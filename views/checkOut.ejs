@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>BRAND HOME - Checkout</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/css/style.css" rel="stylesheet">
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid">
+        <div class="row bg-secondary py-2 px-xl-5">
+            <div class="col-lg-6 d-none d-lg-block">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-dark" href="">FAQs</a>
+                    <span class="text-muted px-2">|</span>
+                    <a class="text-dark" href="">Help</a>
+                    <span class="text-muted px-2">|</span>
+                    <a class="text-dark" href="">Support</a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-twitter"></i> 
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="text-dark pl-2" href="">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center py-3 px-xl-5">
+            <div class="col-lg-3 d-none d-lg-block">
+                <a href="" class="text-decoration-none">
+                    <h1 class="m-0 display-5 font-weight-semi-bold">BRAND HOME</h1>
+                </a>
+
+            </div>
+            <div class="col-lg-6 col-6 text-left">
+                <form action="">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for products">
+                        <div class="input-group-append">
+                            <span class="input-group-text bg-transparent text-primary">
+                                <i class="fa fa-search"></i>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-3 col-6 text-right">
+                <a href="/wishList" class="btn border">
+                    <i class="fas fa-heart text-primary"></i>
+                    <% if (wishListNo) { %>
+
+                        <span class="badge">
+                            <%= wishListNo %>
+                        </span>
+
+                        <% } %>
+                </a>
+                <a href="" class="btn border">
+                    <i class="fas fa-shopping-cart text-primary"></i>
+
+                    <% if (cartNo) { %>
+
+                        <span class="badge">
+                            <%= cartNo %>
+                        </span>
+
+                        <% } %>
+
+                </a>
+                <% if (user.email) { %>
+
+                    <a href="/logout">Log Out</a>
+
+                    <a href="/profile" class="btn border "     >
+                        <i class="fas fa-user  text-primary"></i>
+                    </a>
+                        <!-- 
+                        data-toggle="dropdown"
+                    
+                    
+                        <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
+                                <p  class="dropdown-item"><%= user %></p>
+                                <a href="/addresses" class="dropdown-item">Addresses</a>
+                                <p class="dropdown-item">Wallet :   </p>
+                               
+                         </div> -->
+
+                    <% } else { %>
+
+                        <a href="/login">Log In</a>
+
+                        <% } %>
+                            
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid">
+        <div class="row border-top px-xl-5">
+            <div class="col-lg-3 d-none d-lg-block">
+
+            </div>
+            <div class="col-lg-9">
+                <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
+
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                        <div class="navbar-nav mr-auto py-0">
+                            <a href="/home?email=<%= user.email %>" class="nav-item nav-link ">Home</a>
+                            <a href="/products?email=<%= user.email %>" class="nav-item nav-link">Shop</a>
+                            <a href="/cart" class="nav-item nav-link">Cart</a>
+                            <a href="/orders" class="nav-item nav-link">Orders</a>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                                <div class="dropdown-menu rounded-0 m-0">
+                                    <a href="cart.html" class="dropdown-item">Shopping Cart</a>
+                                    <a href="checkout.html" class="dropdown-item">Checkout</a>
+                                </div>
+                            </div>
+                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        </div>
+                        <!-- <div class="navbar-nav ml-auto py-0">
+                            <a href="/logout" class="nav-item nav-link">Logout</a>
+                            <a href="" class="nav-item nav-link">Register</a>-->
+                    </div>
+            </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Page Header Start -->
+    <div class="container-fluid">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 100px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Checkout</h1>
+
+        </div>
+    </div>
+    <!-- Page Header End -->
+    <form class="place-order">
+        <input type="hidden" name="productCount" id="productCount" value="<%= products.length %>">
+
+        <div class="container-fluid pt-5">
+            <div class="row px-xl-5">
+                <div class="col-lg-8 table-responsive mb-5">
+                    <table class="table table-bordered text-center mb-0">
+                        <thead class="bg-secondary text-dark">
+                            <tr>
+                                <th>Products</th>
+                                <th>Price</th>
+                                <th>Size</th>
+                                <th>Color</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+
+                            </tr>
+                        </thead>
+                        <tbody class="align-middle">
+
+                            <% if (products.length > 0) {
+                                for (let i = 0; i < products.length; i++) { %>
+
+                            <tr>
+                                <td class="align-middle">
+                                    <%= products[i].productName %>
+
+                                            <input type="hidden" value="<%= products[i].productId %>" name="productId<%= i %>">
+                                            <input type="hidden" value="<%= products[i].productName%>" name="productName<%= i %>">
+                                            <input type="hidden" value="<%= products[i].productBrand %>" name="productBrand<%= i %>">
+                                            <input type="hidden" value="<%= products[i].price %>" name="productPrice<%= i %>">
+                                            <input type="hidden" value="<%= products[i].offer %> " name="offer<%= i %>">
+                                            <input type="hidden" value="<%= products[i].productImage %>" name="productImage<%= i %>">
+                                            <input type="hidden" value="<%= products[i].size %>" name="size<%= i %>">
+                                            <input type="hidden" value="<%= products[i].color %>" name="color<%= i %>">
+                                            <input type="hidden" value="<%= products[i].quantity %>" name="quantity<%= i %>">
+                                            <input type="hidden" value="<%= products[i].youSave %>" name="discount<%= i %>">
+                                            <input type="hidden" value="<%= products[i].payAmount %>" name="payAmount<%= i %>">
+                                           
+                                           
+                                </td>
+                                <td class="align-middle" id="pricePerUnit">Rs <%= products[i].payAmount/products[i].quantity %></td>
+                                <td class="align-middle" name="option" id="size"><%= products[i].size %> </td>
+                                <td class="align-middle"  name="color" id="color" ><%= products[i].color %></td>
+                                <td class="align-middle" name="quantity" id="quantity" ><%= products[i].quantity %></td>
+                                <td class="align-middle" id="totalPrice">Rs <%= products[i].payAmount %></td>
+                
+                
+                
+
+                            </tr>
+
+                            <% } } else { %>
+                                <tr>
+                                    <td colspan="7">No products can find</td>
+                                </tr>
+                            <% } %>
+
+                        </tbody>
+                    </table>
+                </div>
+            
+                <div class="col-lg-4 row justify-content-between ">
+<!-- 
+                    <div class="input-group">
+                        <input type="text" class="form-control p-4" placeholder="Coupon Code">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary">Apply Coupon</button>
+                        </div>
+                    </div> -->
+                    
+                    
+                    <% if(coupons.length > 0) { %>
+                        <% for(let i = 0; i < coupons.length; i++) { %>
+                            <div class="col-lg-4   justify-content-center align-items-center container pb-2" id="addCoupon">
+                                <div class="d-flex card text-center " id="couponcard">
+                                    <div class="offimage"><img src="https://i.imgur.com/DC94rZe.png" width="50"></div>
+                                    <div class="offimage2"><img src="https://i.imgur.com/DC94rZe.png" width="50"></div>
+                                    <h1><%= coupons[i].off %> % OFF</h1>
+                                    <span class="d-block"><%= coupons[i].description %></span>
+                                    <a class="mt-4 btn btn-success apply-coupon" id="couponApply<%= i %>" href="javascript:void(0);" 
+                                        data-coupon-id="<%= coupons[i]._id %>" 
+                                        data-total = "<%= totalAmount %> "  
+                                        style="color: #ffffff;">apply</a>
+                                </div>
+                            </div>
+                        <% } %>
+                    <% } else { %>
+                        <p>coupons not available...</p>
+                    <% } %>
+
+                    
+                        <div class="col-lg-12 row justify-content-center align-items-center container pb-2 hide" id="cancelCoupon">
+                               <p>*coupon added successfuly...*</p>
+                               <a class="btn btn-danger" onclick="cancelCoupon()">Cancel Coupon</a>
+                        </div>
+                    
+
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Checkout Start -->
+        <div class="container-fluid pt-5">
+            <div class="row px-xl-5">
+                <div class="col-lg-8">
+                    <div class="mb-4">
+                        <h4 class="font-weight-semi-bold mb-4">Your Addresses</h4>
+                        <div class="row" id="addresses-container" >
+
+                                    <% if (addresses) { for (let i=0; i < addresses.length; i++) { %>
+                                    
+
+                                            <div class="col-md-3 form-group">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="radio" class="address-radio" id="address<%= i %>"
+                                                        value="<%= addresses[i]._id %>" name="address" required>
+                                                    <label class="" for="address<%= i %>">
+                                                        <%= addresses[i].firstName %> <%= addresses[i].lastName %> <br>
+                                                            
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                    
+
+                                <% } } else { %>
+                                    <div class="col-md-3 form-group">
+                                        <p>no addresses...</p>
+                                    </div>
+                                    
+                                    <% } %>
+
+
+
+                                   
+                                       
+
+                                       
+                                          
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <a href="#" class="font-weight-bold text-success" data-toggle="modal" data-target="#addAddressModal" >Add New Address</a>
+
+                        </div>
+
+                        
+                    </div>
+                    <div class=" mb-4" id="shipping-address">
+                        <h4 class="font-weight-semi-bold mb-4">Shipping Address</h4>
+                        <div class="row">
+
+
+                            <div class="col-md-6 form-group">
+                                <label>First Name</label>
+                                <input class="form-control" type="text" placeholder="John" name="firstName"
+                                    id="firstName" required minlength="3" maxlength="30">
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>Last Name</label>
+                                <input class="form-control" type="text" placeholder="Doe" name="lastName" id="lastName"
+                                    required minlength="1" maxlength="20">
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>E-mail</label>
+                                <input class="form-control" type="email" placeholder="example@email.com"
+                                    id="shippingEmail" name="shippingEmail" required>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>Mobile No</label>
+                                <input class="form-control" type="text" placeholder="6745 3456 564" id="mobile"
+                                    name="mobile" required minlength="10" maxlength="10">
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>Country</label>
+                                <input class="form-control" type="text" placeholder="India" name="country" required
+                                    minlength="2" maxlength="30" id="country">
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>State</label>
+                                <input class="form-control" type="text" placeholder="kerala" name="state" required
+                                    minlength="2" maxlength="30" id="state">
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>City</label>
+                                <input class="form-control" type="text" placeholder="kochi" name="city" required
+                                    minlength="2" maxlength="30" id="city">
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>Street</label>
+                                <input class="form-control" type="text" placeholder="123 Street" name="street" required
+                                    minlength="2" maxlength="30" id="street">
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>Postal Code</label>
+                                <input class="form-control" type="text" placeholder="345676" name="postalCode" required
+                                    minlength="6" maxlength="6" id="postalCode">
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card border-secondary mb-5">
+                        <div class="card-header bg-secondary border-0">
+                            <h4 class="font-weight-semi-bold m-0">Order Total</h4>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="font-weight-medium mb-3">Products</h5>
+                           
+                                <% if(products.length > 0){ 
+                                    for(let i = 0 ; i< products.length; i++){%>
+
+                                        <div class="d-flex justify-content-between">
+                                        
+                                            <p>
+                                                <%= products[i].productName %>
+                                            </p>
+                                            <p>Rs <%= products[i].price %> (x <%= products[i].quantity %>)
+                                            </p>
+                                        </div>
+
+                                <%} }else{%>
+                                        <div class="d-flex justify-content-between">
+                                        
+                                            <p>
+                                               no products fount..
+                                            </p>
+                                            
+                                        </div>
+                                <%}%>
+                                
+                            
+
+                            
+                            
+                            <hr class="mt-0">
+                            <div class="d-flex justify-content-between mb-3 pt-1">
+                                <h6 class="font-weight-medium">Subtotal</h6>
+                                <h6 class="font-weight-medium" id="totalPrice2">Rs <%= subTotal %>
+                                </h6>
+                                
+                            </div>
+                            <div class="d-flex justify-content-between mb-3 pt-1">
+                                <h6 class="font-weight-medium"> You Save</h6>
+                                <h6 class="font-weight-medium" id="totalOfferText">Rs <%= totalOffer %>
+                                </h6>
+                                <input type="hidden" name="totalOffer" id="totalOffer" value="<%= totalOffer %>">
+                                <input type="hidden" name="couponOff"  id="couponOff" value="0">
+                                <input type="hidden" name="saveByCoupon"  id="saveByCoupon" value="0">
+                                <input type="hidden" name="appliedCouponId" id="appliedCouponId">
+                                
+                                
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <h6 class="font-weight-medium">Shipping</h6>
+                                <h6 class="font-weight-medium">Rs <%= products.length*40 %></h6>
+                            </div>
+                        </div>
+                        <div class="card-footer border-secondary bg-transparent">
+                            <div class="d-flex justify-content-between mt-2">
+                                <h5 class="font-weight-bold">Total</h5>
+                                <h5 class="font-weight-bold" id="grandTotalText">Rs <%= totalAmount+(products.length*40) %>
+                                </h5>
+                                <input type="hidden" name="totalAmount" id="totalAmount" value="<%= totalAmount %>">
+                                <input type="hidden" name="totalAmountAfterCoupon" id="totalAmountAfterCoupon" value="<%= totalAmount %>">
+                                <input type="hidden" name="grandTotal" id="grandTotal" value="<%= totalAmount+(products.length*40)%>">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border-secondary mb-5">
+                        <div class="card-header bg-secondary border-0">
+                            <h4 class="font-weight-semi-bold m-0">Payment</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" name="paymentOption" id="paypal"
+                                        value="cash on delivery" required>
+                                    <label class="custom-control-label" for="paypal">CashOnDelivery</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" name="paymentOption"
+                                        id="directcheck" value="online payment" required>
+                                    <label class="custom-control-label" for="directcheck">Online Payment</label>
+                                </div>
+                            </div>
+
+
+                            <input type="hidden" value="<%= user.wallet %>" id="userWallet">
+                            <div class="form-group">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" name="paymentOption"
+                                        id="walletPayment" value="wallet payment" required>
+                                    <label class="custom-control-label" for="walletPayment">Wallet  Payment</label>
+                                    <p class="text-primary">in wallet :<%= user.wallet %></p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card-footer border-secondary bg-transparent">
+                            <input type="submit" value="Place Order" id="placeOrder"
+                                class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">
+                            </input>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <div class="modal fade" id="addAddressModal" tabindex="-1" role="dialog" aria-labelledby="addAddressModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addAddressModalLabel">Add New Address</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form  class="addAddress" id="addAddress">
+                <div class="row">
+
+
+                    <div class="col-md-6 form-group">
+                        <label>First Name</label>
+                        <input class="form-control" type="text" placeholder="John" name="firstName"
+                            required minlength="3" maxlength="30">
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label>Last Name</label>
+                        <input class="form-control" type="text" placeholder="Doe" name="lastName"
+                            required minlength="1" maxlength="20">
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label>E-mail</label>
+                        <input class="form-control" type="email" placeholder="example@email.com"
+                            name="shippingEmail" required>
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label>Mobile No</label>
+                        <input class="form-control" type="text" placeholder="6745 3456 564"
+                            name="mobile" required minlength="10" maxlength="10">
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label>Country</label>
+                        <input class="form-control" type="text" placeholder="India" name="country"
+                            required>
+                                        <!-- <select class="custom-select" name="country">
+                            <option selected>United States</option>
+                            <option>Afghanistan</option>
+                            <option>Albania</option>
+                            <option>Algeria</option>
+                        </select> -->
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label>State</label>
+                        <input class="form-control" type="text" placeholder="kerala" name="state"
+                            required>
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label>City</label>
+                        <input class="form-control" type="text" placeholder="kochi" name="city"
+                            required>
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label>Street</label>
+                        <input class="form-control" type="text" placeholder="123 Street"
+                            name="street" required>
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label>Postal Code</label>
+                        <input class="form-control" type="text" placeholder="345676"
+                            name="postalCode" required minlength="6" maxlength="6">
+                    </div>
+
+                    <!-- <div
+                        class="col-md-12 form-group d-flex flex-column align-items-center justify-content-center">
+                        <button type="submit" class="btn btn-success ">Add Address</button>
+                    </div> -->
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit" value="Add Address" id="placeOrder"
+                                class="btn  btn-primary " >
+                            </input>
+                    </div>
+
+                </div>
+                </form>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    <!-- Checkout End -->
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
+        <div class="row px-xl-5 pt-5">
+            <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
+                <a href="" class="text-decoration-none">
+                    <h1 class="mb-4 display-5 font-weight-semi-bold">BRANDHOME</h1>
+                </a>
+                <p>Dolore erat dolor sit lorem vero amet. Sed sit lorem magna, ipsum no sit erat lorem et magna ipsum
+                    dolore amet erat.</p>
+                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
+                <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
+                <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
+            </div>
+            <div class="col-lg-8 col-md-12">
+                <div class="row">
+                    <div class="col-md-4 mb-5">
+                        <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
+                        <div class="d-flex flex-column justify-content-start">
+                            <a class="text-dark mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                            <a class="text-dark mb-2" href="shop.html"><i class="fa fa-angle-right mr-2"></i>Our
+                                Shop</a>
+                            <a class="text-dark mb-2" href="detail.html"><i class="fa fa-angle-right mr-2"></i>Shop
+                                Detail</a>
+                            <a class="text-dark mb-2" href="cart.html"><i class="fa fa-angle-right mr-2"></i>Shopping
+                                Cart</a>
+                            <a class="text-dark mb-2" href="checkout.html"><i
+                                    class="fa fa-angle-right mr-2"></i>Checkout</a>
+                            <a class="text-dark" href="contact.html"><i class="fa fa-angle-right mr-2"></i>Contact
+                                Us</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-5">
+                        <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
+                        <div class="d-flex flex-column justify-content-start">
+                            <a class="text-dark mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                            <a class="text-dark mb-2" href="shop.html"><i class="fa fa-angle-right mr-2"></i>Our
+                                Shop</a>
+                            <a class="text-dark mb-2" href="detail.html"><i class="fa fa-angle-right mr-2"></i>Shop
+                                Detail</a>
+                            <a class="text-dark mb-2" href="cart.html"><i class="fa fa-angle-right mr-2"></i>Shopping
+                                Cart</a>
+                            <a class="text-dark mb-2" href="checkout.html"><i
+                                    class="fa fa-angle-right mr-2"></i>Checkout</a>
+                            <a class="text-dark" href="contact.html"><i class="fa fa-angle-right mr-2"></i>Contact
+                                Us</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-5">
+                        <h5 class="font-weight-bold text-dark mb-4">Newsletter</h5>
+                        <form action="">
+                            <div class="form-group">
+                                <input type="text" class="form-control border-0 py-4" placeholder="Your Name"
+                                    required="required" />
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control border-0 py-4" placeholder="Your Email"
+                                    required="required" />
+                            </div>
+                            <div>
+                                <button class="btn btn-primary btn-block border-0 py-3" type="submit">Subscribe
+                                    Now</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row border-top border-light mx-xl-5 py-4">
+            <div class="col-md-6 px-xl-0">
+                <p class="mb-md-0 text-center text-md-left text-dark">
+                    &copy; <a class="text-dark font-weight-semi-bold" href="#">Your Site Name</a>. All Rights Reserved.
+                    Designed
+                    by
+                    <a class="text-dark font-weight-semi-bold" href="https://htmlcodex.com">HTML Codex</a><br>
+                    Distributed By <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                </p>
+            </div>
+            <div class="col-md-6 px-xl-0 text-center text-md-right">
+                <img class="img-fluid" src="img/payments.png" alt="">
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="/lib/easing/easing.min.js"></script>
+    <script src="/lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    <!-- Contact Javascript File -->
+    <script src="/mail/jqBootstrapValidation.min.js"></script>
+    <script src="/mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="/js/main2.js"></script>
+</body>
+
+
+<script>
+
+    function popup (popupMsg){
+
+        
+
+         Swal.fire({
+                        title: 'Message',
+                        text: popupMsg,
+                        //icon: 'success',
+                        timer: 10000,
+                        showConfirmButton: false,
+                    })
+    }
+
+  
+    function updatePrice() {
+
+        const saveByCoupon = parseInt(document.getElementById("saveByCoupon").value) ;
+       //alert("save by coupon is "+saveByCoupon);
+
+        const totalOffer = parseInt(document.getElementById ("totalOffer"). value) ;
+        //alert("total Offer is "+totalOffer);
+
+        const grandTotal = document.getElementById("grandTotal").value;
+        //alert("grandTotal is "+grandTotal);
+
+        // const totalAmountAfterCoupon = document.getElementById("totalAmountAfterCoupon").value;
+       // alert("totalAmountAfterCoupon is "+totalAmountAfterCoupon);
+
+    //    const productCount = document.getElementById("productCount").value;
+
+
+        
+
+        const newTotal = grandTotal-saveByCoupon;
+        console. log ("new total is ",newTotal);
+        document.getElementById("totalAmountAfterCoupon").value = newTotal;
+        
+        const totl = totalOffer+saveByCoupon ; 
+        console.log("total is ",totl);
+        document . getElementById ("totalOffer"). value = totl;
+
+        //alert("now total offer "+document.getElementById ("totalOffer"). value);
+        document.getElementById("totalOfferText").innerHTML='Rs '+totl;
+
+       
+        document.getElementById("grandTotal").value= newTotal;
+        console.log("grand total is ",newTotal);
+        document.getElementById("grandTotalText").innerHTML='Rs '+  parseInt(newTotal);
+        
+    }
+
+    $(document).ready(function () {
+    $('.apply-coupon').click(function() {
+        var couponId = $(this).data('coupon-id');
+        var total = $(this).data('total');
+      
+
+
+        
+       
+        $.ajax({
+            url: '/checkCoupon',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ couponId: couponId, total: total}) ,
+            success:async (response)=> {
+
+                if(response.fail){
+                    popup(response.message);
+                }else{
+                    document.getElementById("addCoupon").classList.add("hide");
+                 document.getElementById("cancelCoupon").classList.remove("hide");
+
+                 document.getElementById("appliedCouponId").value = response.couponId;
+                 document.getElementById("saveByCoupon").value = response.saveByCoupon;
+                 document.getElementById("couponOff").value = response.couponOff;
+                 document.getElementById("totalAmountAfterCoupon").value = response.totalAmountAfterCoupon;
+                            
+                //  alert(response.couponOff);
+                //  alert(response.couponId);
+                //  alert(response.saveByCoupon);
+                //  alert(response.message);
+                alert(response.totalAmountAfterCoupon);
+
+                         
+               
+                await updatePrice();
+                await      checkWallet()
+                popup(response.message);
+
+                }
+                
+               
+            },
+            error: function(xhr, status, error) {
+                alert('Error: ' + error);
+            }
+        });
+    });
+});
+
+async function cancelCoupon (){
+  
+    document.getElementById("addCoupon").classList.remove("hide");
+    document.getElementById("cancelCoupon").classList.add("hide");
+    document.getElementById("appliedCouponId").value = "";
+
+         const totalAmount = document.getElementById("totalAmount").value;
+         document.getElementById("totalAmountAfterCoupon").value= totalAmount;
+
+        
+
+        const saveByCoupon = parseInt( document.getElementById("saveByCoupon").value);
+        const totalOffer = parseInt( document . getElementById ("totalOffer"). value) ;
+        const grandTotal =  parseInt(document.getElementById("grandTotal").value) ;
+
+        const gdt = grandTotal+saveByCoupon ;
+        document.getElementById("grandTotal").value= gdt
+        console.log("gdt is ",gdt);
+        document.getElementById("grandTotalText").innerHTML='Rs '+gdt;
+
+        const torlofr =  totalOffer-saveByCoupon ;
+        document . getElementById ("totalOffer"). value =torlofr
+        console.log("torlofr is ",torlofr);
+        document.getElementById("totalOfferText").innerHTML='Rs '+torlofr;
+
+        document.getElementById("couponOff").value = 0;
+        document.getElementById("saveByCoupon").value = 0;
+
+
+ 
+    await checkWallet();
+    popup("coupon cancelled ");
+}
+
+
+
+
+    function populateAddressFields(fromCheck) {
+
+        try {
+
+            // Get all radio buttons with class 'address-radio'
+            var addressRadios = document.querySelectorAll('.address-radio');
+            //console.log("addressRadios is" + addressRadios)
+
+            var checkoutAddresses = fromCheck;
+
+            // Loop through each radio button
+            addressRadios.forEach(function (radio) {
+                // Add change event listener to each radio button
+                radio.addEventListener('click', function () {
+                    // Check if the radio button is checked
+
+                    // Get the index of the selected address
+
+
+                    // Retrieve the selected address data from addresses array
+                    var selectedId = this.value;
+                    console.log("selected id is ",selectedId);
+
+                    if (checkoutAddresses.length>0){
+                        var addresses = checkoutAddresses;
+
+                        var selectedAddress = addresses.find(function (address) {
+                            return address._id === selectedId;
+                            });
+
+
+                    }else{
+                        var addresses = JSON.parse('<%- JSON.stringify(addresses) %>');
+
+                        // Find the selected address object from the addresses array
+                        var selectedAddress = addresses.find(function (address) {
+                            return address._id === selectedId;
+                            });
+
+                    }
+
+                   
+
+                    console.log("selected addresses is " , selectedAddress);
+
+                    // Populate input fields with selected address data
+                    document.getElementById('firstName').value = selectedAddress.firstName;
+                    document.getElementById('lastName').value = selectedAddress.lastName;
+                    document.getElementById('shippingEmail').value = selectedAddress.shippingEmail;
+                    document.getElementById('mobile').value = selectedAddress.mobile;
+                    document.getElementById('country').value = selectedAddress.country;
+                    document.getElementById('state').value = selectedAddress.state;
+                    document.getElementById('city').value = selectedAddress.city;
+                    document.getElementById('street').value = selectedAddress.street;
+                    document.getElementById("postalCode").value = selectedAddress.postalCode;
+
+                });
+            });
+        } catch (error) {
+            console.log(error);
+        }
+
+    };
+
+    function checkWallet (){
+        let userWallet = document.getElementById("userWallet").value;
+        let grandTotal = document.getElementById("grandTotal").value;
+
+        console.log("userWaller and grandTotal are ",userWallet,grandTotal);
+
+        if(userWallet<grandTotal){
+
+            document.getElementById("walletPayment").disabled=true;
+        }else{
+            document.getElementById("walletPayment").disabled=false;
+        }
+
+    };
+
+   
+    document.addEventListener('DOMContentLoaded',checkWallet );
+
+    document.addEventListener('DOMContentLoaded', populateAddressFields);
+
+
+    // //--------------------------------------------------------------------------
+
+    $(document).ready(function () {
+        $(".addAddress").submit(
+    function(e){
+        e.preventDefault();
+       
+        var formData = $(this).serialize();
+
+        console.log("form data is "+formData);
+
+        $('#addAddress')[0].reset();
+        $('#addAddressModal').modal('hide');
+
+        $.ajax({
+            url:"/addAddressFromCheckout",
+            type:"POST",
+            data:formData,
+            dataType: "json",
+
+            success: function(res){
+                if (res.success) {
+                    //alert(JSON.stringify(res.addresses));
+
+                    var addresses= res.addresses;
+                    console.log(addresses)
+                    popup("Address added successfully...");
+
+                    // Call the function to render initial addresses;
+                    renderAddresses(addresses);
+
+                    function renderAddresses(addresses) {
+
+                        $('#addresses-container').empty();
+
+                        for(let i = 0 ; i < addresses.length ; i++){
+                            addNewAddressToDOM(addresses[i], i);
+                        }
+
+                        populateAddressFields(addresses);
+
+                    // addresses.forEach((address, index) => {
+                    //     addNewAddressToDOM(address, index);
+                    // });
+                    }
+
+
+                } else {
+                    alert("Failed to add address.");
+                }
+            },
+
+            error: function(err) {
+                console.log(err);
+                alert("An error occurred.");
+            }
+
+        })
+    }
+        )
+    });
+
+
+
+    function addNewAddressToDOM(address,index) {
+  // Generate a new unique ID for the radio button
+  var newId = 'address'+index;
+        console.log("new id is ",newId);
+  // Create the new address HTML
+  var newAddressHTML = `
+    <div class="col-md-3 form-group ">
+      <div class="custom-control custom-checkbox">
+        <input type="radio" class="address-radio" id="${newId}" value="${address._id}" name="address" required>
+        <label class="" for="${newId}">
+          ${address.firstName } ${address.lastName} <br>
+        </label>
+      </div>
+    </div>
+  `;
+
+
+  // Append the new address to the container
+   $('#addresses-container').append(newAddressHTML);
+
+}
+
+    
+
+
+    // //---------------------------------------------------------------------
+
+
+    function verifyPayment(order, payment) {
+        $.ajax({
+            url: "/verifyPayment",
+            type: "POST",
+            data:{order, payment},
+            success:  (res)=> {
+                if (res.status){
+                    
+
+                    window.location.href = "/orderPlaced";
+                    popup("payment successfull");
+                }else{
+                    
+
+                    window.location.href = "#";
+                    popup(res.errorMsg);
+                }
+            }
+        });
+    }
+
+
+    $(document).ready(function () {
+        $(".place-order").submit(function (e) {
+            e.preventDefault();
+
+            var formData = $(this).serialize();
+
+            $.ajax({
+                url: "/placeOrder",
+                type: "POST",
+                data: formData,
+                success: function (res) {
+                    if (res.success) {
+
+                     console . log ("res is ",res);
+
+                        var options = {
+                            "key": "" + res.key_id + "", // Enter the Key ID generated from the Dashboard
+                            "amount": "" + res.amount + "", 
+                            "currency": "INR",
+                            "name": "" + res.company_name + "",
+                            "description": "" + res.description + "",
+                            "image": "https://example.com/your_logo",
+                            "order_id": ""+res.order_id+"", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                            "handler": function (response) {
+                                alert(response.razorpay_payment_id);
+                                alert(response.razorpay_order_id);
+                                alert(response.razorpay_signature);
+
+                              
+
+                                verifyPayment(res,response);
+                            },
+                            "prefill": {
+                                "user": "" + res.user + "",
+                                "email": "" + res.email + "",
+                                "contact": "" + res.contact + "",
+                            },
+                            "notes": {
+                                "description": "" + res.description + "",
+                            },
+                            "theme": {
+                                "color": "#cf7e90"
+                            }
+                        };
+
+                        var razorpayObject = new Razorpay(options);
+                        razorpayObject.on('payment.failed', function (response) {
+                            alert("Payment Failed");
+                            alert(response.error.code);
+                            alert(response.error.description);
+                            alert(response.error.source);
+                            alert(response.error.step);
+                            alert(response.error.reason);
+                            alert(response.error.metadata.order_id);
+                            alert(response.error.metadata.payment_id);
+                        });
+
+                        razorpayObject.open();
+
+
+                    }
+                    if (res.COD || res.WALLET) {
+
+                        window.location.href = "/orderPlaced";
+                    }
+
+                    else {
+                        alert(res.msg);
+
+                    }
+                }
+            })
+        })
+    });
+
+  
+
+</script>
+
+</html>

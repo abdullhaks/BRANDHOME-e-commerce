@@ -1,0 +1,110 @@
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>login</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<!-- MATERIAL DESIGN ICONIC FONT -->
+		<link rel="stylesheet" href="/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+
+		<!-- STYLE CSS -->
+		<link rel="stylesheet" href="/sheets/style.css">
+	</head>
+
+	<body>
+
+		<div class="wrapper" style="background-image: linear-gradient(to right, rgba(243, 167, 27, 0), rgb(236, 168, 104));">
+			<div class="inner">
+				<div class="image-holder">
+					<img src="/images/side.jpeg" alt="">
+					<h1>BRANDHOME</h1>
+				</div>
+				<form action="/submitotp" method="post">
+					<h3>enter OTP</h3>
+
+					<% if (errors) { %>
+						<% errors.forEach(function(error) { %>
+							<p style="color: red;"><%= error.msg %></p><br>
+						<% }) %>
+					  <% } %>
+
+					
+					<p>we sent otp to <%= user.email %></p><br><br>
+					
+					<div class="form-wrapper">
+						<input type="text" name="otp"  placeholder="enter otp" class="form-control" >
+						<input type="hidden"  name="data" value= <%= user.email %> >
+						<i class="zmdi zmdi-email"></i>
+					</div>
+					
+					<p id="countdown" style="opacity: 50;"></p>
+					
+					<a  href="/resentotp/<%=user.email %>" id="resendButton"  onclick="return false">Resend OTP</a>
+					
+					<button>Submit
+						<i class="zmdi zmdi-arrow-right"></i>
+					</button>
+
+
+				</form>
+			</div>
+		</div>
+		
+		<script>
+			const startingMinutes = 2;
+			let time = startingMinutes * 60;
+
+			const countdownEl = document.getElementById('countdown');
+		
+
+			
+			const intervalId = setInterval(updateCountdown,1000);
+			setTimeout(()=>{
+				countdownEl.style.opacity = 100%
+				clearInterval(intervalId);
+			},120000);
+			
+			function updateCountdown(){
+				const minutes = Math.floor(time/60);
+				let seconds = time % 60 ;
+
+				countdownEl.innerHTML = `${minutes}:${seconds}`;
+				time--;
+			}
+			// Function to handle OTP resend
+			function resendOTP() {
+			  var button = document.getElementById('resendButton');
+			  //button.disabled = true; // Disable the button
+			  button.style.cursor= not-allowed;
+			  button.style.opacity = 10%
+			  
+			  setTimeout(function() {
+				var button = document.getElementById('resendButton')
+				//button.disabled = false; // Enable the button after 2 minutes
+				button.style.opacity = 100;
+				button.style.cursor = 'pointer'; // Set cursor to pointer to indicate it's clickable
+                button.onclick = function() { return true; };
+
+			  }, 120000); // 2 minutes in milliseconds
+			}
+		
+			// Initial disable for 2 minutes when the page opens
+			setTimeout(function() {
+				var button = document.getElementById('resendButton')
+				button.disabled = false; // Enable the button after 2 minutes
+				button.style.opacity = 100;
+				button.style.cursor = 'pointer'; // Set cursor to pointer to indicate it's clickable
+                button.onclick = function() { return true; };
+
+			}, 120000); // 2 minutes in milliseconds
+
+		  </script>
+		
+
+
+
+	</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

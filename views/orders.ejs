@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>BRAND HOME -your cart</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid">
+        <div class="row bg-secondary py-2 px-xl-5">
+            <div class="col-lg-6 d-none d-lg-block">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-dark" href="">FAQs</a>
+                    <span class="text-muted px-2">|</span>
+                    <a class="text-dark" href="">Help</a>
+                    <span class="text-muted px-2">|</span>
+                    <a class="text-dark" href="">Support</a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="text-dark pl-2" href="">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center py-3 px-xl-5">
+            <div class="col-lg-3 d-none d-lg-block">
+                <a href="" class="text-decoration-none">
+                    <h1 class="m-0 display-5 font-weight-semi-bold">BRAND HOME</h1>
+                </a>
+                
+            </div>
+            <div class="col-lg-6 col-6 text-left">
+                <form action="">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for products">
+                        <div class="input-group-append">
+                            <span class="input-group-text bg-transparent text-primary">
+                                <i class="fa fa-search"></i>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-3 col-6 text-right">
+                <a href="/wishList" class="btn border">
+                    <i class="fas fa-heart text-primary"></i>
+                    <% if (wishListNo) { %>
+						
+                        <span class="badge"><%= wishListNo %></span>
+						
+					  <% } %>
+                </a>
+                <a href="/cart" class="btn border active">
+                    <i class="fas fa-shopping-cart text-primary"></i> 
+
+                    <% if (cartNo) { %>
+						
+                        <span class="badge"><%= cartNo %></span>
+						
+					<% } %>
+                  
+                </a>
+                <% if (user) { %>
+
+                    <a href="/logout">Log Out</a>
+
+                    <a href="/profile" class="btn border "     >
+                        <i class="fas fa-user  text-primary"></i>
+                    </a>
+                        <!-- 
+                        data-toggle="dropdown"
+                    
+                    
+                        <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
+                                <p  class="dropdown-item"><%= user %></p>
+                                <a href="/addresses" class="dropdown-item">Addresses</a>
+                                <p class="dropdown-item">Wallet :   </p>
+                               
+                         </div> -->
+
+                <% } else { %>
+
+                    <a href="/login">Log In</a>
+
+                <% } %>
+                
+            </div>
+        </div> 
+    </div>
+    <!-- Topbar End -->
+   
+
+    <!-- Navbar Start -->
+    <div class="container-fluid">
+        <div class="row border-top px-xl-5">
+            <div class="col-lg-3 d-none d-lg-block">
+               
+            </div>
+            <div class="col-lg-9">
+                <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
+                    
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                        <div class="navbar-nav mr-auto py-0">
+                            <a href="/home?email=<%= user %>" class="nav-item nav-link ">Home</a>
+                            <a href="/products?email=<%= user %>" class="nav-item nav-link">Shop</a>
+                            <a href="/cart" class="nav-item nav-link ">Cart</a>
+                            <a href="/orders" class="nav-item nav-link active">Orders</a>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                                <div class="dropdown-menu rounded-0 m-0">
+                                    <a href="cart.html" class="dropdown-item">Shopping Cart</a>
+                                    <a href="checkout.html" class="dropdown-item">Checkout</a>
+                                </div>
+                            </div>
+                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        </div>
+                       <!-- <div class="navbar-nav ml-auto py-0">
+                            <a href="/logout" class="nav-item nav-link">Logout</a>
+                            <a href="" class="nav-item nav-link">Register</a>-->
+                        </div>
+                    </div>
+                </nav>
+            </div>
+    </div>
+    
+    <!-- Navbar End -->
+
+
+   
+
+
+    <!-- Shop Start -->
+    <div class="main-content pt-5">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="table-responsive table--no-card m-b-30">
+                            <table class="table table-borderless table-striped table-earning">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Date</th>
+                                        <th>Product</th>
+                                        <th>Quantity</th>
+                                        <th >Total Price</th>
+                                        <th >Order Status</th>
+                                        <th class="text-right"></th>
+                                        
+                                    </tr>
+                                </thead>
+    
+                                <% if (orders.length > 0) {
+                                    for (let i = 0; i < orders.length; i++) { %>
+                                <tbody>
+                                    <tr>
+                                        <td><%= i+1 %></td>
+                                        <td><%= orders[i].orderDate %></td>
+                                        <td>  <a href="/orderManagement?orderId= <%= orders[i]._id %>"><%= orders[i].purchaseDetails.productName %>, <%= orders[i].purchaseDetails.size %>, <%= orders[i].purchaseDetails.color %></a></td>
+                                        <td><%= orders[i].purchaseDetails.quantity %></td>
+                                        <td><%= orders[i].purchaseDetails.payAmount %></td>
+                                        <td><%= orders[i].status %></td>
+                                        
+                                       
+                                        <td>
+                                            <% if(orders[i].status !== 'delivered' && orders[i].status !== 'cancelled') { %>
+                                                <form id="cancelOrderForm" method="post" action="/cancelOrder/<%= orders[i]._id %>">
+
+                                                    <input type="hidden" id="cancelReason" name="cancelReason">
+                                                    <button class="btn btn-danger" type="button" onclick="showCancelConfirmation()">CANCEL ORDER</button>
+                                                </form>
+                                            <% } %>
+
+                                            <% if(orders[i].status == 'cancelled') { %>
+                                                <p class="text-danger">Cancelled</p>
+                                            <% } %>
+
+                                            <% if(orders[i].status == 'delivered' & orders[i].returnStatus == 0 & currentTime < orders[i].returnCanceledOn) { %>
+                                                <form id="returnOrderForm" method="post" action="/returnOrder/<%= orders[i]._id %>">
+
+                                                    <input type="hidden" id="returnReason" name="returnReason">
+                                                    <button class="btn btn-warning" type="button" onclick="showReturnConfirmation()">RETURN ORDER</button>
+                                                </form>
+                                            <% } %>
+
+                                            <% if(orders[i].status == 'delivered' & orders[i].returnStatus == 1) { %>
+                                                <p class="text-primary">returned - pending </p>
+                                            <% } %>
+
+                                            <% if(orders[i].status == 'delivered' & orders[i].returnStatus == 2) { %>
+                                                <p class="text-primary">returned</p>
+                                            <% } %>
+
+                                            <% if(orders[i].status == 'delivered' & orders[i].returnStatus == 3) { %>
+                                                <p class="text-primary">returned - declined</p>
+                                            <% } %>
+
+                                            <% if(orders[i].status == 'delivered' & currentTime >= orders[i].returnCanceledOn) { %>
+                                                <p class="text-success">delivered</p>
+                                            <% } %>
+                                        </td>
+                    
+                                       
+                                    </tr>
+                                </tbody>
+                                <% }
+                                   
+                                
+                            } else { %>
+    
+                                <tbody>
+                                <tr>
+                                    <td colspan="5">
+                                        Users not found...
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <% } %>
+                            </table>
+                        </div>
+                    </div>
+                    
+                </div>
+               
+                
+                
+                
+            </div>
+        </div>
+    </div>
+    <!-- Shop End -->
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
+        <div class="row px-xl-5 pt-5">
+            <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
+                <a href="" class="text-decoration-none">
+                    <h1 class="mb-4 display-5 font-weight-semi-bold">BRAND HOME</h1>
+                </a>
+                <p>Dolore erat dolor sit lorem vero amet. Sed sit lorem magna, ipsum no sit erat lorem et magna ipsum dolore amet erat.</p>
+                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
+                <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
+                <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
+            </div>
+            <div class="col-lg-8 col-md-12">
+                <div class="row">
+                    <div class="col-md-4 mb-5">
+                        <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
+                        <div class="d-flex flex-column justify-content-start">
+                            <a class="text-dark mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                            <a class="text-dark mb-2" href="shop.html"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
+                            <a class="text-dark mb-2" href="detail.html"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
+                            <a class="text-dark mb-2" href="cart.html"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
+                            <a class="text-dark mb-2" href="checkout.html"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                            <a class="text-dark" href="contact.html"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-5">
+                        <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
+                        <div class="d-flex flex-column justify-content-start">
+                            <a class="text-dark mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                            <a class="text-dark mb-2" href="shop.html"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
+                            <a class="text-dark mb-2" href="detail.html"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
+                            <a class="text-dark mb-2" href="cart.html"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
+                            <a class="text-dark mb-2" href="checkout.html"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                            <a class="text-dark" href="contact.html"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-5">
+                        <h5 class="font-weight-bold text-dark mb-4">Newsletter</h5>
+                        <form action="">
+                            <div class="form-group">
+                                <input type="text" class="form-control border-0 py-4" placeholder="Your Name" required="required" />
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control border-0 py-4" placeholder="Your Email"
+                                    required="required" />
+                            </div>
+                            <div>
+                                <button class="btn btn-primary btn-block border-0 py-3" type="submit">Subscribe Now</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row border-top border-light mx-xl-5 py-4">
+            <div class="col-md-6 px-xl-0">
+                <p class="mb-md-0 text-center text-md-left text-dark">
+                    &copy; <a class="text-dark font-weight-semi-bold" href="#">Your Site Name</a>. All Rights Reserved. Designed
+                    by
+                    <a class="text-dark font-weight-semi-bold" href="https://htmlcodex.com">HTML Codex</a><br>
+                    Distributed By <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                </p>
+            </div>
+            <div class="col-md-6 px-xl-0 text-center text-md-right">
+                <img class="img-fluid" src="img/payments.png" alt="">
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="/lib/easing/easing.min.js"></script>
+    <script src="/lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="mail/jqBootstrapValidation.min.js"></script>
+    <script src="mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="/js/main2.js"></script>
+</body>
+
+<script>
+
+function showCancelConfirmation() {
+        Swal.fire({
+            title: 'Cancel Order',
+            html:
+            '<p>Select a reason for cancellation:</p>' +
+            '<input type="radio" id="reason1" name="cancelReason" value="Item no longer needed">' +
+            '<label for="reason1"> Item no longer needed</label><br>' +
+            '<input type="radio" id="reason2" name="cancelReason" value="Found a better deal">' +
+            '<label for="reason2"> Found a better deal</label><br>' +
+            '<input type="radio" id="reason3" name="cancelReason" value="Ordered by mistake">' +
+            '<label for="reason3"> Ordered by mistake</label>',
+            showCancelButton: true,
+            confirmButtonText: 'Confirm',
+            cancelButtonText: 'Close',
+            preConfirm: () => {
+                 
+                 document.getElementById('cancelReason').value = document.querySelector('input[name="cancelReason"]:checked').value;
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('cancelOrderForm').submit();
+            }
+        });
+    };
+
+
+
+    function showReturnConfirmation() {
+        Swal.fire({
+            title: 'Return Order',
+            html:
+            '<p>Select a reason for return this order:</p>' +
+            '<input type="radio" id="reason1" name="returnReason" value="shipped wrong product or size">' +
+            '<label for="reason1"> shipped wrong product or size</label><br>' +
+            '<input type="radio" id="reason2" name="returnReason" value=" product was damaged or defective">' +
+            '<label for="reason2"> product was damaged or defective</label><br>' +
+            '<input type="radio" id="reason3" name="returnReason" value="product did not match the description">' +
+            '<label for="reason3">product did not match the description</label>',
+            showCancelButton: true,
+            confirmButtonText: 'Confirm',
+            cancelButtonText: 'Close',
+            preConfirm: () => {
+         
+                 document.getElementById('returnReason').value = document.querySelector('input[name="returnReason"]:checked').value;
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('returnOrderForm').submit();
+            }
+        });
+    }
+</script>
+
+</html>

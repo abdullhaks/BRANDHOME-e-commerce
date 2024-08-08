@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>BRAND HOME -your cart</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    
+    <!-- Topbar Start -->
+    <div class="container-fluid">
+        <div class="row bg-secondary py-2 px-xl-5">
+            <div class="col-lg-6 d-none d-lg-block">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-dark" href="">FAQs</a>
+                    <span class="text-muted px-2">|</span>
+                    <a class="text-dark" href="">Help</a>
+                    <span class="text-muted px-2">|</span>
+                    <a class="text-dark" href="">Support</a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="text-dark pl-2" href="">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center py-3 px-xl-5">
+            <div class="col-lg-3 d-none d-lg-block">
+                <a href="" class="text-decoration-none">
+                    <h1 class="m-0 display-5 font-weight-semi-bold">BRAND HOME</h1>
+                </a>
+                
+            </div>
+            <div class="col-lg-6 col-6 text-left">
+                <form action="">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for products">
+                        <div class="input-group-append">
+                            <span class="input-group-text bg-transparent text-primary">
+                                <i class="fa fa-search"></i>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-3 col-6 text-right">
+                <a href="/wishList" class="btn border">
+                    <i class="fas fa-heart text-primary"></i>
+                    <% if (wishListNo) { %>
+						
+                        <span class="badge"><%= wishListNo %></span>
+						
+					<% } %>
+                </a>
+                <a href="" class="btn border active">
+                    <i class="fas fa-shopping-cart text-primary"></i> 
+
+                    <% if (cartNo) { %>
+						
+                        <span class="badge"><%= cartNo %></span>
+						
+					<% } %>
+                  
+                </a>
+                <% if (user) { %>
+
+                    <a href="/logout">Log Out</a>
+
+                    <a href="/profile" class="btn border "     >
+                        <i class="fas fa-user  text-primary"></i>
+                    </a>
+                        <!-- 
+                        data-toggle="dropdown"
+                    
+                    
+                        <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
+                                <p  class="dropdown-item"><%= user %></p>
+                                <a href="/addresses" class="dropdown-item">Addresses</a>
+                                <p class="dropdown-item">Wallet :   </p>
+                               
+                         </div> -->
+
+                <% } else { %>
+
+                    <a href="/login">Log In</a>
+
+                <% } %>
+                
+            </div>
+        </div> 
+    </div>
+    <!-- Topbar End -->
+   
+
+    <!-- Navbar Start -->
+    <div class="container-fluid">
+        <div class="row border-top px-xl-5">
+            <div class="col-lg-3 d-none d-lg-block">
+               
+            </div>
+            <div class="col-lg-9">
+                <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
+                    
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                        <div class="navbar-nav mr-auto py-0">
+                            <a href="/home?email=<%= user %>" class="nav-item nav-link ">Home</a>
+                            <a href="/products?email=<%= user %>" class="nav-item nav-link">Shop</a>
+                            <a href="/cart" class="nav-item nav-link active">Cart</a>
+                            <a href="/orders" class="nav-item nav-link">Orders</a>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                                <div class="dropdown-menu rounded-0 m-0">
+                                    <a href="cart.html" class="dropdown-item">Shopping Cart</a>
+                                    <a href="checkout.html" class="dropdown-item">Checkout</a>
+                                </div>
+                            </div>
+                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        </div>
+                       <!-- <div class="navbar-nav ml-auto py-0">
+                            <a href="/logout" class="nav-item nav-link">Logout</a>
+                            <a href="" class="nav-item nav-link">Register</a>-->
+                        </div>
+                    </div>
+                </nav>
+            </div>
+    </div>
+    
+    <!-- Navbar End -->
+
+
+    <!-- Page Header Start -->
+    
+    <!-- Page Header End -->
+
+
+    <!-- Shop Start -->
+        <form action="/checkOut" method="post">
+            <div class="container-fluid pt-5">
+                <div class="row px-xl-5">
+                    <!-- Shop Sidebar Start -->
+                
+                                <div class="col-lg-12 table-responsive mb-5">
+                                    <table class="table table-bordered text-center mb-0">
+                                        <thead class="bg-secondary text-dark">
+                                            <tr>
+                                                <th>Products</th>
+                                                <th>Price</th>
+                                                <th>Size</th>
+                                                <th>Color</th>
+                                                <th>Quantity</th>
+                                                <th>Total</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="align-middle">
+                                            <% if (products.length > 0) {
+                                                for (let i = 0; i < products.length; i++) { %>
+                                            <tr>
+                                                <td class="align-middle">
+                                                    <img src="/productImages/<%= products[i].image1 %>" alt="" style="width: 50px;">
+                                                    <%= products[i].productName %>
+                                                    <input type="hidden" value="<%= products[i]._id %>" name="productId<%= i %>">
+                                                    <input type="hidden" value="<%= products[i].productName%>" name="productName<%= i %>">
+                                                    <input type="hidden" value="<%= products[i].brand %>" name="productBrand<%= i %>">
+                                                    <input type="hidden" value="<%= products[i].price %>" name="productPrice<%= i %>">
+                                                    <input type="hidden" value="<%= products[i].categoryOfferPercentage + products[i]. productOfferPercentage  %> " name="totalOffer<%= i %>">
+                                                    <input type="hidden" value="<%= products[i].image1 %>" name="productImage<%= i %>">
+                                                    <input type="hidden" value="<%= (products[i].categoryOfferPercentage + products[i]. productOfferPercentage )*products[i].price/100 %>" name="save<%= i %>">
+                                                </td>
+
+
+                                                <td class="align-middle" id="pricePerUnit<%= i %>">Rs <%= products[i].price %></td>
+                                                <td class="align-middle">
+                                                    <div class="input-group quantity mx-auto" style="width: 100px;">
+                                                        <select name="option<%= i %>" id="size<%= i %>" required onchange="updateQuantity('<%= products[i]._id %>', `<%= i %>`)">
+                                                            <% if (products[i].sizes && products[i].sizes.length > 0) {
+                                                                for (let j = 0; j < products[i].sizes.length; j++) { %>
+                                                                    <option value="<%= products[i].sizes[j] %>">
+                                                                        <%= products[i].sizes[j] %>
+                                                                    </option>
+                                                            <% } } %>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <div class="input-group quantity mx-auto" style="width: 100px;">
+                                                        <select name="color<%= i %>" id="color<%= i %>" required onchange="updateQuantity('<%= products[i]._id %>', `<%= i %>`)">
+                                                            <% if (products[i].colors && products[i].colors.length > 0) {
+                                                                for (let j = 0; j < products[i].colors.length; j++) { %>
+                                                                    <option value="<%= products[i].colors[j] %>">
+                                                                        <%= products[i].colors[j] %>
+                                                                    </option>
+                                                            <% } } %>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <div class="input-group quantity mx-auto" id="stock<%= i %>" style="width: 100px;">
+                                                        <input type="number" min="1" name="quantity<%= i %>" id="quantity<%= i %>" required onchange="updatePrice(`<%= i %>`)"></input>
+                                                        <!-- <input type="text"> -->
+                                                    </div>
+
+                                                    <div class="input-group quantity mx-auto hide" id="stockAlert<%= i %>" style="width: 100px;">
+                                                       <p class="text-danger" id="">out of stock</p>
+                                                    </div>
+                                                </td>
+                                                <td class="align-middle" id="totalPrice<%= i %>" >
+                                                    Rs <%= products[i].price %>
+                                                    
+                                                </td>
+
+                                                <td class="align-middle">
+                                                    <a href="/removeFromCart?productId=<%= products[i]._id %>" class="btn btn-sm text-dark p-0" onclick="return confirm('Do you want to cancel this product from cart?')">
+                                                        <i class="fas fa-trash text-primary mr-1"></i>Cancel
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <% } } else { %>
+                                                <tr>
+                                                    <td colspan="7">No products in the cart.</td>
+                                                </tr>
+                                            <% } %>
+
+
+                                    
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                        
+                </div>
+            </div>
+            <!-- Shop End -->
+
+            <div class="container-fluid pt-0">
+                <div class="row px-xl-5">
+                    <div class="col-lg-8">
+                        <h5 class="text-dark bg-warning">offers will add from next page..</h5>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card border-secondary mb-2">
+
+                            <div class="card-header bg-secondary border-0">
+                                <h4 class="font-weight-semi-bold m-0">Order Total</h4>
+                            </div>
+
+                            <div class="card-body">
+                                <hr class="mt-0">
+                            </div>
+
+                            <div class="card-footer border-secondary bg-transparent">
+                                <div class="d-flex justify-content-between mt-2">
+                                    <h5 class="font-weight-bold">Total</h5>
+                                    <h5 class="font-weight-bold" id="grandTotal">Rs 
+                                    </h5>
+                                    <input type="hidden" name="totalAmount" id="totalAmount">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card border-secondary mb-5">
+                            
+                            <div class="card-footer border-secondary bg-transparent">
+                                <p class="text-danger hide " id="stockAlert" >remove out of stock item</p>
+                                <input type="submit" value="Check Out" id="placeOrder"
+                                    class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">
+                                </input>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        </form>
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
+        <div class="row px-xl-5 pt-5">
+            <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
+                <a href="" class="text-decoration-none">
+                    <h1 class="mb-4 display-5 font-weight-semi-bold">BRAND HOME</h1>
+                </a>
+                <p>Dolore erat dolor sit lorem vero amet. Sed sit lorem magna, ipsum no sit erat lorem et magna ipsum dolore amet erat.</p>
+                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
+                <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
+                <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
+            </div>
+            <div class="col-lg-8 col-md-12">
+                <div class="row">
+                    <div class="col-md-4 mb-5">
+                        <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
+                        <div class="d-flex flex-column justify-content-start">
+                            <a class="text-dark mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                            <a class="text-dark mb-2" href="shop.html"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
+                            <a class="text-dark mb-2" href="detail.html"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
+                            <a class="text-dark mb-2" href="cart.html"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
+                            <a class="text-dark mb-2" href="checkout.html"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                            <a class="text-dark" href="contact.html"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-5">
+                        <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
+                        <div class="d-flex flex-column justify-content-start">
+                            <a class="text-dark mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                            <a class="text-dark mb-2" href="shop.html"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
+                            <a class="text-dark mb-2" href="detail.html"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
+                            <a class="text-dark mb-2" href="cart.html"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
+                            <a class="text-dark mb-2" href="checkout.html"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                            <a class="text-dark" href="contact.html"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-5">
+                        <h5 class="font-weight-bold text-dark mb-4">Newsletter</h5>
+                        <form action="">
+                            <div class="form-group">
+                                <input type="text" class="form-control border-0 py-4" placeholder="Your Name" required="required" />
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control border-0 py-4" placeholder="Your Email"
+                                    required="required" />
+                            </div>
+                            <div>
+                                <button class="btn btn-primary btn-block border-0 py-3" type="submit">Subscribe Now</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row border-top border-light mx-xl-5 py-4">
+            <div class="col-md-6 px-xl-0">
+                <p class="mb-md-0 text-center text-md-left text-dark">
+                    &copy; <a class="text-dark font-weight-semi-bold" href="#">Your Site Name</a>. All Rights Reserved. Designed
+                    by
+                    <a class="text-dark font-weight-semi-bold" href="https://htmlcodex.com">HTML Codex</a><br>
+                    Distributed By <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                </p>
+            </div>
+            <div class="col-md-6 px-xl-0 text-center text-md-right">
+                <img class="img-fluid" src="img/payments.png" alt="">
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+    <div id="productsData" data-products='<%= JSON.stringify(products) %>'></div>
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="/lib/easing/easing.min.js"></script>
+    <script src="/lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="mail/jqBootstrapValidation.min.js"></script>
+    <script src="mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="/js/main2.js"></script>
+</body>
+
+<script>
+
+var stockCheck = 0 ;
+
+document.addEventListener('DOMContentLoaded',  function () {
+            // Retrieve the products JSON string from the data attribute
+            var productsDataElement = document.getElementById('productsData');
+            console.log("productsDataElement is "+productsDataElement);
+            var productsJson = productsDataElement.getAttribute('data-products');
+            console.log("productsJson is "+productsJson);
+            var products = JSON.parse(productsJson); // Parse it into a JavaScript object
+            console.log("products is "+products);
+            var placeOrderButton = document.getElementById("placeOrder");
+            var stockAlert2 = document.getElementById("stockAlert");
+   
+
+            
+
+             products.forEach((product, index) => {
+                updateQuantity(product._id, index); // Initialize quantity dropdowns
+            });
+
+            if(stockCheck==1){
+               stockAlert2.classList.remove("hide");
+               placeOrderButton.disabled = true;
+            }
+
+            updateGrandTotal();
+        });
+
+function updatePrice(index) {
+    var quantity = document.getElementById('quantity' + index).value;
+    var pricePerUnitText = document.getElementById('pricePerUnit' + index).innerHTML;
+    var pricePerUnit = parseFloat(pricePerUnitText.replace(/[^\d.]/g, ''));
+
+    if (!isNaN(pricePerUnit)) {
+        var totalPrice = quantity * pricePerUnit;
+        document.getElementById('totalPrice' + index).innerHTML = 'Rs ' + totalPrice.toFixed(2);
+        
+        updateGrandTotal();
+    } else {
+        console.log("Invalid price");
+    }
+}
+
+function updateQuantity(productId, index) {
+    var size = document.getElementById("size" + index).value;
+    var color = document.getElementById("color" + index).value;
+    var quantityDropdown = document.getElementById("quantity" + index);
+    var placeOrderButton = document.getElementById("placeOrder");
+    var stockAlert = document.getElementById("stockAlert" + index);
+    var stockAlert2 = document.getElementById("stockAlert");
+    var stock = document.getElementById("stock" + index);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", `/getStock?productId=${productId}&size=${size}&color=${color}`, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+            var stockData = JSON.parse(xhr.responseText);
+           quantityDropdown.innerHTML = "";
+            if (stockData.quantity === 0) {
+               // var option = document.createElement("option");
+                //option.text = "out of stock";
+                quantityDropdown.value = 0 ;
+                stockAlert.classList.remove("hide");
+                stockAlert2.classList.remove("hide");
+                console.log("first"+stockCheck);
+                stockCheck=1;
+                console.log("second"+stockCheck);
+                stock.classList.add("hide");
+                
+                //quantityDropdown.add(option);
+                updatePrice(index);
+                placeOrderButton.disabled = true; // Disable the "Place Order" button
+            } else {
+                // for (var i = 1; i <= stockData.quantity; i++) {
+                //     var option = document.createElement("option");
+                //     option.text = i;
+                //     option.value = i;
+                //     quantityDropdown.add(option);
+                // }
+                stockAlert.classList.add("hide");
+                stockAlert2.classList.add("hide");
+                stock.classList.remove("hide");
+                quantityDropdown.value = 1 ;
+                quantityDropdown.max = stockData.quantity; 
+
+                updatePrice(index);
+                placeOrderButton.disabled = false; // Enable the "Place Order" button
+            }
+        }
+    };
+    xhr.send();
+}
+
+function updateGrandTotal() {
+            var grandTotal = 0;
+            var productsDataElement = document.getElementById('productsData');
+            var productsJson = productsDataElement.getAttribute('data-products');
+            var products = JSON.parse(productsJson); // Parse it into a JavaScript object
+
+            products.forEach((product, index) => {
+                var totalPriceText = document.getElementById('totalPrice' + index).innerHTML;
+                var totalPrice = parseFloat(totalPriceText.replace(/[^\d.]/g, ''));
+                if (!isNaN(totalPrice)) {
+                    grandTotal += totalPrice;
+                }
+            });
+            document.getElementById('grandTotal').innerHTML = 'Rs ' + grandTotal.toFixed(2);
+            document.getElementById("totalAmount").value = grandTotal
+        }
+
+// Attach event listeners to size and color dropdowns for each product
+products.forEach((product, index) => {
+    document.getElementById("size" + index).addEventListener("change", function () {
+        updateQuantity(product._id, index);
+    });
+    document.getElementById("color" + index).addEventListener("change", function () {
+        updateQuantity(product._id, index);
+    });
+});
+
+
+
+</script>
+
+</html>

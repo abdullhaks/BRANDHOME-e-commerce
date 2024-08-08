@@ -1,0 +1,56 @@
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>admin-login</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<!-- MATERIAL DESIGN ICONIC FONT -->
+		<link rel="stylesheet" href="/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+
+		<!-- STYLE CSS -->
+		<link rel="stylesheet" href="/sheets/style.css">
+	</head>
+
+	<body>
+
+		<div class="wrapper" style="background-image: linear-gradient(to right, rgba(243, 167, 27, 0), rgb(236, 168, 104));">
+			<div class="inner">
+				<div class="image-holder">
+					<img src="/images/side.jpeg" alt="">
+					<h1>BRANDHOME</h1>
+				</div>
+				<form action="/admin" method="post">
+					<h3>Welcome owner</h3>
+
+					<% if (errors) { %>
+						<% errors.forEach(function(error) { %>
+							<p style="color: red;"><%= error.msg %></p>
+						<% }) %>
+					  <% } %>
+					
+					
+					<div class="form-wrapper">
+						<input type="email" name="email" required placeholder="Email Address" class="form-control">
+						<i class="zmdi zmdi-email"></i>
+					</div>
+					
+					
+					<div class="form-wrapper">
+						<input type="password" placeholder="Password" name="password" required class="form-control">
+						<i class="zmdi zmdi-lock"></i>
+					</div>
+
+          
+					
+					<button>login
+						<i class="zmdi zmdi-arrow-right"></i>
+					</button>
+				</form>
+			</div>
+		</div>
+		
+	</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
