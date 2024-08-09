@@ -487,15 +487,15 @@
                                                 <% } %>
                                                 <td>
                                                     <% if (users[i].is_blocked === 0) { %>
-                                                        <form method="post" action="/admin/blockuser?id=<%= users[i]._id %>">
-                                                            <button class=" text-danger" onclick=" return confirm('are you want block this user..?')">Block</button>
+                                                        <form id="form-<%= users[i]._id %>" method="post" action="/admin/blockuser?id=<%= users[i]._id %>">
+                                                            <button id="<%= users[i]._id %>" class="block-user text-danger" data-id="<%= users[i]._id %>">Block</button>
                                                         </form>
                                                     <% } else { %>
-                                                        <form method="post" action="/admin/unblockuser?id=<%= users[i]._id %>">
-                                                            <button class=" text-success" onclick=" return confirm('are you want unblock this user..?')">Unblock</button>
+                                                        <form id="form-<%= users[i]._id %>" method="post" action="/admin/unblockuser?id=<%= users[i]._id %>">
+                                                            <button id="<%= users[i]._id %>" class="unblock-user text-success" data-id="<%= users[i]._id %>">Unblock</button>
                                                         </form>
                                                     <% } %>
-                                                </td
+                                                </td>
                                                 
                             
                                                
@@ -595,6 +595,61 @@
 
     <!-- Main JS-->
     <script src="/js/adminMain.js"></script>
+
+
+
+    <script>
+    
+
+
+                document.addEventListener('DOMContentLoaded', function() {
+                function attachEventListeners() {
+                    document.querySelectorAll('.block-user, .unblock-user').forEach(function(button) {
+                        button.addEventListener('click', function(event) {
+                            event.preventDefault();
+
+                            // Get the user ID and action (block/unblock)
+                            var userId = this.getAttribute('data-id');
+                            var isBlocking = this.classList.contains('block-user');
+                            var action = isBlocking ? 'blockuser' : 'unblockuser';
+
+
+                             // Confirm the block action
+                                if (!confirm('Are you sure you want to block this user?')) {
+                                    return;
+                                }
+
+                            // Make the AJAX request to block/unblock the user
+                            fetch('/admin/' + action + '?id=' + userId, {
+                                method: 'POST'
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    // If the action is successful, change the button and form
+                                    document.getElementById('form-' + userId).outerHTML = `
+                                        <form id="form-${userId}" method="post" action="/admin/${isBlocking ? 'unblockuser' : 'blockuser'}?id=${userId}">
+                                            <button id="${userId}" class="${isBlocking ? 'unblock-user text-success' : 'block-user text-danger'}" data-id="${userId}">
+                                                ${isBlocking ? 'Unblock' : 'Block'}
+                                            </button>
+                                        </form>
+                                    `;
+                                    // Re-attach event listeners
+                                    attachEventListeners();
+                                } else {
+                                    alert('Failed to ' + (isBlocking ? 'block' : 'unblock') + ' the user. Please try again.');
+                                }
+                            })
+                            .catch(error => console.error('Error:', error));
+                        });
+                    });
+                }
+
+                // Initially attach event listeners
+                attachEventListeners();
+            });
+
+    </script>
 
 </body>
 

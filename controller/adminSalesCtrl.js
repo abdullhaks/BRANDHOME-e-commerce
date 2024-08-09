@@ -20,13 +20,13 @@ const excel = require('exceljs');
 const loadAdminSalesManagement = async(req,res)=> {
     try{
 
-        const currentDate = new Date();
-        let filterDate;
+        // const currentDate = new Date();
+        // let filterDate;
 
-        filterDate = new Date(currentDate.setHours(0, 0, 0, 0));
+        // filterDate = new Date(currentDate.setHours(0, 0, 0, 0));
 
-        console.log("filter date is",filterDate);
-        sales = await Sales.find({ date: { $gte: filterDate } }).sort({ date: -1 });
+        // console.log("filter date is",filterDate);
+        // sales = await Sales.find({ date: { $gte: filterDate } }).sort({ date: -1 });
 
         const sales = await Sales.find().sort({deliverTime:-1});
 

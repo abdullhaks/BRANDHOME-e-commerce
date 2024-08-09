@@ -138,7 +138,7 @@ const blockUser = async (req,res)=>{
         if(user){
             await User.updateOne({_id:id},{$set:{is_blocked:1}});
 
-            res.redirect("/admin/userManagement");
+            res.json({ success: true, userId: id });
         }
 
         
@@ -158,7 +158,7 @@ const unblockUser = async (req,res)=>{
         if(user){
             await User.updateOne({_id:id},{$set:{is_blocked:0}});
 
-            res.redirect("/admin/userManagement");
+            res.json({ success: true, userId: id });
         }
 
        
