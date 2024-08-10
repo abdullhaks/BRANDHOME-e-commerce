@@ -207,7 +207,7 @@ adminRoute.post(
   adminSalesController.downloadPdf
 );
 
-adminRoute.get(
+adminRoute.post(
   "/downloadXl",
   adminSalesController.downloadXl
 );

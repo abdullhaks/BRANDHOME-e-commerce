@@ -19,18 +19,15 @@ const excel = require('exceljs');
 
 const loadAdminSalesManagement = async(req,res)=> {
     try{
+        const currentDate = new Date();
+        const filterDate = new Date(currentDate.setHours(0, 0, 0, 0));
 
-        // const currentDate = new Date();
-        // let filterDate;
+        console.log("filter date is ",filterDate);
+        
+        const sales = await Sales.find({ deliveredDate: { $gte: filterDate } }).sort({ deliveredDate: -1 });
+        const filter = "today"
 
-        // filterDate = new Date(currentDate.setHours(0, 0, 0, 0));
-
-        // console.log("filter date is",filterDate);
-        // sales = await Sales.find({ date: { $gte: filterDate } }).sort({ date: -1 });
-
-        const sales = await Sales.find().sort({deliverTime:-1});
-
-        res.render("adminSales",{sales});
+        res.render("adminSales",{sales,filter});
 
     }catch(error){
         console.log(error);
@@ -40,11 +37,6 @@ const loadAdminSalesManagement = async(req,res)=> {
 const filterAdminSalesManagement = async(req,res)=>{
     try{
 
-
-        console.log("admin sales management is working now..");
-        console.log(req.body);
-        
-        
 
         const { filter, startDate, endDate } = req.body;
         let sales;
@@ -62,7 +54,7 @@ const filterAdminSalesManagement = async(req,res)=>{
                 },
             }).sort({ deliveredDate: -1 });
 
-            console.log("sales is ",sales);
+           
         } else {
             const currentDate = new Date();
             let filterDate;
@@ -74,7 +66,7 @@ const filterAdminSalesManagement = async(req,res)=>{
                     console.log("filter date is ",filterDate);
                     
                     sales = await Sales.find({ deliveredDate: { $gte: filterDate } }).sort({ deliveredDate: -1 });
-                    console.log("sales is ",sales);
+                    
                     break;
                 case 'thisWeek':
                     filterDate = new Date(currentDate.setDate(currentDate.getDate() - currentDate.getDay()));
@@ -88,7 +80,7 @@ const filterAdminSalesManagement = async(req,res)=>{
                 case 'thisMonth':
                     filterDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
 
-                    console.log("filter date is ",filterDate);
+                   
 
                     sales = await Sales.find({ deliveredDate: { $gte: filterDate } }).sort({ deliveredDate: -1 });
                     console.log("sales is ",sales);
@@ -96,10 +88,10 @@ const filterAdminSalesManagement = async(req,res)=>{
                 case 'thisYear':
                     filterDate = new Date(currentDate.getFullYear(), 0, 1);
 
-                    console.log("filter date is ",filterDate);
+                
 
                     sales = await Sales.find({ deliveredDate: { $gte: filterDate } }).sort({ deliveredDate: -1 });
-                    console.log("sales is ",sales);
+                  
                     break;
                 default:
                     sales = await Sales.find().sort({ deliveredDate: -1 });
@@ -117,12 +109,66 @@ const filterAdminSalesManagement = async(req,res)=>{
 
 const downloadPdf = async (req, res) => {
     try {
-        const filter = req.body.filter;
-        
-        // Assuming you handle the filter logic here
-        const sales = await Sales.find().sort({ deliveredDate: -1 }); // Modify the query according to your filter logic
+        const { filter, startDate, endDate } = req.body;
+        let sales;
+    
+        if (filter === 'dateRange') {
 
-        console.log("download pdf is working and sales is ",sales);
+            console.log("start date is",startDate);
+            console.log("start date is",endDate);
+
+            
+            sales = await Sales.find({
+                deliveredDate: {
+                    $gte: new Date(startDate),
+                    $lte: new Date(endDate),
+                },
+            }).sort({ deliveredDate: -1 });
+
+           
+        } else {
+            const currentDate = new Date();
+            let filterDate;
+    
+            switch (filter) {
+                case 'today':
+                    filterDate = new Date(currentDate.setHours(0, 0, 0, 0));
+
+                    console.log("filter date is ",filterDate);
+                    
+                    sales = await Sales.find({ deliveredDate: { $gte: filterDate } }).sort({ deliveredDate: -1 });
+                    
+                    break;
+                case 'thisWeek':
+                    filterDate = new Date(currentDate.setDate(currentDate.getDate() - currentDate.getDay()));
+
+                    console.log("filter date is ",filterDate);
+
+                    sales = await Sales.find({ deliveredDate: { $gte: filterDate } }).sort({ deliveredDate: -1 });
+
+                    console.log("sales is ",sales);
+                    break;
+                case 'thisMonth':
+                    filterDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+
+                   
+
+                    sales = await Sales.find({ deliveredDate: { $gte: filterDate } }).sort({ deliveredDate: -1 });
+                    console.log("sales is ",sales);
+                    break;
+                case 'thisYear':
+                    filterDate = new Date(currentDate.getFullYear(), 0, 1);
+
+                
+
+                    sales = await Sales.find({ deliveredDate: { $gte: filterDate } }).sort({ deliveredDate: -1 });
+                  
+                    break;
+                default:
+                    sales = await Sales.find().sort({ deliveredDate: -1 });
+            }
+        }
+     
         // Create a new PDF document
         const doc = new PDFDocument({size: 'A4',margin:25});
         
@@ -179,7 +225,7 @@ const downloadPdf = async (req, res) => {
             doc.text(sale.orderObjectId, tableLeft + columnWidths.no + columnWidths.date, rowTop);
             doc.text(sale.purchaseDetails.productName, tableLeft + columnWidths.no + columnWidths.date + columnWidths.orderId, rowTop);
             doc.text(sale.purchaseDetails.quantity, tableLeft + columnWidths.no + columnWidths.date + columnWidths.orderId + columnWidths.item, rowTop);
-            doc.text(`Rs ${sale.purchaseDetails.price}`, tableRight, rowTop, { align: 'right' });
+            doc.text(`Rs ${sale.purchaseDetails.payAmount}`, tableRight, rowTop, { align: 'right' });
             
             No++;
             rowTop += rowHeight;
@@ -194,7 +240,7 @@ const downloadPdf = async (req, res) => {
         doc.moveDown(3);
         var total = 0;
          for(let sale of sales ){
-            total += sale.purchaseDetails.price;
+            total += sale.purchaseDetails.payAmount;
         };
         doc.fontSize(12).text(`TOTAL  : ${total}`,  tableRight, rowTop, { align: 'right' });
         
@@ -207,30 +253,132 @@ const downloadPdf = async (req, res) => {
         res.status(500).send("Failed to generate PDF.");
     }
 };
-const downloadXl = async(req,res)=>{
-    try{
 
-        const sales = await Sales.find().sort({ date: -1 });
+
+const downloadXl = async (req, res) => {
+    try {
+        const { filter, startDate, endDate } = req.body;
+        let sales;
+    
+        if (filter === 'dateRange') {
+
+            console.log("start date is",startDate);
+            console.log("start date is",endDate);
+
+            
+            sales = await Sales.find({
+                deliveredDate: {
+                    $gte: new Date(startDate),
+                    $lte: new Date(endDate),
+                },
+            }).sort({ deliveredDate: -1 });
+
+           
+        } else {
+            const currentDate = new Date();
+            let filterDate;
+    
+            switch (filter) {
+                case 'today':
+                    filterDate = new Date(currentDate.setHours(0, 0, 0, 0));
+
+                    console.log("filter date is ",filterDate);
+                    
+                    sales = await Sales.find({ deliveredDate: { $gte: filterDate } }).sort({ deliveredDate: -1 });
+                    
+                    break;
+                case 'thisWeek':
+                    filterDate = new Date(currentDate.setDate(currentDate.getDate() - currentDate.getDay()));
+
+                    console.log("filter date is ",filterDate);
+
+                    sales = await Sales.find({ deliveredDate: { $gte: filterDate } }).sort({ deliveredDate: -1 });
+
+                    console.log("sales is ",sales);
+                    break;
+                case 'thisMonth':
+                    filterDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+
+                   
+
+                    sales = await Sales.find({ deliveredDate: { $gte: filterDate } }).sort({ deliveredDate: -1 });
+                    console.log("sales is ",sales);
+                    break;
+                case 'thisYear':
+                    filterDate = new Date(currentDate.getFullYear(), 0, 1);
+
+                
+
+                    sales = await Sales.find({ deliveredDate: { $gte: filterDate } }).sort({ deliveredDate: -1 });
+                  
+                    break;
+                default:
+                    sales = await Sales.find().sort({ deliveredDate: -1 });
+            }
+        }
+
         const workbook = new excel.Workbook();
         const worksheet = workbook.addWorksheet('Sales Report');
-    
-        worksheet.columns = [
-            { header: 'Date', key: 'date', width: 30 },
-            { header: 'Amount', key: 'amount', width: 30 },
-        ];
-    
-        sales.forEach(sale => {
-            worksheet.addRow({ date: sale.date, amount: sale.amount });
-        });
-    
-        const filePath = path.join(__dirname, '..', 'sales-report.xlsx');
-        await workbook.xlsx.writeFile(filePath);
-        res.download(filePath);
 
-    }catch(error){
-        throw error;
-    };
-}
+        worksheet.columns = [
+            { header: 'Date', key: 'date', width: 20 },
+            { header: 'Order ID', key: 'orderId', width: 30 },
+            { header: 'Item', key: 'item', width: 30 },
+            { header: 'Quantity', key: 'quantity', width: 10 },
+            { header: 'Amount', key: 'amount', width: 15 },
+        ];
+
+        sales.forEach(sale => {
+            worksheet.addRow({
+                date: new Date(sale.deliveredDate).toLocaleDateString(),
+                orderId: sale.orderObjectId,
+                item: sale.purchaseDetails.productName,
+                quantity: sale.purchaseDetails.quantity,
+                amount: sale.purchaseDetails.payAmount,
+            });
+        });
+
+        
+        var total = 0;
+         for(let sale of sales ){
+            total += sale.purchaseDetails.payAmount;
+        };
+       
+
+        worksheet.addRow({
+
+        });
+      const totalRow =  worksheet.addRow([null,null, null, null,`TOTAL :${total}`]); 
+
+      totalRow.eachCell((cell) => {
+        cell.font = {
+            name: 'Arial',
+            size: 12,
+            bold: true,
+        };
+
+        totalRow.commit();
+    });
+
+
+        // Create buffer and send it directly as a response
+        res.setHeader(
+            'Content-Type',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        );
+        res.setHeader(
+            'Content-Disposition',
+            'attachment; filename=' + 'sales-report.xlsx'
+        );
+
+        await workbook.xlsx.write(res);
+        res.end();
+
+    } catch (error) {
+        console.error("Error generating Excel file:", error);
+        res.status(500).send('Error generating Excel file');
+    }
+};
 
 
 module.exports = {

@@ -43,7 +43,8 @@
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" href="index.html">
-                    <h2>BRANDHOME</h2><h6>Admin</h6>
+                            <h2>BRANDHOME</h2>
+                            <h6>Admin</h6>
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -57,7 +58,7 @@
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
 
-                        <li >
+                        <li>
                             <a class="js-arrow " href="/admin/home">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                            
@@ -75,7 +76,7 @@
 
                         <li>
                             <a href="/product/addProduct">
-                                <i class="fas fa-tags"></i>Products</a>
+                                <i class="fas fa-shopping-basket"></i>Products</a>
                         </li>
 
                         <li>
@@ -90,24 +91,24 @@
 
                         <li>
                             <a href="/admin/returnManagement">
-                                <i class="fas fa-shopping-bag "></i>Returns</a>
+                                <i class="fas fa fa-reply "></i>Returns</a>
                         </li>
 
                         <li>
                             <a href="/admin/offersManagement">
-                                <i class="fas fa-shopping-bag "></i>Offers</a>
+                                <i class="fas fa fa-gift "></i>Offers</a>
                         </li>
 
                         <li>
                             <a href="/admin/couponManagement">
-                                <i class="fas fa-shopping-bag "></i>Coupons</a>
+                                <i class="fas fa fa-tags "></i>Coupons</a>
                         </li>
 
-                        <li class="active has-sub">
+                        <li class="active">
                             <a href="/admin/salesManagement">
-                                <i class="fas fa-shopping-bag "></i>Sales</a>
+                                <i class="fas fa-bar-chart "></i>Sales</a>
                         </li>
-                   
+                    
                     </ul>
                 </div>
             </nav>
@@ -118,29 +119,33 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#">
-                    <h2>BRANDHOME</h2><h6>Admin</h6>
+                    <h2>BRANDHOME</h2>
+                    <h6>Admin</h6>
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
-                    <ul class="list-unstyled navbar__list">
-                        <li >
+                    <ul class="navbar-mobile__list list-unstyled">
+
+                        <li>
                             <a class="js-arrow " href="/admin/home">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                          
+                           
                         </li>
+
                         <li>
                             <a href="/admin/userManagement">
                                 <i class="fas fa-users"></i>Users</a>
-                           
                         </li>
+
                         <li>
                             <a href="/admin/categoryManagement">
                                 <i class="fas fa-th"></i>Categories</a>
                         </li>
+
                         <li>
                             <a href="/product/addProduct">
-                                <i class="fas fa-tags"></i>Products</a>
+                                <i class="fas fa-shopping-basket"></i>Products</a>
                         </li>
 
                         <li>
@@ -155,24 +160,24 @@
 
                         <li>
                             <a href="/admin/returnManagement">
-                                <i class="fas fa-shopping-bag "></i>Returns</a>
+                                <i class="fas fa fa-reply "></i>Returns</a>
                         </li>
 
                         <li>
                             <a href="/admin/offersManagement">
-                                <i class="fas fa-shopping-bag "></i>Offers</a>
+                                <i class="fas fa fa-gift "></i>Offers</a>
                         </li>
 
                         <li>
                             <a href="/admin/couponManagement">
-                                <i class="fas fa-shopping-bag "></i>Coupons</a>
+                                <i class="fas fa fa-tags "></i>Coupons</a>
                         </li>
 
-                        <li class="active has-sub">
+                        <li class="active">
                             <a href="/admin/salesManagement">
-                                <i class="fas fa-shopping-bag "></i>Sales</a>
+                                <i class="fas fa-bar-chart "></i>Sales</a>
                         </li>
-                   
+                    
                     </ul>
                 </nav>
             </div>
@@ -187,7 +192,8 @@
                     <div class="container-fluid">
                         <div class="header-wrap">
                             <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
+                                <input class="au-input au-input--xl" type="text" name="search"
+                                    placeholder="Search for datas &amp; reports..." />
                                 <button class="au-btn--submit" type="submit">
                                     <i class="zmdi zmdi-search"></i>
                                 </button>
@@ -359,7 +365,7 @@
             <div class="main-content">
                 <div class="section__content section__content--p30 ">
                     <div class="container-fluid">
-                        
+
                         <div class="row">
                             <div class="col-lg-8">
                                 <h2 class="title-1 m-b-25">Sales Report</h2>
@@ -367,17 +373,20 @@
 
                             <div class="col-lg-4 row">
                                 <div class="col-lg-6"> <a id="pdf" class="text-danger" href="">Download PDF</a></div>
-                                <div class="col-lg-6"> <a id="xl" href="/admin/sales-report/excel">Download Excel</a></div>
-                               <input type="hidden" name="filter" id="filter">
+                                <div class="col-lg-6"> <a id="xl" href="">Download Excel</a></div>
+                                <input type="hidden" name="filter" id="filter" value="<%= filter %>">
+                                <input type="hidden" name="startDate">
+                                <input type="hidden" name="endDate">
+
                             </div>
-                            
+
                             <div class="col-lg-12">
-                       
+
                                 <form method="POST" action="" id="adminSales">
                                     <label for="filter">Filter:</label>
                                     <select name="filter" id="filter" onchange="toggleDateRange(this.value)">
                                         <option value="all">All</option>
-                                        <option value="today">Today</option>
+                                        <option selected value="today">Today</option>
                                         <option value="thisWeek">This Week</option>
                                         <option value="thisMonth">This Month</option>
                                         <option value="thisYear">This Year</option>
@@ -393,7 +402,7 @@
                                 </form>
                             </div>
                             <div class="col-lg-12">
-                                
+
                                 <div class="table-responsive table--no-card m-b-40">
                                     <table id="salesData" class="table table-borderless table-striped table-earning">
                                         <thead>
@@ -408,37 +417,49 @@
                                         </thead>
 
 
-                                        <% if(sales.length >0){
+                                        <% if(sales.length>0){
                                             for(let i = 0; i < sales.length; i++){ %>
                                                 <tbody>
                                                     <tr>
-                                                        <td><%= new Date(sales[i].deliveredDate).toLocaleDateString() %></td>
-                                                        <td><%= sales[i].orderObjectId %></td>
-                                                        <td><%= sales[i].email %></td>
-                                                        <td class=""><%= sales[i].purchaseDetails.productName %></td>
-                                                        <td class=""><%= sales[i].purchaseDetails.quantity %></td>
-                                                        <td class="text-left">Rs<%= sales[i].purchaseDetails.payAmount %></td>
+                                                        <td>
+                                                            <%= new Date(sales[i].deliveredDate).toLocaleDateString() %>
+                                                        </td>
+                                                        <td>
+                                                            <%= sales[i].orderObjectId %>
+                                                        </td>
+                                                        <td>
+                                                            <%= sales[i].email %>
+                                                        </td>
+                                                        <td class="">
+                                                            <%= sales[i].purchaseDetails.productName %>
+                                                        </td>
+                                                        <td class="">
+                                                            <%= sales[i].purchaseDetails.quantity %>
+                                                        </td>
+                                                        <td class="text-left">Rs<%= sales[i].purchaseDetails.payAmount
+                                                                %>
+                                                        </td>
                                                     </tr>
-                                                   
+
                                                 </tbody>
 
-                                            <% } %>
-                                        <%}else{%>
-                                            <tbody>
-                                                <tr>
-                                                    <td colspan="6">
-                                                        No Sales Yet..
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        <%}%>
-                                      
+                                                <% } %>
+                                                    <%}else{%>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td colspan="6">
+                                                                    No Sales Yet..
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <%}%>
+
                                     </table>
                                 </div>
                             </div>
-                            
-                        </div> 
-                       
+
+                        </div>
+
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="copyright">
@@ -483,17 +504,17 @@
 
 <script>
 
-function toggleDateRange(value) {
-            const dateRange = document.getElementById('dateRange');
-            if (value === 'dateRange') {
-                dateRange.style.display = 'block';
-            } else {
-                dateRange.style.display = 'none';
-            }
-        };
+    function toggleDateRange(value) {
+        const dateRange = document.getElementById('dateRange');
+        if (value === 'dateRange') {
+            dateRange.style.display = 'block';
+        } else {
+            dateRange.style.display = 'none';
+        }
+    };
 
-    $(document).ready(function() {
-        $('#adminSales').submit(function(e) {
+    $(document).ready(function () {
+        $('#adminSales').submit(function (e) {
             e.preventDefault();
 
             console.log("AJAX working...");
@@ -504,7 +525,7 @@ function toggleDateRange(value) {
                 url: "/admin/salesManagement",
                 type: "POST",
                 data: formData,
-                success: function(res) {
+                success: function (res) {
                     if (res.success) {
                         document.getElementById("filter").value = res.filter;
                         let salesData;
@@ -542,7 +563,7 @@ function toggleDateRange(value) {
                                     </tr>
                                 </thead>
                                 <tbody>`;
-                            
+
                             // Loop through the sales data and build rows
                             res.sales.forEach(sale => {
                                 salesData += `
@@ -566,38 +587,80 @@ function toggleDateRange(value) {
         });
 
 
-});
+    });
 
-$(document).ready(function() {
-    $("#pdf").click(function(e) {
+    $(document).ready(function () {
+        $("#pdf").click(function (e) {
+            e.preventDefault();
+
+           
+
+
+            const filter = $("#filter").val();
+            const startDate = $("#startDate").val();
+            const endDate = $("#endDate").val();
+
+           
+
+            $.ajax({
+                url: "/admin/downloadPdf",
+                type: "POST",
+                data: { filter: filter,startDate:startDate,endDate:endDate },
+                xhrFields: {
+                    responseType: 'blob'
+                },
+                success: function (blob, status, xhr) {
+                    const link = document.createElement('a');
+                    const url = window.URL.createObjectURL(blob);
+                    link.href = url;
+                    link.download = "sales-report.pdf";
+                    document.body.appendChild(link);
+                    link.click();
+                    window.URL.revokeObjectURL(url);
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error downloading PDF:", error);
+                }
+            });
+        });
+    });
+
+
+    $(document).ready(function () {
+    $("#xl").click(function (e) {
         e.preventDefault();
 
         const filter = $("#filter").val();
 
-        console.log("pdf....and filter is ",filter);
+        console.log("Downloading Excel file... Filter is:", filter);
 
         $.ajax({
-            url: "/admin/downloadPdf",
+            url: "/admin/downloadXl",
             type: "POST",
-            data: { filter: filter },
+            data: { filter: filter }, // Send filter data as a POST request
             xhrFields: {
-                responseType: 'blob'
+                responseType: 'blob' // Important for file download
             },
-            success: function(blob, status, xhr) {
-                const link = document.createElement('a');
-                const url = window.URL.createObjectURL(blob);
-                link.href = url;
-                link.download = "sales-report.pdf";
-                document.body.appendChild(link);
-                link.click();
+            success: function (data) {
+                // Create a link element, hide it, direct it towards the blob, and then click it
+                const url = window.URL.createObjectURL(new Blob([data]));
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = 'sales-report.xlsx';
+                document.body.appendChild(a);
+                a.click();
                 window.URL.revokeObjectURL(url);
             },
-            error: function(xhr, status, error) {
-                console.error("Error downloading PDF:", error);
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.error("Failed to download Excel file", textStatus, errorThrown);
             }
         });
     });
 });
+
+
+
 
 </script>
 
