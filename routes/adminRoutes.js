@@ -202,13 +202,13 @@ adminRoute.post (
   adminSalesController.filterAdminSalesManagement
 );
 
-adminRoute.get(
-  "/dowloadPdf",
+adminRoute.post(
+  "/downloadPdf",
   adminSalesController.downloadPdf
 );
 
 adminRoute.get(
-  "/dowloadXl",
+  "/downloadXl",
   adminSalesController.downloadXl
 );
 

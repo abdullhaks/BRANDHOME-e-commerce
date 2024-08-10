@@ -115,27 +115,98 @@ const filterAdminSalesManagement = async(req,res)=>{
     }
 };
 
-const downloadPdf = async(req, res )=>{
-    try{
-        const sales = await Sales.find().sort({ date: -1 });
-        const doc = new PDFDocument();
+const downloadPdf = async (req, res) => {
+    try {
+        const filter = req.body.filter;
+        
+        // Assuming you handle the filter logic here
+        const sales = await Sales.find().sort({ deliveredDate: -1 }); // Modify the query according to your filter logic
 
-        console.log("sales to pdf",sales);
-    
-        doc.pipe(fs.createWriteStream('sales-report.pdf'));
-        doc.text('Sales Report');
-        sales.forEach(sale => {
-            doc.text(`${sale.date}: ${sale.amount}`);
+        console.log("download pdf is working and sales is ",sales);
+        // Create a new PDF document
+        const doc = new PDFDocument({size: 'A4',margin:25});
+        
+        // Stream the PDF directly to the response
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', 'attachment; filename="sales-report.pdf"');
+        
+        doc.pipe(res);
+
+        doc.fontSize(22).text('BRANDHOME', {
+            align: 'left'
         });
-        doc.end();
-    
-        res.download(path.join(__dirname, '..', 'sales-report.pdf'));
+        doc.moveDown();
 
-    }catch(error){
-        throw error;
+        // Add content to the PDF
+        doc.fontSize(18).text('Sales Report', {
+            align: 'center'
+        });
+        doc.moveDown(2);
+
+        // Table Header
+        const tableTop = 150;
+        const rowHeight = 20;
+        const columnWidths = {
+            no: 40,
+            date: 80,
+            orderId: 150,
+            item: 150,
+            quantity: 40,
+            amount: 140
+        };
+
+        let tableLeft = doc.page.margins.left;
+        const tableRight = doc.page.width - doc.page.margins.right - columnWidths.amount; 
+
+
+        // Draw the headers
+        doc.fontSize(8);
+        doc.text('No', tableLeft, tableTop);
+        doc.text('Date', tableLeft + columnWidths.no, tableTop);
+        doc.text('Order ID', tableLeft + columnWidths.no + columnWidths.date, tableTop);
+        doc.text('Item', tableLeft + columnWidths.no + columnWidths.date + columnWidths.orderId, tableTop);
+        doc.text('Quantity', tableLeft + columnWidths.no + columnWidths.date + columnWidths.orderId + columnWidths.item, tableTop);
+        doc.text('Amount', tableRight, tableTop, { align: 'right' }); 
+
+
+        // Draw the rows
+        let rowTop = tableTop + rowHeight;
+        let No = 1;
+
+        sales.forEach((sale) => {
+            doc.text(No, tableLeft, rowTop);
+            doc.text(new Date(sale.deliveredDate).toLocaleDateString(), tableLeft + columnWidths.no, rowTop);
+            doc.text(sale.orderObjectId, tableLeft + columnWidths.no + columnWidths.date, rowTop);
+            doc.text(sale.purchaseDetails.productName, tableLeft + columnWidths.no + columnWidths.date + columnWidths.orderId, rowTop);
+            doc.text(sale.purchaseDetails.quantity, tableLeft + columnWidths.no + columnWidths.date + columnWidths.orderId + columnWidths.item, rowTop);
+            doc.text(`Rs ${sale.purchaseDetails.price}`, tableRight, rowTop, { align: 'right' });
+            
+            No++;
+            rowTop += rowHeight;
+
+            // If the row goes beyond the page height, add a new page
+            if (rowTop > doc.page.height - doc.page.margins.bottom - rowHeight) {
+                doc.addPage();
+                rowTop = tableTop;
+            }
+        });
+
+        doc.moveDown(3);
+        var total = 0;
+         for(let sale of sales ){
+            total += sale.purchaseDetails.price;
+        };
+        doc.fontSize(12).text(`TOTAL  : ${total}`,  tableRight, rowTop, { align: 'right' });
+        
+
+        // Finalize the PDF
+        doc.end();
+        
+    } catch (error) {
+        console.error("Error generating PDF:", error);
+        res.status(500).send("Failed to generate PDF.");
     }
 };
-
 const downloadXl = async(req,res)=>{
     try{
 
