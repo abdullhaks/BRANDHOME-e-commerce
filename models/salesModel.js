@@ -46,7 +46,7 @@ const salesSchema = new mongoose.Schema({
         
     },
     deliveredDate:{
-        type:String,
+        type:Date,
         
     },
     

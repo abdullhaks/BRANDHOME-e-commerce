@@ -85,6 +85,8 @@ const updateOrderStatus = async (req,res)=>{
 
             console.log("it is delivered");
 
+            
+
            const exp= Date.now() + (259200 * 1000);
             const result = await Orders.updateOne({_id:orderId },{$set:{status:newStatus}});
             await  Orders.updateOne({_id:orderId },{$set:{deliveredDate:date}});
@@ -109,11 +111,11 @@ const updateOrderStatus = async (req,res)=>{
                 orderDate:order.orderDate,
                 orderTime:order.orderTime,
                 dispatchedDate:order.dispatchedDate,
-                deliveredDate:dat.toLocaleDateString(),
+                deliveredDate:new Date(),
                 deliverTime:dat.getTime(),
                 status:order.status,
                 returnStatus:order.returnStatus,
-                
+           
                
               }
             );
