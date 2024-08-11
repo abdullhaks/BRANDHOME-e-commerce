@@ -74,11 +74,33 @@ const addCoupon = async (req,res)=>{
     }catch(error){
         console.log(error);
     }
+};
+
+
+const deleteCoupon = async(req,res)=>{
+  try{
+
+    const {couponId} = req.body
+
+    console.log("coupon id is ",couponId);
+
+    const data=await Coupons.deleteOne({_id:couponId});
+    console.log("data  is ",data);
+
+    const coupons = await Coupons.find();
+    console.log("coupons  is ",coupons);
+
+    res.json({success:true,coupons});
+
+  }catch(error){
+console.log(error);
+  }
 }
 
 
 
 module.exports = {
     loadAdminCouponManagement,
-    addCoupon
+    addCoupon,
+    deleteCoupon,
 }

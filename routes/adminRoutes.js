@@ -219,6 +219,12 @@ adminRoute.post (
   adminCouponController.addCoupon
 );
 
+adminRoute.delete (
+  "/couponDelete",auth.isLogin,
+  isAdmin.isAdmin,
+  adminCouponController.deleteCoupon
+);
+
 //------------------------------------
 
 adminRoute.get (

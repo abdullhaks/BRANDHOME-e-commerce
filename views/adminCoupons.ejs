@@ -369,56 +369,29 @@
                                     <h3 class="title-3 m-b-30">Coupons</h3>
                                     <div class="table-responsive">
                                         <table class="table table-top-campaign">
-
-                                            <% if (coupons.length > 0) {
-                                                for (let i = 0; i < coupons.length; i++) { %>
-                                            <tbody>
-                                                <tr>
-                                                    <td> <%=i+1 %> <%=coupons[i].couponName %></td>
-
-                                                    <td> <%=coupons[i].off %>% Off</td>
-
-                                                    <td>
-                                                        <div class="table-data-feature">
-                                                            
-                                                            <button class="item" data-placement="top" title="Edit">
-                                                                <a href="/admin/couponManagementDelet?couponId=<%= coupons[i]._id %>"><i class="zmdi zmdi-delete"></i></a>
-
-                                                                
-                                                            </button>
-                                                                                                              
-                                                        </div>
-                                                    </td>
-
-                                                    <td>
-                                                        <div class="table-data-feature">
-                                                            
-                                                            <button class="item"  data-placement="top" title="Edit">
-                                                                <a href="/admin/couponManagementEdit?couponId=<%= coupons[i]._id %>"><i class="zmdi zmdi-edit"></i></a>
-
-                                                                
-                                                            </button>
-                                                                                                              
-                                                        </div>
-                                                    </td>
-
-                                                   
-                                                </tr>
-                                               
+                                            <tbody id="couponRow">
+                                                <% if (coupons.length > 0) { %>
+                                                    <% for (let i = 0; i < coupons.length; i++) { %>
+                                                        <tr>
+                                                            <td><%= i + 1 %> <%= coupons[i].couponName %></td>
+                                                            <td><%= coupons[i].off %>% Off</td>
+                                                            <td>
+                                                                <div class="table-data-feature">
+                                                                    <button class="item" data-placement="top" title="Edit">
+                                                                        <a class="coupon_del" data-couponId="<%= coupons[i]._id %>" href="#">
+                                                                            <i class="zmdi zmdi-delete"></i>
+                                                                        </a>
+                                                                    </button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    <% } %>
+                                                <% } else { %>
+                                                    <tr>
+                                                        <td colspan="3">Coupons not found...</td>
+                                                    </tr>
+                                                <% } %>
                                             </tbody>
-                                            <% }
-
-                                        } else { %>
-
-                                            <tbody>
-                                            <tr>
-                                                <td colspan="1">
-                                                    coupons not found...
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                        <% } %>
-
                                         </table>
                                     </div>
                                 </div>
@@ -533,6 +506,71 @@
 
     <!-- Main JS-->
     <script src="/js/adminMain.js"></script>
+
+
+    <script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    function attachEventListeners() {
+        document.querySelectorAll('.coupon_del').forEach(function(del) {
+            del.addEventListener('click', function(event) {
+                event.preventDefault();
+
+                const couponId = this.getAttribute("data-couponId");
+                console.log("coupon id is", couponId);
+
+                $.ajax({
+                    url: "/admin/couponDelete",
+                    type: "DELETE",
+                    data: { couponId: couponId },
+                    success: function(res) {
+                        alert("it is working");
+
+                        console.log("coupons is", res.coupons);
+
+                        if (res.coupons.length > 0) {
+                            let coupons = ""; // Initialize an empty string
+                            let no = 1;
+                            for (let coupon of res.coupons) {
+                                coupons += `
+                                    <tr>
+                                        <td>${no} ${coupon.couponName}</td>
+                                        <td>${coupon.off}% Off</td>
+                                        <td>
+                                            <div class="table-data-feature">
+                                                <button class="item" data-placement="top" title="Edit">
+                                                    <a class="coupon_del" data-couponId="${coupon._id}" href="#">
+                                                        <i class="zmdi zmdi-delete"></i>
+                                                    </a>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                `;
+                                no++;
+                            }
+
+                            console.log("now data is", coupons);
+
+                            document.getElementById("couponRow").innerHTML = coupons; // Update the tbody content
+                            attachEventListeners(); // Re-attach event listeners to the updated DOM elements
+                        } else {
+                            document.getElementById("couponRow").innerHTML = `
+                                <tr>
+                                    <td colspan="3">Coupons not found...</td>
+                                </tr>
+                            `;
+                        }
+                    }
+                });
+            });
+        });
+    }
+
+    attachEventListeners();
+});
+
+    </script>
 
 </body>
 

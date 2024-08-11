@@ -755,7 +755,7 @@
         console.log("total is ",totl);
         document . getElementById ("totalOffer"). value = totl;
 
-        //alert("now total offer "+document.getElementById ("totalOffer"). value);
+       
         document.getElementById("totalOfferText").innerHTML='Rs '+totl;
 
        
@@ -796,7 +796,7 @@
                 //  alert(response.couponId);
                 //  alert(response.saveByCoupon);
                 //  alert(response.message);
-                alert(response.totalAmountAfterCoupon);
+               
 
                          
                
@@ -809,7 +809,7 @@
                
             },
             error: function(xhr, status, error) {
-                alert('Error: ' + error);
+                popup(error);
             }
         });
     });
@@ -911,7 +911,7 @@ async function cancelCoupon (){
                 });
             });
         } catch (error) {
-            console.log(error);
+            popup(error);
         }
 
     };
@@ -985,13 +985,13 @@ async function cancelCoupon (){
 
 
                 } else {
-                    alert("Failed to add address.");
+                    popup("Failed to add address.");
                 }
             },
 
             error: function(err) {
                 console.log(err);
-                alert("An error occurred.");
+                popup("An error occurred.");
             }
 
         })
@@ -1075,9 +1075,9 @@ async function cancelCoupon (){
                             "image": "https://example.com/your_logo",
                             "order_id": ""+res.order_id+"", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
                             "handler": function (response) {
-                                alert(response.razorpay_payment_id);
-                                alert(response.razorpay_order_id);
-                                alert(response.razorpay_signature);
+                                // alert(response.razorpay_payment_id);
+                                // alert(response.razorpay_order_id);
+                                // alert(response.razorpay_signature);
 
                               
 
@@ -1098,14 +1098,14 @@ async function cancelCoupon (){
 
                         var razorpayObject = new Razorpay(options);
                         razorpayObject.on('payment.failed', function (response) {
-                            alert("Payment Failed");
-                            alert(response.error.code);
-                            alert(response.error.description);
-                            alert(response.error.source);
-                            alert(response.error.step);
-                            alert(response.error.reason);
-                            alert(response.error.metadata.order_id);
-                            alert(response.error.metadata.payment_id);
+                            popup("Payment Failed");
+                            // alert(response.error.code);
+                            // alert(response.error.description);
+                            // alert(response.error.source);
+                            // alert(response.error.step);
+                            // alert(response.error.reason);
+                            // alert(response.error.metadata.order_id);
+                            // alert(response.error.metadata.payment_id);
                         });
 
                         razorpayObject.open();
@@ -1118,7 +1118,7 @@ async function cancelCoupon (){
                     }
 
                     else {
-                        alert(res.msg);
+                        popup(res.msg);
 
                     }
                 }
