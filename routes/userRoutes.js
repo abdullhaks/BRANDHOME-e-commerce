@@ -88,7 +88,7 @@ userRoute.get ("/resentotp/:email",userController.resentOtp)
 
 userRoute.get ("/home",isBlocked.isBlocked,auth.isLogin, userController.loadHome);
 
-userRoute.get("/profile",profileController.loadProfile);
+userRoute.get("/profile",isBlocked.isBlocked,auth.isLogin,profileController.loadProfile);
 
 userRoute.get ("/products", userController.loadProducts); 
 
@@ -99,43 +99,43 @@ userRoute.get ("/addtoCart",isBlocked.isBlocked,auth.isLogin,cartController.addt
 
 userRoute.get ("/cart",isBlocked.isBlocked,auth.isLogin,cartController.loadCart);
 
-userRoute.get ("/removeFromCart",cartController.removeFromCart); 
+userRoute.get ("/removeFromCart",isBlocked.isBlocked,auth.isLogin,cartController.removeFromCart); 
 
 
 userRoute.get ("/addtoWishList",isBlocked.isBlocked,auth.isLogin,wishListController.addtoWishList);
 
 userRoute.get ("/wishList",isBlocked.isBlocked,auth.isLogin,wishListController.loadWishList);
 
-userRoute.get ("/removeFromWishList",wishListController.removeFromWishList); 
+userRoute.get ("/removeFromWishList",isBlocked.isBlocked,auth.isLogin,wishListController.removeFromWishList); 
 
 
-userRoute.post ("/checkOut",auth.isLogin,checkOutController.loadCheckOut);
+userRoute.post ("/checkOut",isBlocked.isBlocked,auth.isLogin,checkOutController.loadCheckOut);
 
 userRoute.get ("/getStock",checkOutController.getStock);
 
 
-userRoute.post ("/verifyPayment",checkOutController.verifyPayment);
+userRoute.post ("/verifyPayment",isBlocked.isBlocked,auth.isLogin,checkOutController.verifyPayment);
 
-userRoute.post ("/checkCoupon",couponController.checkCoupon);
-
-
+userRoute.post ("/checkCoupon",isBlocked.isBlocked,auth.isLogin,couponController.checkCoupon);
 
 
-userRoute.post("/placeOrder",checkOutController.placeOrder);
 
-userRoute.get("/orderPlaced",checkOutController.loadOrderPlaced)
+
+userRoute.post("/placeOrder",isBlocked.isBlocked,auth.isLogin,checkOutController.placeOrder);
+
+userRoute.get("/orderPlaced",checkOutController.loadOrderPlaced);
  
 
 
 
 //--------------------------------------
 
-userRoute.get ("/orders",ordersController.loadOrders);
-userRoute.get ("/orderManagement",ordersController.loadOrderManagement);
+userRoute.get ("/orders",isBlocked.isBlocked,auth.isLogin,ordersController.loadOrders);
+userRoute.get ("/orderManagement",isBlocked.isBlocked,auth.isLogin,ordersController.loadOrderManagement);
 
-userRoute.post ("/cancelOrder/:id",ordersController.cancelOrder);
+userRoute.post ("/cancelOrder/:id",isBlocked.isBlocked,auth.isLogin,ordersController.cancelOrder);
 
-userRoute.post ("/returnOrder/:id",ordersController.returnOrder)
+userRoute.post ("/returnOrder/:id",isBlocked.isBlocked,auth.isLogin,ordersController.returnOrder)
 
 //--------------------------------------
 

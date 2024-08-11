@@ -372,7 +372,6 @@
                                                 <th>ORDER ID</th>
                                                 <th>CUSTOMER</th>
                                                 <th>ITEM</th>
-                                                <th>QUANTITY</th>
                                                 <th>TOTAL</th>
                                                 <th>STATUS</th>
                                                 
@@ -383,11 +382,10 @@
                                             for (let i = 0; i < returns.length; i++) { %>
                                         <tbody>
                                             <tr>
-                                                <td><%= returns[i].dateString %></td>
+                                                <td> <%= new Date(returns[i].dateString).toLocaleDateString() %></td>
                                                 <td><%= returns[i].orderId %></td>
                                                 <td><%= returns[i].user %></td>
-                                                <td><%= returns[i].productDetails %> </td>
-                                                <td><%= returns[i].quantity %></td>
+                                                <td><%= returns[i].productDetails %></td>
                                                 <td>Rs <%= returns[i].totalAmount %></td>
                                                 <td>
                                                     <select name="returnStatus"  value="<%=returns[i].returnStatus%>"  id="returnStatus" data-return-id="<%= returns[i]._id %>">

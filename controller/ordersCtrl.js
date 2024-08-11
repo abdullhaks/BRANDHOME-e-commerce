@@ -165,9 +165,9 @@ const returnOrder = async (req,res)=>{
         const returns = new Returns ({
             orderId:order._id,
             user:order.email,
-            productDetails:order.brand+order.productName+order.color+order.option,
-            totalAmount:order.totalAmount,
-            quantity:order.quantity,
+            productDetails:`${order.purchaseDetails.productBrand} ${order.purchaseDetails.productName} 
+            ${order.purchaseDetails.color} ${order.purchaseDetails.size} (${order.purchaseDetails.quantity})`,
+            totalAmount:order.purchaseDetails.payAmount,
             dateString:datenow,
             returnDate:Date.now(),
           

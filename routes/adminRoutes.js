@@ -53,38 +53,49 @@ adminRoute.get(
 
 adminRoute.get(
   "/userManagement",
+  auth.isLogin,
   isAdmin.isAdmin,
   adminController.userManagement
 );
 
-adminRoute.post("/blockuser", auth.isLogin, adminController.blockUser);
-adminRoute.post("/unblockuser", auth.isLogin, adminController.unblockUser);
+adminRoute.post("/blockuser", auth.isLogin,
+  isAdmin.isAdmin, adminController.blockUser);
+adminRoute.post("/unblockuser", auth.isLogin,
+  isAdmin.isAdmin, adminController.unblockUser);
 
 //--------------------------------------
 
-adminRoute.get("/categoryManagement", productController.loadCategoryManagement);
+adminRoute.get("/categoryManagement",auth.isLogin,
+  isAdmin.isAdmin, productController.loadCategoryManagement);
 
-adminRoute.post("/categoryManagement", productController.addCategory);
+adminRoute.post("/categoryManagement",auth.isLogin,
+  isAdmin.isAdmin, productController.addCategory);
 
 adminRoute.get(
-  "/categoryManagementEdit",
+  "/categoryManagementEdit",auth.isLogin,
+  isAdmin.isAdmin,
   productController.loadCategoryManagementEdit
 );
 
-adminRoute.post("/categoryManagementEdit", productController.editCategory);
+adminRoute.post("/categoryManagementEdit",auth.isLogin,
+  isAdmin.isAdmin, productController.editCategory);
 
 adminRoute.post(
-  "/unlistCategory/:categoryName",
+  "/unlistCategory/:categoryName",auth.isLogin,
+  isAdmin.isAdmin,
   productController.unlistCategory
 );
 
-adminRoute.post("/listCategory/:categoryName", productController.listCategory);
+adminRoute.post("/listCategory/:categoryName",auth.isLogin,
+  isAdmin.isAdmin, productController.listCategory);
 
 //--------------------------------------
 
-adminRoute.get("/allProducts", productController.loadAllProducts);
+adminRoute.get("/allProducts",auth.isLogin,
+  isAdmin.isAdmin, productController.loadAllProducts);
 
-adminRoute.get("/ProductEdit", productController.loadProductEdit);
+adminRoute.get("/ProductEdit",auth.isLogin,
+  isAdmin.isAdmin, productController.loadProductEdit);
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -104,75 +115,92 @@ const upload = multer({
   { name: "image3", maxCount: 1 },
 ]);
 
-adminRoute.post("/ProductEdit", upload, productController.editProduct);
+adminRoute.post("/ProductEdit",auth.isLogin,
+  isAdmin.isAdmin, upload, productController.editProduct);
 
-adminRoute.post("/unlistProduct/:productId", productController.unlistProduct);
+adminRoute.post("/unlistProduct/:productId",auth.isLogin,
+  isAdmin.isAdmin, productController.unlistProduct);
 
-adminRoute.post("/listProduct/:productId", productController.listProduct);
+adminRoute.post("/listProduct/:productId",auth.isLogin,
+  isAdmin.isAdmin, productController.listProduct);
 
 //-------------------------------------
 
-adminRoute.get("/stockManagement", stockController.loadStockManagement);
+adminRoute.get("/stockManagement",auth.isLogin,
+  isAdmin.isAdmin, stockController.loadStockManagement);
 
 adminRoute.get(
-  "/loadProductStocks/:productId",
+  "/loadProductStocks/:productId",auth.isLogin,
+  isAdmin.isAdmin,
   stockController.loadProductStocks
 );
 
-adminRoute.post("/addStock/:productId", stockController.addStock);
+adminRoute.post("/addStock/:productId",auth.isLogin,
+  isAdmin.isAdmin, stockController.addStock);
 
 //-------------------------------------
 
 adminRoute.get(
-  "/orderManagement",
+  "/orderManagement",auth.isLogin,
+  isAdmin.isAdmin,
   adminOrderController.loadAdminOrderManagement
 );
 
-adminRoute.post("/updateOrderStatus", adminOrderController.updateOrderStatus);
+adminRoute.post("/updateOrderStatus",auth.isLogin,
+  isAdmin.isAdmin, adminOrderController.updateOrderStatus);
 
 //.....................................
 
 adminRoute.get(
-  "/returnManagement",
+  "/returnManagement",auth.isLogin,
+  isAdmin.isAdmin,
   adminReturnController.loadAdminReturnManagement
 );
 
-adminRoute.post("/updateReturnStatus", adminReturnController.updateReturnStatus);
+adminRoute.post("/updateReturnStatus",auth.isLogin,
+  isAdmin.isAdmin, adminReturnController.updateReturnStatus);
 
 //-------------------------------------
 
 adminRoute.get(
-  "/offersManagement",
+  "/offersManagement",auth.isLogin,
+  isAdmin.isAdmin,
   adminOffersController.loadAdminOffersManagement
 );
 
 adminRoute.get(
-  "/categoryOffersManagement",
+  "/categoryOffersManagement",auth.isLogin,
+  isAdmin.isAdmin,
   adminOffersController.loadAdminCategoryOffersManagement 
 );
 
 adminRoute.get(
-  "/productOffersManagement",
+  "/productOffersManagement",auth.isLogin,
+  isAdmin.isAdmin,
   adminOffersController.loadAdminProductOffersManagement 
 );
 
 adminRoute.post (
-  "/addCategoryOffer",
+  "/addCategoryOffer",auth.isLogin,
+  isAdmin.isAdmin,
   adminOffersController.addCategoryOffer
 );
 
 adminRoute.post (
-  "/addProductOffer",
+  "/addProductOffer",auth.isLogin,
+  isAdmin.isAdmin,
   adminOffersController.addProductOffer
 );
 
 adminRoute.post (
-  "/endCategoryOffer",
+  "/endCategoryOffer",auth.isLogin,
+  isAdmin.isAdmin,
   adminOffersController.endCategoryOffer
 );
 
 adminRoute.post (
-  "/endProductOffer",
+  "/endProductOffer",auth.isLogin,
+  isAdmin.isAdmin,
   adminOffersController.endProductOffer
 );
 
@@ -180,35 +208,41 @@ adminRoute.post (
 
 //-------------------------------------
 adminRoute.get (
-  "/couponManagement",
+  "/couponManagement",auth.isLogin,
+  isAdmin.isAdmin,
   adminCouponController.loadAdminCouponManagement
 );
 
 adminRoute.post (
-  "/couponManagement",
+  "/couponManagement",auth.isLogin,
+  isAdmin.isAdmin,
   adminCouponController.addCoupon
 );
 
 //------------------------------------
 
 adminRoute.get (
-  "/salesManagement", 
+  "/salesManagement", auth.isLogin,
+  isAdmin.isAdmin,
   adminSalesController.loadAdminSalesManagement
 );
 
 
 adminRoute.post (
-  "/salesManagement", 
+  "/salesManagement", auth.isLogin,
+  isAdmin.isAdmin,
   adminSalesController.filterAdminSalesManagement
 );
 
 adminRoute.post(
-  "/downloadPdf",
+  "/downloadPdf",auth.isLogin,
+  isAdmin.isAdmin,
   adminSalesController.downloadPdf
 );
 
 adminRoute.post(
-  "/downloadXl",
+  "/downloadXl",auth.isLogin,
+  isAdmin.isAdmin,
   adminSalesController.downloadXl
 );
 

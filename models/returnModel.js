@@ -15,10 +15,6 @@ const returnSchema = new mongoose.Schema({
         type:Number,
        
     } ,
-    quantity:{
-        type:Number,
-        
-    } ,
     dateString:{
         type:String,
     },
