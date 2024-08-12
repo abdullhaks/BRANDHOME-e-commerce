@@ -11,6 +11,7 @@ const loadAdminCouponManagement = async (req,res)=>{
 
     }catch(error){
         console.log(error);
+        res.render("adminSideErrors");
     }
 };
 
@@ -43,9 +44,7 @@ const addCoupon = async (req,res)=>{
           errors.push({ msg: "Name is required/at least 3 letter required" });
          }
 
-//else if (!/^[a-zA-Z\s]+$/.test(CategoryName.name)) {
-//     errors.push({ msg: "Name should not contain special keys  " });
-//   };
+
 
         const descriptionInput = coupon.description.trim()
         if (!descriptionInput||descriptionInput.length<5) {
@@ -73,6 +72,7 @@ const addCoupon = async (req,res)=>{
 
     }catch(error){
         console.log(error);
+        res.render("adminSideErrors");
     }
 };
 
@@ -94,6 +94,7 @@ const deleteCoupon = async(req,res)=>{
 
   }catch(error){
 console.log(error);
+res.render("adminSideErrors");
   }
 }
 

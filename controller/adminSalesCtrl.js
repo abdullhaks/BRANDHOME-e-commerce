@@ -31,6 +31,7 @@ const loadAdminSalesManagement = async(req,res)=> {
 
     }catch(error){
         console.log(error);
+        res.render("adminSideErrors");
     }
 };
 
@@ -103,7 +104,8 @@ const filterAdminSalesManagement = async(req,res)=>{
         // res.render('adminSales', { sales, filter });
 
     }catch(error){
-        throw error;
+        console.log(error);
+        res.render("adminSideErrors");
     }
 };
 

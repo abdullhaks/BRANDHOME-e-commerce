@@ -25,6 +25,7 @@ const loadAdminOffersManagement = async(req,res)=>{
 
     }catch(error){
         console.log(error);
+        res.render("adminSideErrors");
     }
 };
 
@@ -48,6 +49,7 @@ const loadAdminCategoryOffersManagement = async(req,res)=>{
 
     }catch(error){
         console.log(error);
+        res.render("adminSideErrors");
     }
 };
 
@@ -70,6 +72,7 @@ const loadAdminProductOffersManagement = async(req,res)=>{
 
     }catch(error){
         console.log(error);
+        res.render("adminSideErrors");
     }
 };
 
@@ -108,6 +111,7 @@ const endCategoryOffer = async(req,res)=>{
 
     }catch(error){
         console.log(error);
+        res.render("adminSideErrors");
     }
 };
 
@@ -145,6 +149,7 @@ const endProductOffer = async(req,res)=>{
 
     }catch(error){
         console.log(error);
+        res.render("adminSideErrors");
     }
 };
 
@@ -182,6 +187,7 @@ const addProductOffer = async(req,res)=>{
 
     }catch(error){
         console.log(error);
+        res.render("adminSideErrors");
     }
 };
 
@@ -217,8 +223,7 @@ const addCategoryOffer = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-       
-        res.status(500).send("Internal Server Error");
+        res.render("adminSideErrors");
     }
 };
 

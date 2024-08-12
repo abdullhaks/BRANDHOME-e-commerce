@@ -39,6 +39,7 @@ const loadAdminOrderManagement = async(req,res)=>{
 
     }catch(error){
         console.log(error);
+        res.render("adminSideErrors");
     }
 };
 
@@ -152,6 +153,7 @@ const updateOrderStatus = async (req,res)=>{
 
     }catch(error){
         console.log(error);
+        res.render("adminSideErrors");
     }
 }
 

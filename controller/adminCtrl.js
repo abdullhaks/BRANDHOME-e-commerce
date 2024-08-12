@@ -11,6 +11,7 @@ const loadLogin = async (req,res)=>{
 
     }catch(error){
         console.log(error);
+       
     }
 };
 
@@ -90,6 +91,7 @@ const loadDashBoard = async (req,res)=>{
         res.render("adminhome2");
     }catch(error){
         console.log(error);
+        res.render("adminSideErrors");
     }
 };
 
@@ -102,6 +104,7 @@ const logout = async (req,res)=>{
 
     }catch(error){
         console.log(error);
+       
     }
 };
 
@@ -125,6 +128,7 @@ const userManagement = async (req,res)=>{
 
     }catch(error){
         console.log(error);
+        res.render("adminSideErrors");
     }
 };
 
@@ -146,6 +150,7 @@ const blockUser = async (req,res)=>{
 
     }catch(error){
         console.log(error);
+        res.render("adminSideErrors");
     }
 };
 
@@ -166,6 +171,7 @@ const unblockUser = async (req,res)=>{
 
     }catch(error){
         console.log(error);
+        res.render("adminSideErrors");
     }
 }
 

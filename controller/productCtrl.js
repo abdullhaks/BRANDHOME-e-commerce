@@ -22,6 +22,7 @@ const loadCategoryManagement = async (req,res)=>{
 
     }catch(error){
         console.log(error);
+        res.render("adminSideErrors");
     }
 };
 
@@ -65,6 +66,8 @@ const addCategory  =  async (req,res)=>{
     }
 
     }catch(error){
+      console.log(error);
+      res.render("adminSideErrors");
 
     }
     
@@ -84,7 +87,8 @@ const loadCategoryManagementEdit = async (req,res)=>{
       res.render("adminCategoryManagement2Edit",{ errors,categories,category });
 
   }catch(error){
-      console.log(error);
+    console.log(error);
+    res.render("adminSideErrors");
   }
 };
 
@@ -130,7 +134,9 @@ if (errors.length > 0) {
 
   }
 
-  }catch(error){
+  }catch(error){  
+    console.log(error)
+    res.render("adminSideError");
 
   }
   
@@ -147,13 +153,16 @@ const loadAddProduct = async (req,res)=>{
 
   }catch(error){
       console.log(error);
+      res.render("adminSideErrors");
   }
 };
 
 
 const addProduct = async(req,res)=>{
-   
-  const categories = await Category.find();
+
+  try{
+
+      const categories = await Category.find();
   var errors = [];
 
   try {
@@ -221,6 +230,14 @@ const addProduct = async(req,res)=>{
     console.error("Error adding product: ", error);
     res.status(400).render("adminProductAdding2", { errors, categories });
   }
+
+
+  }catch(error){
+    console.log(error);
+    res.render("adminSideErrors");
+  }
+   
+
 };
 
 const unlistCategory = async (req,res)=>{
@@ -240,6 +257,7 @@ const unlistCategory = async (req,res)=>{
 
   }catch(error){
       console.log(error);
+      res.render("adminSideErrors");
   }
 };
 
@@ -260,6 +278,7 @@ const listCategory = async (req,res)=>{
 
   }catch(error){
       console.log(error);
+      res.render("adminSideErrors");
   }
 };
 
@@ -284,6 +303,7 @@ const loadAllProducts = async(req,res)=>{
 
   }catch(error){
     console.log(error);
+    res.render("adminSideErrors");
   }
 };
 
@@ -292,17 +312,18 @@ const loadProductEdit = async(req,res)=>{
     var errors = [];
     const categories = await Category.find({ unList: 0 }).sort({ name: 1 });
 
-    const id = req.query.productId; // Removed unnecessary JSON.stringify call
+    const id = req.query.productId; 
     
     console.log("item is " + id);
 
     const product = await Product.findOne({ _id: id });
 
-    console.log("product is ", product); // Logging the product directly
+    console.log("product is ", product); 
 
     res.render("adminProductEdit", { errors, categories, product });
 } catch (error) {
-    console.log(error); // Log the error message directly
+    console.log(error); 
+    res.render("adminSideErrors");
 }};
 
 const editProduct = async (req,res)=>{
@@ -311,8 +332,7 @@ const editProduct = async (req,res)=>{
     var errors = [];
     const categories = await Category.find({unList:0}).sort({name:1});
 
-    //var colorArray = req.body.colors.split(",");
-    //var sizeArray = req.body.sizes.split(",");
+   
 
     const productId = req.query.productId;
 
@@ -382,18 +402,12 @@ const editProduct = async (req,res)=>{
       
       var product = await Product.findOne({_id:productId});
 
-      return res.redirect("/admin/allProducts"); // Redirect to product list page
+      return res.redirect("/admin/allProducts"); 
     }
-   
-   
-
-  
-
- 
-
 
   }catch(error){
     console.log(error);
+    res.render("adminSideErrors");
   }
 };
 
@@ -416,6 +430,7 @@ const unlistProduct = async (req,res)=>{
   }catch(error){
 
     console.log(error);
+    res.render("adminSideErrors");
 
   }
 };
@@ -440,6 +455,7 @@ const listProduct = async (req,res)=>{
   }catch(error){
 
     console.log(error);
+    res.render("adminSideErrors");
 
   }
 };

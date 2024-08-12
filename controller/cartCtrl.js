@@ -84,10 +84,7 @@ const addtoCart = async(req,res)=>{
            }
 
            
-            //const products = await Product.find().limit(16).skip(0);
-            //console.log(products)
-
-            //res.render("products",{user,products})
+          
             
 
     }catch(error){

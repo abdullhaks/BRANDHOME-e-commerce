@@ -33,6 +33,7 @@ const loadAdminReturnManagement = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
+    res.render("adminSideErrors");
   }
 };
 
@@ -91,6 +92,7 @@ const updateReturnStatus = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
+    res.render("adminSideErrors");
   }
 };
 
