@@ -120,7 +120,9 @@ const placeOrder = async(req,res)=>{
        
 
        
-        const user =  req.session.user ; 
+        var user =  req.session.user ; 
+        console.log("user is ",user);
+        console.log(req.body.paymentOption);
 
         const formData = req.body;
 
@@ -137,14 +139,15 @@ const placeOrder = async(req,res)=>{
         var productIds = []; 
         var productNames= [];
 
-        console.log("appliedCouponId is "+appliedCouponId);
+        // console.log("appliedCouponId is "+appliedCouponId);
         const totalAmount = parseInt(req.body.totalAmount);
         const totalAmountAfterCoupon = parseInt(req.body.totalAmountAfterCoupon);
         
         
         var productCount = req.body.productCount ;
+        var orders = [];
 
-        console . log ("product count is :"+ productCount);
+        // console . log ("product count is :"+ productCount);
 
        // const productCount2 = Object.keys(formData).filter(key => key.startsWith('productId')).length;
 
@@ -175,7 +178,7 @@ const placeOrder = async(req,res)=>{
             if (appliedCouponId){
                 const coupon = await Coupons.findById(appliedCouponId)
 
-                console.log("coupon is "+coupon);
+                // console.log("coupon is "+coupon);
 
                 if((totalAmount*couponOff)/100>coupon.maxOff){
                     product.payAmount-= Math.round(saveByCoupon/productCount) ;
@@ -192,15 +195,17 @@ const placeOrder = async(req,res)=>{
             }
 
            
-            const getProduct =await Product.findOne({_id:product.productId});
+            // const getProduct =await Product.findOne({_id:product.productId});
 
-                // await Product.updateOne({_id:product.productId},{$inc:{salesCount:product.quantity}});
+            //     // await Product.updateOne({_id:product.productId},{$inc:{salesCount:product.quantity}});
 
-                // await Product.updateOne({ _id: product.productId }, { $inc: { totalStock:-product.quantity } });
+            //     //here we manage the stock
 
-                // const checkStock = await Stock.updateOne({ $and: [{productId:product.productId},{ productVariant: product.size}, { productColor: product.color}] },{$inc:{stock:-product.quantity}});
+            //     await Product.updateOne({ _id: product.productId }, { $inc: { totalStock:-product.quantity } });
 
-                    // console.log("stock is "+checkStock);
+            //     const checkStock = await Stock.updateOne({ $and: [{productId:product.productId},{ productVariant: product.size}, { productColor: product.color}] },{$inc:{stock:-product.quantity}});
+
+            //         console.log("stock is "+checkStock);
 
                      const datenow = new Date(); 
 
@@ -240,8 +245,9 @@ const placeOrder = async(req,res)=>{
                                      
                             
                                     var result = await order.save();
+                                    orders.push(order);
                             
-                                    console.log("order details is "+ result);
+                                    // console.log("order details is "+ result);
 
            
 
@@ -257,18 +263,19 @@ const placeOrder = async(req,res)=>{
                         receipt: result.orderId // Unique order ID
                     };
 
-                    console.log("paymentOption is "+ paymentOptions.receipt);
-                    console.log("product is ",product);
+                    // console.log("paymentOption is "+ paymentOptions.receipt);
+                    // console.log("product is ",product);
 
                     await  razorpay.orders.create(paymentOptions,
                         (err,order)=>{
                             if(!err){
 
-                                console.log("order is",order);
+                                // console.log("order is",order);
                                 res.status(200).send({
                                     success:true,
                                     productNames:productNames,
                                     productIds:productIds,
+                                    orders:orders,
                                     msg:"Order Created",
                                     order_id:order.id,
                                     receipt:order.receipt,
@@ -291,9 +298,19 @@ const placeOrder = async(req,res)=>{
 
                 }else if(req.body.paymentOption === "cash on delivery"){
 
-                            for (let i = 0; i < productCount; i++) {
+                for (let i = 0; i < productCount; i++) {
 
-                             await Cart.updateOne({email:user},{$pull : {products:productIds[i]}});
+                 await Cart.updateOne({email:user},{$pull : {products:productIds[i]}});
+
+                 
+                 await Product.updateOne({ _id: orders[i].purchaseDetails.productId },
+                                                             { $inc: { totalStock:-orders[i].purchaseDetails.quantity } });
+
+                 await Stock.updateOne({ $and: [{productId:orders[i].purchaseDetails.productId },
+                                                                    { productVariant: orders[i].purchaseDetails.size},
+                                                                    { productColor: orders[i].purchaseDetails.color}] },
+                                                                    {$inc:{stock:-orders[i].purchaseDetails.quantity}});
+
                              
                             }
                                
@@ -305,18 +322,34 @@ const placeOrder = async(req,res)=>{
 
                       // res.redirect("/orderPlaced");
 
-                }else if (req.body.paymentOption === "wallet Payment"){
+                }else if (req.body.paymentOption === "wallet payment"){
+
+                    console.log("i am hereeee")
 
                     for (let i = 0; i < productCount; i++) {
 
                         await Cart.updateOne({email:user},{$pull : {products:productIds[i]}});
+
+
+                        await Product.updateOne({ _id: orders[i].purchaseDetails.productId },
+                            { $inc: { totalStock:-orders[i].purchaseDetails.quantity } });
+
+                        await Stock.updateOne({ $and: [{productId:orders[i].purchaseDetails.productId },
+                                                        { productVariant: orders[i].purchaseDetails.size},
+                                                        { productColor: orders[i].purchaseDetails.color}] },
+                                                        {$inc:{stock:-orders[i].purchaseDetails.quantity}});
+
                         
                        };
 
-                       await User.updateOne({email:user},{$inc:{wallet:-req.body.grandTotal}});
+                       const gndtotl = req.body.grandTotal
 
-                       await Orders.updateMany({orderId:result.orderId},{$set:{paymentStatus:1}});
+                       console.log("user and gndtotl is ",user,gndtotl);
 
+                      const gtup= await User.updateOne({ email: user }, { $inc: { wallet: -gndtotl } });
+                       console.log("gtup",gtup);
+                      const paymntstts= await Orders.updateMany({ orderId: orders[0].orderId }, { $set: { paymentStatus: 1 } });
+                       console.log("paymntstts is ",paymntstts);
                     res.status(200).send({
                         WALLET:true,});
 
@@ -324,6 +357,7 @@ const placeOrder = async(req,res)=>{
 
                     res.send({
                         msg:"something went wrong"});
+                        
                 }
 
         
@@ -394,6 +428,11 @@ const verifyPayment = async(req,res)=>{
 
         const { payment,order} = req.body;
 
+
+        console.log("order from verify payment....",order);
+
+        var orders=order.orders;
+
         //add crypto module
         const { createHmac } = require('node:crypto');
 
@@ -416,6 +455,15 @@ const verifyPayment = async(req,res)=>{
                           
                                  
                                      await Cart.updateOne({email:user},{$pull : {products:order.productIds[i]}});
+
+                                     await Product.updateOne({ _id: orders[i].purchaseDetails.productId },
+                                        { $inc: { totalStock:-orders[i].purchaseDetails.quantity } });
+            
+                                    await Stock.updateOne({ $and: [{productId:orders[i].purchaseDetails.productId },
+                                                                    { productVariant: orders[i].purchaseDetails.size},
+                                                                    { productColor: orders[i].purchaseDetails.color}] },
+                                                                    {$inc:{stock:-orders[i].purchaseDetails.quantity}});
+            
                                 
                                     }
 

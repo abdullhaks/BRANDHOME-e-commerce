@@ -1,6 +1,8 @@
 const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
+const Sales = require("../models/salesModel");
+const Orders = require("../models/orderModel");
 
 
 const loadLogin = async (req,res)=>{
@@ -88,7 +90,41 @@ const loadDashBoard = async (req,res)=>{
 
     try{
 
-        res.render("adminhome2");
+
+        const result = await Sales.aggregate([
+            {
+                $group: {
+                    _id: null,
+                    totalSales: { $sum: "$purchaseDetails.quantity" },
+                    totalDiscount: { $sum: "$purchaseDetails.youSave" } 
+                }
+            }
+        ]);
+
+        const overallSalesCount = result.length > 0 ? result[0].totalSales : 0;
+        const overallDiscount = result.length > 0 ? result[0].totalDiscount : 0;
+        console.log("Overall Sales Count:", overallSalesCount);
+        console.log("Overall Discount:", overallDiscount);
+
+
+        const orderCount = await Orders.countDocuments({
+            cancelledDate: { $exists: false }, 
+            returnStatus: { $ne: 2 }, 
+            $or: [
+                { paymentOption: "cash on delivery" }, 
+                { paymentOption: { $ne: "cash on delivery" }, paymentStatus: 1 } 
+            ]
+        });
+
+        console.log("Overall Order Count:", orderCount);
+
+        const totalUsers = await User.countDocuments({});
+
+        console.log("totaouserss",totalUsers);
+
+        
+
+        res.render("adminhome2",{overallSalesCount,overallDiscount,orderCount,totalUsers});
     }catch(error){
         console.log(error);
         res.render("adminSideErrors");

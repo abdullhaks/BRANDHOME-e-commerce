@@ -457,7 +457,7 @@ const loadProducts = async (req, res) => {
       const category = req.query.category;
       const search = req.query.search;
       const page = parseInt(req.query.page) || 1; // Default to page 1
-      const pageSize = 3; // Number of products per page
+      const pageSize = 4; // Number of products per page
 
       let query = { unList: 0 }; // Default query
 

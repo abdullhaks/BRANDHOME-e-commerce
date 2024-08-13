@@ -6,6 +6,8 @@ const Recoverypassword = require("../models/recoveryPasswordmodel");
 const Product = require("../models/productmodel");
 const Orders = require("../models/orderModel");
 const Returns = require("../models/returnModel");
+const Stock = require("../models/stockModel");
+const Sales = require("../models/salesModel")
 const Category = require("../models/categorymodel");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
@@ -45,12 +47,12 @@ const updateReturnStatus = async (req, res) => {
     var newStatus = req.body.newStatus; // Accessing the new status from the request body
     var returnId = req.body.returnId;
 
-    const returns =await Returns.findOne({_id:returnId});
-    const order = await Orders.findOne({_id:orderId});
+    var returnItem =await Returns.findOne({_id:returnId});
+    var order = await Orders.findOne({_id:orderId});
 
     
 
-    console.log("new return  is " + returns);
+    console.log("new return  is " + returnItem);
     console.log("new oder  is " + order);
 
 
@@ -70,17 +72,39 @@ const updateReturnStatus = async (req, res) => {
     }
 
     if (newStatus == "approved") {
+    
+
+      if(returnItem.returnReason==="damaged"){
+       
         const returns =await Returns.updateOne({_id:returnId},{$set:{returnStatus:newStatus}});
-        const order = await Orders.updateOne({_id:orderId},{$set:{returnStatus:2}});
+        await Orders.updateOne({_id:orderId},{$set:{returnStatus:2}});
         
-        await Product.updateOne({_id:order.productId},{$inc:{salesCount:-order.quantity}});
+        await Product.updateOne({_id:order.purchaseDetails.productId},{$inc:{salesCount:-order.purchaseDetails.quantity}});
 
-        await Product.updateOne({ _id: order.productId }, { $inc: { totalStock:order.quantity } });
+        await Sales.deleteOne({orderObjectId:returnItem.orderId});
 
-        await Stock.updateOne({ $and: [{productId:order.productId},{ productVariant:order.option }, { productColor:order.color }] },{$inc:{stock:order.quantity}});
+        await User.updateOne({email:order.email},{$inc:{wallet:order.purchaseDetails.payAmount}});
+       
+      }else{
+
+
+
         
+        const returns =await Returns.updateOne({_id:returnId},{$set:{returnStatus:newStatus}});
+        await Orders.updateOne({_id:orderId},{$set:{returnStatus:2}});
+        
+       
 
-           
+        await Product.updateOne({_id:order.purchaseDetails.productId},{$inc:{salesCount:-order.purchaseDetails.quantity}});
+
+        await Product.updateOne({ _id: order.purchaseDetails.productId }, { $inc: { totalStock:order.purchaseDetails.quantity } });
+
+        await Stock.updateOne({ $and: [{productId:order.purchaseDetails.productId},{ productVariant:order.purchaseDetails.size }, { productColor:order.purchaseDetails.color }] },{$inc:{stock:order.purchaseDetails.quantity}});
+        
+        await Sales.deleteOne({orderObjectId:returnItem.orderId});
+
+        await User.updateOne({email:order.email},{$inc:{wallet:order.purchaseDetails.payAmount}});
+      }
     
            
 

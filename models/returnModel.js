@@ -22,6 +22,9 @@ const returnSchema = new mongoose.Schema({
         type:String,
        
     },
+    returnReason:{
+        type:String,
+    },
     returnStatus:{
         type:String,
         default:"pending"

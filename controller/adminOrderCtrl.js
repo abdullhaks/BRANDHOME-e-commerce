@@ -88,7 +88,7 @@ const updateOrderStatus = async (req,res)=>{
 
             
 
-           const exp= Date.now() + (259200 * 1000);
+           const exp= Date.now() + (120 * 1000);
             const result = await Orders.updateOne({_id:orderId },{$set:{status:newStatus}});
             await  Orders.updateOne({_id:orderId },{$set:{deliveredDate:date}});
             await  Orders.updateOne({_id:orderId },{$set:{returnCanceledOn:exp}});

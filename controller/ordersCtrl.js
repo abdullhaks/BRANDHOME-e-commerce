@@ -29,7 +29,7 @@ const loadOrders = async (req,res)=>{
         email: user,
         $or: [
           { paymentOption: "cash on delivery" },
-          { paymentOption: "wallet payment"  },
+          { paymentOption: "wallet payment" ,paymentStatus: 1 },
           { paymentOption: "online payment", paymentStatus: 1 },
         ],
       }).sort({ orderTime: -1 });
@@ -147,6 +147,12 @@ const loadOrderManagement = async(req,res)=>{
 const returnOrder = async (req,res)=>{
     try{
         const id = req.params.id;
+
+        const returnReason = req.body.returnReason;
+
+         console.log("it is running"+returnReason);
+
+        console.log("checking.....:",returnReason==="damaged");
         
         const result = await Orders.updateOne({_id:id },{$set:{returnStatus:1}});
 
@@ -159,6 +165,8 @@ const returnOrder = async (req,res)=>{
             month: 'numeric', 
             day: 'numeric'
         };
+
+
         
         const date = datenow.toLocaleDateString('en-GB', options);
 
@@ -168,6 +176,7 @@ const returnOrder = async (req,res)=>{
             productDetails:`${order.purchaseDetails.productBrand} ${order.purchaseDetails.productName} 
             ${order.purchaseDetails.color} ${order.purchaseDetails.size} (${order.purchaseDetails.quantity})`,
             totalAmount:order.purchaseDetails.payAmount,
+            returnReason:req.body.returnReason,
             dateString:datenow,
             returnDate:Date.now(),
           
