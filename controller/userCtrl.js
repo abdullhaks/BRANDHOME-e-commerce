@@ -320,7 +320,7 @@ const loadHome = async (req,res)=>{
 
       const wishList = await WishList.findOne({email:id});
 
-      console.log("wishlist is "+wishList );
+      
     
         let wishListNo = 0;
         if(wishList){

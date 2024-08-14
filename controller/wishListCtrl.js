@@ -57,39 +57,38 @@ const loadWishList = async(req,res)=>{
 
 
 
-const addtoWishList = async(req,res)=>{
-    try{
+const addtoWishList = async (req, res) => {
+    try {
+        const { productId } = req.body;
+        const user = req.session.user;
 
-            const productId = req.query.productId;
-            console.log("wish produt id is"+productId);
+        // Find the user's wishlist
+        let wishList = await WishList.findOne({ email: user });
+        let cart = await Cart.findOne({ email: user });
 
-            const user = req.session.user;
-            console.log(user);
+        // Check if the product is already in the wishlist
+        if (wishList && wishList.products.includes(productId)) {
+            return res.json({ success: true, msg: "already added", wishCount: wishList.products.length });
+        }
 
-            const wishList =  await WishList.findOne({email:user});
+        if (cart && cart.products.includes(productId)) {
+            return res.json({ success: true, msg: "item already in cart" });
+        }
 
-           if( wishList && wishList.products.includes (productId)){
-            return res.redirect("/wishList");
-           }else{
+        // Add the product to the wishlist
+        await WishList.updateOne({ email: user }, { $push: { products: productId } }, { upsert: true });
 
-            const result = await WishList.updateOne({email:user},{$push : {products:productId}},{upsert:true});
+        // Get the updated wishlist count
+        wishList = await WishList.findOne({ email: user });
+        let wishCount = wishList ? wishList.products.length : 0;
 
-            console.log(result);
-
-            return res.redirect("/wishList");
-           }
-
-           
-            //const products = await Product.find().limit(16).skip(0);
-            //console.log(products)
-
-            //res.render("products",{user,products})
-            
-
-    }catch(error){
+        res.json({ success: true, msg: "added to wishlist", wishCount });
+    } catch (error) {
+        res.json({ success: false, msg: "something went wrong" });
         console.log(error);
     }
 };
+
 
 const removeFromWishList = async(req,res)=>{
     try{

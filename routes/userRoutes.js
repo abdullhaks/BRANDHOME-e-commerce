@@ -95,14 +95,16 @@ userRoute.get ("/products", userController.loadProducts);
 userRoute.get ("/productsDetails", userController.loadProductsDetails);
 
 
-userRoute.get ("/addtoCart",isBlocked.isBlocked,auth.isLogin,cartController.addtoCart);
+userRoute.post ("/addtoCart",isBlocked.isBlocked,auth.isLogin,cartController.addtoCart);
+
+userRoute.post ("/addtoCartFromWishlist",isBlocked.isBlocked,auth.isLogin,cartController.addtoCartFromWishlist);
 
 userRoute.get ("/cart",isBlocked.isBlocked,auth.isLogin,cartController.loadCart);
 
 userRoute.get ("/removeFromCart",isBlocked.isBlocked,auth.isLogin,cartController.removeFromCart); 
 
 
-userRoute.get ("/addtoWishList",isBlocked.isBlocked,auth.isLogin,wishListController.addtoWishList);
+userRoute.post ("/addtoWishList",isBlocked.isBlocked,auth.isLogin,wishListController.addtoWishList);
 
 userRoute.get ("/wishList",isBlocked.isBlocked,auth.isLogin,wishListController.loadWishList);
 

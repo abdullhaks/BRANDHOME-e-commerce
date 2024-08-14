@@ -82,47 +82,21 @@
             <div class="col-lg-3 col-6 text-right">
                 <a href="/wishList" class="btn border">
                     <i class="fas fa-heart text-primary"></i>
-                    <% if (wishListNo) { %>
-						
-                        <span class="badge"><%= wishListNo %></span>
-						
-					  <% } %>
+                    <span id="wishListBadge" class="badge"><%= wishListNo || 0 %></span>
                 </a>
                 <a href="/cart" class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i> 
-
-                    <% if (cartNo) { %>
-						
-                        <span class="badge"><%= cartNo %></span>
-						
-					<% } %>
-                  
+                    <span id="cartBadge" class="badge"><%= cartNo || 0 %></span>
                 </a>
                 <% if (user) { %>
-
                     <a href="/logout">Log Out</a>
-
-                    <a href="/profile" class="btn border "     >
-                        <i class="fas fa-user  text-primary"></i>
+                    <a href="/profile" class="btn border">
+                        <i class="fas fa-user text-primary"></i>
                     </a>
-                        <!-- 
-                        data-toggle="dropdown"
-                    
-                    
-                        <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                                <p  class="dropdown-item"><%= user %></p>
-                                <a href="/addresses" class="dropdown-item">Addresses</a>
-                                <p class="dropdown-item">Wallet :   </p>
-                               
-                         </div> -->
-
                 <% } else { %>
-
                     <a href="/login">Log In</a>
-
                 <% } %>
-               
-        </div> 
+            </div>
     </div>
     <!-- Topbar End -->
    
@@ -403,56 +377,46 @@
                         </div>
                     </div>
 
-                    <% if (products.length > 0) {
-                        for (let i = 0; i < products.length; i++) { %>
-    
-                            <div class="col-lg-3 col-md-6 col-sm-12 pb-1" >
-                                <a href="/productsDetails?productId=<%=products[i]._id %>">
-                                    <div class="card product-item border-0 mb-4 " style="height: 360px;">
-                                            <div class="d-flex justify-content-center align-items-center">
-                                                <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0 " style="height: 250px; width: 200px;">
-                                                    <img class="img-fluid " src="/productImages/<%= products[i].image1 %>" alt="" style="max-height: 100%; max-width: 100%;" >
-                                                </div>
+                    <% if (products.length > 0) { %>
+                        <% products.forEach(product => { %>
+                            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                                <a href="/productsDetails?productId=<%= product._id %>">
+                                    <div class="card product-item border-0 mb-4" style="height: 360px;">
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0" style="height: 250px; width: 200px;">
+                                                <img class="img-fluid" src="/productImages/<%= product.image1 %>" alt="" style="max-height: 100%; max-width: 100%;">
                                             </div>
-                                            <div class="card-body border-left border-right text-center p-0 pt-2">
-                                                <h6 class="text-truncate mb-3 overflow-hidden"><a href="/productsDetails/<%=products[i].productName %>"></a>
-                                                    <%= products[i].productName %>
-                                                </h6>
-                                                <div class="d-flex justify-content-center">
-                                                    <% if(products[i].productOfferPercentage>0||products[i].categoryOfferPercentage>0){ %>
-                                                    
-                                                            <h6>Rs <%= products[i]. price - (products[i].productOfferPercentage + products[i].categoryOfferPercentage)*products[i]. price / 100 %> </h6>
-                                                            
-                                                            <p class="text-muted " style="font-size: 10px;"><del><%= products[i]. price%></del> <span class="text-success"><%= products[i].productOfferPercentage + products[i].categoryOfferPercentage%>% off</span></p>
-                                                    
-                                                    <%}else{%>
-
-                                                        
-                                                            <h6>Rs <%= products[i]. price %></h6>
-                                                            <h6 class="text-muted ml-2"><del></del></h6>
-                                                    
-
-                                                    <%}%>
-                                                </div>
-
-                                                
-                                            </div>
-                                        
-                                        <div class="card-footer d-flex justify-content-between bg-light border">
-                                            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View </a>
-                                           <a href="/addtoWishList?productId=<%=products[i]._id %>" class="btn btn-sm text-dark p-0"><i class="fas fa-heart text-primary mr-1"></i>Add </a>  
                                         </div>
+                                        <div class="card-body border-left border-right text-center p-0 pt-2">
+                                            <h6 class="text-truncate mb-3 overflow-hidden"><%= product.productName %></h6>
+                                            <div class="d-flex justify-content-center">
+                                                <% if(product.productOfferPercentage > 0 || product.categoryOfferPercentage > 0) { %>
+                                                    <h6>Rs <%= product.price - (product.productOfferPercentage + product.categoryOfferPercentage) * product.price / 100 %> </h6>
+                                                    <p class="text-muted" style="font-size: 10px;">
+                                                        <del><%= product.price %></del>
+                                                        <span class="text-success"><%= product.productOfferPercentage + product.categoryOfferPercentage %>% off</span>
+                                                    </p>
+                                                <% } else { %>
+                                                    <h6>Rs <%= product.price %></h6>
+                                                <% } %>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer d-flex justify-content-between bg-light border">
+                                            <a href="#" class="btn btn-sm text-dark p-0 add-to-cart" data-productid="<%= product._id %>">
+                                                <i class="fas fa-shopping-cart text-primary mr-1"></i>Cart
+                                            </a>
+                                            <a href="#" class="btn btn-sm text-dark p-0 add-to-wishlist ml-auto" data-productid="<%= product._id %>">
+                                                <i class="fas fa-heart text-primary mr-1"></i>Add
+                                            </a>
+                                        </div>
+                                        
                                     </div>
                                 </a>
                             </div>
-
-    
-                    <% }
-    
-                 } else { %>
-                    <p>products not available now!</p>
+                        <% }); %>
+                    <% } else { %>
+                        <p>Products not available now!</p>
                     <% } %>
-
                     
                    
                     <% if (totalPages > 1) { %>
@@ -573,13 +537,97 @@
     <script src="mail/jqBootstrapValidation.min.js"></script>
     <script src="mail/contact.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- Template Javascript -->
     <script src="js/main2.js"></script>
 
-
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Function to handle wish list updates
+            function updateWishList(productId) {
+                console.log("WishList AJAX is working...");
+                fetch('/addtoWishList', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ productId })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        if (data.wishCount !== undefined) {
+                            const wishListBadge = document.getElementById("wishListBadge");
+                            if (wishListBadge) {
+                                wishListBadge.innerText = data.wishCount || 0;
+                            } else {
+                                const newBadge = `<span id="wishListBadge" class="badge">${data.wishCount || 0}</span>`;
+                                document.querySelector('.btn.border[href="/wishList"]').insertAdjacentHTML('beforeend', newBadge);
+                            }
+                        }
+                    } else {
+                        console.error('Failed to update wishlist:', data.msg);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            }
     
+            // Function to handle cart updates
+            function updateCart(productId) {
+                console.log("Cart AJAX is working...");
+                fetch('/addtoCart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ productId })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        if (data.cartCount !== undefined) {
+                            const cartBadge = document.getElementById("cartBadge");
+                            if (cartBadge) {
+                                cartBadge.innerText = data.cartCount || 0;
+                            } else {
+                                const newBadge = `<span id="cartBadge" class="badge">${data.cartCount || 0}</span>`;
+                                document.querySelector('.btn.border[href="/cart"]').insertAdjacentHTML('beforeend', newBadge);
+                            }
+                        }
+                        if (data.wishCount !== undefined) {
+                            const wishListBadge = document.getElementById("wishListBadge");
+                            if (wishListBadge) {
+                                wishListBadge.innerText = data.wishCount || 0;
+                            }
+                        }
+                    } else {
+                        console.error('Failed to update cart:', data.msg);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            }
+    
+            // Event delegation for add to wish list
+            document.body.addEventListener('click', function (e) {
+                if (e.target.closest('.add-to-wishlist')) {
+                    e.preventDefault();
+                    const productId = e.target.closest('.add-to-wishlist').getAttribute('data-productid');
+                    updateWishList(productId);
+                }
+            });
+    
+            // Event delegation for add to cart
+            document.body.addEventListener('click', function (e) {
+                if (e.target.closest('.add-to-cart')) {
+                    e.preventDefault();
+                    const productId = e.target.closest('.add-to-cart').getAttribute('data-productid');
+                    updateCart(productId);
+                }
+            });
+        });
     </script>
+    
 </body>
 
 </html>

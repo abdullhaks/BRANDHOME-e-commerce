@@ -25,11 +25,12 @@ const isBlocked = async(req,res,next)=>{
             var passwordErrors =[];
             var password =""
 
-            req.session.destroy();
+            // req.session.destroy();
 
-            res.set('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-            res.set('Expires', '-1');
-            res.set('Pragma', 'no-cache');
+            // res.set('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+            // res.set('Expires', '-1');
+            // res.set('Pragma', 'no-cache');
+            req.session.user=""
 
             emailErrors.push({ msg: "this account is blocked  " });
            return res.render("login",{emailErrors,passwordErrors,  email:email, password:password});
