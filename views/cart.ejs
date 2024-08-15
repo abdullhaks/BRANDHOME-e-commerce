@@ -407,14 +407,15 @@
 var stockCheck = 0 ;
 
 document.addEventListener('DOMContentLoaded',  function () {
-            // Retrieve the products JSON string from the data attribute
+       
             var productsDataElement = document.getElementById('productsData');
-            console.log("productsDataElement is "+productsDataElement);
+     
             var productsJson = productsDataElement.getAttribute('data-products');
-            console.log("productsJson is "+productsJson);
-            var products = JSON.parse(productsJson); // Parse it into a JavaScript object
-            console.log("products is "+products);
+        
+            var products = JSON.parse(productsJson);
+       
             var placeOrderButton = document.getElementById("placeOrder");
+
             var stockAlert2 = document.getElementById("stockAlert");
    
 

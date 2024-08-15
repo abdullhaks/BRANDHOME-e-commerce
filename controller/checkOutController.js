@@ -389,6 +389,36 @@ const getStock = async (req, res) => {
     }
 };
 
+
+const getStockFromPrductDetails = async (req, res) => {
+    try {
+        console.log("Fetching stock details...");
+
+        const size = req.query.size;
+        const color = req.query.color;
+        const productId = req.query.productId;
+
+        console.log("Size:", size, "Color:", color, "Product ID:", productId);
+
+        const stock = await Stock.findOne({ 
+            productId: productId, 
+            productVariant: size, 
+            productColor: color 
+        });
+
+        if (!stock || stock.stock < 1) {
+            return res.json({ success: false, msg: "Stock not found" });
+        } else {
+            console.log("Stock available:", stock.stock);
+            return res.json({ success: true, stock: stock.stock });
+        }
+    } catch (error) {
+        console.error("Error fetching stock:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
+
 const loadOrderPlaced = async(req,res)=>{
     try{
 
@@ -495,4 +525,6 @@ module.exports = {
     getStock,
     loadOrderPlaced,
     verifyPayment,
+    getStockFromPrductDetails,
+
 }
