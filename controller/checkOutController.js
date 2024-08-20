@@ -371,16 +371,17 @@ const placeOrder = async(req,res)=>{
 
 const getStock = async (req, res) => {
     try {
-        const size = req.query.size;
-        const color = req.query.color;
+        const { size, color, productId } = req.query;
 
-        const productId = req.query.productId;
+        const stock = await Stock.findOne({
+            productId,
+            productVariant: size,
+            productColor: color
+        });
 
-        const stock = await Stock.findOne({ $and: [{productId:productId},{ productVariant: size }, { productColor: color }] });
         if (!stock) {
             return res.status(404).json({ error: "Stock not found" });
         }
-        console.log("stock is "+stock);
 
         res.json({ quantity: stock.stock });
     } catch (error) {
@@ -388,6 +389,7 @@ const getStock = async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 };
+
 
 
 const getStockFromPrductDetails = async (req, res) => {

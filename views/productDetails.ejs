@@ -435,7 +435,7 @@
             
 
     Swal.fire({
-                title: 'Message',
+                title: '',
                 text: popupMsg,
                 //icon: 'success',
                 timer: 8000,
@@ -513,7 +513,7 @@ function checkQuantity() {
             if(res.success){
                 window.location.href="/products";
             }else{
-                popup(res.msg);
+                popup(res.msg||"please login");
             }
         },
         error: function(err) {

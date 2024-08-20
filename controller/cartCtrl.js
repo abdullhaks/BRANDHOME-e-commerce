@@ -16,6 +16,7 @@ const loadCart = async(req,res)=>{
     try{
 
         const products= []; 
+        const variants=[];
 
 
         const id = await req.session.user 
@@ -45,11 +46,14 @@ const loadCart = async(req,res)=>{
 
             if(singleProduct){
                 products.push(singleProduct);
+                variants.push(cart.products[i]);
             };
            
         }
-         console .log("products are "+products);
-        return  res.render("cart",{products,user:id,cartNo,wishListNo});
+         console .log("products are ",products);
+         console .log("variants are ",variants);
+
+        return  res.render("cart",{products,variants,user:id,cartNo,wishListNo});
     }catch(error){
         console.log(error);
     }
@@ -115,23 +119,42 @@ const addtoCart = async (req, res) => {
 };
 
 
-const removeFromCart = async(req,res)=>{
-    try{
+const removeFromCart = async (req, res) => {
+    try {
+        const { productId, color, size } = req.query;
+        const userId = req.session.user;
 
-        const productId = req.query.productId;
-        console.log(productId);
+        const result = await Cart.updateOne(
+            { email: userId },
+            { $pull: { products: { productId, color, size } } }
+        );
 
-        const user = req.session.user;
-        console.log(user);
+        if (result.modifiedCount > 0) {
+            const cart = await Cart.findOne({ email: userId });
+            const products = [];
+            const variants = [];
 
-        const result = await Cart.updateOne({email:user},{$pull : {products:productId}});
+            for (const item of cart.products) {
+                const singleProduct = await Product.findOne({ _id: item.productId, unList: 0 });
 
-        res.redirect("/cart");
+                if (singleProduct) {
+                    products.push(singleProduct);
+                    variants.push(item);
+                }
+            }
 
-    }catch(error){
-        console.log(error);
+            res.json({ success: true, products, variants });
+        } else {
+            res.status(400).json({ error: 'Product not found in cart' });
+        }
+    } catch (error) {
+        console.error('Error removing product from cart:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
-}
+};
+
+
+
 
 module.exports = {
     addtoCart,

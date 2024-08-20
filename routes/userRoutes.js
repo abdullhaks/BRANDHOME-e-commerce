@@ -99,7 +99,7 @@ userRoute.post ("/addtoCart",isBlocked.isBlocked,auth.isLogin,cartController.add
 
 userRoute.get ("/cart",isBlocked.isBlocked,auth.isLogin,cartController.loadCart);
 
-userRoute.get ("/removeFromCart",isBlocked.isBlocked,auth.isLogin,cartController.removeFromCart); 
+userRoute.delete ("/removeFromCart",isBlocked.isBlocked,auth.isLogin,cartController.removeFromCart); 
 
 
 userRoute.get ("/addtoWishList",isBlocked.isBlocked,auth.isLogin,wishListController.addtoWishList);
