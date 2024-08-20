@@ -69,7 +69,7 @@ const cancelOrder = async (req,res)=>{
         const user = await User.findOne({email:email});
 
         if(user && order && (order.paymentOption=="online payment" || order.paymentOption=="wallet payment")){
-            await User.updateOne({email:email},{$set:{wallet:order.purchaseDetails.payAmount}});
+            await User.updateOne({email:email},{$inc:{wallet:order.purchaseDetails.payAmount}});
         };
 
         const datenow = new Date(); 

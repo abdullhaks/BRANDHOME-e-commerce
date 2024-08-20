@@ -117,9 +117,7 @@ const loadCheckOut = async(req,res)=>{
 const placeOrder = async(req,res)=>{
     try{
 
-       
 
-       
         var user =  req.session.user ; 
         console.log("user is ",user);
         console.log(req.body.paymentOption);
@@ -127,10 +125,7 @@ const placeOrder = async(req,res)=>{
         const formData = req.body;
 
         var id = Date.now();
-    
-        
 
-        
         const totalOffer= parseInt(req.body.totalOffer);
         const grandTotal= parseInt(req.body.grandTotal);
         var couponOff= parseInt(req.body.couponOff);
@@ -300,7 +295,7 @@ const placeOrder = async(req,res)=>{
 
                 for (let i = 0; i < productCount; i++) {
 
-                 await Cart.updateOne({email:user},{$pull : {products:productIds[i]}});
+                
 
                  
                  await Product.updateOne({ _id: orders[i].purchaseDetails.productId },
@@ -312,7 +307,16 @@ const placeOrder = async(req,res)=>{
                                                                     {$inc:{stock:-orders[i].purchaseDetails.quantity}});
 
                              
-                            }
+                    var productId=orders[i].purchaseDetails.productId;
+                    var color=orders[i].purchaseDetails.color;
+                    var size=orders[i].purchaseDetails.size;
+
+                const result = await Cart.updateOne(
+                    { email: user },
+                    { $pull: { products: { productId,color, size } } }
+                );
+
+                            };
                                
                             res.status(200).send({
                                 COD:true,});
@@ -338,6 +342,16 @@ const placeOrder = async(req,res)=>{
                                                         { productVariant: orders[i].purchaseDetails.size},
                                                         { productColor: orders[i].purchaseDetails.color}] },
                                                         {$inc:{stock:-orders[i].purchaseDetails.quantity}});
+
+
+                            var productId=orders[i].purchaseDetails.productId;
+                            var color=orders[i].purchaseDetails.color;
+                            var size=orders[i].purchaseDetails.size;
+        
+                        const result = await Cart.updateOne(
+                            { email: user },
+                            { $pull: { products: { productId,color, size } } }
+                        );
 
                         
                        };
@@ -495,6 +509,15 @@ const verifyPayment = async(req,res)=>{
                                                                     { productVariant: orders[i].purchaseDetails.size},
                                                                     { productColor: orders[i].purchaseDetails.color}] },
                                                                     {$inc:{stock:-orders[i].purchaseDetails.quantity}});
+
+                                        var productId=orders[i].purchaseDetails.productId;
+                                        var color=orders[i].purchaseDetails.color;
+                                        var size=orders[i].purchaseDetails.size;
+                    
+                                    const result = await Cart.updateOne(
+                                        { email: user },
+                                        { $pull: { products: { productId,color, size } } }
+                                    );
             
                                 
                                     }
