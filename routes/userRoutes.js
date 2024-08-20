@@ -101,7 +101,7 @@ userRoute.post ("/addtoCartFromWishlist",isBlocked.isBlocked,auth.isLogin,cartCo
 
 userRoute.get ("/cart",isBlocked.isBlocked,auth.isLogin,cartController.loadCart);
 
-userRoute.get ("/removeFromCart",isBlocked.isBlocked,auth.isLogin,cartController.removeFromCart); 
+userRoute.delete ("/removeFromCart",isBlocked.isBlocked,auth.isLogin,cartController.removeFromCart); 
 
 
 userRoute.post ("/addtoWishList",isBlocked.isBlocked,auth.isLogin,wishListController.addtoWishList);
@@ -114,6 +114,9 @@ userRoute.get ("/removeFromWishList",isBlocked.isBlocked,auth.isLogin,wishListCo
 userRoute.post ("/checkOut",isBlocked.isBlocked,auth.isLogin,checkOutController.loadCheckOut);
 
 userRoute.get ("/getStock",checkOutController.getStock);
+userRoute.get ("/getStockFromPrductDetails",checkOutController.getStockFromPrductDetails);
+
+
 
 
 userRoute.post ("/verifyPayment",isBlocked.isBlocked,auth.isLogin,checkOutController.verifyPayment);

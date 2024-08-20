@@ -371,16 +371,17 @@ const placeOrder = async(req,res)=>{
 
 const getStock = async (req, res) => {
     try {
-        const size = req.query.size;
-        const color = req.query.color;
+        const { size, color, productId } = req.query;
 
-        const productId = req.query.productId;
+        const stock = await Stock.findOne({
+            productId,
+            productVariant: size,
+            productColor: color
+        });
 
-        const stock = await Stock.findOne({ $and: [{productId:productId},{ productVariant: size }, { productColor: color }] });
         if (!stock) {
             return res.status(404).json({ error: "Stock not found" });
         }
-        console.log("stock is "+stock);
 
         res.json({ quantity: stock.stock });
     } catch (error) {
@@ -388,6 +389,37 @@ const getStock = async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 };
+
+
+
+const getStockFromPrductDetails = async (req, res) => {
+    try {
+        console.log("Fetching stock details...");
+
+        const size = req.query.size;
+        const color = req.query.color;
+        const productId = req.query.productId;
+
+        console.log("Size:", size, "Color:", color, "Product ID:", productId);
+
+        const stock = await Stock.findOne({ 
+            productId: productId, 
+            productVariant: size, 
+            productColor: color 
+        });
+
+        if (!stock || stock.stock < 1) {
+            return res.json({ success: false, msg: "Stock not found" });
+        } else {
+            console.log("Stock available:", stock.stock);
+            return res.json({ success: true, stock: stock.stock });
+        }
+    } catch (error) {
+        console.error("Error fetching stock:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
 
 const loadOrderPlaced = async(req,res)=>{
     try{
@@ -495,4 +527,6 @@ module.exports = {
     getStock,
     loadOrderPlaced,
     verifyPayment,
+    getStockFromPrductDetails,
+
 }

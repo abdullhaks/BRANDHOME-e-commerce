@@ -29,6 +29,66 @@
 </head>
 
 <body>
+    <style>
+         #main-image {
+        max-width: 500px;
+        margin-top: 20px;
+       
+    }
+    .product-title {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+    
+    .product-description {
+        font-size: 1.1rem;
+        margin-top: 10px;
+        color: #555;
+    }
+    
+    .product-price {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #d9534f;
+        margin-top: 15px;
+    }
+    
+    .size,
+    .color {
+        margin-top: 15px;
+    }
+    
+    .form-select {
+        width: 100%;
+        max-width: 250px;
+        padding: 5px;
+        margin-top: 5px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+    }
+    
+    .stock-status {
+        margin-top: 20px;
+    }
+    
+    .cart {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    .cart:hover {
+        background-color: #0056b3;
+    }
+   
+    </style>
+
+
+
     <!-- Topbar Start -->
     <div class="container-fluid">
         <div class="row bg-secondary py-2 px-xl-5">
@@ -165,7 +225,7 @@
 
 
     <!-- Shop Start -->
-    <div class="main-content pt-5">
+    <div class="main-content ">
         <div class="section__content section__content--p30">
             <div class="container-fluid">
                 <div class="row  align-items-center justify-content-center">
@@ -191,7 +251,7 @@
                                     <% } %>
                                 </ul>
                         
-                                <img src="/productImages/<%= product.image1 %>" alt="" class="big-img">
+                                <img src="/productImages/<%= product.image1 %>" alt="" class="big-img" id="main-image">
                             </div>
                         
                           
@@ -199,24 +259,50 @@
                         
                         
                             <div class="description" id="description">
-                        
-                                <h1><%= product.productName %></h1>
-                        
-                                <p>\<%= product.description%></p>
-                        
-                                <span>Rs <%= product.price %></span>
-                                <div>
-                                    <% if (product.totalStock <=0 ){ %>
-                                        <p class="text-danger">Out Of Stock</p>
-                                    <% }else{ %>
-
-                                    
-                                   <!---<button class="buy">buy now</button>  --> 
-                                    <button class="cart" onclick="window.location.href='/addtoCart?productId=<%= product._id %>';">add to cart</button>
-                                    <% } %>
-                                    
+                                <h1 class="product-title"><%= product.productName %></h1>
+                                <input type="hidden" name="productId" id="productId" value="<%= product._id %>">
+                                <p class="product-description"><%= product.description %></p>
+                                <span class="product-price">Rs <%= product.price %></span>
+                                
+                                <!-- Variant Selection -->
+                                <div class="variant-selection">
+                                    <label for="variant-dropdown">Choose Variant:</label>
+                                    <select class="form-select" name="option" id="size" required onchange="checkQuantity()">
+                                        <% if (product && product.sizes.length > 0) {
+                                            for (let j = 0; j < product.sizes.length; j++) { %>
+                                                <option value="<%= product.sizes[j] %>">
+                                                    <%= product.sizes[j] %>
+                                                </option>
+                                        <% } } %>
+                                    </select>
+                                </div>
+                            
+                                <!-- Color Selection -->
+                                <div class="color-selection mt-2">
+                                    <label for="color-dropdown">Choose Color:</label>
+                                    <select id="color" class="form-select" name="color" required onchange="checkQuantity()">
+                                        <% if (product.colors && product.colors.length > 0) {
+                                            for (let j = 0; j < product.colors.length; j++) { %>
+                                                <option value="<%= product.colors[j] %>">
+                                                    <%= product.colors[j] %>
+                                                </option>
+                                        <% } } %>
+                                    </select>
+                                </div>
+                            
+                                <div id="stock-false" class="stock-false mt-3 hide">
+                                    <h2 class="text-danger">Out Of Stock</h2>
+                                    <p>Please check another variant...</p>
+                                </div>
+                            
+                                <div id="stock-true" class="stock-true mt-3 hide">
+                                    <button class="cart btn btn-primary mt-2" id="addToCart">Add to Cart</button>
                                 </div>
                             </div>
+                            
+
+
+
                         </div>
 
                             
@@ -334,26 +420,118 @@
     <!-- Template Javascript -->
     <script src="/js/main2.js"></script>
     <script src="/js/zoomsl.js" type="text/javascript"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 
 
 </html>
 
-<script type="text/javascript">
-    $(document).ready(function(){
-        $(".small-img").hover(function(){
-            $(".big-img").attr('src',$(this).attr('src'));
-        });
+<script>
+
+    function popup (popupMsg){
+
+            
+
+    Swal.fire({
+                title: '',
+                text: popupMsg,
+                //icon: 'success',
+                timer: 8000,
+                showConfirmButton: false,
+            })
+    };
+
+   $(document).ready(function(){
+    $(".small-img").hover(function(){
+        $(".big-img").attr('src', $(this).attr('src'));
     });
+
+    $(".big-img").imagezoomsl({
+        zoomrange: [3, 3]
+    });
+
+    // Invoke checkQuantity function when the page loads
+    checkQuantity();
+
+    $("#addToCart").click(function(){ 
+        
+        addToCart()
+    
+    });
+});
+
+function checkQuantity() {
+    var productId = document.getElementById("productId").value;
+    var size = document.getElementById("size").value;
+    var color = document.getElementById("color").value;
+    var stockTrue = document.getElementById("stock-true");
+    var stockFalse = document.getElementById("stock-false");
+
+    console.log("Checking quantity for size:", size, "and color:", color);
+
+    $.ajax({
+        url: "/getStockFromPrductDetails",
+        type: "GET",
+        data: { size, color, productId },
+
+        success: function(res) {
+            if (res.success) {
+                stockTrue.classList.remove("hide");
+                stockFalse.classList.add("hide");
+            } else {
+                stockTrue.classList.add("hide");
+                stockFalse.classList.remove("hide");
+            }
+        },
+        error: function(err) {
+            console.error("Error fetching stock:", err);
+        }
+    });
+
+};
+
+
+    function addToCart() {
+
+
+
+        console.log("add to cart is working........")
+    // Get the selected size and color values
+    var size = document.getElementById('size').value;
+    var color = document.getElementById('color').value;
+    var productId = document.getElementById('productId').value;
+
+
+    $.ajax({
+        url: "/addtoCart",
+        type: "POST",
+        data: { productId ,color:color,size:size},
+
+        success: function(res) {
+            if(res.success){
+                window.location.href="/products";
+            }else{
+                popup(res.msg||"please login");
+            }
+        },
+        error: function(err) {
+            console.log("Error adding to cart:", err);
+        }
+    
+    })
+
+    }
+
+
+   
+
+
+
+
 </script>
 
-<script type="text/javascript">
-    $(document).ready(function(){
-        $(".big-img").imagezoomsl({
-            zoomrange:[3,3]
-        });
-    });
-</script>
+
 
 
