@@ -8,6 +8,7 @@ const Product = require("../models/productmodel");
 const Orders = require("../models/orderModel");
 const Stock = require("../models/stockModel");
 const Returns = require("../models/returnModel");
+const Wallet = require("../models/walletModel");
 const Category = require("../models/categorymodel");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
@@ -70,6 +71,13 @@ const cancelOrder = async (req,res)=>{
 
         if(user && order && (order.paymentOption=="online payment" || order.paymentOption=="wallet payment")){
             await User.updateOne({email:email},{$inc:{wallet:order.purchaseDetails.payAmount}});
+
+            const transactions={
+                date:new Date(),
+                amount:order.purchaseDetails.payAmount,
+                status:"credit"
+              }
+              const trans = await Wallet.updateOne({user:email},{$push:{transactions:transactions}} ,{upsert:true});
         };
 
         const datenow = new Date(); 

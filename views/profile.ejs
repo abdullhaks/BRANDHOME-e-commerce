@@ -195,8 +195,8 @@
                             <a href="/orders"><h4>Orders</h4></a>
                          </div>
 
-                         <div class="col-md-4 shadow p-3 mb-5  rounded d-flex align-items-center  justify-content-center" style="background-color: rgb(194, 189, 189); max-width: 400px;">
-                            <h4>Wallet </h4> <p>Rs:<%= profile.wallet %></p>
+                         <div class="col-md-4 shadow p-3 mb-5  rounded d-flex  justify-content-center" id="wallet" style="background-color: rgb(194, 189, 189); max-width: 400px;">
+                            <h4>Wallet-Rs:<%= profile.wallet %></h4>
                           </div>
 
                     </div>
@@ -205,6 +205,53 @@
                 
         </div>
     </div>
+
+   
+
+    <% if (wallet.transactions.length> 0) { %>
+        <div class="modal fade" id="walletModal" tabindex="-1" role="dialog" aria-labelledby="walletModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="walletModalLabel">Wallet Transactions</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Amount</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% wallet.transactions.slice().reverse().forEach(function(item) { %>
+                        <tr>
+                          <td><%= new Date(item.date).toLocaleDateString() %></td>
+                          <% if (item.status == "debit") { %>
+                            <td class="text-danger"><%= item.amount %></td>
+                          <% } else { %>
+                            <td class="text-success"><%= item.amount %></td>
+                          <% } %>
+                          <td><%= item.status %></td>
+                        </tr>
+                      <% }); %>
+                  </tbody>
+                </table>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% } %>
+      
+
+    
 
     <!-- Checkout Start -->
    
@@ -299,5 +346,12 @@
     <!-- Template Javascript -->
     <script src="/js/main.js"></script>
 </body>
+
+<script>
+
+document.getElementById('wallet').addEventListener('click', function () {
+    $('#walletModal').modal('show');
+});
+</script>
 
 </html>

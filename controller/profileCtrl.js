@@ -4,6 +4,7 @@ const Address = require("../models/addressmodel");
 const Cart = require("../models/cartModel");
 const WishList = require("../models/wishListModel");
 const User = require("../models/userModel");
+const Wallet = require("../models/walletModel");
 const Stock = require("../models/stockModel");
 const Recoverypassword = require("../models/recoveryPasswordmodel");
 const Product = require("../models/productmodel");
@@ -35,9 +36,11 @@ const loadProfile = async ( req , res )=>{
             var wishListNo = 0;
             if(wishList){
             wishListNo = wishList.products.length;
-            }
+            };
+
+        const wallet =await Wallet.findOne({user:user});
     
-            return res.render("profile",{user,profile,cartNo,wishListNo});
+            return res.render("profile",{user,profile,cartNo,wishListNo,wallet});
 
 
 

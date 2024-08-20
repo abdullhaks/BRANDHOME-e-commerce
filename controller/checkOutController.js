@@ -5,6 +5,7 @@ const Address = require("../models/addressmodel");
 const Product = require("../models/productmodel");
 const Orders = require("../models/orderModel");
 const Stock = require("../models/stockModel");
+const Wallet = require("../models/walletModel");
 const Coupons = require ("../models/couponModel");
 const Razorpay = require('razorpay');
 
@@ -361,6 +362,12 @@ const placeOrder = async(req,res)=>{
                        console.log("user and gndtotl is ",user,gndtotl);
 
                       const gtup= await User.updateOne({ email: user }, { $inc: { wallet: -gndtotl } });
+                      const transactions={
+                        date:new Date(),
+                        amount:parseInt(gndtotl),
+                        status:"debit"
+                      }
+                      const trans = await Wallet.updateOne({user:user},{$push:{transactions:transactions}} ,{upsert:true});
                        console.log("gtup",gtup);
                       const paymntstts= await Orders.updateMany({ orderId: orders[0].orderId }, { $set: { paymentStatus: 1 } });
                        console.log("paymntstts is ",paymntstts);
