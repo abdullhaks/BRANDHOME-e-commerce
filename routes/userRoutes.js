@@ -61,6 +61,9 @@ userRoute.post("/addAddress",addressController.addAddress);
 
 userRoute.post("/addAddressFromCheckout",addressController.addAddressFromCheckout);
 
+userRoute.get("/deleteAddress",addressController.deleteAddress);
+
+userRoute.post("/editAddress",addressController.editAddress)
 //-------------------------------------
 
 userRoute.get("/auth/google", googleAuthController.googleAuth.authenticate);

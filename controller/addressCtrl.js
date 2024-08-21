@@ -192,12 +192,59 @@ const addAddressFromCheckout = async(req,res)=>{
     }catch(error){
         console.log(error);
     }
-}
+};
 
+const deleteAddress = async(req,res)=>{
+    try{
+
+        const addressId = req.query.id;
+        console.log("addressId",addressId);
+
+        const result = await Address.deleteOne({_id:addressId});
+        console.log("result is ",result);
+
+        res.redirect("/addresses");
+
+
+    }catch(error){
+        console.log(error);
+    }
+};
+
+
+const editAddress = async(req,res)=>{
+    try{
+        const addressId = req.query.id;
+        console.log("addressId",addressId);
+
+        var preAddress = await Address.findById(addressId);
+        console . log ("preAddress",preAddress);
+
+        preAddress. email= req.session.user,
+        preAddress.firstName= req.body.firstName,
+        preAddress.lastName= req.body.lastName,
+        preAddress. shippingEmail= req.body.shippingEmail,
+        preAddress. mobile= req.body.mobile,
+        preAddress. country= req.body.country,
+        preAddress.state= req.body.state,
+        preAddress. city= req.body.city,
+        preAddress. street= req.body.street,
+        preAddress. postalCode= req.body.postalCode,
+
+        await preAddress.save();
+
+        res.redirect("/addresses");
+
+    }catch(error){
+        console.log(error);
+    }
+}
 
 module.exports = {
     loadAddress,
     addAddress,
     addAddressFromCheckout,
+    deleteAddress,
+    editAddress,
                 
                     };

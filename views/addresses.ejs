@@ -184,47 +184,124 @@
         <div class="row px-xl-5">
             <div class="col-lg-12">
                 <div class="mb-4">
-                    <div class="row justify-content-between" >
+                    <div class="row " >
 
                         <% if (addresses) {
                             for (let i = 0; i < addresses.length; i++) { %>
-
-
-
-                        <div class="col-md-4 row shadow p-3 mb-5 bg-white rounded" style="max-width: 350px;">
-                            <div class="col-md-10">
+                        
+                        
+                        
+                        <div class="col-md-4 row shadow p-3 mr-4 mb-3 bg-white rounded" style="max-width: 350px; ">
+                            <div class="col-md-8">
                                 <p><%= addresses[i].firstName %>  <%= addresses[i].lastName %></p>
+                                
                             </div>
-
-                            <div class="col-md-2">
-                                <a href="">
-                                    <i class="fas fa-trash "></i>
-                                </a>
+                        
+                            <div class="col-md-4 row">
+                                <div class="col-md-6">
+                                    <a href="#" class="edit-address" data-toggle="modal" data-target="#editAddressModal" data-address="<%= JSON.stringify(addresses[i]) %>">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="/deleteAddress?id=<%= addresses[i]._id %>">
+                                        <i class="fas fa-trash "></i>
+                                    </a>
+                                </div>
+                               
                             </div>
-
-                           
+                        
+                           <div class="col-md-12">
+                            <p><small><%= addresses[i].shippingEmail %> 
+                                <%= addresses[i].mobile %>
+                                <%= addresses[i].street %>,<%= addresses[i].city %>
+                                <%= addresses[i].state %>,<%= addresses[i].country %>
+                                <%= addresses[i].postalCode %></small>
+                            </p>
+                           </div>
                            
                         </div>
-
-                        <% }
-    
-                    } else { %>
-        
-                        <% } %>
-    
                         
-                    </div>
+                        <% }
+                        
+                        } else { %>
+                        
+                        <% } %>
+                        
+                        
+                        </div>
                 </div>
             </div>
         </div>
     </div>
 
+
+    <div class="modal fade" id="editAddressModal" tabindex="-1" role="dialog" aria-labelledby="editAddressModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editAddressModalLabel">Edit Address</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form action="/editAddress" method="post" id="editAddressForm">
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <label>First Name</label>
+                    <input class="form-control" type="text" name="firstName" id="editFirstName" required minlength="3" maxlength="30">
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label>Last Name</label>
+                    <input class="form-control" type="text" name="lastName" id="editLastName" required minlength="1" maxlength="20">
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label>E-mail</label>
+                    <input class="form-control" type="email" name="shippingEmail" id="editEmail" required>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label>Mobile No</label>
+                    <input class="form-control" type="text" name="mobile" id="editMobile" required minlength="10" maxlength="10">
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label>Country</label>
+                    <input class="form-control" type="text" name="country" id="editCountry" required>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label>State</label>
+                    <input class="form-control" type="text" name="state" id="editState" required>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label>City</label>
+                    <input class="form-control" type="text" name="city" id="editCity" required>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label>Street</label>
+                    <input class="form-control" type="text" name="street" id="editStreet" required>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label>Postal Code</label>
+                    <input class="form-control" type="text" name="postalCode" id="editPostalCode" required minlength="6" maxlength="6">
+                  </div>
+                  <input type="hidden" name="addressId" id="editAddressId">
+                  <div class="col-md-12 form-group d-flex flex-column align-items-center justify-content-center">
+                    <button type="submit" class="btn btn-success">Edit Address</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
     <!-- Checkout Start -->
-    <div class="container-fluid pt-5">
+    <div class="container-fluid pt-1">
         <div class="row px-xl-5">
             <div class="col-lg-8">
                 <div class="mb-4">
-                    <h4 class="font-weight-semi-bold mb-4">Billing Address</h4>
+                    <h4 class="font-weight-semi-bold mb-4">Add Address</h4>
     
                     <% if (errors) { %>
                         <% errors.forEach(function(error) { %>
@@ -403,5 +480,30 @@
     <!-- Template Javascript -->
     <script src="/js/main.js"></script>
 </body>
+
+<script>
+
+$(document).on('click', '.edit-address', function (e) {
+    e.preventDefault();
+
+    // Get the address data from the button's data-address attribute
+    const address = $(this).data('address');
+
+    // Populate the modal form fields with the address data
+    $('#editAddressModal input[name="firstName"]').val(address.firstName);
+    $('#editAddressModal input[name="lastName"]').val(address.lastName);
+    $('#editAddressModal input[name="shippingEmail"]').val(address.shippingEmail);
+    $('#editAddressModal input[name="mobile"]').val(address.mobile);
+    $('#editAddressModal input[name="country"]').val(address.country);
+    $('#editAddressModal input[name="state"]').val(address.state);
+    $('#editAddressModal input[name="city"]').val(address.city);
+    $('#editAddressModal input[name="street"]').val(address.street);
+    $('#editAddressModal input[name="postalCode"]').val(address.postalCode);
+
+    // Set the form action URL to include the address ID
+    $('#editAddressModal form').attr('action', `/editAddress?id=${address._id}`);
+});
+
+</script>
 
 </html>
