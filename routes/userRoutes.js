@@ -49,7 +49,7 @@ userRoute.post ("/forgetPassword",userController.checkemail);
 userRoute.post ("/submitRecoveryPassword", forgetPasswordController.checkRecoveryPassword);
 userRoute.post ("/resendRecoveryPassword", forgetPasswordController.resentRecoveryPassword);
 userRoute.post ("/newPassword", forgetPasswordController.verifyNewPassword);
-
+userRoute.post ("/changePassword",userController.changePassword)
 
 //-------------------------------------
 
@@ -63,7 +63,9 @@ userRoute.post("/addAddressFromCheckout",addressController.addAddressFromCheckou
 
 userRoute.get("/deleteAddress",addressController.deleteAddress);
 
-userRoute.post("/editAddress",addressController.editAddress)
+userRoute.post("/editAddress",addressController.editAddress);
+
+userRoute.post ("/editProfile",userController.editProfile)
 //-------------------------------------
 
 userRoute.get("/auth/google", googleAuthController.googleAuth.authenticate);

@@ -180,7 +180,7 @@
                                                 <i class="fas fa-trash text-primary mr-1"></i>Remove
                                             </a>
                                             <% if(products[i].totalStock > 0){ %>
-                                                <a class="btn btn-sm text-dark p-0 move-to-cart" data-productId="<%=products[i]._id %>" href="#">
+                                                <a class="btn btn-sm text-dark p-0 move-to-cart" data-productId="<%=products[i]._id %>" href="/productsDetails?productId=<%= products[i]._id %>">
                                                     <i class="fas fa-shopping-cart text-primary mr-1"></i>Move to Cart
                                                 </a>
                                             <% } else { %>
@@ -302,89 +302,89 @@
             });
         }
     
-        document.addEventListener("DOMContentLoaded", function () {
-            document.getElementById("wishListItems").addEventListener("click", function (e) {
-                if (e.target.closest('.move-to-cart')) {
-                    e.preventDefault();
-                    const productId = e.target.closest('.move-to-cart').getAttribute('data-productId');
-                    updateCart(productId);
-                }
-            });
+        // document.addEventListener("DOMContentLoaded", function () {
+        //     document.getElementById("wishListItems").addEventListener("click", function (e) {
+        //         if (e.target.closest('.move-to-cart')) {
+        //             e.preventDefault();
+        //             const productId = e.target.closest('.move-to-cart').getAttribute('data-productId');
+        //             updateCart(productId);
+        //         }
+        //     });
     
-            function updateCart(productId) {
-                console.log("AJAX is working now, and the product id is", productId);
+        //     function updateCart(productId) {
+        //         console.log("AJAX is working now, and the product id is", productId);
     
-                $.ajax({
-                    url: '/addtoCartFromWishlist',
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify({ productId: productId }),
+        //         $.ajax({
+        //             url: '/addtoCartFromWishlist',
+        //             type: 'POST',
+        //             contentType: 'application/json',
+        //             data: JSON.stringify({ productId: productId }),
     
-                    success: function (res) {
-                        if (res.success) {
-                            popup(res.msg);
-                            if (res.cartCount !== undefined) {
-                                document.getElementById("cartBadge").innerText = res.cartCount;
-                            }
-                            if (res.wishCount !== undefined) {
-                                document.getElementById("wishListBadge").innerText = res.wishCount;
-                            }
+        //             success: function (res) {
+        //                 if (res.success) {
+        //                     popup(res.msg);
+        //                     if (res.cartCount !== undefined) {
+        //                         document.getElementById("cartBadge").innerText = res.cartCount;
+        //                     }
+        //                     if (res.wishCount !== undefined) {
+        //                         document.getElementById("wishListBadge").innerText = res.wishCount;
+        //                     }
     
-                            if (res.products.length > 0) {
-                                let wishProducts = '';
-                                for (let product of res.products) {
-                                    const item = `
-                                        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                                            <a href="/productsDetails?productId=${product._id}">
-                                                <div class="card product-item border-0 mb-4" style="height: 360px;">
-                                                    <div class="d-flex justify-content-center align-items-center">
-                                                        <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0" style="height: 250px; width: 200px;">
-                                                            <img class="img-fluid" src="/productImages/${product.image1}" alt="" style="max-height: 100%; max-width: 100%;">
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-body border-left border-right text-center p-0 pt-2">
-                                                        <h6 class="text-truncate mb-3 overflow-hidden">${product.productName}</h6>
-                                                        <div class="d-flex justify-content-center">
-                                                            ${
-                                                                (product.productOfferPercentage > 0 || product.categoryOfferPercentage > 0) ?
-                                                                `<h6>Rs ${product.price - (product.productOfferPercentage + product.categoryOfferPercentage) * product.price / 100}</h6>
-                                                                <p class="text-muted" style="font-size: 10px;">
-                                                                    <del>${product.price}</del>
-                                                                    <span class="text-success">${product.productOfferPercentage + product.categoryOfferPercentage}% off</span>
-                                                                </p>` :
-                                                                `<h6>Rs ${product.price}</h6>`
-                                                            }
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-footer d-flex justify-content-between bg-light border">
-                                                        <a href="/removeFromWishList?productId=${product._id}" class="btn btn-sm text-dark p-0" onclick="return confirm('Do you want to remove this product from the wishlist?')">
-                                                            <i class="fas fa-trash text-primary mr-1"></i>Remove
-                                                        </a>
-                                                        ${
-                                                            product.totalStock > 0 ?
-                                                            `<a class="btn btn-sm text-dark p-0 move-to-cart" data-productId="${product._id}" href="#">
-                                                                <i class="fas fa-shopping-cart text-primary mr-1"></i>Move to Cart
-                                                            </a>` :
-                                                            `<span class="text-danger">Out of Stock</span>`
-                                                        }
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>`;
-                                    wishProducts += item;
-                                }
+        //                     if (res.products.length > 0) {
+        //                         let wishProducts = '';
+        //                         for (let product of res.products) {
+        //                             const item = `
+        //                                 <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+        //                                     <a href="/productsDetails?productId=${product._id}">
+        //                                         <div class="card product-item border-0 mb-4" style="height: 360px;">
+        //                                             <div class="d-flex justify-content-center align-items-center">
+        //                                                 <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0" style="height: 250px; width: 200px;">
+        //                                                     <img class="img-fluid" src="/productImages/${product.image1}" alt="" style="max-height: 100%; max-width: 100%;">
+        //                                                 </div>
+        //                                             </div>
+        //                                             <div class="card-body border-left border-right text-center p-0 pt-2">
+        //                                                 <h6 class="text-truncate mb-3 overflow-hidden">${product.productName}</h6>
+        //                                                 <div class="d-flex justify-content-center">
+        //                                                     ${
+        //                                                         (product.productOfferPercentage > 0 || product.categoryOfferPercentage > 0) ?
+        //                                                         `<h6>Rs ${product.price - (product.productOfferPercentage + product.categoryOfferPercentage) * product.price / 100}</h6>
+        //                                                         <p class="text-muted" style="font-size: 10px;">
+        //                                                             <del>${product.price}</del>
+        //                                                             <span class="text-success">${product.productOfferPercentage + product.categoryOfferPercentage}% off</span>
+        //                                                         </p>` :
+        //                                                         `<h6>Rs ${product.price}</h6>`
+        //                                                     }
+        //                                                 </div>
+        //                                             </div>
+        //                                             <div class="card-footer d-flex justify-content-between bg-light border">
+        //                                                 <a href="/removeFromWishList?productId=${product._id}" class="btn btn-sm text-dark p-0" onclick="return confirm('Do you want to remove this product from the wishlist?')">
+        //                                                     <i class="fas fa-trash text-primary mr-1"></i>Remove
+        //                                                 </a>
+        //                                                 ${
+        //                                                     product.totalStock > 0 ?
+        //                                                     `<a class="btn btn-sm text-dark p-0 move-to-cart" data-productId="${product._id}" href="#">
+        //                                                         <i class="fas fa-shopping-cart text-primary mr-1"></i>Move to Cart
+        //                                                     </a>` :
+        //                                                     `<span class="text-danger">Out of Stock</span>`
+        //                                                 }
+        //                                             </div>
+        //                                         </div>
+        //                                     </a>
+        //                                 </div>`;
+        //                             wishProducts += item;
+        //                         }
     
-                                document.getElementById("wishListItems").innerHTML = wishProducts;
-                            } else {
-                                document.getElementById("wishListItems").innerHTML = "<p>No products in the wishlist.</p>";
-                            }
-                        } else {
-                            console.error('Failed to update cart:', res.msg);
-                        }
-                    }
-                });
-            }
-        });
+        //                         document.getElementById("wishListItems").innerHTML = wishProducts;
+        //                     } else {
+        //                         document.getElementById("wishListItems").innerHTML = "<p>No products in the wishlist.</p>";
+        //                     }
+        //                 } else {
+        //                     console.error('Failed to update cart:', res.msg);
+        //                 }
+        //             }
+        //         });
+        //     }
+        // });
     </script>
     
 

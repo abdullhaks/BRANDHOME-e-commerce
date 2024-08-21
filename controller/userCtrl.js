@@ -217,7 +217,7 @@ const verifyLogin = async (req,res)=>{
             passwordErrors.push({ msg: "Password is required  " });
           } else if (password.length < 6) {
             passwordErrors.push({ msg: "Password should be at least 6 characters  " });
-          }
+          };
 
           if (emailErrors.length > 0||passwordErrors.length > 0) {
             // If yes, render the signup form again with the errors and the user input
@@ -623,7 +623,69 @@ const checkemail = async (req,res)=>{
   }catch(error){
     console.log(error);
   }
-}
+};
+
+const editProfile = async (req,res)=>{
+  try{
+    const {name,mobile,userId}=req.body;
+
+    console.log("name and userId and mobile is ",name,mobile,userId);
+
+    const user =await User.findById(userId);
+    user.name=name;
+    user.mobile= mobile;
+
+    await user.save();
+
+    res.redirect("/profile");
+
+
+  }catch(error){
+    console.log(error);
+  }
+};
+
+
+const changePassword = async (req, res) => {
+  try {
+      const { userId, currentPassword, newPassword,repeatPassword } = req.body;
+
+      console.log("userId, currentPassword, newPassword:", userId, currentPassword, newPassword,repeatPassword);
+
+      const user = await User.findById(userId);
+      console.log("user:", user);
+
+      if (!user) {
+          return res.json({ success: false, msg: "User not found." });
+      }
+
+      const passwordMatch = await bcrypt.compare(currentPassword, user.password);
+      console.log("passwordMatch:", passwordMatch);
+
+      if (passwordMatch) {
+          // Assuming you want to save the new password after hashing
+          // user.password = await bcrypt.hash(newPassword, 10);
+
+        const spassword = await securePassword(newPassword);
+        user.password=spassword; 
+        const sCONFpassword = await securePassword(repeatPassword);
+        user.confirmPassword=sCONFpassword;
+
+        await user.save();
+
+          res.json({ success: true, msg: "Password successfully changed." });
+          console.log("Password successfully changed.");
+          
+      } else {
+          res.json({ success: false, msg: "Wrong current password." });
+          console.log("Wrong current password.");
+      }
+
+  } catch (error) {
+      console.error("Error:", error);
+      res.status(500).json({ success: false, msg: "An error occurred." });
+  }
+};
 
 
 
@@ -641,5 +703,7 @@ module.exports = {
     loadProducts,
     loadProductsDetails,
     loadForgetPassword,
-    checkemail
+    checkemail,
+    editProfile,
+    changePassword,
         };

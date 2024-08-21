@@ -170,9 +170,14 @@
 
 
     <!-- Page Header Start -->
-    <div class="container-fluid bg-secondary mb-5">
+    <div class="container-fluid bg-secondary mb-1">
         <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 50px">
-           <h5><%= profile.name %></h5> <p class="font-weight-semi-bold text-uppercase mb-3"><%= profile.email %></p>
+           <h5><%= profile.name %> 
+            <span id="edit-Profile" data-user="<%= JSON.stringify(profile) %>" data-toggle="modal" data-target="#editProfile">
+                <i class="fas fa-edit  text-muted"></i></span></h5> 
+                <p><small>Mob <%=profile.mobile %></small></p>
+                <p class="font-weight-semi-bold mb-3"><%= profile.email %>  
+                <small class="text-danger" id="" data-toggle="modal" data-target="#changePassword">change password</small></p>
            <!-- <div class="d-inline-flex">
                 <p class="m-0"><a href="">Home</a></p>
                 <p class="m-0 px-2">-</p>
@@ -180,6 +185,79 @@
             </div>-->
         </div>
     </div>
+
+    <div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="editAddressModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editAddressModalLabel">Edit Profile</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form action="/editProfile" method="post" id="editProfileForm">
+                <div class="row">
+                  <div class="col-md-12 form-group">
+                    <label>Name</label>
+                    <input class="form-control" type="text" value="<%=profile.name %>" name="name" id="editName" required minlength="3" maxlength="30">
+                  </div>
+                  <div class="col-md-12 form-group">
+                    <label>Mobile</label>
+                    <input class="form-control" type="text" value="<%=profile.mobile %>" name="mobile" id="editMobile" required minlength="1" maxlength="20">
+                  </div>
+                  
+                  <input type="hidden" name="userId" id="userId" value="<%=profile._id %>">
+                  <div class="col-md-12 form-group d-flex flex-column align-items-center justify-content-center">
+                    <button type="submit" class="btn btn-success">Edit Profile</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="editAddressModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editAddressModalLabel">Change Password</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form action="" method="post" id="changePasswordForm">
+                <div class="row">
+                  <div class="col-md-12 form-group">
+                    <label>Current Password</label>
+                    <input class="form-control" type="text" name="currentPassword" id="currentPassword" required minlength="6" maxlength="30">
+                  </div>
+                  <div class="col-md-12 form-group">
+                    <label>New Password</label>
+                    <input class="form-control" type="text" name="newPassword" id="newPassword" required minlength="6" maxlength="30">
+                  </div>
+                  <div class="col-md-12 form-group">
+                    <label>Repeat Password</label>
+                    <input class="form-control" type="text" name="repeatPassword" id="repeatPassword" required minlength="6" maxlength="30">
+                    <small class="text-danger hide" id="passwordError">not same!</small>
+                  </div>
+                  
+                  <input type="hidden" name="userId" id="userId" value="<%=profile._id %>">
+                  <div class="col-md-12 form-group d-flex flex-column align-items-center justify-content-center">
+                    <button type="submit" class="btn btn-success" id="changePasswordBtn" disabled >Change Password</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+
     <!-- Page Header End -->
     <div class="container-fluid pt-5">
         <div class="row px-xl-5">
@@ -208,7 +286,7 @@
 
    
 
-    <% if (wallet.transactions.length> 0) { %>
+    <% if (wallet&&wallet.transactions.length> 0) { %>
         <div class="modal fade" id="walletModal" tabindex="-1" role="dialog" aria-labelledby="walletModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-scrollable" role="document">
             <div class="modal-content">
@@ -345,13 +423,83 @@
 
     <!-- Template Javascript -->
     <script src="/js/main.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
 
 <script>
 
+        function popup(popupMsg) {
+            Swal.fire({
+                title: '',
+                text: popupMsg,
+                timer: 1000,
+                showConfirmButton: false,
+            });
+        }
+
+
 document.getElementById('wallet').addEventListener('click', function () {
     $('#walletModal').modal('show');
 });
+
+
+$(document).ready(function(){
+    function validatePasswords() {
+        let newPassword = document.getElementById("newPassword").value;
+        let repeatPassword = document.getElementById("repeatPassword").value;
+
+        if (newPassword === repeatPassword) {
+            document.getElementById("passwordError").classList.add("hide");
+            document.getElementById("changePasswordBtn").disabled = false;
+        } else {
+            document.getElementById("passwordError").classList.remove("hide");
+            document.getElementById("changePasswordBtn").disabled = true;
+        }
+    };
+
+    // document.getElementById("newPassword").addEventListener("input", validatePasswords);
+    document.getElementById("repeatPassword").addEventListener("input", validatePasswords);
+});
+
+$(document).ready(function(){
+    document.getElementById("changePasswordForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const formData = $(this).serialize();
+
+        console.log("formdata is ",formData);
+
+        $.ajax({
+            url: '/changePassword',
+            type: "POST",
+            data: formData,
+            dataType: "json",
+
+            success: function(res) {
+                if (res.success) {
+                    popup(res.msg);  // Popup message
+
+                    setTimeout(function () {
+                        window.location.href = "/profile";
+                    }, 2000);
+                        // Redirect if necessary
+                    
+                } else {
+                    popup(res.msg);  // Display error message
+                }
+            },
+            error: function(err) {
+                console.error('Error:', err);
+                popup('An error occurred. Please try again.');
+            }
+        });
+    });
+});
+
+
+
 </script>
 
 </html>
