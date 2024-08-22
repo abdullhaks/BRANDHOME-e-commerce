@@ -149,6 +149,13 @@ adminRoute.get(
 adminRoute.post("/updateOrderStatus",auth.isLogin,
   isAdmin.isAdmin, adminOrderController.updateOrderStatus);
 
+  adminRoute.get(
+    "/orderDetails",auth.isLogin,
+    isAdmin.isAdmin,
+    adminOrderController.orderDetails
+  );
+  
+
 //.....................................
 
 adminRoute.get(

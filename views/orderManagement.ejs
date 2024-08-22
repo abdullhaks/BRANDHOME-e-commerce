@@ -179,7 +179,7 @@
                             <div class="col-lg-4">
                                 
                             </div>
-                            <div class="col-lg-8 pb-3">
+                            <div class="col-lg-8 " >
                                 <img src="/productImages/<%= order.purchaseDetails.productImage%>" alt="" style="width: 150px;">
                             </div>
 
@@ -187,14 +187,28 @@
                             <div class="col-lg-4">
                                 <p>Product Name </p>
                             </div>
-                            <div class="col-lg-8 pb-3">
-                                <p class="text-dark"><%= order.purchaseDetails.brand %> <%= order.purchaseDetails.productName %> ,<%= order.purchaseDetails.size %>,<%= order.purchaseDetails.color %></p>
+                            <div class="col-lg-8 ">
+                                <p class="text-dark"><%= order.purchaseDetails.productBrand %> <%= order.purchaseDetails.productName %> ,<%= order.purchaseDetails.size %>,<%= order.purchaseDetails.color %></p>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <p>Quantity</p>
+                            </div>
+                            <div class="col-lg-8 ">
+                                <p class="text-dark"><%= order.purchaseDetails.quantity %></p>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <p>Price</p>
+                            </div>
+                            <div class="col-lg-8 ">
+                                <p class="text-dark"><%= order.purchaseDetails.price %></p>
                             </div>
 
                             <div class="col-lg-4">
                                 <p>Order Date </p>
                             </div>
-                            <div class="col-lg-8 pb-3">
+                            <div class="col-lg-8 ">
                                 <p><%= order.orderDate %></p>
                             </div>
 
@@ -203,31 +217,60 @@
                             <div class="col-lg-4">
                                 <p>Order Id </p>
                             </div>
-                            <div class="col-lg-8 pb-3">
+                            <div class="col-lg-8 ">
                                 <p><%= order._id %></p>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <p>Shipping Charge</p>
+                            </div>
+                            <div class="col-lg-8 ">
+                                <p>Rs <%= order.purchaseDetails.shippingCharge %></p>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <p>Discount</p>
+                            </div>
+                            <div class="col-lg-8 ">
+                                <p>Rs <%= order.purchaseDetails.youSave %></p>
                             </div>
 
                             <div class="col-lg-4">
                                 <p>Total Amount </p>
                             </div>
-                            <div class="col-lg-8 pb-3">
+                            <div class="col-lg-8 ">
                                 <p>Rs <%= order.purchaseDetails.payAmount %></p>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <p>Shipping Address </p>
+                            </div>
+                            <div class="col-lg-8 ">
+                                <p><%= order.address.firstName %> <%= order.address.lastName %> <br>
+                                    <%= order.address.shippingEmail %> <br>
+                                    <%= order.address.mobile %> <br>
+                                    <%= order.address.street %> ,<%= order.address.city %> <br>
+                                    <%= order.address.state %> ,<%= order.address.country %> <br>
+                                    pin : <%= order.address.postalCode %>
+                                    
+                                    
+                                    </p>
                             </div>
 
                             <div class="col-lg-4">
                                 <p>Payment Option </p>
                             </div>
-                            <div class="col-lg-8 pb-3">
+                            <div class="col-lg-8 ">
                                 <p><%= order.paymentOption %></p>
                             </div>
 
                             <div class="col-lg-4">
                                 <p>Order Status  </p>
                             </div>
-                            <div class="col-lg-8 pb-3">
+                            <div class="col-lg-8 ">
 
                                 <% if( order.status=="dispatched"){ %>
-                                    <p class="text-primary"><%= order.status %> - <%= order.dispatchedDate %> %></p> 
+                                    <p class="text-primary"><%= order.status %> - <%= order.dispatchedDate %> </p> 
                                 <% } %>
 
                                 <% if( order.status=="delivered"){ %>
@@ -245,15 +288,7 @@
                                 
                             </div>
 
-                            
-
-                            
-
-                            
-
-                  
-                        
-                        
+                         
                     </div>
                     
                     

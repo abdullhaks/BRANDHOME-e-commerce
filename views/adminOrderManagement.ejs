@@ -382,13 +382,21 @@
                                         <tbody>
                                             <tr>
                                                 <td><%= orders[i].orderDate %></td>
-                                                <td><%= orders[i]._id %></td>
+                                                <td class="text-danger font-weight-bold" id="order-details" data-toggle="modal" data-target="#orderDetails" data-order="<%= JSON.stringify(orders[i]) %>">
+                                                    <%= orders[i]._id %></td>
 
-                                                <td> <a href="/orderManagement?orderId= <%= orders[i]._id %>" style="color: rgb(182, 83, 97); font-weight: bold;" >
+                                                <!-- <td > <a href="/admin/orderDetails?orderId= <%= orders[i]._id %>" style="color: rgb(182, 83, 97); font-weight: bold;" >
                                                     <%= orders[i].purchaseDetails.productBrand %> 
                                                     <%= orders[i].purchaseDetails.productName %>,<br>
                                                     <%= orders[i].purchaseDetails.size %>, <%= orders[i].color %> 
-                                                    (<%= orders[i].purchaseDetails.quantity %>) </a> </td>
+                                                    (<%= orders[i].purchaseDetails.quantity %>) </a> </td> -->
+
+                                                    <td > 
+                                                        <%= orders[i].purchaseDetails.productBrand %> 
+                                                        <%= orders[i].purchaseDetails.productName %>,<br>
+                                                        <%= orders[i].purchaseDetails.size %>, <%= orders[i].color %> 
+                                                        (<%= orders[i].purchaseDetails.quantity %>) 
+                                                    </td>
 
                                                 <td>Rs <%= orders[i].purchaseDetails.payAmount %></td>
                                                 <td>
@@ -466,6 +474,117 @@
                 </div>
             </div>
             <!-- END MAIN CONTENT-->
+
+
+            <div class="modal fade" id="orderDetails" tabindex="-1" role="dialog" aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="editAddressModalLabel">Order Details</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="col-lg-12 row ">
+                        
+                            <div class="col-lg-4">
+                                
+                            </div>
+                            <div class="col-lg-8 " id="productImage">
+                               
+                            </div>
+
+                            <div class="col-lg-4">
+                                <p>Product Name </p>
+                            </div>
+                            <div class="col-lg-8 " id="productName">
+                                
+                            </div>
+
+                            <div class="col-lg-4">
+                                <p>Quantity</p>
+                            </div>
+                            <div class="col-lg-8 " id="quantity">
+                              
+                            </div>
+
+                            <div class="col-lg-4">
+                                <p>Price</p>
+                            </div>
+                            <div class="col-lg-8 " id="price">
+                            
+                            </div>
+
+                            <div class="col-lg-4">
+                                <p>Order Date </p>
+                            </div>
+                            <div class="col-lg-8 " id="orderDate">
+                            
+                            </div>
+
+
+
+                            <div class="col-lg-4">
+                                <p>Order Id </p>
+                            </div>
+                            <div class="col-lg-8 " id="id">
+                            
+                            </div>
+
+                            <div class="col-lg-4">
+                                <p>Shipping Charge</p>
+                            </div>
+                            <div class="col-lg-8 " id="shippingCharge">
+                            
+                            </div>
+
+                            <div class="col-lg-4">
+                                <p>Discount</p>
+                            </div>
+                            <div class="col-lg-8 " id="youSave">
+                    
+                            </div>
+
+                            <div class="col-lg-4">
+                                <p>Total Amount </p>
+                            </div>
+                            <div class="col-lg-8 " id="payAmount">
+                          
+                            </div>
+
+                            <div class="col-lg-4">
+                                <p>Shipping Address </p>
+                            </div>
+                            <div class="col-lg-8 " id="Address">
+                               
+                            </div>
+
+                            <div class="col-lg-4">
+                                <p>Payment Option </p>
+                            </div>
+                            <div class="col-lg-8 " id="paymentOption">
+                            
+                            </div>
+
+                            <div class="col-lg-4">
+                                <p>Order Status  </p>
+                            </div>
+                            <div class="col-lg-8 " id="Status">
+
+                              
+                            
+                                
+                            </div>
+                            
+                         
+                    </div>
+                      
+                    </div>
+                  </div>
+                </div>
+            </div>
             <!-- END PAGE CONTAINER-->
         </div>
 
@@ -558,6 +677,82 @@ $(document).ready(function() {
        
     });
 });
+
+
+$(document).on('click', '#order-details', function (e) {
+    e.preventDefault();
+
+    // Get the order data from the button's data-order attribute
+    const order = $(this).data('order');
+
+    // Populate the modal form fields with the order data
+    document.getElementById("productImage").innerHTML = `
+        <img src="/productImages/${order.purchaseDetails.productImage}" alt="" style="width: 150px;">
+    `;
+    
+    document.getElementById("productName").innerHTML = `
+        <p class="text-dark">${order.purchaseDetails.productBrand} ${order.purchaseDetails.productName}, 
+        ${order.purchaseDetails.size}, ${order.purchaseDetails.color}</p>
+    `;
+    
+    document.getElementById("quantity").innerHTML = `
+        <p class="text-dark">${order.purchaseDetails.quantity}</p>
+    `;
+    
+    document.getElementById("price").innerHTML = `
+        <p class="text-dark">Rs ${order.purchaseDetails.price}</p>
+    `;
+    
+    document.getElementById("orderDate").innerHTML = `
+        <p>${order.orderDate}</p>
+    `;
+    
+    document.getElementById("id").innerHTML = `
+        <p>${order._id}</p>
+    `;
+    
+    document.getElementById("shippingCharge").innerHTML = `
+        <p>Rs ${order.purchaseDetails.shippingCharge}</p>
+    `;
+    
+    document.getElementById("youSave").innerHTML = `
+        <p>Rs ${order.purchaseDetails.youSave}</p>
+    `;
+    
+    document.getElementById("payAmount").innerHTML = `
+        <p>Rs ${order.purchaseDetails.payAmount}</p>
+    `;
+    
+    document.getElementById("Address").innerHTML = `
+        <p>${order.address.firstName} ${order.address.lastName}<br>
+        ${order.address.shippingEmail}<br>
+        ${order.address.mobile}<br>
+        ${order.address.street}, ${order.address.city}<br>
+        ${order.address.state}, ${order.address.country}<br>
+        pin: ${order.address.postalCode}</p>
+    `;
+    
+    document.getElementById("paymentOption").innerHTML = `
+        <p>${order.paymentOption}</p>
+    `;
+    
+    // Status and Dates
+    let statusContent = '';
+    if (order.status === "dispatched") {
+        statusContent = `<p class="text-primary">${order.status} - ${order.dispatchedDate}</p>`;
+    } else if (order.status === "delivered") {
+        statusContent = `<p class="text-success">${order.status} - ${order.deliveredDate}</p>`;
+    } else if (order.status === "cancelled") {
+        statusContent = `<p class="text-danger">${order.status} - ${order.cancelledDate}</p>`;
+    } else if (order.status === "pending") {
+        statusContent = `<p>pending</p>`;
+    }
+
+    document.getElementById("Status").innerHTML = statusContent;
+});
+
+
+
 </script>
 
 </html>

@@ -155,9 +155,19 @@ const updateOrderStatus = async (req,res)=>{
         console.log(error);
         res.render("adminSideErrors");
     }
+};
+
+
+const orderDetails = async (req,res)=>{
+    try{
+
+    }catch(error){
+        console.log(error);
+    }
 }
 
 module.exports = {
     loadAdminOrderManagement,
     updateOrderStatus,
+    orderDetails,
 }

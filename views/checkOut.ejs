@@ -1036,10 +1036,14 @@ async function cancelCoupon (){
             data:{order, payment},
             success:  (res)=> {
                 if (res.status){
-                    
 
-                    window.location.href = "/orderPlaced";
                     popup("payment successfull");
+                    setTimeout(function () {
+                        window.location.href = "/orderPlaced";
+                    }, 1500);
+
+                   
+                   
                 }else{
                     
 
