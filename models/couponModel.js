@@ -24,6 +24,9 @@ const couponSchema = new mongoose.Schema({
     } ,
     users:{
         type:Array,
+    },
+    endsOn:{
+        type:Date,
     }
     
 });

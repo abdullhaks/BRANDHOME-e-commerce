@@ -209,8 +209,18 @@ const unblockUser = async (req,res)=>{
         console.log(error);
         res.render("adminSideErrors");
     }
+};
+
+
+
+
+module.exports = {
+    loadLogin,
+    verifyLogin,
+    loadDashBoard,
+    logout,
+    userManagement,
+    blockUser,
+    unblockUser,
+    
 }
-
-
-
-module.exports = {loadLogin,verifyLogin,loadDashBoard,logout,userManagement,blockUser,unblockUser}

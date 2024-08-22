@@ -20,6 +20,7 @@
 
     <!-- Bootstrap CSS-->
     <link href="/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+    
 
     <!-- Vendor CSS-->
     <link href="/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
@@ -377,9 +378,19 @@
                                                             <td><%= coupons[i].off %>% Off</td>
                                                             <td>
                                                                 <div class="table-data-feature">
-                                                                    <button class="item" data-placement="top" title="Edit">
+                                                                    <button class="item" data-placement="top" title="delete">
                                                                         <a class="coupon_del" data-couponId="<%= coupons[i]._id %>" href="#">
                                                                             <i class="zmdi zmdi-delete"></i>
+                                                                        </a>
+                                                                    </button>
+                                                                </div>
+                                                            </td>
+
+                                                            <td>
+                                                                <div class="table-data-feature">
+                                                                    <button class="item">
+                                                                        <a class="coupon-edit" href="" data-placement="top" title="Edit" data-toggle="modal" data-target="#editCouponModal" data-coupon='<%= JSON.stringify(coupons[i]) %>'>
+                                                                            <i class="zmdi zmdi-edit"></i>
                                                                         </a>
                                                                     </button>
                                                                 </div>
@@ -396,7 +407,13 @@
                                     </div>
                                 </div>
                                 <!--  END TOP CAMPAIGN-->
+                                  
                             </div>
+
+
+                         
+
+                          
 
 
                             <div class="col-lg-6">
@@ -407,14 +424,14 @@
 
                                             <% if (errors) { %>
                                                 <% errors.forEach(function(error) { %>
-                                                  <p style="color: red;"><%= error.msg %></p>
+                                                  <small style="color: red;"><%= error.msg %></small>
                                                 <% }) %>
                                               <% } %>
 
 
                                             <div class="form-group">
                                                 <div class="input-group">
-                                                    <input type="text"  name="coupon" value="<%= coupon.name %>" placeholder="coupon name" class="form-control" required minlength="3" maxlength="25" >
+                                                    <input type="text"  name="coupon" value="<%= coupon.couponName %>" placeholder="coupon name" class="form-control" required minlength="3" maxlength="25" >
                                                     <div class="input-group-addon">
                                                         <i class="fa fa-gift"></i>
                                                     </div>
@@ -430,7 +447,7 @@
 
                                             <div class="form-group">
                                                 <div class="input-group">
-                                                    <input type="number"  name="off" value="<%= coupon.off %>" placeholder="off percentage" class="form-control" required  min="1" max="15">
+                                                    <input type="number"  name="off" value="<%= coupon.off %>" placeholder="off percentage" class="form-control" required  min="1" max="50">
                                                     
                                                 </div>
                                             </div>
@@ -445,6 +462,14 @@
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <input type="number"  name="startsAt" value="<%= coupon.startsAt %>" placeholder="off starts from" class="form-control" required  min="1" >
+                                                    
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <small>coupon ends on..</small>
+                                                <div class="input-group">
+                                                    <input type="date"  name="endsOn" value="<%= coupon.endsOn %>"  class="form-control" required  >
                                                     
                                                 </div>
                                             </div>
@@ -475,7 +500,54 @@
             </div>
 
            
-                       
+            <div class="modal fade" id="editCouponModal" tabindex="-1" role="dialog" aria-labelledby="editCouponModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editCouponModalLabel">Edit Coupon</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" method="post" id="editCouponForm">
+                                <div class="row">
+                                    <div class="col-md-12 form-group">
+                                        <div class="input-group">
+                                            <input type="text" name="couponName" placeholder="Coupon Name" class="form-control" required minlength="3" maxlength="25">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-gift"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <textarea class="form-control" name="description" id="description" rows="1" placeholder="Add description..." minlength="5" maxlength="100" required></textarea>
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <input type="number" name="off" placeholder="Off Percentage" class="form-control" required min="1" max="50">
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <input type="number" name="maxOff" placeholder="Enter Maximum Off Amount" class="form-control" required min="1">
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <input type="number" name="startsAt" placeholder="Off Starts From" class="form-control" required min="1">
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <small>Coupon ends on..</small>
+                                        <div class="input-group">
+                                            <input type="date" name="endsOn" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="couponId" id="couponId">
+                                    <div class="col-md-12 form-group d-flex flex-column align-items-center justify-content-center">
+                                        <button type="submit" class="btn btn-success btn-sm">Update Coupon</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>    
                 
             <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
@@ -506,9 +578,20 @@
 
     <!-- Main JS-->
     <script src="/js/adminMain.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
     <script>
+
+function popup(popupMsg) {
+            Swal.fire({
+                title: '',
+                text: popupMsg,
+                timer: 1000,
+                showConfirmButton: false,
+            });
+        };
+
 
 document.addEventListener('DOMContentLoaded', function() {
     function attachEventListeners() {
@@ -569,6 +652,62 @@ document.addEventListener('DOMContentLoaded', function() {
 
     attachEventListeners();
 });
+
+$(document).on('click', '.coupon-edit', function (e) {
+    e.preventDefault();
+
+    const coupon = $(this).data('coupon');
+
+    console.log("coupon is ",coupon);
+
+    $('#editCouponModal input[name="couponName"]').val(coupon.couponName);
+    $('#editCouponModal textarea[name="description"]').val(coupon.description);
+    $('#editCouponModal input[name="off"]').val(coupon.off);
+    $('#editCouponModal input[name="maxOff"]').val(coupon.maxOff);
+    $('#editCouponModal input[name="startsAt"]').val(coupon.startsAt);
+    $('#editCouponModal input[name="endsOn"]').val(new Date(coupon.endsOn).toISOString().split('T')[0]);  // Setting date properly
+    $('#editCouponModal input[name="couponId"]').val(coupon._id);
+
+    // Update form action dynamically
+    // $('#editCouponForm').attr('action', `/admin/editCoupon?id=${coupon._id}`);
+});
+
+$(document).ready(function(){
+    document.getElementById("editCouponForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const formData = $(this).serialize();
+
+        console.log("formdata is ",formData);
+
+        $.ajax({
+            url: '/admin/editCoupon',
+            type: "POST",
+            data: formData,
+            dataType: "json",
+
+            success: function(res) {
+                if (res.success) {
+                    popup(res.msg);  // Popup message
+
+                    setTimeout(function () {
+                        window.location.href = "/admin/couponManagement";
+                    }, 1500);
+                        // Redirect if necessary
+                    
+                } else {
+                    popup(res.msg);  // Display error message
+                }
+            },
+            error: function(err) {
+                console.error('Error:', err);
+                popup('An error occurred. Please try again.');
+            }
+        });
+    });
+});
+
+
 
     </script>
 
