@@ -368,12 +368,18 @@ function showCancelConfirmation() {
             title: 'Cancel Order',
             html:
             '<p>Select a reason for cancellation:</p>' +
-            '<input type="radio" id="reason1" name="cancelReason" value="Item no longer needed">' +
-            '<label for="reason1"> Item no longer needed</label><br>' +
-            '<input type="radio" id="reason2" name="cancelReason" value="Found a better deal">' +
-            '<label for="reason2"> Found a better deal</label><br>' +
-            '<input type="radio" id="reason3" name="cancelReason" value="Ordered by mistake">' +
-            '<label for="reason3"> Ordered by mistake</label>',
+            '<div style="text-align: left;">' +
+                '<input type="radio" id="reason1" name="cancelReason" value="Item no longer needed" style="margin-right: 10px;">' +
+                '<label for="reason1">Item no longer needed</label>' +
+            '</div>' +
+            '<div style="text-align: left; ">' +
+                '<input type="radio" id="reason2" name="cancelReason" value="Found a better deal" style="margin-right: 10px;">' +
+                '<label for="reason2">Found a better deal</label>' +
+            '</div>' +
+            '<div style="text-align: left; ">' +
+                '<input type="radio" id="reason3" name="cancelReason" value="Ordered by mistake" style="margin-right: 10px;">' +
+                '<label for="reason3">Ordered by mistake</label>' +
+            '</div>',
             showCancelButton: true,
             confirmButtonText: 'Confirm',
             cancelButtonText: 'Close',

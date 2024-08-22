@@ -400,15 +400,15 @@
 
                                                 <td>Rs <%= orders[i].purchaseDetails.payAmount %></td>
                                                 <td>
-                                                    <select name="orderStatus"  value="<%=orders[i].status%>"  id="orderStatus">
-                                                        
-                                                        <option value="" disabled selected><%=orders[i].status%></option>
-                                                        <option >pending</option>
-                                                        <option >dispatched</option>
-                                                        <option >delivered</option>
-                                                        <option >cancelled</option>
+                                                    <select name="orderStatus" id="orderStatus-<%= orders[i]._id %>" data-order-id="<%= orders[i]._id %>">
+                                                        <option value="" disabled selected><%= orders[i].status %></option>
+                                                        <option value="pending">pending</option>
+                                                        <option value="dispatched">dispatched</option>
+                                                        <option value="delivered">delivered</option>
+                                                        <option value="cancelled">cancelled</option>
                                                     </select>
                                                 </td>
+                                                
                                        
                                             </tr>
                                         </tbody>
@@ -668,13 +668,12 @@ function  showConfirmation(orderId,newStatus){
   // update order status 
 
 $(document).ready(function() {
-  
     $('select[name="orderStatus"]').change(function() {
-        var orderId = $(this).closest('tr').find('td:nth-child(2)').text(); 
+        var orderId = $(this).data('order-id'); // Corrected the attribute name
+        console.log('Order ID is', orderId); // This should now correctly log the order ID
         var newStatus = $(this).val(); 
         
-        showConfirmation(orderId,newStatus);
-       
+        showConfirmation(orderId, newStatus);
     });
 });
 

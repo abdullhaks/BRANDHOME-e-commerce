@@ -204,7 +204,7 @@
                   </div>
                   <div class="col-md-12 form-group">
                     <label>Mobile</label>
-                    <input class="form-control" type="text" value="<%=profile.mobile %>" name="mobile" id="editMobile" required minlength="1" maxlength="20">
+                    <input class="form-control" type="tel" pattern="[0-9]{10}" value="<%=profile.mobile %>" name="mobile" id="editMobile" required minlength="10" maxlength="10">
                   </div>
                   
                   <input type="hidden" name="userId" id="userId" value="<%=profile._id %>">
