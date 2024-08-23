@@ -9587,7 +9587,7 @@ a.text-dark:hover, a.text-dark:focus {
   display: none;
 }
 
-#couponcard {
+.couponcard {
   width: 90px;
   border-radius: 2px;
   background: orange;
@@ -9604,12 +9604,12 @@ a.text-dark:hover, a.text-dark:focus {
   height: 100vh;
 } */
 
-#couponcard h1 {
+.couponcard h1 {
   font-size: 12px;
   margin-bottom: 0px;
 }
 
-#couponcard span {
+.couponcard span {
   font-size: 9px;
 }
 
