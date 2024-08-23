@@ -243,34 +243,57 @@
                     </table>
                 </div>
             
-                <div class="col-lg-4 row justify-content-between ">
-<!-- 
-                    <div class="input-group">
+                <div class="col-lg-4 row ">
+
+                    <!-- <div class="input-group">
                         <input type="text" class="form-control p-4" placeholder="Coupon Code">
                         <div class="input-group-append">
                             <button class="btn btn-primary">Apply Coupon</button>
                         </div>
                     </div> -->
+                    <div class="col-lg-12 row justify-content-center align-items-center container pb-2" id="applyCoupon">
+                        <a class="btn btn-success" data-toggle="modal" data-target="#couponModal">Apply Coupon</a>
+                    </div>
                     
-                    
-                    <% if(coupons.length > 0) { %>
-                        <% for(let i = 0; i < coupons.length; i++) { %>
-                            <div class="col-lg-4   justify-content-center align-items-center container pb-2" id="addCoupon">
-                                <div class="d-flex card text-center " id="couponcard">
-                                    <div class="offimage"><img src="https://i.imgur.com/DC94rZe.png" width="50"></div>
-                                    <div class="offimage2"><img src="https://i.imgur.com/DC94rZe.png" width="50"></div>
-                                    <h1><%= coupons[i].off %> % OFF</h1>
-                                    <span class="d-block"><%= coupons[i].description %></span>
-                                    <a class="mt-4 btn btn-success apply-coupon" id="couponApply<%= i %>" href="javascript:void(0);" 
-                                        data-coupon-id="<%= coupons[i]._id %>" 
-                                        data-total = "<%= totalAmount %> "  
-                                        style="color: #ffffff;">apply</a>
-                                </div>
+                    <div class="modal fade" id="couponModal" tabindex="-1" role="dialog" aria-labelledby="couponModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-md" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="couponModalLabel">Available Coupons</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
                             </div>
-                        <% } %>
-                    <% } else { %>
-                        <p>coupons not available...</p>
-                    <% } %>
+                            <div class="modal-body">
+
+                            <div class="col-lg-12 row">
+
+                               
+                              <% if(coupons.length > 0) { %>
+                                  <% for(let i = 0; i < coupons.length; i++) { %>
+                                      <div class="col-lg-3 justify-content-center align-items-center container pb-2 coupon-container" id="couponContainer<%= i %>">
+                                          <div class="d-flex card text-center couponcard" id="couponCard<%= i %>">
+                                              <div class="offimage"><img src="https://i.imgur.com/DC94rZe.png" width="50"></div>
+                                              <div class="offimage2"><img src="https://i.imgur.com/DC94rZe.png" width="50"></div>
+                                              <h1><%= coupons[i].off %> % OFF</h1>
+                                              <span class="d-block"><%= coupons[i].description %></span>
+                                              <a class="mt-4 btn btn-success apply-coupon" id="couponApply<%= i %>" href="javascript:void(0);" 
+                                                  data-coupon-id="<%= coupons[i]._id %>" 
+                                                  data-total="<%= totalAmount %>" 
+                                                  style="color: #ffffff;">Apply</a>
+                                          </div>
+                                      </div>
+                                  <% } %>
+                              <% } else { %>
+                                  <p>Coupons not available...</p>
+                              <% } %>
+
+
+                            </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
                     
                         <div class="col-lg-12 row justify-content-center align-items-center container pb-2 hide" id="cancelCoupon">
@@ -769,44 +792,40 @@
     $('.apply-coupon').click(function() {
         var couponId = $(this).data('coupon-id');
         var total = $(this).data('total');
-      
 
+        console.log("coupon id, total, index =", couponId, total);
 
-        
-       
         $.ajax({
             url: '/checkCoupon',
             type: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify({ couponId: couponId, total: total}) ,
-            success:async (response)=> {
-
-                if(response.fail){
+            data: JSON.stringify({couponId, total}),
+            success: async (response) => {
+                if (response.fail) {
                     popup(response.message);
-                }else{
-                    document.getElementById("addCoupon").classList.add("hide");
-                 document.getElementById("cancelCoupon").classList.remove("hide");
+                } else {
+                    // Hide all coupons
+                    $('.coupon-container').addClass('hide');
 
-                 document.getElementById("appliedCouponId").value = response.couponId;
-                 document.getElementById("saveByCoupon").value = response.saveByCoupon;
-                 document.getElementById("couponOff").value = response.couponOff;
-                 document.getElementById("totalAmountAfterCoupon").value = response.totalAmountAfterCoupon;
-                            
-                //  alert(response.couponOff);
-                //  alert(response.couponId);
-                //  alert(response.saveByCoupon);
-                //  alert(response.message);
-               
+                    // Show cancel coupon and update hidden fields
+                    document.getElementById("cancelCoupon").classList.remove("hide");
 
-                         
-               
-                await updatePrice();
-                await      checkWallet()
-                popup(response.message);
+                    document.getElementById("appliedCouponId").value = response.couponId;
+                    document.getElementById("saveByCoupon").value = response.saveByCoupon;
+                    document.getElementById("couponOff").value = response.couponOff;
+                    document.getElementById("totalAmountAfterCoupon").value = response.totalAmountAfterCoupon;
 
+                    await updatePrice();
+                    await checkWallet();
+
+                    // Close the modal
+                    $('#couponModal').modal('hide');
+
+                    // Hide the apply coupon button
+                    document.getElementById("applyCoupon").classList.add("hide");
+
+                    popup(response.message);
                 }
-                
-               
             },
             error: function(xhr, status, error) {
                 popup(error);
@@ -815,39 +834,48 @@
     });
 });
 
-async function cancelCoupon (){
-  
-    document.getElementById("addCoupon").classList.remove("hide");
+async function cancelCoupon() {
+    // Show all coupon containers that were hidden
+    document.querySelectorAll('.coupon-container').forEach(function (element) {
+        element.classList.remove('hide');
+    });
+
+    document.getElementById("applyCoupon").classList.remove("hide");
+
+    // Hide the cancel coupon button
     document.getElementById("cancelCoupon").classList.add("hide");
+
+    // Reset the applied coupon ID
     document.getElementById("appliedCouponId").value = "";
 
-         const totalAmount = document.getElementById("totalAmount").value;
-         document.getElementById("totalAmountAfterCoupon").value= totalAmount;
+    // Reset the total amount after coupon to the original total amount
+    const totalAmount = document.getElementById("totalAmount").value;
+    document.getElementById("totalAmountAfterCoupon").value = totalAmount;
 
-        
+    // Adjust the grand total and offer amounts back to their original values
+    const saveByCoupon = parseInt(document.getElementById("saveByCoupon").value);
+    const totalOffer = parseInt(document.getElementById("totalOffer").value);
+    const grandTotal = parseInt(document.getElementById("grandTotal").value);
 
-        const saveByCoupon = parseInt( document.getElementById("saveByCoupon").value);
-        const totalOffer = parseInt( document . getElementById ("totalOffer"). value) ;
-        const grandTotal =  parseInt(document.getElementById("grandTotal").value) ;
+    const updatedGrandTotal = grandTotal + saveByCoupon;
+    document.getElementById("grandTotal").value = updatedGrandTotal;
+    document.getElementById("grandTotalText").innerHTML = 'Rs ' + updatedGrandTotal;
 
-        const gdt = grandTotal+saveByCoupon ;
-        document.getElementById("grandTotal").value= gdt
-        console.log("gdt is ",gdt);
-        document.getElementById("grandTotalText").innerHTML='Rs '+gdt;
+    const updatedTotalOffer = totalOffer - saveByCoupon;
+    document.getElementById("totalOffer").value = updatedTotalOffer;
+    document.getElementById("totalOfferText").innerHTML = 'Rs ' + updatedTotalOffer;
 
-        const torlofr =  totalOffer-saveByCoupon ;
-        document . getElementById ("totalOffer"). value =torlofr
-        console.log("torlofr is ",torlofr);
-        document.getElementById("totalOfferText").innerHTML='Rs '+torlofr;
+    // Reset coupon-related fields
+    document.getElementById("couponOff").value = 0;
+    document.getElementById("saveByCoupon").value = 0;
 
-        document.getElementById("couponOff").value = 0;
-        document.getElementById("saveByCoupon").value = 0;
-
-
- 
+    // Re-check the wallet balance after canceling the coupon
     await checkWallet();
-    popup("coupon cancelled ");
+
+    // Display a popup message indicating the coupon was canceled
+    popup("Coupon canceled");
 }
+
 
 
 

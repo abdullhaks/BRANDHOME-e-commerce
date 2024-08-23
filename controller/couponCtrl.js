@@ -10,19 +10,16 @@ const checkCoupon = async (req,res)=>{
 
         const user = req.session.user;
 
-        const { couponId} = ""+req.body+"";
+        const couponId = req.body.couponId;
 
         const total = req.body.total;
         console.log("total is ",total);
        
-       
-        
-        
         console.log("Coupon ID is " + couponId);
        
         
  
-        const coupon = await Coupons.findOne({id:couponId});
+        const coupon = await Coupons.findOne({_id:couponId});
 
         console.log("coupon is "+coupon);
         
