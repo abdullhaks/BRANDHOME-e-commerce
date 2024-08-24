@@ -242,33 +242,17 @@
                                                 </td>
 
                                                 <td class="align-middle">
-                                                   
-                                                    <div class="justify-content-between input-group quantity mx-auto" id="stock<%= i %>" >
-
-                                                        <div-col-lg-3>
-                                                            
-                                                        </div-col-lg-3>
-                                                            <a class="btn btn-sm btn-dark" id="decrease<%= i %>" onclick="decrease('<%= products[i]._id %>', '<%= i %>',)">-</a>
-                                                        <div-col-lg-3>
-                                                            <input type="number" min="1" name="quantity<%= i %>" id="quantity<%= i %>"
-                                                             required onchange="updatePrice(`<%= i %>`)" readonly style="width: 50px; text-align: center;" ></input>
-                                                             <input type="hidden" id="limit<%=i%>">
-                                                        </div-col-lg-3>
-
-                                                        <div-col-lg-6>
-                                                            <a class="btn btn-sm btn-dark" id="increase<%= i %>"  onclick="increase('<%= products[i]._id %>', '<%= i %>',)">+</a>
-                                                        </div-col-lg-6>
-
-                                                     
-                                                        
-                                                       
-                                                        <!-- <input type="text"> -->
+                                                    <div class="justify-content-between input-group quantity mx-auto" id="stock<%= i %>">
+                                                        <a class="btn btn-sm btn-dark" id="decrease<%= i %>">-</a>
+                                                        <input type="number" value="1" name="quantity<%= i %>" id="quantity<%= i %>" required readonly style="width: 50px; text-align: center;">
+                                                        <input type="hidden" id="limit<%= i %>">
+                                                        <a class="btn btn-sm btn-dark" id="increase<%= i %>">+</a>
                                                     </div>
-
                                                     <div class="input-group quantity mx-auto hide" id="stockAlert<%= i %>" style="width: 100px;">
-                                                       <p class="text-danger" id="">out of stock</p>
+                                                        <p class="text-danger">Out of stock</p>
                                                     </div>
                                                 </td>
+
                                                 <td class="align-middle" id="totalPrice<%= i %>" >
                                                     Rs <%= products[i].price %>
                                                     
@@ -333,7 +317,7 @@
                             
                             <div class="card-footer border-secondary bg-transparent">
                                 <p class="text-danger hide " id="stockAlert" >remove out of stock item</p>
-                                <input type="submit" value="Check Out" id="placeOrder"
+                                <input type="submit" value="Check Out" id="checkoutButton"
                                     class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">
                                 </input>
                             </div>
@@ -436,215 +420,140 @@
 </body>
 
 
-
-    
 <script>
-   
-   var stockCheck = [];
 
 document.addEventListener('DOMContentLoaded', async function () {
-    var productsDataElement = document.getElementById('productsData');
-    var productsJson = productsDataElement.getAttribute('data-products');
-    var products = JSON.parse(productsJson);
+    const cartItems = await document.querySelectorAll('tr[id^="cartItem"]');
+    console.log("cart items",cartItems);
 
-    await initializeCart(products);
-    updateGrandTotal();
-    isStock();  // Check if any products are out of stock after loading
+    await checkStockAndUpdateLimit();
+    for (let i = 0; i < cartItems.length; i++) {
+      await  updateTotalPriceAndGrandTotal(i);
+    };
+    
 });
 
-async function initializeCart(products) {
-    await Promise.all(products.map(async (product, index) => {
-        if(product){
-            await updateQuantity(product._id, index);
-            document.getElementById("decrease" + index).classList.add("hide");
-        }
-    }));
+async function checkStockAndUpdateLimit() {
 
-    // Recalculate the grand total after initializing the cart
-    updateGrandTotal();
-}
+    console.log("checkStockAndUpdateLimit is working ....")
+    const cartItems = document.querySelectorAll('tr[id^="cartItem"]');
 
-async function updateQuantity(productId, index) {
-    var size = document.getElementById("size" + index).value;
-    var color = document.getElementById("color" + index).value;
-    var quantityInput = document.getElementById("quantity" + index);
-    var stockAlert = document.getElementById("stockAlert" + index);
-    var stock = document.getElementById("stock" + index);
-    var limit = document.getElementById("limit" + index);
+    console.log("cart items",cartItems);
+    
+    
+    for (let i = 0; i < cartItems.length; i++) {
+        const productId = document.querySelector(`input[name="productId${i}"]`).value;
+        const size = document.querySelector(`input[name="option${i}"]`).value;
+        const color = document.querySelector(`input[name="color${i}"]`).value;
 
-    try {
-        const response = await fetch(`/getStock?productId=${productId}&size=${size}&color=${color}`);
-        if (!response.ok) throw new Error('Network response was not ok');
+        console.log("product id and sise and color are",productId,size,color);
+        
+        
+        try {
+            const response = await fetch(`/getStock?productId=${productId}&size=${size}&color=${color}`);
+            const data = await response.json();
+            
+            console.log("data is ",data);
 
-        const stockData = await response.json();
+            if (data.quantity <= 0) {
+                document.getElementById(`stockAlert${i}`).classList.remove('hide');
+                document.getElementById(`stockAlert`).classList.remove('hide');
+                document.getElementById(`stock${i}`).classList.add('hide');
+                document.querySelector('#checkoutButton').disabled = true;
+                document.getElementById(`quantity${i}`).value = 0;
+            } else {
+                document.getElementById(`limit${i}`).value = data.quantity;
 
-        if (stockData.quantity < 1) {
-            quantityInput.value = 0;
-            limit.value = 0;
-            stockCheck[index] = 0;
-            stockAlert.classList.remove("hide");
-            stock.classList.add("hide");
-        } else {
-            quantityInput.value = 1;
-            limit.value = stockData.quantity;
-            stockCheck[index] = 1;
-            stockAlert.classList.add("hide");
-            stock.classList.remove("hide");
-            document.getElementById("increase" + index).classList.remove("hide");
-            document.getElementById("decrease" + index).classList.add("hide");
-        }
-    } catch (error) {
-        console.error('There was a problem with the fetch operation:', error);
-    }
+                document.getElementById(`stockAlert${i}`).classList.add('hide');
+                document.getElementById(`stockAlert`).classList.add('hide');
+                document.getElementById(`stock${i}`).classList.remove('hide');
+                document.querySelector('#checkoutButton').disabled = false;
 
-    updatePrice(index);
-    isStock();
-}
-
-function updateGrandTotal() {
-    var grandTotal = 0;
-    var productsDataElement = document.getElementById('productsData');
-    var productsJson = productsDataElement.getAttribute('data-products');
-    var products = JSON.parse(productsJson);
-
-    products.forEach((product, index) => {
-        if(product){
-            var totalPriceText = document.getElementById('totalPrice' + index).innerHTML;
-            var totalPrice = parseFloat(totalPriceText.replace(/[^\d.]/g, ''));
-            if (!isNaN(totalPrice)) {
-                grandTotal += totalPrice;
+                console.log("updated limit is ",document.getElementById(`limit${i}`).value )
             }
+        } catch (error) {
+            console.error(`Error fetching stock for product ${productId}:`, error);
         }
+    }
+};
+
+function updateTotalPriceAndGrandTotal(i) {
+
+    console.log("i is ",i);
+    console.log("updateTotalPriceAndGrandTotal is working ");
+
+    const price = parseFloat(document.querySelector(`input[name="productPrice${i}"]`).value);
+    const quantity = document.getElementById(`quantity${i}`).value;
+    const limit = document.getElementById(`limit${i}`).value;
+
+    console.log("item price and quantity and limit is",price,quantity,limit);
+    
+    // Update total price for the product
+    const totalPrice = price * quantity;
+
+    console.log("total price is ",totalPrice)
+    document.getElementById(`totalPrice${i}`).innerText = `Rs ${totalPrice.toFixed(2)}`;
+    
+    // Update grand total
+    let grandTotal = 0;
+    const cartItems = document.querySelectorAll('tr[id^="cartItem"]');
+    cartItems.forEach((item, i) => {
+        const itemTotalPrice = parseFloat(document.getElementById(`totalPrice${i}`).innerText.replace('Rs ', ''));
+        grandTotal += itemTotalPrice;
     });
+    document.getElementById('grandTotal').innerText = `Rs ${grandTotal.toFixed(2)}`;
 
-    document.getElementById('grandTotal').innerHTML = 'Rs ' + grandTotal.toFixed(2);
-    document.getElementById("totalAmount").value = grandTotal;
-}
-
-function isStock() {
-    var placeOrderButton = document.getElementById("placeOrder");
-    var stockAlert2 = document.getElementById("stockAlert");
-
-    if (stockCheck.includes(0)) {
-        stockAlert2.classList.remove("hide");
-        placeOrderButton.disabled = true;
+    // Handle the increase and decrease buttons
+    if (quantity <= 1) {
+        document.getElementById(`decrease${i}`).style.display = 'none';
     } else {
-        stockAlert2.classList.add("hide");
-        placeOrderButton.disabled = false;
+        document.getElementById(`decrease${i}`).style.display = 'inline';
     }
-}
 
-function updatePrice(index) {
-    var quantity = parseInt(document.getElementById('quantity' + index).value);
-    var pricePerUnitText = document.getElementById('pricePerUnit' + index).innerHTML;
-    var pricePerUnit = parseFloat(pricePerUnitText.replace(/[^\d.]/g, ''));
-
-    if (!isNaN(pricePerUnit)) {
-        var totalPrice = quantity * pricePerUnit;
-        document.getElementById('totalPrice' + index).innerHTML = 'Rs ' + totalPrice.toFixed(2);
-        updateGrandTotal();
+    if (quantity >= limit) {
+        document.getElementById(`increase${i}`).style.display = 'none';
     } else {
-        console.log("Invalid price");
+        document.getElementById(`increase${i}`).style.display = 'inline';
     }
 }
 
-function increase(productId, index) {
-    var limit = parseInt(document.getElementById("limit" + index).value);
-    var num = parseInt(document.getElementById("quantity" + index).value);
+document.querySelectorAll('a[id^="increase"]').forEach(button => {
+    button.addEventListener('click', function() {
+        const index = this.id.replace('increase', '');
+        const quantityInput = document.querySelector(`#quantity${index}`);
+        quantityInput.value = parseInt(quantityInput.value) + 1;
+        updateTotalPriceAndGrandTotal(index);
+    });
+});
 
-    num++;
-    if (num >= limit) {
-        num = limit;
-        document.getElementById("increase" + index).classList.add("hide");
-    }
+document.querySelectorAll('a[id^="decrease"]').forEach(button => {
+    button.addEventListener('click', function() {
+        const index = this.id.replace('decrease', '');
+        const quantityInput = document.querySelector(`#quantity${index}`);
+        quantityInput.value = parseInt(quantityInput.value) - 1;
+        updateTotalPriceAndGrandTotal(index);
+    });
+});
 
-    document.getElementById("quantity" + index).value = num;
-    document.getElementById("decrease" + index).classList.remove("hide");
-    updatePrice(index);
-}
-
-function decrease(productId, index) {
-    var num = parseInt(document.getElementById("quantity" + index).value);
-
-    num--;
-    if (num <= 1) {
-        num = 1;
-        document.getElementById("decrease" + index).classList.add("hide");
-    }
-
-    document.getElementById("quantity" + index).value = num;
-    document.getElementById("increase" + index).classList.remove("hide");
-    updatePrice(index);
-}
-
-$(document).ready(function () {
-    $('.removeCartItems').click(function (e) {
-        e.preventDefault();
-        var productId = $(this).data('productid');
-        var color = $(this).data('color');
-        var size = $(this).data('size');
-        var index = $(this).data('index');
+async function removeProductFromCart(productId, color, size, index) {
+    try {
 
         const quantities = Array.from(document.querySelectorAll("input[id^='quantity']")).map(input => input.value);
 
         quantities.splice(index, 1);
 
         if (confirm('Do you want to cancel this product from the cart?')) {
-            $.ajax({
-                url: `/removeFromCart?productId=${productId}&color=${color}&size=${size}`,
-                type: "DELETE",
-                success: function (res) {
-                    if (res.success&&res.products && res.products.length > 0) {
-                        const products = res.products;
-                        const variants = res.variants;
+        const response = await fetch(`/removeFromCart?productId=${productId}&color=${color}&size=${size}`, {
+            method: 'DELETE',
+        });
 
-                        // Update the cart table and grand total here
-                        updateCartTable(products, variants,quantities);
-                        updateGrandTotal();
-                    
-                        //REinitializeCart(products);
-                        //isStock(); 
-                        alert('Failed to remove the item. Please try again.');
-                    }else{
-                        window.location.href="/products";
+        const data = await response.json();
+        if (data.success) {
+            document.getElementById(`cartTable`).innerHTML = ''; // Clear existing cart items
 
-                    }
-
-
-
-                },
-                error: function (error) {
-                    console.error('Error removing item:', error);
-                    alert('An error occurred. Please try again.');
-                }
-            });
-        }
-    });
-
-    // Re-initialize cart on page load
-    var productsJson = $('#productsData').data('products');
-    var products = JSON.parse(productsJson);
-    initializeCart(products);
-    updateGrandTotal();
-    isStock();
-});
-
-
-function updateCartTable(products, variants,quantities) {
-
-
-console.log("updateCartTable is working now... and details are",products,variants,quantities);
-// Clear existing rows
-document.getElementById('cartTable').innerHTML="";
-            var variants= variants;
-            var quantities=quantities;
-
-
-            if (products.length > 0) {
-                products.forEach((product, i) => {
-                    const row = document.createElement('tr');
-                    row.id = `cartItem${i}`;
-                    row.innerHTML = `
+            data.products.forEach((product, i) => {
+                document.getElementById('cartTable').innerHTML += `
+                    <tr id="cartItem${i}">
                         <td class="align-middle">
                             <img src="/productImages/${product.image1}" alt="" style="width: 50px;">
                             ${product.productName}
@@ -657,43 +566,352 @@ document.getElementById('cartTable').innerHTML="";
                             <input type="hidden" value="${(product.categoryOfferPercentage + product.productOfferPercentage) * product.price / 100}" name="save${i}">
                         </td>
                         <td class="align-middle" id="pricePerUnit${i}">Rs ${product.price}</td>
-                        <td class="align-middle">${variants[i].size}
-                            <input type="hidden" name="option${i}" id="size${i}" value="${variants[i].size}">
+                        <td class="align-middle">${data.variants[i].size}
+                            <input type="hidden" name="option${i}" id="size${i}" value="${data.variants[i].size}">
                         </td>
-                        <td class="align-middle">${variants[i].color}
-                            <input type="hidden" name="color${i}" id="color${i}" value="${variants[i].color}">
+                        <td class="align-middle">${data.variants[i].color}
+                            <input type="hidden" name="color${i}" id="color${i}" value="${data.variants[i].color}">
                         </td>
                         <td class="align-middle">
                             <div class="justify-content-between input-group quantity mx-auto" id="stock${i}">
-                                <a class="btn btn-sm btn-dark" id="decrease${i}" onclick="decrease('${product._id}', '${i}')">-</a>
-                                <input type="number" min="1" name="quantity${i}" id="quantity${i}" value="${quantities[i] || 1}" required onchange="updatePrice('${i}')" readonly style="width: 50px; text-align: center;">
-                                <input type="hidden" id="limit${i}">
-                                <a class="btn btn-sm btn-dark" id="increase${i}" onclick="increase('${product._id}', '${i}')">+</a>
+                                <div-col-lg-3></div-col-lg-3>
+                                <a class="btn btn-sm btn-dark" id="decrease${i}">-</a>
+                                <div-col-lg-3>
+                                    <input type="number" value='${quantities[i]}' name="quantity${i}" id="quantity${i}" required readonly style="width: 50px; text-align: center;">
+                                    <input type="hidden" id="limit${i}">
+                                </div-col-lg-3>
+                                <div-col-lg-6>
+                                    <a class="btn btn-sm btn-dark" id="increase${i}">+</a>
+                                </div-col-lg-6>
                             </div>
                             <div class="input-group quantity mx-auto hide" id="stockAlert${i}" style="width: 100px;">
-                               <p class="text-danger">out of stock</p>
+                                <p class="text-danger">Out of stock</p>
                             </div>
                         </td>
                         <td class="align-middle" id="totalPrice${i}">Rs ${product.price}</td>
                         <td class="align-middle">
-                            <a class="btn btn-sm text-dark p-0" onclick="removeCartItem('${product._id}', '${variants[i].color}', '${variants[i].size}', '${i}')">
+                            <a class="btn btn-sm text-dark p-0 removeCartItems" data-productId="${product._id}" data-color="${data.variants[i].color}" data-size="${data.variants[i].size}" data-index="${i}">
                                 <i class="fas fa-trash text-primary mr-1"></i>Cancel
                             </a>
                         </td>
-                    `;
-                    document.getElementById("cartTable").appendChild(row);
-                });
+                    </tr>
+                `;
+            });
 
-                document.getElementById("productsData").innerHTML='';
-                document.getElementById("productsData").innerHTML=`
-                    <div data-products='${JSON.stringify(products)}'></div> `
-            } 
-};
+            await checkStockAndUpdateLimit();
+                for (let i = 0; i < data.products.length; i++) {
+                await  updateTotalPriceAndGrandTotal(i);
+                };
+                
+        } };
 
+        document.querySelectorAll('a[id^="increase"]').forEach(button => {
+    button.addEventListener('click', function() {
+        const index = this.id.replace('increase', '');
+        const quantityInput = document.querySelector(`#quantity${index}`);
+        quantityInput.value = parseInt(quantityInput.value) + 1;
+        updateTotalPriceAndGrandTotal(index);
+    });
+});
 
+document.querySelectorAll('a[id^="decrease"]').forEach(button => {
+    button.addEventListener('click', function() {
+        const index = this.id.replace('decrease', '');
+        const quantityInput = document.querySelector(`#quantity${index}`);
+        quantityInput.value = parseInt(quantityInput.value) - 1;
+        updateTotalPriceAndGrandTotal(index);
+    });
 
+    document.querySelectorAll('.removeCartItems').forEach(button => {
+    button.addEventListener('click', function() {
+        const productId = this.dataset.productid;
+        const color = this.dataset.color;
+        const size = this.dataset.size;
+        const index = this.dataset.index;
+
+        removeProductFromCart(productId, color, size, index);
+    });
+});
+
+});
+    } catch (error) {
+        console.error(`Error removing product from cart: ${error}`);
+    }
+}
+
+document.querySelectorAll('.removeCartItems').forEach(button => {
+    button.addEventListener('click', function() {
+        const productId = this.dataset.productid;
+        const color = this.dataset.color;
+        const size = this.dataset.size;
+        const index = this.dataset.index;
+
+        removeProductFromCart(productId, color, size, index);
+    });
+});
 
 
 </script>
+
+
+    
+//  <script>
+   
+//    var stockCheck = [];
+
+// document.addEventListener('DOMContentLoaded', async function () {
+//     var productsDataElement = document.getElementById('productsData');
+//     var productsJson = productsDataElement.getAttribute('data-products');
+//     var products = JSON.parse(productsJson);
+    
+
+//     await initializeCart(products);
+//     updateGrandTotal();
+//     isStock();  // Check if any products are out of stock after loading
+// });
+
+// async function initializeCart(products) {
+//     await Promise.all(products.map(async (product, index) => {
+//         if(product){
+//             await updateQuantity(product._id, index);
+//             document.getElementById("decrease" + index).classList.add("hide");
+//         }
+//     }));
+
+//     // Recalculate the grand total after initializing the cart
+//     updateGrandTotal();
+// }
+
+// async function updateQuantity(productId, index) {
+//     var size = document.getElementById("size" + index).value;
+//     var color = document.getElementById("color" + index).value;
+//     var quantityInput = document.getElementById("quantity" + index);
+//     var stockAlert = document.getElementById("stockAlert" + index);
+//     var stock = document.getElementById("stock" + index);
+//     var limit = document.getElementById("limit" + index);
+
+//     try {
+//         const response = await fetch(`/getStock?productId=${productId}&size=${size}&color=${color}`);
+//         if (!response.ok) throw new Error('Network response was not ok');
+
+//         const stockData = await response.json();
+
+//         if (stockData.quantity < 1) {
+//             quantityInput.value = 0;
+//             limit.value = 0;
+//             stockCheck[index] = 0;
+//             stockAlert.classList.remove("hide");
+//             stock.classList.add("hide");
+//         } else {
+//             quantityInput.value = 1;
+//             limit.value = stockData.quantity;
+//             stockCheck[index] = 1;
+//             stockAlert.classList.add("hide");
+//             stock.classList.remove("hide");
+//             document.getElementById("increase" + index).classList.remove("hide");
+//             document.getElementById("decrease" + index).classList.add("hide");
+//         }
+//     } catch (error) {
+//         console.error('There was a problem with the fetch operation:', error);
+//     }
+
+//     updatePrice(index);
+//     isStock();
+// }
+
+// function updateGrandTotal() {
+//     var grandTotal = 0;
+//     var productsDataElement = document.getElementById('productsData');
+//     var productsJson = productsDataElement.getAttribute('data-products');
+//     var products = JSON.parse(productsJson);
+
+//     products.forEach((product, index) => {
+//         if(product){
+//             var totalPriceText = document.getElementById('totalPrice' + index).innerHTML;
+//             var totalPrice = parseFloat(totalPriceText.replace(/[^\d.]/g, ''));
+//             if (!isNaN(totalPrice)) {
+//                 grandTotal += totalPrice;
+//             }
+//         }
+//     });
+
+//     document.getElementById('grandTotal').innerHTML = 'Rs ' + grandTotal.toFixed(2);
+//     document.getElementById("totalAmount").value = grandTotal;
+// }
+
+// function isStock() {
+//     var placeOrderButton = document.getElementById("placeOrder");
+//     var stockAlert2 = document.getElementById("stockAlert");
+
+//     if (stockCheck.includes(0)) {
+//         stockAlert2.classList.remove("hide");
+//         placeOrderButton.disabled = true;
+//     } else {
+//         stockAlert2.classList.add("hide");
+//         placeOrderButton.disabled = false;
+//     }
+// }
+
+// function updatePrice(index) {
+//     var quantity = parseInt(document.getElementById('quantity' + index).value);
+//     var pricePerUnitText = document.getElementById('pricePerUnit' + index).innerHTML;
+//     var pricePerUnit = parseFloat(pricePerUnitText.replace(/[^\d.]/g, ''));
+
+//     if (!isNaN(pricePerUnit)) {
+//         var totalPrice = quantity * pricePerUnit;
+//         document.getElementById('totalPrice' + index).innerHTML = 'Rs ' + totalPrice.toFixed(2);
+//         updateGrandTotal();
+//     } else {
+//         console.log("Invalid price");
+//     }
+// }
+
+// function increase(productId, index) {
+//     var limit = parseInt(document.getElementById("limit" + index).value);
+//     var num = parseInt(document.getElementById("quantity" + index).value);
+
+//     num++;
+//     if (num >= limit) {
+//         num = limit;
+//         document.getElementById("increase" + index).classList.add("hide");
+//     }
+
+//     document.getElementById("quantity" + index).value = num;
+//     document.getElementById("decrease" + index).classList.remove("hide");
+//     updatePrice(index);
+// }
+
+// function decrease(productId, index) {
+//     var num = parseInt(document.getElementById("quantity" + index).value);
+
+//     num--;
+//     if (num <= 1) {
+//         num = 1;
+//         document.getElementById("decrease" + index).classList.add("hide");
+//     }
+
+//     document.getElementById("quantity" + index).value = num;
+//     document.getElementById("increase" + index).classList.remove("hide");
+//     updatePrice(index);
+// }
+
+// $(document).ready(function () {
+//     $('.removeCartItems').click(function (e) {
+//         e.preventDefault();
+//         var productId = $(this).data('productid');
+//         var color = $(this).data('color');
+//         var size = $(this).data('size');
+//         var index = $(this).data('index');
+
+//         const quantities = Array.from(document.querySelectorAll("input[id^='quantity']")).map(input => input.value);
+
+//         quantities.splice(index, 1);
+
+//         if (confirm('Do you want to cancel this product from the cart?')) {
+//             $.ajax({
+//                 url: `/removeFromCart?productId=${productId}&color=${color}&size=${size}`,
+//                 type: "DELETE",
+//                 success: function (res) {
+//                     if (res.success&&res.products && res.products.length > 0) {
+//                         const products = res.products;
+//                         const variants = res.variants;
+
+//                         // Update the cart table and grand total here
+//                         updateCartTable(products, variants,quantities);
+//                         updateGrandTotal();
+                    
+//                         //REinitializeCart(products);
+//                         //isStock(); 
+//                         alert('Failed to remove the item. Please try again.');
+//                     }else{
+//                         window.location.href="/products";
+
+//                     }
+
+
+
+//                 },
+//                 error: function (error) {
+//                     console.error('Error removing item:', error);
+//                     alert('An error occurred. Please try again.');
+//                 }
+//             });
+//         }
+//     });
+
+//     // Re-initialize cart on page load
+//     var productsJson = $('#productsData').data('products');
+//     var products = JSON.parse(productsJson);
+//     initializeCart(products);
+//     updateGrandTotal();
+//     isStock();
+// });
+
+
+// function updateCartTable(products, variants,quantities) {
+
+
+// console.log("updateCartTable is working now... and details are",products,variants,quantities);
+// // Clear existing rows
+// document.getElementById('cartTable').innerHTML="";
+//             var variants= variants;
+//             var quantities=quantities;
+
+
+//             if (products.length > 0) {
+//                 products.forEach((product, i) => {
+//                     const row = document.createElement('tr');
+//                     row.id = `cartItem${i}`;
+//                     row.innerHTML = `
+//                         <td class="align-middle">
+//                             <img src="/productImages/${product.image1}" alt="" style="width: 50px;">
+//                             ${product.productName}
+//                             <input type="hidden" value="${product._id}" name="productId${i}">
+//                             <input type="hidden" value="${product.productName}" name="productName${i}">
+//                             <input type="hidden" value="${product.brand}" name="productBrand${i}">
+//                             <input type="hidden" value="${product.price}" name="productPrice${i}">
+//                             <input type="hidden" value="${product.categoryOfferPercentage + product.productOfferPercentage}" name="totalOffer${i}">
+//                             <input type="hidden" value="${product.image1}" name="productImage${i}">
+//                             <input type="hidden" value="${(product.categoryOfferPercentage + product.productOfferPercentage) * product.price / 100}" name="save${i}">
+//                         </td>
+//                         <td class="align-middle" id="pricePerUnit${i}">Rs ${product.price}</td>
+//                         <td class="align-middle">${variants[i].size}
+//                             <input type="hidden" name="option${i}" id="size${i}" value="${variants[i].size}">
+//                         </td>
+//                         <td class="align-middle">${variants[i].color}
+//                             <input type="hidden" name="color${i}" id="color${i}" value="${variants[i].color}">
+//                         </td>
+//                         <td class="align-middle">
+//                             <div class="justify-content-between input-group quantity mx-auto" id="stock${i}">
+//                                 <a class="btn btn-sm btn-dark" id="decrease${i}" onclick="decrease('${product._id}', '${i}')">-</a>
+//                                 <input type="number" min="1" name="quantity${i}" id="quantity${i}" value="${quantities[i] || 1}" required onchange="updatePrice('${i}')" readonly style="width: 50px; text-align: center;">
+//                                 <input type="hidden" id="limit${i}">
+//                                 <a class="btn btn-sm btn-dark" id="increase${i}" onclick="increase('${product._id}', '${i}')">+</a>
+//                             </div>
+//                             <div class="input-group quantity mx-auto hide" id="stockAlert${i}" style="width: 100px;">
+//                                <p class="text-danger">out of stock</p>
+//                             </div>
+//                         </td>
+//                         <td class="align-middle" id="totalPrice${i}">Rs ${product.price}</td>
+//                         <td class="align-middle">
+//                             <a class="btn btn-sm text-dark p-0" onclick="removeCartItem('${product._id}', '${variants[i].color}', '${variants[i].size}', '${i}')">
+//                                 <i class="fas fa-trash text-primary mr-1"></i>Cancel
+//                             </a>
+//                         </td>
+//                     `;
+//                     document.getElementById("cartTable").appendChild(row);
+//                 });
+
+//                 document.getElementById("productsData").innerHTML='';
+//                 document.getElementById("productsData").innerHTML=`
+//                     <div data-products='${JSON.stringify(products)}'></div> `
+//             } 
+// };
+
+
+
+
+
+// </script> 
 
 </html>
