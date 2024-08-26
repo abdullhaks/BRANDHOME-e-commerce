@@ -400,13 +400,20 @@ function showCancelConfirmation() {
         Swal.fire({
             title: 'Return Order',
             html:
+            
             '<p>Select a reason for return this order:</p>' +
-            '<input type="radio" id="reason1" name="returnReason" value="wrong">' +
-            '<label for="reason1"> shipped wrong product or size</label><br>' +
-            '<input type="radio" id="reason2" name="returnReason" value="damaged">' +
-            '<label for="reason2"> product was damaged or defective</label><br>' +
-            '<input type="radio" id="reason3" name="returnReason" value="not match">' +
-            '<label for="reason3">product did not match the description</label>',
+            '<div style="text-align: left;">' +
+                '<input type="radio" id="reason1" name="returnReason" value="wrong" style="margin-right: 10px;">' +
+                '<label for="reason1">shipped wrong product or size</label>' +
+            '</div>' +
+            '<div style="text-align: left; ">' +
+                '<input type="radio" id="reason2" name="returnReason" value="damaged" style="margin-right: 10px;">' +
+                '<label for="reason2">product was damaged or defective</label>' +
+            '</div>' +
+            '<div style="text-align: left; ">' +
+                '<input type="radio" id="reason3" name="returnReason" value="not match" style="margin-right: 10px;">' +
+                '<label for="reason3">product did not match the description</label>' +
+            '</div>',
             showCancelButton: true,
             confirmButtonText: 'Confirm',
             cancelButtonText: 'Close',

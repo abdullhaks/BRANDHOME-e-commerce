@@ -86,6 +86,10 @@ const loadCheckOut = async(req,res)=>{
         const addresses = await Address.find({email:email});
 
         console.log("addresesses got..");
+
+        const currentDate = new Date();
+        await Coupons.deleteMany({ endsOn: { $lt: currentDate } });
+
         const coupons = await Coupons.find();
         
 

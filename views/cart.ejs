@@ -24,8 +24,21 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="/css/style.css" rel="stylesheet">
 </head>
+<style>
+
+input.form-control {
+    padding: 5px 10px;
+}
+
+#stockAlert {
+    font-size: 0.875rem; /* Slightly smaller font for alerts */
+}
+
+</style>
 
 <body>
+
+    
 
     
     <!-- Topbar Start -->
@@ -242,16 +255,31 @@
                                                 </td>
 
                                                 <td class="align-middle">
-                                                    <div class="justify-content-between input-group quantity mx-auto" id="stock<%= i %>">
-                                                        <a class="btn btn-sm btn-dark" id="decrease<%= i %>">-</a>
-                                                        <input type="number" value="1" name="quantity<%= i %>" id="quantity<%= i %>" required readonly style="width: 50px; text-align: center;">
+                                                    <div class="d-flex align-items-center justify-content-center">
+                                                        <!-- Decrease Button -->
+                                                        <a class="btn btn-sm btn-dark" id="decrease<%= i %>" style="min-width: 36px;">
+                                                            <i class="fas fa-minus"></i>
+                                                        </a>
+                                                
+                                                        <!-- Quantity Input -->
+                                                        <input type="number" value="1" name="quantity<%= i %>" id="quantity<%= i %>" 
+                                                               class="form-control text-center mx-2" style="max-width: 60px;" readonly>
+                                                
+                                                        <!-- Increase Button -->
+                                                        <a class="btn btn-sm btn-dark" id="increase<%= i %>" style="min-width: 36px;">
+                                                            <i class="fas fa-plus"></i>
+                                                        </a>
+                                                
+                                                        <!-- Limit Indicator (Hidden) -->
                                                         <input type="hidden" id="limit<%= i %>">
-                                                        <a class="btn btn-sm btn-dark" id="increase<%= i %>">+</a>
                                                     </div>
-                                                    <div class="input-group quantity mx-auto hide" id="stockAlert<%= i %>" style="width: 100px;">
-                                                        <p class="text-danger">Out of stock</p>
+                                                
+                                                    <!-- Stock Alert (Hidden by Default) -->
+                                                    <div class="text-center mt-2 d-none" id="stockAlert<%= i %>">
+                                                        <span class="text-danger">Out of stock</span>
                                                     </div>
                                                 </td>
+                                                
 
                                                 <td class="align-middle" id="totalPrice<%= i %>" >
                                                     Rs <%= products[i].price %>
@@ -573,17 +601,32 @@ async function removeProductFromCart(productId, color, size, index) {
                             <input type="hidden" name="color${i}" id="color${i}" value="${data.variants[i].color}">
                         </td>
                         <td class="align-middle">
-                            <div class="justify-content-between input-group quantity mx-auto" id="stock${i}">
-                                <div-col-lg-3></div-col-lg-3>
-                                <a class="btn btn-sm btn-dark" id="decrease${i}">-</a>
-                                <div-col-lg-3>
-                                    <input type="number" value='${quantities[i]}' name="quantity${i}" id="quantity${i}" required readonly style="width: 50px; text-align: center;">
-                                    <input type="hidden" id="limit${i}">
-                                </div-col-lg-3>
-                                <div-col-lg-6>
-                                    <a class="btn btn-sm btn-dark" id="increase${i}">+</a>
-                                </div-col-lg-6>
-                            </div>
+                           <td class="align-middle">
+    <div class="d-flex align-items-center justify-content-center">
+        <!-- Decrease Button -->
+        <a class="btn btn-sm btn-dark" id="decrease${i}" style="min-width: 36px;">
+            <i class="fas fa-minus"></i>
+        </a>
+
+        <!-- Quantity Input -->
+        <input type="number" value="${quantities[i]}" name="quantity${i}" id="quantity${i}" 
+               class="form-control text-center mx-2" style="max-width: 60px;" readonly>
+
+        <!-- Increase Button -->
+        <a class="btn btn-sm btn-dark" id="increase${i}" style="min-width: 36px;">
+            <i class="fas fa-plus"></i>
+        </a>
+
+        <!-- Limit Indicator (Hidden) -->
+        <input type="hidden" id="limit${i}">
+    </div>
+
+    <!-- Stock Alert (Hidden by Default) -->
+    <div class="text-center mt-2 d-none" id="stockAlert${i}">
+        <span class="text-danger">Out of stock</span>
+    </div>
+</td>
+
                             <div class="input-group quantity mx-auto hide" id="stockAlert${i}" style="width: 100px;">
                                 <p class="text-danger">Out of stock</p>
                             </div>

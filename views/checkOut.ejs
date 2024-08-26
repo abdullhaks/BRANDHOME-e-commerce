@@ -93,7 +93,7 @@
 
                         <% } %>
                 </a>
-                <a href="" class="btn border">
+                <a href="/cart" class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
 
                     <% if (cartNo) { %>
@@ -493,7 +493,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" name="paymentOption" id="paypal"
+                                    <input type="radio" class="custom-control-input" name="paymentOption" id="CashOnDelivery"
                                         value="cash on delivery" required>
                                     <label class="custom-control-label" for="paypal">CashOnDelivery</label>
                                 </div>
@@ -817,6 +817,7 @@
 
                     await updatePrice();
                     await checkWallet();
+                    await checkCOD();
 
                     // Close the modal
                     $('#couponModal').modal('hide');
@@ -871,6 +872,7 @@ async function cancelCoupon() {
 
     // Re-check the wallet balance after canceling the coupon
     await checkWallet();
+    await checkCOD();
 
     // Display a popup message indicating the coupon was canceled
     popup("Coupon canceled");
@@ -959,8 +961,19 @@ async function cancelCoupon() {
 
     };
 
+    function checkCOD (){
+        let grandTotal = document.getElementById("grandTotal").value;
+
+        if(grandTotal>1500){
+            document.getElementById("walletPayment").disabled=true;
+        }else{
+            document.getElementById("walletPayment").disabled=false;
+        };
+    }
+
    
     document.addEventListener('DOMContentLoaded',checkWallet );
+    document.addEventListener('DOMContentLoaded',checkCOD );
 
     document.addEventListener('DOMContentLoaded', populateAddressFields);
 

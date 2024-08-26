@@ -6,7 +6,8 @@ const User = require("../models/userModel");
 const checkCoupon = async (req,res)=>{
     try{
 
-        
+        const currentDate = new Date();
+        await Coupons.deleteMany({ endsOn: { $lt: currentDate } });
 
         const user = req.session.user;
 
@@ -53,7 +54,7 @@ const checkCoupon = async (req,res)=>{
             }
            
         } else {
-            res.json({ fail:true, message: 'Coupon not found.' });
+            res.json({ fail:true, message: 'Coupon not found.Try another one' });
         }
 
     }catch(error){
