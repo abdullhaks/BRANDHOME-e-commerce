@@ -17,7 +17,7 @@ const razorpay = new Razorpay({
 
 const loadCheckOut = async(req,res)=>{
     try{
-        const email =  req.session.user ;
+        var email =  req.session.user ;
         const user = await User.findOne({email:email});
         console. log ("user is ",user);       
 
@@ -98,14 +98,14 @@ const loadCheckOut = async(req,res)=>{
 
         const cart = await Cart.findOne({email:email});
 
-        let cartNo = 0;
+        var cartNo = 0;
         if(cart){
         cartNo = cart.products.length;
         }
 
       const wishList = await WishList.findOne({email:email});
 
-        let wishListNo = 0;
+        var wishListNo = 0;
         if(wishList){
         wishListNo = wishList.products.length;
         }
@@ -115,6 +115,7 @@ const loadCheckOut = async(req,res)=>{
         return res.render("checkOut",{user,cartNo,wishListNo,addresses, products,totalAmount,totalOffer,subTotal,coupons});
     }catch(error){
         console.log(error);
+        return res.render("userSideErrors",{user:email,cartNo,wishListNo});
     }
 };
 
@@ -390,7 +391,8 @@ const placeOrder = async(req,res)=>{
 
     }catch(error){
 
-        console.log(error)
+        console.log(error);
+        res.status(500).json({ success: false, msg: "Server error" });
     }
 };
 
@@ -449,11 +451,11 @@ const getStockFromPrductDetails = async (req, res) => {
 const loadOrderPlaced = async(req,res)=>{
     try{
 
-        const id = await req.session.user 
+        var id = await req.session.user 
 
         const cart = await Cart.findOne({email:id});
      
-        let cartNo = 0;
+        var cartNo = 0;
         if(cart){
          cartNo = cart.products.length;
         console.log(cartNo);
@@ -461,7 +463,7 @@ const loadOrderPlaced = async(req,res)=>{
 
         const wishList = await WishList.findOne({email:id});
 
-        let wishListNo = 0;
+        var wishListNo = 0;
         if(wishList){
         wishListNo = wishList.products.length;
         }
@@ -471,6 +473,7 @@ const loadOrderPlaced = async(req,res)=>{
 
     }catch(error){
         console.log(error);
+        return res.render("userSideErrors",{user:id,cartNo,wishListNo});
     }
 };
 
@@ -549,6 +552,7 @@ const verifyPayment = async(req,res)=>{
 
     }catch(error){
         console.log(error);
+        res.status(500).json({ error: "Internal Server Error" });
     }
 
 

@@ -19,12 +19,12 @@ const loadCart = async(req,res)=>{
         const variants=[];
 
 
-        const id = await req.session.user 
+        var id = await req.session.user 
 
         const cart = await Cart.findOne({email:id});
         console.log(cart);
 
-        let cartNo = 0;
+        var cartNo = 0;
         if(cart){
          cartNo = cart.products.length;
         console.log(cartNo);
@@ -32,7 +32,7 @@ const loadCart = async(req,res)=>{
 
         const wishList = await WishList.findOne({email:id});
 
-        let wishListNo = 0;
+        var wishListNo = 0;
         if(wishList){
         wishListNo = wishList.products.length;
         }
@@ -56,6 +56,7 @@ const loadCart = async(req,res)=>{
         return  res.render("cart",{products,variants,user:id,cartNo,wishListNo});
     }catch(error){
         console.log(error);
+        return res.render("userSideErrors",{user:id,cartNo,wishListNo});
     }
 }
 

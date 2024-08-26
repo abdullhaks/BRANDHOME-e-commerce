@@ -19,7 +19,7 @@ const session = require("express-session");
 
 const loadOrders = async (req,res)=>{ 
     try{
-        const user = await req.session.user ;
+        var user = await req.session.user ;
 
       const cart = await Cart.findOne({email:user});
       console.log(cart);
@@ -36,7 +36,7 @@ const loadOrders = async (req,res)=>{
       }).sort({ orderTime: -1 });
 
 
-        let cartNo = 0;
+        var cartNo = 0;
         if (cart) {
             cartNo = cart.products.length;
             console.log(cartNo);
@@ -44,7 +44,7 @@ const loadOrders = async (req,res)=>{
 
       const wishList = await WishList.findOne({email:user});
 
-        let wishListNo = 0;
+        var wishListNo = 0;
         if(wishList){
         wishListNo = wishList.products.length;
         }
@@ -54,8 +54,8 @@ const loadOrders = async (req,res)=>{
         res. render ("orders",{user,cartNo,orders,currentTime,wishListNo});
 
     }catch(error){
-
-        console.log(error);
+     console.log(error);
+     return res.render("userSideErrors",{user,cartNo,wishListNo});
     }
 };
 
@@ -64,7 +64,22 @@ const cancelOrder = async (req,res)=>{
         const id = req.params.id;
         const status = "cancelled"
 
-        const email = req.session.user;
+        var email = req.session.user;
+
+       
+        const cart = await Cart.findOne({email:email});
+    
+         var cartNo = 0;
+        if(cart){
+         cartNo = cart.products.length;
+        }
+    
+        const wishList = await WishList.findOne({email:email});
+    
+            var wishListNo = 0;
+            if(wishList){
+            wishListNo = wishList.products.length;
+            }
 
         const order = await Orders.findOne({_id:id });
         const user = await User.findOne({email:email});
@@ -105,6 +120,7 @@ const cancelOrder = async (req,res)=>{
         return res. redirect("/orders");
     }catch(error){
         console.log(error); 
+        return res.render("userSideErrors",{user:email,cartNo,wishListNo});
     }
 };
 
@@ -112,7 +128,7 @@ const cancelOrder = async (req,res)=>{
 const loadOrderManagement = async(req,res)=>{
     try{
 
-        const user = await req.session.user 
+        var user = await req.session.user 
 
       const cart = await Cart.findOne({email:user});
 
@@ -129,7 +145,7 @@ const loadOrderManagement = async(req,res)=>{
       const product = await Product.findOne({_id:order.productId});
 
 
-      let cartNo = 0;
+      var cartNo = 0;
       if(cart){
        cartNo = cart.products.length;
       console.log(cartNo);
@@ -137,7 +153,7 @@ const loadOrderManagement = async(req,res)=>{
 
       const wishList = await WishList.findOne({email:user});
 
-        let wishListNo = 0;
+        var wishListNo = 0;
         if(wishList){
         wishListNo = wishList.products.length;
         }
@@ -147,6 +163,7 @@ const loadOrderManagement = async(req,res)=>{
     }catch(error){
 
         console.log(error);
+        return res.render("userSideErrors",{user,cartNo,wishListNo});
 
     }
 };
@@ -154,6 +171,23 @@ const loadOrderManagement = async(req,res)=>{
 
 const returnOrder = async (req,res)=>{
     try{
+
+        var user =  req.session.user ;
+        const cart = await Cart.findOne({email:user});
+    
+         var cartNo = 0;
+        if(cart){
+         cartNo = cart.products.length;
+        }
+    
+        const wishList = await WishList.findOne({email:user});
+    
+            var wishListNo = 0;
+            if(wishList){
+            wishListNo = wishList.products.length;
+            }
+    
+            
         const id = req.params.id;
 
         const returnReason = req.body.returnReason;
@@ -198,6 +232,7 @@ const returnOrder = async (req,res)=>{
 
     }catch(error){
         console.log(error);
+        return res.render("userSideErrors",{user,cartNo,wishListNo});
     }
 }
 

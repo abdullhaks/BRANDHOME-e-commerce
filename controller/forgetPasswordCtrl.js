@@ -18,12 +18,14 @@ const securePassword = async(password)=>{
         return hashedPassword;
     }catch(error){
         console.log(error);
+        res.status(500).json({ error: "Internal Server Error" });
     }
 
 };
 
 
 const checkRecoveryPassword = async (req,res)=>{
+  try {
 
     var errors = [];
    const otp = req.body.otp;
@@ -31,13 +33,25 @@ const checkRecoveryPassword = async (req,res)=>{
    
     console.log(email)
     
+    var id =  req.session.user ;
+    const cart = await Cart.findOne({email:id});
+
+     var cartNo = 0;
+    if(cart){
+     cartNo = cart.products.length;
+    }
+
+    const wishList = await WishList.findOne({email:id});
+
+        var wishListNo = 0;
+        if(wishList){
+        wishListNo = wishList.products.length;
+        }
   
-    console.log("rec pass is : "+otp);
-  
-    try {
+
       const user = await Recoverypassword.findOne({ email: email }).sort({ createdAt: -1 }).limit(1);;
       
-  
+
       if(user){
         if(user.otp==otp){
           
@@ -48,7 +62,8 @@ const checkRecoveryPassword = async (req,res)=>{
         }
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
+      return res.render("userSideErrors",{user:id,cartNo,wishListNo});
     }
   
   
@@ -57,39 +72,76 @@ const checkRecoveryPassword = async (req,res)=>{
   };
   
   const resentRecoveryPassword = async(req,res)=>{
-    const email = req.params.email;
+
+    try{
+
+      var id =  req.session.user ;
+      const cart = await Cart.findOne({email:id});
   
-    console.log("resend recovery password is "+email)
+       var cartNo = 0;
+      if(cart){
+       cartNo = cart.products.length;
+      }
   
-    const OTP = otpGenerator.generate(8, {  specialChars: false });
+      const wishList = await WishList.findOne({email:id});
   
-    const recoverypassword = new Recoverypassword ({
-      email:email,
-      otp:OTP
+          var wishListNo = 0;
+          if(wishList){
+          wishListNo = wishList.products.length;
+          }
+      const email = req.params.email;
   
-    });
-  
-    const recoveryPasswordResult = await recoverypassword.save();
-  
-   
-    var errors = [];
-    const mailOptions = {
-      from:"muthuab786@gmail.com",
-      to:email,
-      subject:"WELCOME TO BRANDHOME... ",
-      text:"Hi, This is your OTP : "+recoverypassword.otp
-  
+      console.log("resend recovery password is "+email)
+    
+      const OTP = otpGenerator.generate(8, {  specialChars: false });
+    
+      const recoverypassword = new Recoverypassword ({
+        email:email,
+        otp:OTP
+    
+      });
+    
+      const recoveryPasswordResult = await recoverypassword.save();
+    
+     
+      var errors = [];
+      const mailOptions = {
+        from:"muthuab786@gmail.com",
+        to:email,
+        subject:"WELCOME TO BRANDHOME... ",
+        text:"Hi, This is your OTP : "+recoverypassword.otp
+    
+      }
+    
+      mail.sendMail(mailOptions);
+      const user = await User.findOne({ email: email })
+      return  res.render("recoveryPassword",{errors,user});
+    
+    }catch(error){
+      console.log(error);
+      return res.render("userSideErrors",{user:id,cartNo,wishListNo});
     }
-  
-    mail.sendMail(mailOptions);
-    const user = await User.findOne({ email: email })
-    return  res.render("recoveryPassword",{errors,user});
-  
+    
   };
 
   const verifyNewPassword = async (req,res)=>{
     try{
 
+      var user =  req.session.user ;
+      const cart = await Cart.findOne({email:user});
+  
+       var cartNo = 0;
+      if(cart){
+       cartNo = cart.products.length;
+      }
+  
+      const wishList = await WishList.findOne({email:user});
+  
+          var wishListNo = 0;
+          if(wishList){
+          wishListNo = wishList.products.length;
+          }
+          
         const password= req.body.password;
         const confirmPassword= req.body.confirmPassword;
         const email = req.body.email;
@@ -127,7 +179,8 @@ const checkRecoveryPassword = async (req,res)=>{
 
 
     }catch(error){
-        console.log(error)
+        console.log(error);
+        return res.render("userSideErrors",{user,cartNo,wishListNo});
     }
   }
 

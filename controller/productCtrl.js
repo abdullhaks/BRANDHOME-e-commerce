@@ -181,7 +181,7 @@ const addProduct = async(req,res)=>{
     }
 
     var product = new Product({
-      productName:      req.body.productName,
+      productName:      req.body.productName.toLowerCase(),
       category:         req.body.category,
       brand:            req.body.brand,
       colors:           colorArray,
@@ -293,10 +293,11 @@ const loadAllProducts = async(req,res)=>{
     const totalProducts = await Product.countDocuments();
         const totalPages = Math.ceil(totalProducts / pageSize);
 
-    const products = await Product.find()
+    var products = await Product.find()
     .sort({productName:1})
     .limit(pageSize)
     .skip((page - 1) * pageSize);
+
 
     res.render("adminAllProducts",{products,currentPage:page, totalPages})
 
@@ -373,13 +374,7 @@ const editProduct = async (req,res)=>{
       if (req.body.price){
         await Product.updateOne({_id:productId},{$set:{price:req.body.price}});
       };
-      
-      
      
-      
-      
-     
-  
       if (req.body.image2Status==1){
         await Product.updateOne({_id:productId},{$set:{image2:""}});
       };

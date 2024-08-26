@@ -22,7 +22,7 @@ const loadWishList = async(req,res)=>{
 
         const cart = await Cart.findOne({email:id});
 
-      let cartNo = 0;
+      var cartNo = 0;
       if(cart){
        cartNo = cart.products.length;
       };
@@ -30,7 +30,7 @@ const loadWishList = async(req,res)=>{
         const wishList = await WishList.findOne({email:id});
         console.log(wishList);
 
-        let wishListNo = 0;
+        var wishListNo = 0;
         if(wishList){
         wishListNo = wishList.products.length;
         console.log(wishListNo);
@@ -52,6 +52,7 @@ const loadWishList = async(req,res)=>{
         return  res.render("wishlist",{products,user:id,wishListNo,cartNo});
     }catch(error){
         console.log(error);
+        return res.render("userSideErrors",{user:id,cartNo,wishListNo});
     }
 }
 
@@ -96,7 +97,20 @@ const removeFromWishList = async(req,res)=>{
         const productId = req.query.productId;
         console.log(productId);
 
-        const user = req.session.user;
+        var user =  req.session.user ;
+        const cart = await Cart.findOne({email:user});
+    
+         var cartNo = 0;
+        if(cart){
+         cartNo = cart.products.length;
+        }
+    
+        const wishList = await WishList.findOne({email:user});
+    
+            var wishListNo = 0;
+            if(wishList){
+            wishListNo = wishList.products.length;
+            }
         console.log(user);
 
         const result = await WishList.updateOne({email:user},{$pull : {products:productId}});
@@ -105,6 +119,7 @@ const removeFromWishList = async(req,res)=>{
 
     }catch(error){
         console.log(error);
+        return res.render("userSideErrors",{user,cartNo,wishListNo});
     }
 }
 

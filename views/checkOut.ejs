@@ -496,6 +496,7 @@
                                     <input type="radio" class="custom-control-input" name="paymentOption" id="CashOnDelivery"
                                         value="cash on delivery" required>
                                     <label class="custom-control-label" for="paypal">CashOnDelivery</label>
+                                    <small class="text-muted">(COD) is available for purchases ranging from ₹1 to ₹1500</small>
                                 </div>
                             </div>
 
@@ -514,7 +515,7 @@
                                     <input type="radio" class="custom-control-input" name="paymentOption"
                                         id="walletPayment" value="wallet payment" required>
                                     <label class="custom-control-label" for="walletPayment">Wallet  Payment</label>
-                                    <p class="text-primary">in wallet :<%= user.wallet %></p>
+                                    <small class="text-success">in wallet :<%= user.wallet %></small>
                                 </div>
                             </div>
 

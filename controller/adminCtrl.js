@@ -13,6 +13,7 @@ const loadLogin = async (req,res)=>{
 
     }catch(error){
         console.log(error);
+        res.render("adminSideErrors");
        
     }
 };
@@ -82,6 +83,7 @@ const verifyLogin = async (req,res)=>{
         }}
         catch(error){
         console.log(error);
+        res.render("adminSideErrors");
     }
 };
 
@@ -140,7 +142,7 @@ const logout = async (req,res)=>{
 
     }catch(error){
         console.log(error);
-       
+        res.render("adminSideErrors");
     }
 };
 

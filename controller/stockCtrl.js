@@ -27,6 +27,7 @@ const loadStockManagement = async(req,res)=>{
 
     }catch(error){
         console.log(error);
+        res.render("adminSideErrors");
     }
 };
 
@@ -49,6 +50,7 @@ const loadProductStocks = async(req,res)=>{
 
     }catch(error){
         console.log(error);
+        res.render("adminSideErrors");
     }
 };
 
@@ -77,7 +79,7 @@ const addStock = async (req, res) => {
         
     } catch (error) {
         console.log(error);
-        return res.status(500).send("Internal Server Error");
+        res.render("adminSideErrors");
     }
 };
 

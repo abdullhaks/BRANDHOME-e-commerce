@@ -16,10 +16,11 @@ const otpGenerator = require('otp-generator');
 const securePassword = async(password)=>{
 
     try{
-        const hashedPassword = await bcrypt.hash(password,10);
+       const hashedPassword = await bcrypt.hash(password,10);
         return hashedPassword;
     }catch(error){
         console.log(error);
+        res.status(500).json({ error: "Internal Server Error" });
     }
 
 };
@@ -40,6 +41,8 @@ const loadRegister = async(req,res)=>{
 
   }catch(error){
     console.log(error);
+    res.status(500).json({ error: "Internal Server Error" });
+   
   }
 
 }
@@ -165,6 +168,7 @@ const verifyRegister = async (req,res)=> {
     };
   }catch(error){
     res.send(error.message);
+    res.status(500).json({ error: "Internal Server Error" });
 }
 };
   
@@ -191,6 +195,7 @@ const loadLogin = async (req,res)=>{
 
     }catch(error){
         console.log(error);
+        res.status(500).json({ error: "Internal Server Error" });
     }
 };
 
@@ -300,20 +305,21 @@ const verifyLogin = async (req,res)=>{
 
     }catch(error){
         console.log(error);
+        res.status(500).json({ error: "Internal Server Error" });
     }
 };
 
 const loadHome = async (req,res)=>{
     try{
      
-      const id = await req.session.user 
+      var id = await req.session.user 
 
       const categories = await Category.find().sort({name:1});
 
 
       const cart = await Cart.findOne({email:id});
 
-      let cartNo = 0;
+      var cartNo = 0;
       if(cart){
        cartNo = cart.products.length;
       };
@@ -322,7 +328,7 @@ const loadHome = async (req,res)=>{
 
       
     
-        let wishListNo = 0;
+        var wishListNo = 0;
         if(wishList){
         wishListNo = wishList.products.length;
         }
@@ -339,6 +345,7 @@ const loadHome = async (req,res)=>{
 
     }catch(error){
         console.log(error);
+        return res.render("userSideErrors",{user:id,cartNo,wishListNo});
     }
 };
 
@@ -356,22 +363,23 @@ const logout = async (req,res)=>{
 
     }catch(error){
         console.log (error);
+        res.status(500).json({ error: "Internal Server Error" });
     }
 };
 
 const checkOtp = async (req,res)=>{
-
-  var errors = [];
- const otp = req.body.otp;
- const email = req.body.data;
- const user = await User.find({email:email});
- 
-  console.log(email)
-  
-
-  console.log("otp is : "+otp);
-
   try {
+            var errors = [];
+          const otp = req.body.otp;
+          const email = req.body.data;
+
+          
+            console.log(email)
+            
+
+            console.log("otp is : "+otp);
+
+
     const user = await Otp.findOne({ email: email }).sort({ createdAt: -1 }).limit(1);;
     
 
@@ -395,6 +403,7 @@ const checkOtp = async (req,res)=>{
     }
   } catch (error) {
     console.log(error)
+    res.status(500).json({ error: "Internal Server Error" });
   }
 
 
@@ -403,53 +412,61 @@ const checkOtp = async (req,res)=>{
 };
 
 const resentOtp = async(req,res)=>{
-  const email = req.params.email;
 
-  console.log("resend otp is "+email)
+  try{
+    const email = req.params.email;
 
-  const OTP = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false , lowerCaseAlphabets:false});
-
-  const otp = new Otp ({
-    email:email,
-    otp:OTP
-
-  });
-
-  const otpResult = await otp.save();
-
- 
-  var errors = [];
-  const mailOptions = {
-    from:"muthuab786@gmail.com",
-    to:email,
-    subject:"WELCOME TO BRANDHOME... ",
-    text:"Hi, This is your OTP : "+otp.otp
+    console.log("resend otp is "+email)
+  
+    const OTP = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false , lowerCaseAlphabets:false});
+  
+    const otp = new Otp ({
+      email:email,
+      otp:OTP
+  
+    });
+  
+    const otpResult = await otp.save();
+  
+   
+    var errors = [];
+    const mailOptions = {
+      from:"muthuab786@gmail.com",
+      to:email,
+      subject:"WELCOME TO BRANDHOME... ",
+      text:"Hi, This is your OTP : "+otp.otp
+  
+    }
+  
+    mail.sendMail(mailOptions);
+    const user = await User.findOne({ email: email })
+    return  res.render("otp",{errors,user});
+  }catch(error){
+    console.log(error);
+    res.status(500).json({ error: "Internal Server Error" });
 
   }
-
-  mail.sendMail(mailOptions);
-  const user = await User.findOne({ email: email })
-  return  res.render("otp",{errors,user});
+  
 
 };
 
 const loadProducts = async (req, res) => {
   try {
       const user = req.query.email;
-      const id = await req.session.user;
+      var id = await req.session.user;
 
       const cart = await Cart.findOne({ email: id });
 
       const categories = await Category.find().sort({name:1});
 
-      let cartNo = 0;
+      var cartNo = 0;
       if (cart) {
           cartNo = cart.products.length;
       }
 
       const wishList = await WishList.findOne({email:id});
     
-        let wishListNo = 0;
+        var wishListNo = 0;
         if(wishList){
         wishListNo = wishList.products.length;
         }
@@ -509,7 +526,7 @@ const loadProducts = async (req, res) => {
 
   } catch (error) {
       console.log(error);
-      res.status(500).send("Internal Server Error");
+      return res.render("userSideErrors",{user:id,cartNo,wishListNo});
   }
 };
 
@@ -557,6 +574,7 @@ const loadForgetPassword = async (req,res)=>{
   }catch(error){
 
       console.log(error);
+      res.status(500).json({ error: "Internal Server Error" });
   }
 
 };
@@ -622,11 +640,27 @@ const checkemail = async (req,res)=>{
 
   }catch(error){
     console.log(error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
 const editProfile = async (req,res)=>{
   try{
+    var id =  req.session.user ;
+    const cart = await Cart.findOne({email:id});
+
+     var cartNo = 0;
+    if(cart){
+     cartNo = cart.products.length;
+    }
+
+    const wishList = await WishList.findOne({email:id});
+
+        var wishListNo = 0;
+        if(wishList){
+        wishListNo = wishList.products.length;
+        }
+
     const {name,mobile,userId}=req.body;
 
     console.log("name and userId and mobile is ",name,mobile,userId);
@@ -642,6 +676,7 @@ const editProfile = async (req,res)=>{
 
   }catch(error){
     console.log(error);
+    return res.render("userSideErrors",{user:id,cartNo,wishListNo});
   }
 };
 

@@ -19,15 +19,9 @@ const loadAddress = async(req,res)=>{
     var errors =[];
     
     var user =  req.session.user ;
-
     const cart = await Cart.findOne({email:user});
 
-    //const productId = req.params.productId;
-
-    //console.log("first product id is "+productId);
-
-
-    var cartNo = 0;
+     var cartNo = 0;
     if(cart){
      cartNo = cart.products.length;
     }
@@ -136,11 +130,11 @@ const addAddress = async (req, res) => {
               return res.render("checkOut", { user, cartNo, products, addresses, stocks,wishListNo  });
           } else {
               // If productId is not provided, render the addresses page with updated address list
-              const user = req.session.user
+              var user = req.session.user
               const addresses = await Address.find({ email: user });
 
               const cart = await Cart.findOne({ email: user });
-              let cartNo = 0;
+              var cartNo = 0;
               if (cart) {
                   cartNo = cart.products.length;
               };
@@ -158,11 +152,28 @@ const addAddress = async (req, res) => {
       }
   } catch (error) {
       console.log(error);
+      return res.render("userSideErrors",{user,cartNo,wishListNo});
   }
 };
 
 const addAddressFromCheckout = async(req,res)=>{
     try{
+
+        var user =  req.session.user ;
+        var cart = await Cart.findOne({email:user});
+    
+         var cartNo = 0;
+        if(cart){
+         cartNo = cart.products.length;
+        }
+        
+        var wishList = await WishList.findOne({email:user});
+    
+            var wishListNo = 0;
+            if(wishList){
+            wishListNo = wishList.products.length;
+            }
+        
 
         console.log("i am here..");
 
@@ -182,7 +193,7 @@ const addAddressFromCheckout = async(req,res)=>{
         const result = await address.save();
 
         console.log("address added successfuly..."+address);
-        const user = req.session.user;
+       
         const addresses = await Address.find({ email: user });
 
         res.json( {success:true,addresses });
@@ -191,11 +202,28 @@ const addAddressFromCheckout = async(req,res)=>{
 
     }catch(error){
         console.log(error);
+        return res.render("userSideErrors",{user,cartNo,wishListNo})
     }
 };
 
 const deleteAddress = async(req,res)=>{
     try{
+
+        var user =  req.session.user ;
+        var cart = await Cart.findOne({email:user});
+    
+         var cartNo = 0;
+        if(cart){
+         cartNo = cart.products.length;
+        }
+        
+        var wishList = await WishList.findOne({email:user});
+    
+            var wishListNo = 0;
+            if(wishList){
+            wishListNo = wishList.products.length;
+            }
+        
 
         const addressId = req.query.id;
         console.log("addressId",addressId);
@@ -208,12 +236,30 @@ const deleteAddress = async(req,res)=>{
 
     }catch(error){
         console.log(error);
+        return res.render("userSideErrors",{user,cartNo,wishListNo})
     }
 };
 
 
 const editAddress = async(req,res)=>{
     try{
+
+        var user =  req.session.user ;
+        var cart = await Cart.findOne({email:user});
+    
+         var cartNo = 0;
+        if(cart){
+         cartNo = cart.products.length;
+        }
+        
+        var wishList = await WishList.findOne({email:user});
+    
+            var wishListNo = 0;
+            if(wishList){
+            wishListNo = wishList.products.length;
+            }
+        
+            
         const addressId = req.query.id;
         console.log("addressId",addressId);
 
@@ -237,6 +283,7 @@ const editAddress = async(req,res)=>{
 
     }catch(error){
         console.log(error);
+        return res.render("userSideErrors",{user,cartNo,wishListNo})
     }
 }
 

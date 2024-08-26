@@ -166,6 +166,7 @@ if (existingCoupon && existingCoupon._id.toString() !== couponId) {
 
   }catch(error){
       console.log(error);
+      res.render("adminSideErrors");
   }
 
 }

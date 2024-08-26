@@ -183,16 +183,8 @@ const updateOrderStatus = async (req, res) => {
 };
 
 
-const orderDetails = async (req,res)=>{
-    try{
-
-    }catch(error){
-        console.log(error);
-    }
-}
-
 module.exports = {
     loadAdminOrderManagement,
     updateOrderStatus,
-    orderDetails,
+ 
 }

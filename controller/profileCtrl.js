@@ -17,7 +17,7 @@ const session = require("express-session");
 const loadProfile = async ( req , res )=>{
     try{
 
-
+        
     
         var user =  req.session.user ;
 
@@ -46,6 +46,7 @@ const loadProfile = async ( req , res )=>{
 
     }catch(error){
         console.log(error);
+        return res.render("userSideErrors",{user,cartNo,wishListNo});
     }
 };
 
