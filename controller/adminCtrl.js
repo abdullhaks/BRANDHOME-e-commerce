@@ -13,7 +13,7 @@ const loadLogin = async (req,res)=>{
 
     }catch(error){
         console.log(error);
-        res.render("adminSideErrors");
+        res.status(500).json({ success: false, msg: "An error occurred." });
        
     }
 };
@@ -83,7 +83,7 @@ const verifyLogin = async (req,res)=>{
         }}
         catch(error){
         console.log(error);
-        res.render("adminSideErrors");
+        res.status(500).json({ success: false, msg: "An error occurred." });
     }
 };
 
@@ -142,7 +142,7 @@ const logout = async (req,res)=>{
 
     }catch(error){
         console.log(error);
-        res.render("adminSideErrors");
+        res.status(500).json({ success: false, msg: "An error occurred." });
     }
 };
 

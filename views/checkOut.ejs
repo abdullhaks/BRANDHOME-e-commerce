@@ -495,7 +495,7 @@
                                 <div class="custom-control custom-radio">
                                     <input type="radio" class="custom-control-input" name="paymentOption" id="CashOnDelivery"
                                         value="cash on delivery" required>
-                                    <label class="custom-control-label" for="paypal">CashOnDelivery</label>
+                                    <label class="custom-control-label" for="CashOnDelivery">CashOnDelivery</label>
                                     <small class="text-muted">(COD) is available for purchases ranging from ₹1 to ₹1500</small>
                                 </div>
                             </div>
@@ -962,16 +962,16 @@ async function cancelCoupon() {
 
     };
 
-    function checkCOD (){
-        let grandTotal = document.getElementById("grandTotal").value;
-
-        if(grandTotal>1500){
-            document.getElementById("walletPayment").disabled=true;
-        }else{
-            document.getElementById("walletPayment").disabled=false;
-        };
+function checkCOD() {
+    let grandTotal = parseFloat(document.getElementById("grandTotal").value);
+    console.log("grandTotal is", grandTotal);
+    
+    if (grandTotal <= 1500) {
+        document.getElementById("CashOnDelivery").disabled = false;
+    } else {
+        document.getElementById("CashOnDelivery").disabled = true;
     }
-
+}
    
     document.addEventListener('DOMContentLoaded',checkWallet );
     document.addEventListener('DOMContentLoaded',checkCOD );

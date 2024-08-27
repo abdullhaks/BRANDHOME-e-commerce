@@ -3,6 +3,7 @@ const Cart = require("../models/cartModel");
 const WishList = require("../models/wishListModel");
 const Address = require("../models/addressmodel");
 const Product = require("../models/productmodel");
+const CheckOut = require("../models/checkoutMOdel");
 const Orders = require("../models/orderModel");
 const Stock = require("../models/stockModel");
 const Wallet = require("../models/walletModel");
@@ -15,7 +16,50 @@ const razorpay = new Razorpay({
 });
 
 
+
 const loadCheckOut = async(req,res)=>{
+    try{
+        var email =  req.session.user;
+        const user = await User.findOne({email:email});
+        const checkItem = await CheckOut.findOne({user:email});
+
+       var products= checkItem. products;
+       var totalAmount= checkItem.totalAmount;
+       var totalOffer= checkItem.totalOffer;
+       var subTotal= checkItem.subTotal;
+
+       const currentDate = new Date();
+       await Coupons.deleteMany({ endsOn: { $lt: currentDate } });
+
+       const coupons = await Coupons.find();
+
+       const cart = await Cart.findOne({email:email});
+
+       var cartNo = 0;
+       if(cart){
+       cartNo = cart.products.length;
+       }
+
+     const wishList = await WishList.findOne({email:email});
+
+       var wishListNo = 0;
+       if(wishList){
+       wishListNo = wishList.products.length;
+       };
+
+       const addresses = await Address.find({email:email});
+
+
+       return res.render("checkOut",{user,cartNo,wishListNo,addresses, products,
+                                        totalAmount,totalOffer,subTotal,coupons});
+
+    }catch(error){
+        console.log(error);
+        return res.render("userSideErrors",{user:email,cartNo,wishListNo});
+    }
+}
+
+const addToCheckOut = async(req,res)=>{
     try{
         var email =  req.session.user ;
         const user = await User.findOne({email:email});
@@ -40,10 +84,6 @@ const loadCheckOut = async(req,res)=>{
         for (let i = 0; i < productCount; i++) {
 
             var save= parseFloat(formData[`save${i}`]);
-
-            // if(save > 5000){
-            //     save= 5000;
-            // };
 
             const product = {
                 productId: formData[`productId${i}`],
@@ -77,24 +117,6 @@ const loadCheckOut = async(req,res)=>{
         console.log("total offer is"+totalOffer);
 
         console.log("subTotal  is"+subTotal);
-        
-
-        //const productId = req.query.productId;
-
-        //const products = await Product.findOne({_id:productId});
-
-        const addresses = await Address.find({email:email});
-
-        console.log("addresesses got..");
-
-        const currentDate = new Date();
-        await Coupons.deleteMany({ endsOn: { $lt: currentDate } });
-
-        const coupons = await Coupons.find();
-        
-
-        //const stocks = await Stock.find({productId:products._id});
-        
 
         const cart = await Cart.findOne({email:email});
 
@@ -102,22 +124,35 @@ const loadCheckOut = async(req,res)=>{
         if(cart){
         cartNo = cart.products.length;
         }
-
+ 
       const wishList = await WishList.findOne({email:email});
-
+ 
         var wishListNo = 0;
         if(wishList){
         wishListNo = wishList.products.length;
-        }
-  
-   
+        };
 
-        return res.render("checkOut",{user,cartNo,wishListNo,addresses, products,totalAmount,totalOffer,subTotal,coupons});
+        const delResult = await CheckOut.deleteMany({user:email});
+        
+        const check = new CheckOut ({
+            user:email,
+            products:products,
+            totalAmount:totalAmount,
+            totalOffer:totalOffer,
+            subTotal:subTotal
+        });
+
+        const result = await check.save(); 
+      
+
+
+        return res.redirect("/checkOut");
     }catch(error){
         console.log(error);
         return res.render("userSideErrors",{user:email,cartNo,wishListNo});
     }
 };
+
 
 
 const placeOrder = async(req,res)=>{
@@ -195,18 +230,6 @@ const placeOrder = async(req,res)=>{
 
             }
 
-           
-            // const getProduct =await Product.findOne({_id:product.productId});
-
-            //     // await Product.updateOne({_id:product.productId},{$inc:{salesCount:product.quantity}});
-
-            //     //here we manage the stock
-
-            //     await Product.updateOne({ _id: product.productId }, { $inc: { totalStock:-product.quantity } });
-
-            //     const checkStock = await Stock.updateOne({ $and: [{productId:product.productId},{ productVariant: product.size}, { productColor: product.color}] },{$inc:{stock:-product.quantity}});
-
-            //         console.log("stock is "+checkStock);
 
                      const datenow = new Date(); 
 
@@ -254,6 +277,9 @@ const placeOrder = async(req,res)=>{
 
            
         };
+
+
+        const delResult = await CheckOut.deleteMany({user:user});
 
                 if(req.body.paymentOption === "online payment"){
 
@@ -323,6 +349,10 @@ const placeOrder = async(req,res)=>{
                 );
 
                             };
+
+
+
+                   
                                
                             res.status(200).send({
                                 COD:true,});
@@ -451,6 +481,11 @@ const getStockFromPrductDetails = async (req, res) => {
 const loadOrderPlaced = async(req,res)=>{
     try{
 
+        req.session.products = '';
+        req.session.totalAmount= '';
+        req.session.totalOffer = '';
+        req.session.subTotal = '';
+
         var id = await req.session.user 
 
         const cart = await Cart.findOne({email:id});
@@ -560,11 +595,12 @@ const verifyPayment = async(req,res)=>{
 }
 
 module.exports = {
-    loadCheckOut,
+    addToCheckOut,
     placeOrder,
     getStock,
     loadOrderPlaced,
     verifyPayment,
     getStockFromPrductDetails,
+    loadCheckOut,
 
 }
