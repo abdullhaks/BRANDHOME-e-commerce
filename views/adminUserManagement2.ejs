@@ -495,64 +495,78 @@
     <script src="/vendor/circle-progress/circle-progress.min.js"></script>
     <script src="/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="/vendor/chartjs/Chart.bundle.min.js"></script>
-    <script src="/vendor/select2/select2.min.js">
-    </script>
+    <script src="/vendor/select2/select2.min.js"></script>
 
     <!-- Main JS-->
     <script src="/js/adminMain.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
     <script>
     
+    function popup(popupMsg) {
+        Swal.fire({
+            title: 'Message',
+            text: popupMsg,
+            //icon: 'success',
+            timer: 10000,
+            showConfirmButton: false,
+        });
+                };
+
+    document.addEventListener('DOMContentLoaded', function() {
+    function attachEventListeners() {
+        document.querySelectorAll('.block-user, .unblock-user').forEach(function(button) {
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+
+                // Get the user ID and action (block/unblock)
+                var userId = this.getAttribute('data-id');
+                var isBlocking = this.classList.contains('block-user');
+                var action = isBlocking ? 'blockuser' : 'unblockuser';
 
 
-                document.addEventListener('DOMContentLoaded', function() {
-                function attachEventListeners() {
-                    document.querySelectorAll('.block-user, .unblock-user').forEach(function(button) {
-                        button.addEventListener('click', function(event) {
-                            event.preventDefault();
+                    // Confirm the block action
+                    Swal.fire({
+        title: 'confirm user controll',
+        html: '<p>Are you sure...?</p>',
+        showCancelButton: true,
+        cancelButtonText: 'NO',
+        confirmButtonText: 'SURE',
+    }).then((result) => {
+        if (result.isConfirmed) {     
 
-                            // Get the user ID and action (block/unblock)
-                            var userId = this.getAttribute('data-id');
-                            var isBlocking = this.classList.contains('block-user');
-                            var action = isBlocking ? 'blockuser' : 'unblockuser';
-
-
-                             // Confirm the block action
-                                if (!confirm('Are you sure you want to block this user?')) {
-                                    return;
-                                }
-
-                            // Make the AJAX request to block/unblock the user
-                            fetch('/admin/' + action + '?id=' + userId, {
-                                method: 'POST'
-                            })
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data.success) {
-                                    // If the action is successful, change the button and form
-                                    document.getElementById('form-' + userId).outerHTML = `
-                                        <form id="form-${userId}" method="post" action="/admin/${isBlocking ? 'unblockuser' : 'blockuser'}?id=${userId}">
-                                            <button id="${userId}" class="${isBlocking ? 'unblock-user text-success' : 'block-user text-danger'}" data-id="${userId}">
-                                                ${isBlocking ? 'Unblock' : 'Block'}
-                                            </button>
-                                        </form>
-                                    `;
-                                    // Re-attach event listeners
-                                    attachEventListeners();
-                                } else {
-                                    alert('Failed to ' + (isBlocking ? 'block' : 'unblock') + ' the user. Please try again.');
-                                }
-                            })
-                            .catch(error => console.error('Error:', error));
-                        });
-                    });
-                }
-
-                // Initially attach event listeners
-                attachEventListeners();
+                // Make the AJAX request to block/unblock the user
+                fetch('/admin/' + action + '?id=' + userId, {
+                    method: 'POST'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // If the action is successful, change the button and form
+                        document.getElementById('form-' + userId).outerHTML = `
+                            <form id="form-${userId}" method="post" action="/admin/${isBlocking ? 'unblockuser' : 'blockuser'}?id=${userId}">
+                                <button id="${userId}" class="${isBlocking ? 'unblock-user text-success' : 'block-user text-danger'}" data-id="${userId}">
+                                    ${isBlocking ? 'Unblock' : 'Block'}
+                                </button>
+                            </form>
+                        `;
+                        // Re-attach event listeners
+                        attachEventListeners();
+                    } else {
+                        alert('Failed to ' + (isBlocking ? 'block' : 'unblock') + ' the user. Please try again.');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            }
+        });
             });
+        });
+    }
+
+    // Initially attach event listeners
+    attachEventListeners();
+});
 
     </script>
 
