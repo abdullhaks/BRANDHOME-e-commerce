@@ -67,30 +67,48 @@
             </form>
         </div>
         <div class="col-lg-3 col-6 text-right">
-            <a href="" class="btn border active">
+            <a href="/wishList" class="btn border">
                 <i class="fas fa-heart text-primary"></i>
-              
-                    <span id="wishListBadge" class="badge"><%= wishListNo ||0%></span>
-            
+                <% if (wishListNo) { %>
+                    
+                    <span class="badge"><%= wishListNo %></span>
+                    
+                <% } %>
             </a>
-            <a href="/cart" class="btn border active">
+            <a href="" class="btn border active">
                 <i class="fas fa-shopping-cart text-primary"></i> 
-               
-                    <span id="cartBadge" class="badge"><%= cartNo ||0%></span>
-                
+
+                <% if (cartNo) { %>
+                    
+                    <span class="badge"><%= cartNo %></span>
+                    
+                <% } %>
+              
             </a>
             <% if (user) { %>
+
                 <a href="/logout">Log Out</a>
+
+                <a href="/profile" class="btn border "     >
+                    <i class="fas fa-user  text-primary"></i>
+                </a>
+                    <!-- 
+                    data-toggle="dropdown"
+                
+                
+                    <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
+                            <p  class="dropdown-item"><%= user %></p>
+                            <a href="/addresses" class="dropdown-item">Addresses</a>
+                            <p class="dropdown-item">Wallet :   </p>
+                           
+                     </div> -->
+
             <% } else { %>
+
                 <a href="/login">Log In</a>
+
             <% } %>
-            <a href="" class="btn border " data-toggle="dropdown">
-                <i class="fas fa-user  text-primary"></i>
-            </a>
-            <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                <p class="dropdown-item"><%= user %></p>
-                <a href="/addresses" class="dropdown-item">Addresses</a>
-            </div>
+            
         </div>
     </div> 
 </div>

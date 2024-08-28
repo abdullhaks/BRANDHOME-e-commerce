@@ -238,6 +238,7 @@
                   <div class="col-md-12 form-group">
                     <label>New Password</label>
                     <input class="form-control" type="text" name="newPassword" id="newPassword" required minlength="6" maxlength="30">
+                    <small class="text-danger hide" id="newPasswordError">it's not strong password..!</small>
                   </div>
                   <div class="col-md-12 form-group">
                     <label>Repeat Password</label>
@@ -461,6 +462,24 @@ $(document).ready(function(){
 
     // document.getElementById("newPassword").addEventListener("input", validatePasswords);
     document.getElementById("repeatPassword").addEventListener("input", validatePasswords);
+});
+
+document.getElementById("newPassword").addEventListener("input", function() {
+    const passwordInput = this.value.trim();
+    let repeatPassword = document.getElementById("repeatPassword").value;
+    const errorElement = document.getElementById("newPasswordError");
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+    if (passwordPattern.test(passwordInput)) {
+        errorElement.classList.add("hide");
+        if(passwordInput==repeatPassword){
+            document.getElementById("changePasswordBtn").disabled = false; 
+        }
+        
+    } else {
+        errorElement.classList.remove("hide");
+        document.getElementById("changePasswordBtn").disabled = true;
+    }
 });
 
 $(document).ready(function(){
