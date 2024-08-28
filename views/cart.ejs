@@ -342,14 +342,15 @@ input.form-control {
                             </div>
                         </div>
                         <div class="card border-secondary mb-5">
-                            
-                            <div class="card-footer border-secondary bg-transparent">
-                                <p class="text-danger hide " id="stockAlert" >remove out of stock item</p>
-                                <input type="submit" value="Check Out" id="checkoutButton"
-                                    class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">
-                                </input>
-                            </div>
-
+                            <% if(products.length > 0){ %>
+                                <div class="card-footer border-secondary bg-transparent">
+                                    <p class="text-danger hide " id="stockAlert" >remove out of stock item</p>
+                                    <input type="submit" value="Check Out" id="checkoutButton"
+                                        class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">
+                                    </input>
+                                </div>
+                           <% } %>
+                           
                         </div>
                     </div>
                 </div>

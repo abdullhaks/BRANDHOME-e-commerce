@@ -148,8 +148,6 @@ adminRoute.get(
 
 adminRoute.post("/updateOrderStatus",auth.isLogin,
 isAdmin.isAdmin, adminOrderController.updateOrderStatus);
-
-
   
 
 //.....................................

@@ -521,9 +521,11 @@
 
                         </div>
                         <div class="card-footer border-secondary bg-transparent">
+                            <% if(products.length > 0){ %>
                             <input type="submit" value="Place Order" id="placeOrder"
                                 class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">
                             </input>
+                            <%}%>
                         </div>
                     </div>
                 </div>
@@ -1118,7 +1120,7 @@ function checkCOD() {
                             "currency": "INR",
                             "name": "" + res.company_name + "",
                             "description": "" + res.description + "",
-                            "image": "https://example.com/your_logo",
+                            "image": "/images/BRAND HOME.jpg",
                             "order_id": ""+res.order_id+"", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
                             "handler": function (response) {
                                 // alert(response.razorpay_payment_id);
@@ -1163,10 +1165,10 @@ function checkCOD() {
                         window.location.href = "/orderPlaced";
                     }
 
-                    else {
-                        popup(res.msg);
-
-                    }
+                    
+                },
+                error:function(){
+                    popup(res.msg);
                 }
             })
         })

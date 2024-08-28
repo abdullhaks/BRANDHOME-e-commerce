@@ -168,7 +168,7 @@ const placeOrder = async(req,res)=>{
         var id = Date.now();
 
         const totalOffer= parseInt(req.body.totalOffer);
-        const grandTotal= parseInt(req.body.grandTotal);
+        var grandTotal= parseInt(req.body.grandTotal);
         var couponOff= parseInt(req.body.couponOff);
         const saveByCoupon= parseInt(req.body.saveByCoupon);
         const appliedCouponId= req.body.appliedCouponId;
@@ -205,6 +205,7 @@ const placeOrder = async(req,res)=>{
                 couponOffer:couponOff,
                 youSave:parseInt(formData[`discount${i}`], 10),
                 payAmount: parseInt(formData[`payAmount${i}`])+40,
+                grandTotal:grandTotal,
 
             };
 
@@ -523,6 +524,10 @@ const verifyPayment = async(req,res)=>{
 
         const { payment,order} = req.body;
 
+        console.log("payment is ",payment);
+        console.log("order is ",order);
+
+
 
         console.log("order from verify payment....",order);
 
@@ -541,8 +546,12 @@ const verifyPayment = async(req,res)=>{
 
                 console.log("payment success");
 
-                const result = await Orders.updateMany({orderId:order.receipt},
+                const result =  await Orders.updateMany({orderId:order.receipt},
                                 {$set:{paymentStatus:1}});
+
+                                await Orders.updateMany({orderId:order.receipt},
+                                    {$set:{transactionId:payment.razorpay_payment_id}});
+
 
                                 console.log(result);
 
