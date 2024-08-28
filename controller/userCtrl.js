@@ -698,9 +698,6 @@ const changePassword = async (req, res) => {
       console.log("passwordMatch:", passwordMatch);
 
       if (passwordMatch) {
-          // Assuming you want to save the new password after hashing
-          // user.password = await bcrypt.hash(newPassword, 10);
-
         const spassword = await securePassword(newPassword);
         user.password=spassword; 
         const sCONFpassword = await securePassword(repeatPassword);

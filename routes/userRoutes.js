@@ -49,23 +49,23 @@ userRoute.post ("/forgetPassword",userController.checkemail);
 userRoute.post ("/submitRecoveryPassword", forgetPasswordController.checkRecoveryPassword);
 userRoute.post ("/resendRecoveryPassword", forgetPasswordController.resentRecoveryPassword);
 userRoute.post ("/newPassword", forgetPasswordController.verifyNewPassword);
-userRoute.post ("/changePassword",userController.changePassword)
+
+userRoute.post ("/changePassword",isBlocked.isBlocked,auth.isLogin,userController.changePassword)
 
 //-------------------------------------
 
-userRoute.get("/addresses/:productId",addressController.loadAddress);
+userRoute.get("/addresses",isBlocked.isBlocked,auth.isLogin,addressController.loadAddress);
 
-userRoute.get("/addresses",addressController.loadAddress);
+userRoute.post("/addAddress",isBlocked.isBlocked,auth.isLogin,addressController.addAddress);
 
-userRoute.post("/addAddress",addressController.addAddress);
+userRoute.post("/addAddressFromCheckout",isBlocked.isBlocked,auth.isLogin,addressController.addAddressFromCheckout);
 
-userRoute.post("/addAddressFromCheckout",addressController.addAddressFromCheckout);
+userRoute.get("/deleteAddress",isBlocked.isBlocked,auth.isLogin,addressController.deleteAddress);
 
-userRoute.get("/deleteAddress",addressController.deleteAddress);
+userRoute.post("/editAddress",isBlocked.isBlocked,auth.isLogin,addressController.editAddress);
 
-userRoute.post("/editAddress",addressController.editAddress);
 
-userRoute.post ("/editProfile",userController.editProfile)
+userRoute.post ("/editProfile",isBlocked.isBlocked,auth.isLogin,userController.editProfile);
 //-------------------------------------
 
 userRoute.get("/auth/google", googleAuthController.googleAuth.authenticate);
@@ -102,7 +102,7 @@ userRoute.get ("/productsDetails", userController.loadProductsDetails);
 
 userRoute.post ("/addtoCart",isBlocked.isBlocked,auth.isLogin,cartController.addtoCart);
 
-userRoute.post ("/addtoCartFromWishlist",isBlocked.isBlocked,auth.isLogin,cartController.addtoCartFromWishlist);
+// userRoute.post ("/addtoCartFromWishlist",isBlocked.isBlocked,auth.isLogin,cartController.addtoCartFromWishlist);
 
 userRoute.get ("/cart",isBlocked.isBlocked,auth.isLogin,cartController.loadCart);
 
@@ -119,8 +119,8 @@ userRoute.get ("/removeFromWishList",isBlocked.isBlocked,auth.isLogin,wishListCo
 userRoute.get ("/checkOut",isBlocked.isBlocked,auth.isLogin,checkOutController.loadCheckOut);
 
 
-userRoute.get ("/getStock",checkOutController.getStock);
-userRoute.get ("/getStockFromPrductDetails",checkOutController.getStockFromPrductDetails);
+userRoute.get ("/getStock",isBlocked.isBlocked,auth.isLogin,checkOutController.getStock);
+userRoute.get ("/getStockFromPrductDetails",isBlocked.isBlocked,auth.isLogin,checkOutController.getStockFromPrductDetails);
 
 
 
@@ -134,7 +134,7 @@ userRoute.post ("/checkCoupon",isBlocked.isBlocked,auth.isLogin,couponController
 
 userRoute.post("/placeOrder",isBlocked.isBlocked,auth.isLogin,checkOutController.placeOrder);
 
-userRoute.get("/orderPlaced",checkOutController.loadOrderPlaced);
+userRoute.get("/orderPlaced",isBlocked.isBlocked,auth.isLogin,checkOutController.loadOrderPlaced);
  
 
 

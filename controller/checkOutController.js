@@ -157,9 +157,18 @@ const addToCheckOut = async(req,res)=>{
 
 const placeOrder = async(req,res)=>{
     try{
+        var user = req.session.user;
 
+       console .log("user is ",user);
 
-        var user =  req.session.user ; 
+        const checkCart = await Cart.findOne({ email: user });
+        console.log("check cart is ",checkCart.products.length);
+
+        if (!checkCart || checkCart.products.length < 1) {
+            res.status(200).send({
+                REFRESH:true,});
+        }else{
+                
         console.log("user is ",user);
         console.log(req.body.paymentOption);
 
@@ -418,6 +427,8 @@ const placeOrder = async(req,res)=>{
                 }
 
         
+        }
+   
         
 
     }catch(error){

@@ -496,7 +496,7 @@
                                     <input type="radio" class="custom-control-input" name="paymentOption" id="CashOnDelivery"
                                         value="cash on delivery" required>
                                     <label class="custom-control-label" for="CashOnDelivery">CashOnDelivery</label>
-                                    <small class="text-muted">(COD) is available for purchases ranging from ₹1 to ₹1500</small>
+                                    <small class="text-muted">(COD) is available for purchases ranging from ₹ 1 to ₹ 1000</small>
                                 </div>
                             </div>
 
@@ -968,7 +968,7 @@ function checkCOD() {
     let grandTotal = parseFloat(document.getElementById("grandTotal").value);
     console.log("grandTotal is", grandTotal);
     
-    if (grandTotal <= 1500) {
+    if (grandTotal <= 1000) {
         document.getElementById("CashOnDelivery").disabled = false;
     } else {
         document.getElementById("CashOnDelivery").disabled = true;
@@ -1160,9 +1160,11 @@ function checkCOD() {
 
 
                     }
-                    if (res.COD || res.WALLET) {
+                    else if (res.COD || res.WALLET) {
 
                         window.location.href = "/orderPlaced";
+                    }else if (res.REFRESH){
+                        window.location.href = "/orders";
                     }
 
                     
