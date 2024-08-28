@@ -34,7 +34,33 @@
     <link href="/css/theme.css" rel="stylesheet" media="all">
 
 </head>
+<style>
 
+.filter-options {
+    margin-bottom: 20px;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.filter-btn:hover {
+    background-color: #45a049;
+}
+
+.chart-container {
+    position: relative;
+    height: 400px;
+}
+
+
+</style>
 <body class="animsition">
     <div class="page-wrapper">
         <!-- HEADER MOBILE-->
@@ -442,6 +468,24 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row m-t-25">
+                            <div class="col-md-12">
+                                <div class="overview-wrap">
+                                    <h2 class="title-1">Sales Overview</h2>
+                                    <div>
+                                        <select id="salesFilter" class="form-control">
+                                            <option value="week" selected>This Week</option>
+                                            <option value="month">This Month</option>
+                                            <option value="year">This Year</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <canvas id="salesChart" width="400" height="150"></canvas>
+                            </div>
+                        </div>
+                        
+                        
                
                         <div class="row">
                             <div class="col-md-12">
@@ -477,11 +521,84 @@
     <script src="/vendor/circle-progress/circle-progress.min.js"></script>
     <script src="/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="/vendor/chartjs/Chart.bundle.min.js"></script>
-    <script src="/vendor/select2/select2.min.js">
-    </script>
+    <script src="/vendor/select2/select2.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
     <!-- Main JS-->
     <script src="/js/adminMain.js"></script>
+
+
+    <script>
+
+document.addEventListener("DOMContentLoaded", function() {
+    const ctx = document.getElementById('salesChart').getContext('2d');
+    let salesChart;
+
+    function renderChart(labels, data) {
+        if (salesChart) {
+            salesChart.destroy();
+        }
+        salesChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Sales Quantity',
+                    data: data,
+                    backgroundColor: 'rgba(9, 164, 78, 0.8)',
+                    borderColor: 'rgba(65, 155, 105, 0.8)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+
+    function loadSalesData(filter) {
+        // Example data for the current week
+        const salesData = <%- JSON.stringify(sales) %>;
+        
+        const labels = [];
+        const data = [];
+
+        // Prepare data for the chart
+        salesData.forEach(sale => {
+            const date = new Date(sale.deliveredDate);
+            const day = date.toLocaleDateString('en-US', { weekday: 'short' });
+
+            const index = labels.indexOf(day);
+            if (index > -1) {
+                data[index] += sale.purchaseDetails.quantity;
+            } else {
+                labels.push(day);
+                data.push(sale.purchaseDetails.quantity);
+            }
+        });
+        labels.reverse();
+        data.reverse();
+        renderChart(labels, data);
+    }
+
+    // Load chart with the default filter (week)
+    loadSalesData("week");
+
+    // Event listener for filter change
+    document.getElementById('salesFilter').addEventListener('change', function() {
+        const filter = this.value;
+        loadSalesData(filter);
+    });
+});
+
+
+    </script>
 
 </body>
 

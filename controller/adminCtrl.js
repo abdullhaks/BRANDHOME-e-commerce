@@ -92,6 +92,15 @@ const loadDashBoard = async (req,res)=>{
 
     try{
 
+        const currentDate = new Date();
+        const filterDate = new Date(currentDate.setDate(currentDate.getDate() - currentDate.getDay()));
+
+        console.log("filter date is ",filterDate);
+
+        const   sales = await Sales.find({ deliveredDate: { $gte: filterDate } }).sort({ deliveredDate: -1 });
+
+        console.log("sales is ",sales);
+        const filter = "week"
 
         const result = await Sales.aggregate([
             {
@@ -126,7 +135,7 @@ const loadDashBoard = async (req,res)=>{
 
         
 
-        res.render("adminhome2",{overallSalesCount,overallDiscount,orderCount,totalUsers});
+        res.render("adminhome2",{overallSalesCount,overallDiscount,orderCount,totalUsers,sales});
     }catch(error){
         console.log(error);
         res.render("adminSideErrors");
