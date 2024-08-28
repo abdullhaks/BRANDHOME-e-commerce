@@ -533,6 +533,11 @@
         showCancelButton: true,
         cancelButtonText: 'NO',
         confirmButtonText: 'SURE',
+        customClass: {
+            popup: 'no-border-radius',
+            confirmButton: 'custom-confirm-btn',
+            cancelButton: 'custom-cancel-btn'
+        }
     }).then((result) => {
         if (result.isConfirmed) {     
 

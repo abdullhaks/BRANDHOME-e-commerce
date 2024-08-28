@@ -9626,4 +9626,6 @@ a.text-dark:hover, a.text-dark:focus {
   right: 0;
   opacity: .1;
 }
-
+.no-border-radius {
+  border-radius: 0 !important;
+}

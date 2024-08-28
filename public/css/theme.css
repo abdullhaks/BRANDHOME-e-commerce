@@ -14697,3 +14697,7 @@ section {
     background-color:#E9E7E6 ;
   
 }
+
+.no-border-radius {
+    border-radius: 0 !important;
+}
