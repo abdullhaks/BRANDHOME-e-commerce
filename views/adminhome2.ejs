@@ -478,6 +478,7 @@
                                             <option value="week" selected>This Week</option>
                                             <option value="month">This Month</option>
                                             <option value="year">This Year</option>
+                                            <option value="all">All</option>
                                         </select>
                                     </div>
                                 </div>
@@ -566,11 +567,15 @@ document.addEventListener("DOMContentLoaded", function() {
         // Example data for the current week
         const salesData = <%- JSON.stringify(sales) %>;
         
-        const labels = [];
-        const data = [];
+        var labels = [];
+        var data = [];
+
+        console.log("filter is ",filter);
 
         // Prepare data for the chart
-        salesData.forEach(sale => {
+
+        if(filter=="week"){
+            salesData.forEach(sale => {
             const date = new Date(sale.deliveredDate);
             const day = date.toLocaleDateString('en-US', { weekday: 'short' });
 
@@ -584,8 +589,70 @@ document.addEventListener("DOMContentLoaded", function() {
         });
         labels.reverse();
         data.reverse();
-        renderChart(labels, data);
+
+        }else if (filter=="month"){
+            const weeksInMonth = 5; // Assuming there are at most 5 weeks in a month.
+                 data = new Array(weeksInMonth).fill(0); // Array to hold sales data for each week.
+                 labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5'];
+
+                salesData.forEach(sale => {
+                    const date = new Date(sale.deliveredDate);
+
+                    // Check if the sale is within the current month
+                    const now = new Date();
+                    if (date.getMonth() === now.getMonth() && date.getFullYear() === now.getFullYear()) {
+                        // Calculate the week number in the month (1-5)
+                        const weekNumber = Math.ceil(date.getDate() / 7);
+                        
+                        // Accumulate sales data for the corresponding week
+                        data[weekNumber-1] += sale.purchaseDetails.quantity;
+                    }
+                });
+
+        }else if (filter=="year"){
+            data = new Array(12).fill(0); // Array to hold sales data for each month
+            labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+        salesData.forEach(sale => {
+        const date = new Date(sale.deliveredDate);
+
+        // Check if the sale is within the current year
+        const now = new Date();
+        if (date.getFullYear() === now.getFullYear()) {
+            const month = date.getMonth(); // Month index (0-11)
+            
+            // Accumulate sales data for the corresponding month
+            data[month] += sale.purchaseDetails.quantity;
+        } 
+            });
+
+    }else if(filter=="all"){
+            data = []; // Array to hold sales data for each year
+            labels = []; // Array to hold year labels
+
+        salesData.forEach(sale => {
+        const date = new Date(sale.deliveredDate);
+        const year = date.getFullYear();
+
+        const index = labels.indexOf(year);
+        if (index > -1) {
+            // If the year is already in the labels, accumulate the sales data
+            data[index] += sale.purchaseDetails.quantity;
+        } else {
+            // If the year is not in the labels, add it
+            labels.push(year);
+            data.push(sale.purchaseDetails.quantity);
+        }
+        });
+        labels.reverse();
+        data.reverse();
     }
+       
+      
+        renderChart(labels, data);
+    };
+
+
 
     // Load chart with the default filter (week)
     loadSalesData("week");
@@ -593,6 +660,8 @@ document.addEventListener("DOMContentLoaded", function() {
     // Event listener for filter change
     document.getElementById('salesFilter').addEventListener('change', function() {
         const filter = this.value;
+
+        console.log("filter is ",filter);
         loadSalesData(filter);
     });
 });

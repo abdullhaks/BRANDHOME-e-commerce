@@ -97,10 +97,10 @@ const loadDashBoard = async (req,res)=>{
 
         console.log("filter date is ",filterDate);
 
-        const   sales = await Sales.find({ deliveredDate: { $gte: filterDate } }).sort({ deliveredDate: -1 });
+        const   sales = await Sales.find({ }).sort({ deliveredDate: -1 });
 
         console.log("sales is ",sales);
-        const filter = "week"
+      
 
         const result = await Sales.aggregate([
             {
