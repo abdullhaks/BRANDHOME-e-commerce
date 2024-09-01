@@ -24,7 +24,7 @@ const loadAdminReturnManagement = async (req, res) => {
     const totalPages = Math.ceil(totalReturns / pageSize);
 
     const returns = await Returns.find()
-      .sort({ returnDate: -1 })
+      .sort({ requestDate: -1 })
       .limit(pageSize)
       .skip((page - 1) * pageSize);
 
@@ -43,31 +43,28 @@ const loadAdminReturnManagement = async (req, res) => {
 
 const updateReturnStatus = async (req, res) => {
   try {
-    var orderId = req.body.orderId; // Accessing the order ID from the request body
-    var newStatus = req.body.newStatus; // Accessing the new status from the request body
+    var newStatus = req.body.newStatus; 
     var returnId = req.body.returnId;
 
     var returnItem =await Returns.findOne({_id:returnId});
-    var order = await Orders.findOne({_id:orderId});
-
-    
+    // var order = await Orders.findOne({orderId:returnItem.orderId});
 
     console.log("new return  is " + returnItem);
-    console.log("new oder  is " + order);
-
-
-    const datenow = new Date();
-    const options = {
-      year: "numeric",
-      month: "numeric",
-      day: "numeric",
-    };
-
-    const date = datenow.toLocaleDateString("en-GB", options);
+    // console.log("new oder  is " + order);
 
     if (newStatus == "pending") {
+
         const returns =await Returns.updateOne({_id:returnId},{$set:{returnStatus:newStatus}});
-        const order = await Orders.updateOne({_id:orderId},{$set:{returnStatus:1}});
+        // const order = await Orders.updateOne({orderId:returnItem.orderId},{$set:{returnStatus:1}});
+
+        const updateResult = await Orders.updateOne(
+          { orderId: returnItem.orderId },
+          {
+              $set: {
+                  [`items.${returnItem.index}.returnStatus`]: 1,
+              }
+          }
+          );
 
     }
 
@@ -77,13 +74,23 @@ const updateReturnStatus = async (req, res) => {
       if(returnItem.returnReason==="damaged"){
        
         const returns =await Returns.updateOne({_id:returnId},{$set:{returnStatus:newStatus}});
-        await Orders.updateOne({_id:orderId},{$set:{returnStatus:2}});
+        // await Orders.updateOne({_id:orderId},{$set:{returnStatus:2}});
+
+        const updateResult = await Orders.updateOne(
+          { orderId: returnItem.orderId },
+          {
+              $set: {
+                  [`items.${returnItem.index}.returnStatus`]: 2,
+                  [`items.${returnItem.index}.returnedOn`]: new Date(),
+              }
+          }
+          );
         
-        await Product.updateOne({_id:order.purchaseDetails.productId},{$inc:{salesCount:-order.purchaseDetails.quantity}});
+        await Product.updateOne({_id:returnItem.item.productId},{$inc:{salesCount:-returnItem.item.quantity}});
 
-        await Sales.deleteOne({orderObjectId:returnItem.orderId});
+        await Sales.deleteOne({_id:returnItem.item.salesId});
 
-        await User.updateOne({email:order.email},{$inc:{wallet:order.purchaseDetails.payAmount}});
+        await User.updateOne({email:returnItem.user},{$inc:{wallet:returnItem.item.payAmount}});
        
       }else{
 
@@ -91,19 +98,28 @@ const updateReturnStatus = async (req, res) => {
 
         
         const returns =await Returns.updateOne({_id:returnId},{$set:{returnStatus:newStatus}});
-        await Orders.updateOne({_id:orderId},{$set:{returnStatus:2}});
+        // await Orders.updateOne({_id:orderId},{$set:{returnStatus:2}});
         
        
+        const updateResult = await Orders.updateOne(
+          { orderId: returnItem.orderId },
+          {
+              $set: {
+                  [`items.${returnItem.index}.returnStatus`]: 2,
+                  [`items.${returnItem.index}.returnedOn`]: new Date(),
+              }
+          }
+          );
 
-        await Product.updateOne({_id:order.purchaseDetails.productId},{$inc:{salesCount:-order.purchaseDetails.quantity}});
+        await Product.updateOne({_id:returnItem.item.productId},{$inc:{salesCount:-returnItem.item.quantity}});
 
-        await Product.updateOne({ _id: order.purchaseDetails.productId }, { $inc: { totalStock:order.purchaseDetails.quantity } });
+        await Product.updateOne({ _id: returnItem.item.productId }, { $inc: { totalStock:returnItem.item.quantity } });
 
-        await Stock.updateOne({ $and: [{productId:order.purchaseDetails.productId},{ productVariant:order.purchaseDetails.size }, { productColor:order.purchaseDetails.color }] },{$inc:{stock:order.purchaseDetails.quantity}});
+        await Stock.updateOne({ $and: [{productId:returnItem.item.productId},{ productVariant:returnItem.item.size }, { productColor:order.returnItem.color }] },{$inc:{stock:returnItem.item.quantity}});
         
-        await Sales.deleteOne({orderObjectId:returnItem.orderId});
+        await Sales.deleteOne({_id:returnItem.item.orderId});
 
-        await User.updateOne({email:order.email},{$inc:{wallet:order.purchaseDetails.payAmount}});
+        await User.updateOne({email:returnItem.user},{$inc:{wallet:returnItem.item.payAmount}});
       }
     
            
@@ -112,7 +128,17 @@ const updateReturnStatus = async (req, res) => {
 
     if (newStatus == "declined") {
         const returns =await Returns.updateOne({_id:returnId},{$set:{returnStatus:newStatus}});
-        const order = await Orders.updateOne({_id:orderId},{$set:{returnStatus:3}});
+        // const order = await Orders.updateOne({_id:orderId},{$set:{returnStatus:3}});
+
+        const updateResult = await Orders.updateOne(
+          { orderId: returnItem.orderId },
+          {
+              $set: {
+                  [`items.${returnItem.index}.returnStatus`]: 3,
+                  [`items.${returnItem.index}.returDeclinedOn`]: new Date(),
+              }
+          }
+          );
     }
   } catch (error) {
     console.log(error);

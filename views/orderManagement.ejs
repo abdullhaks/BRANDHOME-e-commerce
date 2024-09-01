@@ -180,7 +180,7 @@
                                 
                             </div>
                             <div class="col-lg-8 " >
-                                <img src="/productImages/<%= order.purchaseDetails.productImage%>" alt="" style="width: 150px;">
+                                <img src="/productImages/<%= orderItem.productImage%>" alt="" style="width: 150px;">
                             </div>
 
 
@@ -188,28 +188,28 @@
                                 <p>Product Name </p>
                             </div>
                             <div class="col-lg-8 ">
-                                <p class="text-dark"><%= order.purchaseDetails.productBrand %> <%= order.purchaseDetails.productName %> ,<%= order.purchaseDetails.size %>,<%= order.purchaseDetails.color %></p>
+                                <p class="text-dark"><%= orderItem.productBrand %> <%= orderItem.productName %> ,<%= orderItem.size %>,<%= orderItem.color %></p>
                             </div>
 
                             <div class="col-lg-4">
                                 <p>Quantity</p>
                             </div>
                             <div class="col-lg-8 ">
-                                <p class="text-dark"><%= order.purchaseDetails.quantity %></p>
+                                <p class="text-dark"><%= orderItem.quantity %></p>
                             </div>
 
                             <div class="col-lg-4">
                                 <p>Price</p>
                             </div>
                             <div class="col-lg-8 ">
-                                <p class="text-dark"><%= order.purchaseDetails.price %></p>
+                                <p class="text-dark"><%= orderItem.price %></p>
                             </div>
 
                             <div class="col-lg-4">
                                 <p>Order Date </p>
                             </div>
                             <div class="col-lg-8 ">
-                                <p><%= order.orderDate %></p>
+                                <p><%= orderItem.orderDate.toLocaleDateString() %></p>
                             </div>
 
 
@@ -218,28 +218,28 @@
                                 <p>Order Id </p>
                             </div>
                             <div class="col-lg-8 ">
-                                <p><%= order._id %></p>
+                                <p><%= order.orderId %></p>
                             </div>
 
                             <div class="col-lg-4">
                                 <p>Shipping Charge</p>
                             </div>
                             <div class="col-lg-8 ">
-                                <p>Rs <%= order.purchaseDetails.shippingCharge %></p>
+                                <p>Rs <%= orderItem.shippingCharge %></p>
                             </div>
 
                             <div class="col-lg-4">
                                 <p>Discount</p>
                             </div>
                             <div class="col-lg-8 ">
-                                <p>Rs <%= order.purchaseDetails.youSave %></p>
+                                <p>Rs <%= orderItem.youSave %></p>
                             </div>
 
                             <div class="col-lg-4">
                                 <p>Total Amount </p>
                             </div>
                             <div class="col-lg-8 ">
-                                <p>Rs <%= order.purchaseDetails.payAmount %></p>
+                                <p>Rs <%= orderItem.payAmount %></p>
                             </div>
 
                             <div class="col-lg-4">
@@ -269,19 +269,19 @@
                             </div>
                             <div class="col-lg-8 ">
 
-                                <% if( order.status=="dispatched"){ %>
-                                    <p class="text-primary"><%= order.status %> - <%= order.dispatchedDate %> </p> 
+                                <% if( orderItem.status=="dispatched"){ %>
+                                    <p class="text-primary"><%= orderItem.status %> - <%= orderItem.dispatchedDate.toLocaleDateString() %> </p> 
                                 <% } %>
 
-                                <% if( order.status=="delivered"){ %>
-                                    <p class="text-success"><%= order.status %> - <%= order.deliveredDate %> %></p> 
+                                <% if( orderItem.status=="delivered"){ %>
+                                    <p class="text-success"><%= orderItem.status %> - <%= orderItem.deliveredDate.toLocaleDateString() %> %></p> 
                                 <% } %>
 
-                                <% if( order.status=="cancelled"){ %>
-                                    <p class="text-danger"><%= order.status %> - <%= order.cancelledDate %> %></p> 
+                                <% if( orderItem.status=="cancelled"){ %>
+                                    <p class="text-danger"><%= orderItem.status %> - <%= orderItem.cancelDate.toLocaleDateString() %> %></p> 
                                 <% } %>
 
-                                <% if( order.status=="pending"){ %>
+                                <% if( orderItem.status=="pending"){ %>
                                     <p>pending</p> 
                                 <% } %>
                             

@@ -7,6 +7,7 @@ const Product = require("../models/productmodel");
 const Orders = require("../models/orderModel");
 const Sales = require("../models/salesModel");
 const Stock = require("../models/stockModel");
+const Wallet = require("../models/walletModel");
 const Returns = require("../models/returnModel");
 const Category = require("../models/categorymodel");
 const bcrypt = require("bcrypt");
@@ -24,10 +25,10 @@ const loadAdminOrderManagement = async(req,res)=>{
         const totalOrders = await Orders.countDocuments();
         const totalPages = Math.ceil(totalOrders / pageSize);
 
-        const orders = await Orders.find({$or:[{paymentOption:"cash on delivery"},
-                                                {paymentOption:"wallet payment"},
+        const orders = await Orders.find({$or:[ {paymentOption:"cash on delivery"},
+                                                {$and:[{paymentOption:"wallet payment"},{paymentStatus:1}]},
                                                 {$and:[{paymentOption:"online payment"},{paymentStatus:1}]}]})
-        .sort({orderTime:-1})
+        .sort({orderDate:-1})
         .limit(pageSize)
         .skip((page - 1) * pageSize);
 
@@ -49,34 +50,53 @@ const updateOrderStatus = async (req, res) => {
     try {
 
         var orderId = req.body.orderId;
+        var index = req.body.index;
         var newStatus = req.body.newStatus;
 
         console.log("new status is " + newStatus);
 
         const order = await Orders.findOne({ _id: orderId });
 
+        if (!order) {
+            console.log("Order not found");
+            return res.render("adminSideErrors");
+        }
+
         if (order) {
-            const datenow = new Date();
-            const options = {
-
-                year: 'numeric',
-                month: 'numeric',
-                day: 'numeric'
-            };
-
-            const date = datenow.toLocaleDateString('en-GB', options);
+           
 
             if (newStatus == "dispatched") {
 
-                const result = await Orders.updateOne({ _id: orderId }, { $set: { status: newStatus } });
-                await Orders.updateOne({ _id: orderId }, { $set: { dispatchedDate: date } });
+                // const result = await Orders.updateOne({ _id: orderId }, { $set: { status: newStatus } });
+                // await Orders.updateOne({ _id: orderId }, { $set: { dispatchedDate: date } });
+
+
+                const updateResult = await Orders.updateOne(
+                    { _id: orderId },
+                    {
+                        $set: {
+                            [`items.${index}.status`]: newStatus,
+                            [`items.${index}.dispatchedDate`]: new Date()
+                        }
+                    }
+                );
                 console.log('Order status updated successfully');
 
             };
 
             if (newStatus == "pending") {
 
-                const result = await Orders.updateOne({ _id: orderId }, { $set: { status: newStatus } });
+                // const result = await Orders.updateOne({ _id: orderId }, { $set: { status: newStatus } });
+
+                const updateResult = await Orders.updateOne(
+                    { _id: orderId },
+                    {
+                        $set: {
+                            [`items.${index}.status`]: newStatus,
+                           
+                        }
+                    }
+                );
 
                 console.log('Order status updated successfully');
 
@@ -88,34 +108,44 @@ const updateOrderStatus = async (req, res) => {
 
 
 
-                const exp = Date.now() + (120 * 1000);
-                const result = await Orders.updateOne({ _id: orderId }, { $set: { status: newStatus } });
-                await Orders.updateOne({ _id: orderId }, { $set: { deliveredDate: date } });
-                await Orders.updateOne({ _id: orderId }, { $set: { returnCanceledOn: exp } });
-                await Orders.updateOne({ _id: orderId }, { $set: { paymentStatus: 1 } });
+                var exp = Date.now() + (120 * 1000);
+                // const result = await Orders.updateOne({ _id: orderId }, { $set: { status: newStatus } });
+                // await Orders.updateOne({ _id: orderId }, { $set: { deliveredDate: date } });
+                // await Orders.updateOne({ _id: orderId }, { $set: { returnCanceledOn: exp } });
+                // await Orders.updateOne({ _id: orderId }, { $set: { paymentStatus: 1 } });
+
+                const updateResult = await Orders.updateOne(
+                    { _id: orderId },
+                    {
+                        $set: {
+                            [`items.${index}.status`]: newStatus,
+                            [`items.${index}.deliveredDate`]: new Date(),
+                            [`items.${index}.returnExp`]: exp,
+                            [`items.${index}.paymentStatus`]: 1,
+                        }
+                    }
+                );
 
                 const order = await Orders.findOne({ _id: orderId });
                 console.log("order is ", order);
 
-                var dat = new Date();
+             
 
                 const sale = new Sales(
                     {
                         orderObjectId: order._id,
                         email: order.email,
                         orderId: order.orderId,
-                        purchaseDetails: order.purchaseDetails,
+                        item: order.items[index],
                         address: order.address,
                         paymentOption: order.paymentOption,
                         paymentStatus: order.paymentStatus,
                         transactionId: order.transactionId,
                         orderDate: order.orderDate,
-                        orderTime: order.orderTime,
-                        dispatchedDate: order.dispatchedDate,
-                        deliveredDate: new Date(),
-                        deliverTime: dat.getTime(),
-                        status: order.status,
+                        dispatchedDate: order.items[index].dispatchedDate,
+                        deliveredDate: order.items[index].deliveredDate,
                         returnStatus: order.returnStatus,
+                        grandTotal:order.grandTotal,
 
 
                     }
@@ -124,6 +154,17 @@ const updateOrderStatus = async (req, res) => {
                 console.log("sale is ", sale);
                 const saleResult = await sale.save();
                 console.log("sale result is ", saleResult);
+
+                const updatesalesId = await Orders.updateOne(
+                    { _id: orderId },
+                    {
+                        $set: {
+                            [`items.${index}.salesId`]: saleResult._id,
+                        }
+                    }
+                );
+
+                console.log("update salse id details..",updatesalesId);
 
 
 
@@ -136,16 +177,58 @@ const updateOrderStatus = async (req, res) => {
 
             if (newStatus === "cancelled") {
 
-                const result = await Orders.updateOne({ _id: orderId }, { $set: { status: newStatus } });
-                await Orders.updateOne({ _id: orderId }, { $set: { cancelledDate: date } });
+                // const result = await Orders.updateOne({ _id: orderId }, { $set: { status: newStatus } });
+                // await Orders.updateOne({ _id: orderId }, { $set: { cancelledDate: date } });
 
-                await Product.updateOne({ _id: order.productId }, { $inc: { salesCount: -order.quantity } });
+                // await Product.updateOne({ _id: order.productId }, { $inc: { salesCount: -order.quantity } });
 
-                await Product.updateOne({ _id: order.productId }, { $inc: { totalStock: order.quantity } });
+                // await Product.updateOne({ _id: order.productId }, { $inc: { totalStock: order.quantity } });
 
-                await Stock.updateOne({ $and: [{ productId: order.productId }, { productVariant: order.option }, { productColor: order.color }] }, { $inc: { stock: order.quantity } });
+                // await Stock.updateOne({ $and: [{ productId: order.productId }, { productVariant: order.option }, { productColor: order.color }] }, { $inc: { stock: order.quantity } });
 
                 console.log('Order status updated successfully');
+
+                const user = await User.findOne({ email: order.email });
+                console.log("user is ",user);
+
+                if (user && (order.paymentOption === "online payment" || order.paymentOption === "wallet payment")) {
+                    // Refund the payment amount to the user's wallet
+
+                    console.log(" refund the payment......")
+                    await User.updateOne({ email: order.email }, { $inc: { wallet: order.items[index].payAmount } });
+        
+                    const transactions = {
+                        date: new Date(),
+                        amount: order.items[index].payAmount,
+                        status: "credit"
+                    };
+
+                    console.log("transaction is ... ",transactions);
+                    await Wallet.updateOne({ user: order.email }, { $push: { transactions: transactions } }, { upsert: true });
+                    
+                };
+        
+                // Update the status of the specific item in the order
+                const updateResult = await Orders.updateOne(
+                    { _id: orderId },
+                    {
+                        $set: {
+                            [`items.${index}.status`]: 'cancelled',
+                            [`items.${index}.cancelDate`]: new Date()
+                        }
+                    }
+                );
+        
+                console.log("Update result.........:", updateResult);
+                
+
+            await Product.updateOne({_id:order.items[index].productId},{$inc:{salesCount:-order.items[index].quantity}});
+
+            await Product.updateOne({ _id: order.items[index].productId }, { $inc: { totalStock:order.items[index].quantity } });
+    
+            await Stock.updateOne({ $and: [{productId:order.items[index].productId},{ productVariant:order.items[index].size }, { productColor:order.items[index].color }] },{$inc:{stock:order.items[index].quantity}});
+
+            
 
             };
 
@@ -158,12 +241,11 @@ const updateOrderStatus = async (req, res) => {
             const totalOrders = await Orders.countDocuments();
             const totalPages = Math.ceil(totalOrders / pageSize);
 
-            const orders = await Orders.find({
-                $or: [{ paymentOption: "cash on delivery" },
-                { paymentOption: "wallet payment" },
-                { $and: [{ paymentOption: "online payment" }, { paymentStatus: 1 }] }]
-            })
-                .sort({ orderTime: -1 })
+            const orders = await Orders.find({$or:[ {paymentOption:"cash on delivery"},
+                {$and:[{paymentOption:"wallet payment"},{paymentStatus:1}]},
+                {$and:[{paymentOption:"online payment"},{paymentStatus:1}]}]})
+
+                .sort({orderDate:-1})
                 .limit(pageSize)
                 .skip((page - 1) * pageSize);
 

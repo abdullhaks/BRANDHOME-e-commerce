@@ -106,8 +106,8 @@ const loadDashBoard = async (req,res)=>{
             {
                 $group: {
                     _id: null,
-                    totalSales: { $sum: "$purchaseDetails.quantity" },
-                    totalDiscount: { $sum: "$purchaseDetails.youSave" } 
+                    totalSales: { $sum: "$item.quantity" },
+                    totalDiscount: { $sum: "$item.youSave" } 
                 }
             }
         ]);
@@ -119,7 +119,7 @@ const loadDashBoard = async (req,res)=>{
 
 
         const orderCount = await Orders.countDocuments({
-            cancelledDate: { $exists: false }, 
+            cancelDate: { $exists: false }, 
             returnStatus: { $ne: 2 }, 
             $or: [
                 { paymentOption: "cash on delivery" }, 

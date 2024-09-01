@@ -5,22 +5,18 @@ const returnSchema = new mongoose.Schema({
     orderId:{
         type:String,
     },
+    index:{
+        type:Number
+    },
     user:{
         type:String,
     },
-    productDetails:{
-        type:String,
+    item:{
+        type:Object,
     },
-    totalAmount:{
-        type:Number,
-       
-    } ,
-    dateString:{
-        type:String,
-    },
-    returnDate:{
-        type:String,
-       
+    requestDate:{
+        type:Date,
+     
     },
     returnReason:{
         type:String,

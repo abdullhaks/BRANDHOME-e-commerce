@@ -380,43 +380,56 @@
                                         
                                     <tbody  id="tableItems">
 
+                    <% if (orders.length> 0) {
+                        for (let i = 0; i < orders.length; i++) { %>
 
-                                            <% if (orders.length > 0) {
-                                                for (let i = 0; i < orders.length; i++) { %> 
-                                            <tr>
-                                                <td><%= orders[i].orderDate %></td>
-                                                <td class="text-danger font-weight-bold" id="order-details" data-toggle="modal" data-target="#orderDetails" data-order="<%= JSON.stringify(orders[i]) %>">
-                                                    <%= orders[i]._id %></td>
+                            <% for (let j=0; j < orders[i].items.length; j++) { %>
+                                <tr>
+                                    <td>
+                                        <%= orders[i].orderDate.toLocaleDateString() %>
+                                    </td>
+                                    <td class="text-danger font-weight-bold" id="order-details" data-toggle="modal"
+                                        data-target="#orderDetails" data-order="<%= JSON.stringify(orders[i]) %>" data-index="<%= j %>">
+                                        <%= orders[i].orderId%>
+                                    </td>
 
-                                                <!-- <td > <a href="/admin/orderDetails?orderId= <%= orders[i]._id %>" style="color: rgb(182, 83, 97); font-weight: bold;" >
-                                                    <%= orders[i].purchaseDetails.productBrand %> 
-                                                    <%= orders[i].purchaseDetails.productName %>,<br>
-                                                    <%= orders[i].purchaseDetails.size %>, <%= orders[i].color %> 
-                                                    (<%= orders[i].purchaseDetails.quantity %>) </a> </td> -->
+                                    <!-- <td > <a href="/admin/orderDetails?orderId= <%= orders[i]._id %>" style="color: rgb(182, 83, 97); font-weight: bold;" >
+                                                                        <%= orders[i].items[j].productBrand %> 
+                                                                        <%= orders[i].items[j].productName %>,<br>
+                                                                        <%= orders[i].items[j].size %>, <%= orders[i].color %> 
+                                                                        (<%= orders[i].items[j].quantity %>) </a> </td> -->
 
-                                                    <td > 
-                                                        <%= orders[i].purchaseDetails.productBrand %> 
-                                                        <%= orders[i].purchaseDetails.productName %>,<br>
-                                                        <%= orders[i].purchaseDetails.size %>, <%= orders[i].color %> 
-                                                        (<%= orders[i].purchaseDetails.quantity %>) 
-                                                    </td>
+                                    <td>
+                                        <%= orders[i].items[j].productBrand %>
+                                            <%= orders[i].items[j].productName %>,<br>
+                                                <%= orders[i].items[j].size %>, <%= orders[i].color %>
+                                                        (<%= orders[i].items[j].quantity %>)
+                                    </td>
 
-                                                <td>Rs <%= orders[i].purchaseDetails.payAmount %></td>
-                                                <td>
-                                                    <select name="orderStatus" id="orderStatus-<%= orders[i]._id %>" data-order-id="<%= orders[i]._id %>">
-                                                        <option value="" disabled selected><%= orders[i].status %></option>
-                                                        <option value="pending">pending</option>
-                                                        <option value="dispatched">dispatched</option>
-                                                        <option value="delivered">delivered</option>
-                                                        <option value="cancelled">cancelled</option>
-                                                    </select>
-                                                </td>
-                                                
-                                       
-                                            </tr>
+                                    <td>Rs <%= orders[i].items[j].payAmount %>
+                                    </td>
+                                    <td>
+                                        <select name="orderStatus" id="orderStatus-<%= j %>"
+                                            data-order-id="<%= orders[i]._id %>" data-index="<%= j %>">
+                                            <option value="" disabled selected>
+                                                <%= orders[i].items[j].status %>
+                                            </option>
+                                            <option value="pending">pending</option>
+                                            <option value="dispatched">dispatched</option>
+                                            <option value="delivered">delivered</option>
+                                            <option value="cancelled">cancelled</option>
+                                        </select>
+                                    </td>
 
-                                            <% } %>
-                                        </tbody>
+
+                                </tr>
+
+
+                                <% } %>
+                                    <% } %>
+
+
+                                </tbody>
                                        
                                            
                                         
@@ -639,7 +652,7 @@ function popup(popupMsg) {
     });
 };
 
-function showConfirmation(orderId, newStatus, currentPage) {
+function showConfirmation(orderId,index, newStatus, currentPage) {
     Swal.fire({
         title: 'Confirm Order Status',
         html: '<p>Are you sure you want to update the order status?</p>',
@@ -651,45 +664,51 @@ function showConfirmation(orderId, newStatus, currentPage) {
             $.ajax({
                 type: 'POST',
                 url: '/admin/updateOrderStatus',
-                data: { orderId: orderId, newStatus: newStatus, currentPage: currentPage },
+                data: { orderId: orderId,index:index, newStatus: newStatus, currentPage: currentPage },
                 success: function(response) {
                     if (response.success) {
                         const ordersTableBody = document.getElementById("tableItems");
                         ordersTableBody.innerHTML = ''; // Clear existing rows
                         console.log("response data is ", response.orders);
 
-                        response.orders.forEach((order, index) => {
-                            const row = document.createElement('tr'); // Create a new row element
+                       
 
-                            row.innerHTML = `
-                                <td>${order.orderDate}</td>
-                                <td class="text-danger font-weight-bold" id="order-details" data-toggle="modal" data-target="#orderDetails" data-order='${JSON.stringify(order)}'>
-                                    ${order._id}
-                                </td>
-                                <td>
-                                    ${order.purchaseDetails.productBrand} ${order.purchaseDetails.productName},<br>
-                                    ${order.purchaseDetails.size}, ${order.color} (${order.purchaseDetails.quantity})
-                                </td>
-                                <td>Rs ${order.purchaseDetails.payAmount}</td>
-                                <td>
-                                    <select name="orderStatus" id="orderStatus-${order._id}" data-order-id="${order._id}">
-                                        <option value="" disabled selected>${order.status}</option>
-                                        <option value="pending">pending</option>
-                                        <option value="dispatched">dispatched</option>
-                                        <option value="delivered">delivered</option>
-                                        <option value="cancelled">cancelled</option>
-                                    </select>
-                                </td>
-                            `;
-                            ordersTableBody.appendChild(row); // Append the newly created row to the table body
-                        });
+                        response.orders.forEach((order) => {
+                            // Loop through each item in the order
+                            order.items.forEach((item, index) => {
+                                const row = document.createElement('tr'); // Create a new row element
+
+                                row.innerHTML = `
+                                    <td>${new Date(order.orderDate).toLocaleDateString()}</td>
+                                    <td class="text-danger font-weight-bold" id="order-details" data-toggle="modal" data-target="#orderDetails" data-order='${JSON.stringify(order)}' data-index='${index}'>
+                                        ${order.orderId}
+                                    </td>
+                                    <td>
+                                        ${item.productBrand} ${item.productName},<br>
+                                        ${item.size}, ${item.color} (${item.quantity})
+                                    </td>
+                                    <td>Rs ${item.payAmount}</td>
+                                    <td>
+                                        <select name="orderStatus" id="orderStatus-${order._id}-${index}" data-order-id="${order._id}" data-index="${index}">
+                                            <option value="" disabled selected>${item.status}</option>
+                                            <option value="pending">pending</option>
+                                            <option value="dispatched">dispatched</option>
+                                            <option value="delivered">delivered</option>
+                                            <option value="cancelled">cancelled</option>
+                                        </select>
+                                    </td>
+                                `;
+                                ordersTableBody.appendChild(row); // Append the newly created row to the table body
+                            });
+                         });
 
                         // Re-attach the event listener for the newly added select elements
                         $('select[name="orderStatus"]').change(function() {
                             var orderId = $(this).data('order-id');
+                            var index = $(this).data('index');
                             var newStatus = $(this).val();
                             const currentPage = document.getElementById("currentPage").value;
-                            showConfirmation(orderId, newStatus, currentPage);
+                            showConfirmation(orderId,index, newStatus, currentPage);
                         });
                     } else {
                         popup("Status changing failed!");
@@ -709,57 +728,60 @@ function showConfirmation(orderId, newStatus, currentPage) {
 $(document).ready(function() {
     $('select[name="orderStatus"]').change(function() {
         var orderId = $(this).data('order-id');
+        var index = $(this).data('index');
         console.log('Order ID is', orderId);
         var newStatus = $(this).val();
         const currentPage = document.getElementById("currentPage").value;
         console.log("current page is", currentPage);
 
-        showConfirmation(orderId, newStatus, currentPage);
+        showConfirmation(orderId,index,newStatus,currentPage);
     });
 });
+
 
 $(document).on('click', '#order-details', function(e) {
     e.preventDefault();
 
     // Get the order data from the button's data-order attribute
     const order = $(this).data('order');
+    const index = $(this).data('index');
 
     // Populate the modal form fields with the order data
     document.getElementById("productImage").innerHTML = `
-        <img src="/productImages/${order.purchaseDetails.productImage}" alt="" style="width: 150px;">
+        <img src="/productImages/${order.items[index].productImage}" alt="" style="width: 150px;">
     `;
 
     document.getElementById("productName").innerHTML = `
-        <p class="text-dark">${order.purchaseDetails.productBrand} ${order.purchaseDetails.productName}, 
-        ${order.purchaseDetails.size}, ${order.purchaseDetails.color}</p>
+        <p class="text-dark">${order.items[index].productBrand} ${order.items[index].productName}, 
+        ${order.items[index].size}, ${order.items[index].color}</p>
     `;
 
     document.getElementById("quantity").innerHTML = `
-        <p class="text-dark">${order.purchaseDetails.quantity}</p>
+        <p class="text-dark">${order.items[index].quantity}</p>
     `;
 
     document.getElementById("price").innerHTML = `
-        <p class="text-dark">Rs ${order.purchaseDetails.price}</p>
+        <p class="text-dark">Rs ${order.items[index].price}</p>
     `;
 
     document.getElementById("orderDate").innerHTML = `
-        <p>${order.orderDate}</p>
+    <p>${new Date(order.orderDate).toLocaleDateString()}</p>
     `;
 
     document.getElementById("id").innerHTML = `
-        <p>${order._id}</p>
+        <p>${order.orderId}</p>
     `;
 
     document.getElementById("shippingCharge").innerHTML = `
-        <p>Rs ${order.purchaseDetails.shippingCharge}</p>
+        <p>Rs ${order.items[index].shippingCharge}</p>
     `;
 
     document.getElementById("youSave").innerHTML = `
-        <p>Rs ${order.purchaseDetails.youSave}</p>
+        <p>Rs ${order.items[index].youSave}</p>
     `;
 
     document.getElementById("payAmount").innerHTML = `
-        <p>Rs ${order.purchaseDetails.payAmount}</p>
+        <p>Rs ${order.items[index].payAmount}</p>
     `;
 
     document.getElementById("Address").innerHTML = `
@@ -777,13 +799,13 @@ $(document).on('click', '#order-details', function(e) {
 
     // Status and Dates
     let statusContent = '';
-    if (order.status === "dispatched") {
-        statusContent = `<p class="text-primary">${order.status} - ${order.dispatchedDate}</p>`;
-    } else if (order.status === "delivered") {
-        statusContent = `<p class="text-success">${order.status} - ${order.deliveredDate}</p>`;
-    } else if (order.status === "cancelled") {
-        statusContent = `<p class="text-danger">${order.status} - ${order.cancelledDate}</p>`;
-    } else if (order.status === "pending") {
+    if (order.items[index].status === "dispatched") {
+        statusContent = `<p class="text-primary">${order.items[index].status} - ${new Date(order.items[index].dispatchedDate).toLocaleDateString()}</p>`;
+    } else if (order.items[index].status === "delivered") {
+        statusContent = `<p class="text-success">${order.items[index].status} - ${new Date(order.items[index].deliveredDate).toLocaleDateString()}</p>`;
+    } else if (order.items[index].status === "cancelled") {
+        statusContent = `<p class="text-danger">${order.items[index].status} - ${new Date(order.items[index].cancelDate).toLocaleDateString()}</p>`;
+    } else if (order.items[index].status === "pending") {
         statusContent = `<p>pending</p>`;
     }
 

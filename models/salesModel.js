@@ -17,7 +17,7 @@ const salesSchema = new mongoose.Schema({
         type:String,
         required:true,
     } ,
-    purchaseDetails:{
+    item:{
         type:Object,
         required:true,
     } ,
@@ -38,33 +38,16 @@ const salesSchema = new mongoose.Schema({
         type:String,
     },
     orderDate:{
-        type:String,
-        required:true,
+        type:Date,
+        
     },
     dispatchedDate:{
-        type:String,
+        type:Date,
         
     },
     deliveredDate:{
         type:Date,
         
-    },
-    
-    deliverTime:{
-        type:String,
-    },
-  
-    orderTime:{
-        type:String,
-        required:true,
-    },
-    status:{
-        type:String,
-        default:"pending",
-        
-    } ,
-    returnCanceledOn:{
-        type:Number,
     },
     returnStatus:{
         type:Number,

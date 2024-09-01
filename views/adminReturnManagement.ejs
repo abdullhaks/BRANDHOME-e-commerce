@@ -368,11 +368,10 @@
                                     <table class="table table-borderless table-striped table-earning">
                                         <thead>
                                             <tr>
-                                                <th>DATE</th>
-                                                <th>ORDER ID</th>
-                                                <th>CUSTOMER</th>
-                                                <th>ITEM</th>
-                                                <th>TOTAL</th>
+                                                <th>date</th>
+                                                <th>order ID</th>
+                                                <th>item&quantity</th>
+                                                <th>total</th>
                                                 <th>STATUS</th>
                                                 
                                             </tr>
@@ -382,14 +381,13 @@
                                             for (let i = 0; i < returns.length; i++) { %>
                                         <tbody>
                                             <tr>
-                                                <td> <%= new Date(returns[i].dateString).toLocaleDateString() %></td>
+                                                <td> <%= returns[i].requestDate.toLocaleDateString() %></td>
                                                 <td><%= returns[i].orderId %></td>
-                                                <td><%= returns[i].user %></td>
-                                                <td><%= returns[i].productDetails %></td>
-                                                <td>Rs <%= returns[i].totalAmount %></td>
+                                                <td><%= returns[i].item.productName %>-( <%= returns[i].item.quantity %>)</td>
+                                                <td>Rs <%= returns[i].item.payAmount %></td>
                                                 <td>
                                                     <select name="returnStatus"  value="<%=returns[i].returnStatus%>"  id="returnStatus" data-return-id="<%= returns[i]._id %>">
-                                                        <option><%=returns[i].returnStatus%></option>
+                                                        <option disabled selected><%=returns[i].returnStatus%></option>
                                                         <option >pending</option>
                                                         <option >approved</option>
                                                         <option >declined</option>
@@ -503,7 +501,6 @@
 $(document).ready(function() {
     // Change event handler for the order status select element
     $('select[name="returnStatus"]').change(function() {
-        var orderId = $(this).closest('tr').find('td:nth-child(2)').text(); // Extracting order ID from the table row
         var newStatus = $(this).val(); // Getting the selected status
         var returnId = $(this).data('return-id'); 
         
@@ -511,7 +508,7 @@ $(document).ready(function() {
         $.ajax({
             type: 'POST',
             url: '/admin/updateReturnStatus',
-            data: { orderId: orderId, newStatus: newStatus,returnId: returnId }, 
+            data: { newStatus: newStatus,returnId: returnId }, 
             success: function(response) {
                 // Handle success response
                 console.log(response);

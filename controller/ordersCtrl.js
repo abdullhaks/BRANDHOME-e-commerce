@@ -21,8 +21,7 @@ const loadOrders = async (req,res)=>{
     try{
         var user = await req.session.user ;
 
-      const cart = await Cart.findOne({email:user});
-      console.log(cart);
+     
 
       
 
@@ -33,9 +32,11 @@ const loadOrders = async (req,res)=>{
           { paymentOption: "wallet payment" ,paymentStatus: 1 },
           { paymentOption: "online payment", paymentStatus: 1 },
         ],
-      }).sort({ orderTime: -1 });
+      }).sort({ orderDate: -1 });
 
 
+      const cart = await Cart.findOne({email:user});
+ 
         var cartNo = 0;
         if (cart) {
             cartNo = cart.products.length;
@@ -61,59 +62,83 @@ const loadOrders = async (req,res)=>{
 
 const cancelOrder = async (req,res)=>{
     try{
-        const id = req.params.id;
-        const status = "cancelled"
-
+        var id = req.query.orderId.trim();  
+        var index = parseInt(req.query.itemNo.trim());
         var email = req.session.user;
 
-       
+
         const cart = await Cart.findOne({email:email});
-    
-         var cartNo = 0;
-        if(cart){
-         cartNo = cart.products.length;
+ 
+        var cartNo = 0;
+        if (cart) {
+            cartNo = cart.products.length;
+            console.log(cartNo);
         }
-    
-        const wishList = await WishList.findOne({email:email});
-    
-            var wishListNo = 0;
-            if(wishList){
-            wishListNo = wishList.products.length;
+
+      const wishList = await WishList.findOne({email:email});
+
+        var wishListNo = 0;
+        if(wishList){
+        wishListNo = wishList.products.length;
+        }
+
+
+        console.log('Order ID:', id);
+        console.log("Item index:", index);
+
+        // Retrieve the order by its _id, not orderId
+        const order = await Orders.findOne({ _id: id });
+
+        if (!order) {
+            console.log("Order not found");
+            return res.render("userSideErrors", { user:email,cartNo,wishListNo });
+        }
+
+        console.log("Item to be cancelled:", order.items[index]);
+
+        const user = await User.findOne({ email: email });
+
+        if (user && (order.paymentOption === "online payment" || order.paymentOption === "wallet payment")) {
+            // Refund the payment amount to the user's wallet
+            await User.updateOne({ email: email }, { $inc: { wallet: order.items[index].payAmount } });
+
+            const transactions = {
+                date: new Date(),
+                amount: order.items[index].payAmount,
+                status: "credit"
+            };
+            await Wallet.updateOne({ user: email }, { $push: { transactions: transactions } }, { upsert: true });
+        }
+
+        // Update the status of the specific item in the order
+        const updateResult = await Orders.updateOne(
+            { _id: id },
+            {
+                $set: {
+                    [`items.${index}.status`]: 'cancelled',
+                    [`items.${index}.cancelDate`]: new Date()
+                }
             }
+        );
 
-        const order = await Orders.findOne({_id:id });
-        const user = await User.findOne({email:email});
+        console.log("Update result:", updateResult);
 
-        if(user && order && (order.paymentOption=="online payment" || order.paymentOption=="wallet payment")){
-            await User.updateOne({email:email},{$inc:{wallet:order.purchaseDetails.payAmount}});
+        if (updateResult.matchedCount === 0) {
+            console.log("No order found with the given ID.");
+        } else if (updateResult.modifiedCount === 0) {
+            console.log("The document was found but not modified. Double-check the index or the existing status.");
+        } else {
+            console.log("Item status updated successfully.");
+        }
 
-            const transactions={
-                date:new Date(),
-                amount:order.purchaseDetails.payAmount,
-                status:"credit"
-              }
-              const trans = await Wallet.updateOne({user:email},{$push:{transactions:transactions}} ,{upsert:true});
-        };
-
-        const datenow = new Date(); 
-        const options = { 
-            
-            year: 'numeric',
-            month: 'numeric', 
-            day: 'numeric'
-        };
-        
-        const date = datenow.toLocaleDateString('en-GB', options);
-        
-            await Orders.updateOne({_id:id },{$set:{status:status}});
-
-            await  Orders.updateOne({_id:id },{$set:{cancelledDate:date}});
-
-            await Product.updateOne({_id:order.purchaseDetails.productId},{$inc:{salesCount:-order.purchaseDetails.quantity}});
-
-            await Product.updateOne({ _id: order.purchaseDetails.productId }, { $inc: { totalStock:order.purchaseDetails.quantity } });
     
-            await Stock.updateOne({ $and: [{productId:order.purchaseDetails.productId},{ productVariant:order.purchaseDetails.size }, { productColor:order.purchaseDetails.color }] },{$inc:{stock:order.purchaseDetails.quantity}});
+   
+
+            await Product.updateOne({_id:order.items[index].productId},{$inc:{salesCount:-order.items[index].quantity}});
+
+            await Product.updateOne({ _id: order.items[index].productId }, { $inc: { totalStock:order.items[index].quantity } });
+    
+            await Stock.updateOne({ $and: [{productId:order.items[index].productId},{ productVariant:order.items[index].size }, { productColor:order.items[index].color }] },{$inc:{stock:order.items[index].quantity}});
 
             
 
@@ -133,15 +158,15 @@ const loadOrderManagement = async(req,res)=>{
       const cart = await Cart.findOne({email:user});
 
       const orderId = req.query.orderId;
-      
+      const itemNo = req.query.itemNo;
 
 
       console.log("order id is "+orderId);
 
       const trimOrderId = orderId.trim();
     
-      const order = await Orders.findOne({_id:trimOrderId});
-
+      var order = await Orders.findOne({_id:trimOrderId});
+       var orderItem = order.items[itemNo];
       const product = await Product.findOne({_id:order.productId});
 
 
@@ -158,7 +183,7 @@ const loadOrderManagement = async(req,res)=>{
         wishListNo = wishList.products.length;
         }
 
-        return res.render("orderManagement",{user,cartNo,order,product,wishListNo});
+        return res.render("orderManagement",{user,cartNo,order,orderItem,product,wishListNo});
 
     }catch(error){
 
@@ -171,6 +196,9 @@ const loadOrderManagement = async(req,res)=>{
 
 const returnOrder = async (req,res)=>{
     try{
+
+        const id = req.query.orderId.trim();  
+        const index = parseInt(req.query.itemNo.trim());
 
         var user =  req.session.user ;
         const cart = await Cart.findOne({email:user});
@@ -188,15 +216,27 @@ const returnOrder = async (req,res)=>{
             }
     
             
-        const id = req.params.id;
+       
 
         const returnReason = req.body.returnReason;
 
          console.log("it is running"+returnReason);
 
         console.log("checking.....:",returnReason==="damaged");
+
         
         const result = await Orders.updateOne({_id:id },{$set:{returnStatus:1}});
+
+        const updateResult = await Orders.updateOne(
+            { _id: id },
+            {
+                $set: {
+                    [`items.${index}.returnStatus`]: 1,
+                    [`items.${index}.returnRequestOn`]: new Date()
+                }
+            }
+        );
+
 
         const order = await Orders.findOne({_id:id });
 
@@ -213,15 +253,12 @@ const returnOrder = async (req,res)=>{
         const date = datenow.toLocaleDateString('en-GB', options);
 
         const returns = new Returns ({
-            orderId:order._id,
+            orderId:order.orderId,
+            index:index,
             user:order.email,
-            productDetails:`${order.purchaseDetails.productBrand} ${order.purchaseDetails.productName} 
-            ${order.purchaseDetails.color} ${order.purchaseDetails.size} (${order.purchaseDetails.quantity})`,
-            totalAmount:order.purchaseDetails.payAmount,
+            item:order.items[index],
             returnReason:req.body.returnReason,
-            dateString:datenow,
-            returnDate:Date.now(),
-          
+            requestDate:order.items[index].returnRequestOn,
         });
 
         await returns.save();

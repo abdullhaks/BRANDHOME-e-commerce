@@ -120,50 +120,50 @@ const addtoCart = async (req, res) => {
 };
 
 
-const addtoCartFromWishlist = async (req, res) => {
-    try {
-        console.log("addtoCartFromWishlist is working now.....");
-        const { productId } = req.body;
-        const user = req.session.user;
+// const addtoCartFromWishlist = async (req, res) => {
+//     try {
+//         console.log("addtoCartFromWishlist is working now.....");
+//         const { productId } = req.body;
+//         const user = req.session.user;
 
-        console.log("product id is ", productId);
-        console.log("user is ", user);
+//         console.log("product id is ", productId);
+//         console.log("user is ", user);
 
-        // Find the user's cart
-        let cart = await Cart.findOne({ email: user });
+//         // Find the user's cart
+//         let cart = await Cart.findOne({ email: user });
 
-        // Check if the product is already in the cart
-        if (cart && cart.products.includes(productId)) {
-            return res.json({ success: true, msg: "Product already added to the cart" });
-        }
+//         // Check if the product is already in the cart
+//         if (cart && cart.products.includes(productId)) {
+//             return res.json({ success: true, msg: "Product already added to the cart" });
+//         }
 
-        // Add the product to the cart
-        await Cart.updateOne({ email: user }, { $push: { products: productId } }, { upsert: true });
+//         // Add the product to the cart
+//         await Cart.updateOne({ email: user }, { $push: { products: productId } }, { upsert: true });
 
-        // Remove the product from the wishlist
-        await WishList.updateOne({ email: user }, { $pull: { products: productId } });
+//         // Remove the product from the wishlist
+//         await WishList.updateOne({ email: user }, { $pull: { products: productId } });
 
-        // Get the updated wishlist and cart counts
-        const wishList = await WishList.findOne({ email: user });
-        const wishCount = wishList ? wishList.products.length : 0;
+//         // Get the updated wishlist and cart counts
+//         const wishList = await WishList.findOne({ email: user });
+//         const wishCount = wishList ? wishList.products.length : 0;
 
-        const products = [];
-        if (wishCount > 0) {
-            for (let i = 0; i < wishList.products.length; i++) {
-                const item = await Product.findById(wishList.products[i]);
-                products.push(item);
-            }
-        }
+//         const products = [];
+//         if (wishCount > 0) {
+//             for (let i = 0; i < wishList.products.length; i++) {
+//                 const item = await Product.findById(wishList.products[i]);
+//                 products.push(item);
+//             }
+//         }
 
-        cart = await Cart.findOne({ email: user });
-        const cartCount = cart ? cart.products.length : 0;
+//         cart = await Cart.findOne({ email: user });
+//         const cartCount = cart ? cart.products.length : 0;
 
-        res.json({ success: true, msg: "Product moved to cart", wishCount, cartCount, products });
-    } catch (error) {
-        res.json({ success: false, msg: "Something went wrong" });
-        console.error(error);
-    }
-};
+//         res.json({ success: true, msg: "Product moved to cart", wishCount, cartCount, products });
+//     } catch (error) {
+//         res.json({ success: false, msg: "Something went wrong" });
+//         console.error(error);
+//     }
+// };
 
 const removeFromCart = async (req, res) => {
     try {
@@ -206,5 +206,5 @@ module.exports = {
     addtoCart,
     loadCart,
     removeFromCart,
-    addtoCartFromWishlist,
+    // addtoCartFromWishlist,
 }

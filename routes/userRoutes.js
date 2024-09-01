@@ -144,9 +144,9 @@ userRoute.get("/orderPlaced",isBlocked.isBlocked,auth.isLogin,checkOutController
 userRoute.get ("/orders",isBlocked.isBlocked,auth.isLogin,ordersController.loadOrders);
 userRoute.get ("/orderManagement",isBlocked.isBlocked,auth.isLogin,ordersController.loadOrderManagement);
 
-userRoute.post ("/cancelOrder/:id",isBlocked.isBlocked,auth.isLogin,ordersController.cancelOrder);
+userRoute.post ("/cancelOrder",isBlocked.isBlocked,auth.isLogin,ordersController.cancelOrder);
 
-userRoute.post ("/returnOrder/:id",isBlocked.isBlocked,auth.isLogin,ordersController.returnOrder)
+userRoute.post ("/returnOrder",isBlocked.isBlocked,auth.isLogin,ordersController.returnOrder)
 
 //--------------------------------------
 

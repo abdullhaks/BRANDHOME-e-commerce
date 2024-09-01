@@ -183,6 +183,7 @@ const placeOrder = async(req,res)=>{
         const appliedCouponId= req.body.appliedCouponId;
         var productIds = []; 
         var productNames= [];
+        var products = [];
 
         // console.log("appliedCouponId is "+appliedCouponId);
         const totalAmount = parseInt(req.body.totalAmount);
@@ -190,7 +191,7 @@ const placeOrder = async(req,res)=>{
         
         
         var productCount = req.body.productCount ;
-        var orders = [];
+       
 
         // console . log ("product count is :"+ productCount);
 
@@ -200,7 +201,7 @@ const placeOrder = async(req,res)=>{
             var product = {
                
                 
-                
+                itemNo:i+1,
                 productId: formData[`productId${i}`],
                 productName: formData[`productName${i}`],
                 productBrand: formData[`productBrand${i}`],
@@ -214,6 +215,9 @@ const placeOrder = async(req,res)=>{
                 couponOffer:couponOff,
                 youSave:parseInt(formData[`discount${i}`], 10),
                 payAmount: parseInt(formData[`payAmount${i}`])+40,
+                orderDate:new Date(),
+                status:"pending",
+                returnStatus:0,
                 grandTotal:grandTotal,
 
             };
@@ -238,55 +242,57 @@ const placeOrder = async(req,res)=>{
                     const result = await Coupons.updateOne({_id:coupon._id},{$push : {users:user}},{upsert:true}); 
                 }
 
-            }
+            };
 
-
-                     const datenow = new Date(); 
-
-                     const options = { 
-            
-                            year: 'numeric',
-                            month: 'numeric', 
-                            day: 'numeric'
-                        };
-
-                    const date = datenow.toLocaleDateString('en-GB', options);
-
-                    const address = {
-                                email:user,
-                                firstName:req.body.firstName,
-                                lastName:req.body.lastName,
-                                shippingEmail:req.body.shippingEmail,
-                                mobile:req.body.mobile,
-                                country:req.body.country,
-                                state:req.body.state,
-                                city:req.body.city,
-                                street:req.body.street,
-                                postalCode:req.body.postalCode,
-                            };
-
-                            const order = new Orders ({
-                                        email:user,
-                                        orderId:user+id ,
-                                        purchaseDetails:product,
-                                        address:address,
-                                        paymentOption:req.body.paymentOption, 
-                                        orderDate:date,
-                                        orderTime:Date.now(),
-                             
-                                    });
-                            
-                                     
-                            
-                                    var result = await order.save();
-                                    orders.push(order);
-                            
-                                    // console.log("order details is "+ result);
-
-           
-
+            products.push(product);
            
         };
+
+        const generateOrderId = () => {
+            const prefix = 'BHodr'; // Your company's name
+            const timestamp = Date.now(); // Current timestamp
+            const randomValue = Math.floor(1000 + Math.random() * 9000); // Generates a 4-digit random number
+            
+            return `${prefix}-${timestamp}${randomValue}`;
+        };
+       
+
+       
+
+       
+
+       const address = {
+                   email:user,
+                   firstName:req.body.firstName,
+                   lastName:req.body.lastName,
+                   shippingEmail:req.body.shippingEmail,
+                   mobile:req.body.mobile,
+                   country:req.body.country,
+                   state:req.body.state,
+                   city:req.body.city,
+                   street:req.body.street,
+                   postalCode:req.body.postalCode,
+               };
+
+               const savedOrder = new Orders ({
+                           email:user,
+                           orderId: generateOrderId(user),
+                           items:products,
+                           address:address,
+                           paymentOption:req.body.paymentOption, 
+                           grandTotal:grandTotal,
+                           orderDate:new Date(),
+                       });
+               
+                        
+               
+                       var result = await savedOrder.save();
+            
+
+               
+                   
+                       console.log("result is ",result);
+
 
 
         const delResult = await CheckOut.deleteMany({user:user});
@@ -312,7 +318,7 @@ const placeOrder = async(req,res)=>{
                                     success:true,
                                     productNames:productNames,
                                     productIds:productIds,
-                                    orders:orders,
+                                    order:result,
                                     msg:"Order Created",
                                     order_id:order.id,
                                     receipt:order.receipt,
@@ -340,20 +346,20 @@ const placeOrder = async(req,res)=>{
                 
 
                  
-                 await Product.updateOne({ _id: orders[i].purchaseDetails.productId },
-                                                             { $inc: { totalStock:-orders[i].purchaseDetails.quantity } });
+                 await Product.updateOne({ _id: result.items[i].productId },
+                                                             { $inc: { totalStock:-result.items[i].quantity } });
 
-                 await Stock.updateOne({ $and: [{productId:orders[i].purchaseDetails.productId },
-                                                                    { productVariant: orders[i].purchaseDetails.size},
-                                                                    { productColor: orders[i].purchaseDetails.color}] },
-                                                                    {$inc:{stock:-orders[i].purchaseDetails.quantity}});
+                 await Stock.updateOne({ $and: [{productId:result.items[i].productId },
+                                                                    { productVariant: result.items[i].size},
+                                                                    { productColor: result.items[i].color}] },
+                                                                    {$inc:{stock:-result.items[i].quantity}});
 
                              
-                    var productId=orders[i].purchaseDetails.productId;
-                    var color=orders[i].purchaseDetails.color;
-                    var size=orders[i].purchaseDetails.size;
+                    var productId=result.items[i].productId;
+                    var color=result.items[i].color;
+                    var size=result.items[i].size;
 
-                const result = await Cart.updateOne(
+                const Result = await Cart.updateOne(
                     { email: user },
                     { $pull: { products: { productId,color, size } } }
                 );
@@ -381,20 +387,20 @@ const placeOrder = async(req,res)=>{
                         await Cart.updateOne({email:user},{$pull : {products:productIds[i]}});
 
 
-                        await Product.updateOne({ _id: orders[i].purchaseDetails.productId },
-                            { $inc: { totalStock:-orders[i].purchaseDetails.quantity } });
+                        await Product.updateOne({ _id: result.items[i].productId },
+                            { $inc: { totalStock:-result.items[i].quantity } });
 
-                        await Stock.updateOne({ $and: [{productId:orders[i].purchaseDetails.productId },
-                                                        { productVariant: orders[i].purchaseDetails.size},
-                                                        { productColor: orders[i].purchaseDetails.color}] },
-                                                        {$inc:{stock:-orders[i].purchaseDetails.quantity}});
+                        await Stock.updateOne({ $and: [{productId:result.items[i].productId },
+                                                        { productVariant: result.items[i].size},
+                                                        { productColor: result.items[i].color}] },
+                                                        {$inc:{stock:-result.items[i].quantity}});
 
 
-                            var productId=orders[i].purchaseDetails.productId;
-                            var color=orders[i].purchaseDetails.color;
-                            var size=orders[i].purchaseDetails.size;
+                            var productId=result.items[i].productId;
+                            var color=result.items[i].color;
+                            var size=result.items[i].size;
         
-                        const result = await Cart.updateOne(
+                        const Result = await Cart.updateOne(
                             { email: user },
                             { $pull: { products: { productId,color, size } } }
                         );
@@ -414,7 +420,7 @@ const placeOrder = async(req,res)=>{
                       }
                       const trans = await Wallet.updateOne({user:user},{$push:{transactions:transactions}} ,{upsert:true});
                        console.log("gtup",gtup);
-                      const paymntstts= await Orders.updateMany({ orderId: orders[0].orderId }, { $set: { paymentStatus: 1 } });
+                      const paymntstts= await Orders.updateOne({ orderId: result.orderId }, { $set: { paymentStatus: 1 } });
                        console.log("paymntstts is ",paymntstts);
                     res.status(200).send({
                         WALLET:true,});
@@ -493,11 +499,6 @@ const getStockFromPrductDetails = async (req, res) => {
 const loadOrderPlaced = async(req,res)=>{
     try{
 
-        req.session.products = '';
-        req.session.totalAmount= '';
-        req.session.totalOffer = '';
-        req.session.subTotal = '';
-
         var id = await req.session.user 
 
         const cart = await Cart.findOne({email:id});
@@ -531,7 +532,7 @@ const verifyPayment = async(req,res)=>{
 
         const user = req.session.user;
 
-        console . log ( req.body);
+      
 
         const { payment,order} = req.body;
 
@@ -557,31 +558,31 @@ const verifyPayment = async(req,res)=>{
 
                 console.log("payment success");
 
-                const result =  await Orders.updateMany({orderId:order.receipt},
+                const result =  await Orders.updateOne({orderId:order.receipt},
                                 {$set:{paymentStatus:1}});
 
-                                await Orders.updateMany({orderId:order.receipt},
+                                await Orders.updateOne({orderId:order.receipt},
                                     {$set:{transactionId:payment.razorpay_payment_id}});
 
 
-                                console.log(result);
+                                console.log("length is ",order.order.items.length);
 
-                                for (let i = 0; i < order.productIds.length; i++) {
+                                for (let i = 0; i < order.order.items.length; i++) {
                           
                                  
                                      await Cart.updateOne({email:user},{$pull : {products:order.productIds[i]}});
 
-                                     await Product.updateOne({ _id: orders[i].purchaseDetails.productId },
-                                        { $inc: { totalStock:-orders[i].purchaseDetails.quantity } });
+                                     await Product.updateOne({ _id: order.order.items[i].productId },
+                                        { $inc: { totalStock:-order.order.items[i].quantity } });
             
-                                    await Stock.updateOne({ $and: [{productId:orders[i].purchaseDetails.productId },
-                                                                    { productVariant: orders[i].purchaseDetails.size},
-                                                                    { productColor: orders[i].purchaseDetails.color}] },
-                                                                    {$inc:{stock:-orders[i].purchaseDetails.quantity}});
+                                    await Stock.updateOne({ $and: [{productId:order.order.items[i].productId },
+                                                                    { productVariant: order.order.items[i].size},
+                                                                    { productColor: order.order.items[i].color}] },
+                                                                    {$inc:{stock:-order.order.items[i].quantity}});
 
-                                        var productId=orders[i].purchaseDetails.productId;
-                                        var color=orders[i].purchaseDetails.color;
-                                        var size=orders[i].purchaseDetails.size;
+                                        var productId=order.order.items[i].productId;
+                                        var color=order.order.items[i].color;
+                                        var size=order.order.items[i].size;
                     
                                     const result = await Cart.updateOne(
                                         { email: user },

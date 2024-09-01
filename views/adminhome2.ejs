@@ -581,10 +581,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
             const index = labels.indexOf(day);
             if (index > -1) {
-                data[index] += sale.purchaseDetails.quantity;
+                data[index] += sale.item.quantity;
             } else {
                 labels.push(day);
-                data.push(sale.purchaseDetails.quantity);
+                data.push(sale.item.quantity);
             }
         });
         labels.reverse();
@@ -605,7 +605,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         const weekNumber = Math.ceil(date.getDate() / 7);
                         
                         // Accumulate sales data for the corresponding week
-                        data[weekNumber-1] += sale.purchaseDetails.quantity;
+                        data[weekNumber-1] += sale.item.quantity;
                     }
                 });
 
@@ -622,7 +622,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const month = date.getMonth(); // Month index (0-11)
             
             // Accumulate sales data for the corresponding month
-            data[month] += sale.purchaseDetails.quantity;
+            data[month] += sale.item.quantity;
         } 
             });
 
@@ -637,11 +637,11 @@ document.addEventListener("DOMContentLoaded", function() {
         const index = labels.indexOf(year);
         if (index > -1) {
             // If the year is already in the labels, accumulate the sales data
-            data[index] += sale.purchaseDetails.quantity;
+            data[index] += sale.item.quantity;
         } else {
             // If the year is not in the labels, add it
             labels.push(year);
-            data.push(sale.purchaseDetails.quantity);
+            data.push(sale.item.quantity);
         }
         });
         labels.reverse();

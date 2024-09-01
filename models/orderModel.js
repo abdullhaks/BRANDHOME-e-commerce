@@ -12,8 +12,8 @@ const orderSchema = new mongoose.Schema({
         type:String,
         required:true,
     } ,
-    purchaseDetails:{
-        type:Object,
+    items:{
+        type:Array,
         required:true,
     } ,
     address:{
@@ -24,6 +24,10 @@ const orderSchema = new mongoose.Schema({
         type:String,
         required:true,
     } ,
+    grandTotal:{
+        type:Number,
+        required:true,
+    },
     paymentStatus:{
         type:Number,
         default:0,
@@ -33,42 +37,9 @@ const orderSchema = new mongoose.Schema({
         type:String,
     },
     orderDate:{
-        type:String,
+        type:Date,
         required:true,
     },
-    dispatchedDate:{
-        type:String,
-        
-    },
-    deliveredDate:{
-        type:String,
-        
-    },
-    cancelledDate:{
-        type:String,
-    
-    },
-    orderTime:{
-        type:String,
-        required:true,
-    },
-    status:{
-        type:String,
-        default:"pending",
-        
-    } ,
-    returnCanceledOn:{
-        type:Number,
-    },
-    returnStatus:{
-        type:Number,
-        default:0,
-        
-    } ,
-    grandTotal:{
-        type:Number,
-    },
-   
     
 });
  

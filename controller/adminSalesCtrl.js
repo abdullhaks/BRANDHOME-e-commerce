@@ -224,10 +224,10 @@ const downloadPdf = async (req, res) => {
         sales.forEach((sale) => {
             doc.text(No, tableLeft, rowTop);
             doc.text(new Date(sale.deliveredDate).toLocaleDateString(), tableLeft + columnWidths.no, rowTop);
-            doc.text(sale.orderObjectId, tableLeft + columnWidths.no + columnWidths.date, rowTop);
-            doc.text(sale.purchaseDetails.productName, tableLeft + columnWidths.no + columnWidths.date + columnWidths.orderId, rowTop);
-            doc.text(sale.purchaseDetails.quantity, tableLeft + columnWidths.no + columnWidths.date + columnWidths.orderId + columnWidths.item, rowTop);
-            doc.text(`Rs ${sale.purchaseDetails.payAmount}`, tableRight, rowTop, { align: 'right' });
+            doc.text(sale.orderId, tableLeft + columnWidths.no + columnWidths.date, rowTop);
+            doc.text(sale.item.productName, tableLeft + columnWidths.no + columnWidths.date + columnWidths.orderId, rowTop);
+            doc.text(sale.item.quantity, tableLeft + columnWidths.no + columnWidths.date + columnWidths.orderId + columnWidths.item, rowTop);
+            doc.text(`Rs ${sale.item.payAmount}`, tableRight, rowTop, { align: 'right' });
             
             No++;
             rowTop += rowHeight;
@@ -242,7 +242,7 @@ const downloadPdf = async (req, res) => {
         doc.moveDown(3);
         var total = 0;
          for(let sale of sales ){
-            total += sale.purchaseDetails.payAmount;
+            total += sale.item.payAmount;
         };
         doc.fontSize(12).text(`TOTAL  : ${total}`,  tableRight, rowTop, { align: 'right' });
         
@@ -333,17 +333,17 @@ const downloadXl = async (req, res) => {
         sales.forEach(sale => {
             worksheet.addRow({
                 date: new Date(sale.deliveredDate).toLocaleDateString(),
-                orderId: sale.orderObjectId,
-                item: sale.purchaseDetails.productName,
-                quantity: sale.purchaseDetails.quantity,
-                amount: sale.purchaseDetails.payAmount,
+                orderId: sale.orderId,
+                item: sale.item.productName,
+                quantity: sale.item.quantity,
+                amount: sale.item.payAmount,
             });
         });
 
         
         var total = 0;
          for(let sale of sales ){
-            total += sale.purchaseDetails.payAmount;
+            total += sale.item.payAmount;
         };
        
 

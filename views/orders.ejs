@@ -180,82 +180,78 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Date</th>
-                                        <th>Product</th>
-                                        <th>Quantity</th>
-                                        <th >Total Price</th>
-                                        <th >Order Status</th>
+                                        <th>Order-id</th>
+                                        <th>GrandTotal</th>
+                                        <th>paymentType</th>
+                                        <th></th>
                                         <th class="text-right"></th>
-                                        
                                     </tr>
                                 </thead>
-    
-                                <% if (orders.length > 0) {
-                                    for (let i = 0; i < orders.length; i++) { %>
                                 <tbody>
-                                    <tr>
-                                        <td><%= i+1 %></td>
-                                        <td><%= orders[i].orderDate %></td>
-                                        <td>  <a href="/orderManagement?orderId= <%= orders[i]._id %>"><%= orders[i].purchaseDetails.productName %>, <%= orders[i].purchaseDetails.size %>, <%= orders[i].purchaseDetails.color %></a></td>
-                                        <td><%= orders[i].purchaseDetails.quantity %></td>
-                                        <td><%= orders[i].purchaseDetails.payAmount %></td>
-                                        <td><%= orders[i].status %></td>
-                                        
-                                       
-                                        <td>
-                                            <% if(orders[i].status !== 'delivered' && orders[i].status !== 'cancelled') { %>
-                                                <form id="cancelOrderForm" method="post" action="/cancelOrder/<%= orders[i]._id %>">
-
-                                                    <input type="hidden" id="cancelReason" name="cancelReason">
-                                                    <button class="btn btn-danger" type="button" onclick="showCancelConfirmation()">CANCEL ORDER</button>
-                                                </form>
+                                    <% if (orders.length > 0) { %>
+                                        <% for (let i = 0; i < orders.length; i++) { %>
+                                            <tr style="background-color: rgb(184, 185, 176);">
+                                                <td><%= i + 1 %></td>
+                                                <td><%= orders[i].orderDate.toLocaleDateString() %></td>
+                                                <td><%= orders[i].orderId%></td>
+                                                <td><%= orders[i].grandTotal %></td>
+                                                <td><%= orders[i].paymentOption %></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            
+                                            <% for (let j = 0; j < orders[i].items.length; j++) { %>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>Item <%=j+1%></td>
+                                                    <td>
+                                                        <a href="/orderManagement?orderId=<%=orders[i]._id%>&itemNo=<%= j %>">
+                                                            <%= orders[i].items[j].productName %>, <%= orders[i].items[j].size %>, <%= orders[i].items[j].color %>
+                                                        </a>
+                                                    </td>
+                                                    <td><%= orders[i].items[j].price %>x<%= orders[i].items[j].quantity %></td>
+                                                    <td><%= orders[i].items[j].payAmount %></td>
+                                                    <td><%= orders[i].items[j].status %></td>
+                                                    <td>
+                                                        <% if (orders[i].items[j].status !== 'delivered' && orders[i].items[j].status !== 'cancelled') { %>
+                                                            <form id="cancelOrderForm<%= j %>" method="post" action="/cancelOrder?orderId=<%=orders[i]._id%>&itemNo=<%= j %>">
+                                                                <input type="hidden" id="cancelReason" name="cancelReason">
+                                                                <button class="btn btn-danger" type="button" onclick="showCancelConfirmation('<%= j %>')">CANCEL ORDER</button>
+                                                            </form>
+                                                        <% } %>
+                            
+                                                        <% if (orders[i].items[j].status == 'cancelled') { %>
+                                                            <p class="text-danger">Cancelled</p>
+                                                        <% } %>
+                            
+                                                        <% if (orders[i].items[j].status == 'delivered') { %>
+                                                            <% if (orders[i].items[j].returnStatus == 0 && currentTime < new Date(orders[i].items[j].returnExp)) { %>
+                                                                <form id="returnOrderForm<%= j %>" method="post" action="/returnOrder?orderId=<%= orders[i]._id %>&itemNo=<%= j %>">
+                                                                    <input type="hidden" id="returnReason" name="returnReason">
+                                                                    <button class="btn btn-warning" type="button" onclick="showReturnConfirmation('<%= j %>')">RETURN ORDER</button>
+                                                                </form>
+                                                            <% } else if (orders[i].items[j].returnStatus == 1) { %>
+                                                                <p class="text-primary">Returned - Pending</p>
+                                                            <% } else if (orders[i].items[j].returnStatus == 2) { %>
+                                                                <p class="text-primary">Returned</p>
+                                                            <% } else if (orders[i].items[j].returnStatus == 3) { %>
+                                                                <p class="text-primary">Returned - Declined</p>
+                                                            <% } else if (currentTime >= new Date(orders[i].returnCanceledOn)) { %>
+                                                                <p class="text-success">Delivered</p>
+                                                            <% } %>
+                                                        <% } %>
+                                                    </td>
+                                                </tr>
                                             <% } %>
-
-                                            <% if(orders[i].status == 'cancelled') { %>
-                                                <p class="text-danger">Cancelled</p>
-                                            <% } %>
-
-                                            <% if(orders[i].status == 'delivered' & orders[i].returnStatus == 0 & currentTime < orders[i].returnCanceledOn) { %>
-                                                <form id="returnOrderForm" method="post" action="/returnOrder/<%= orders[i]._id %>">
-
-                                                    <input type="hidden" id="returnReason" name="returnReason">
-                                                    <button class="btn btn-warning" type="button" onclick="showReturnConfirmation()">RETURN ORDER</button>
-                                                </form>
-                                            <% } %>
-
-                                            <% if(orders[i].status == 'delivered' & orders[i].returnStatus == 1) { %>
-                                                <p class="text-primary">returned - pending </p>
-                                            <% } %>
-
-                                            <% if(orders[i].status == 'delivered' & orders[i].returnStatus == 2) { %>
-                                                <p class="text-primary">returned</p>
-                                            <% } %>
-
-                                            <% if(orders[i].status == 'delivered' & orders[i].returnStatus == 3) { %>
-                                                <p class="text-primary">returned - declined</p>
-                                            <% } %>
-
-                                            <% if(orders[i].status == 'delivered' & currentTime >= orders[i].returnCanceledOn) { %>
-                                                <p class="text-success">delivered</p>
-                                            <% } %>
-                                        </td>
-                    
-                                       
-                                    </tr>
+                                        <% } %>
+                                    <% } else { %>
+                                        <tr>
+                                            <td colspan="7">Orders not found...</td>
+                                        </tr>
+                                    <% } %>
                                 </tbody>
-                                <% }
-                                   
-                                
-                            } else { %>
-    
-                                <tbody>
-                                <tr>
-                                    <td colspan="5">
-                                        Users not found...
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <% } %>
                             </table>
+                            
                         </div>
                     </div>
                     
@@ -363,7 +359,7 @@
 
 <script>
 
-function showCancelConfirmation() {
+function showCancelConfirmation(no) {
         Swal.fire({
             title: 'Cancel Order',
             html:
@@ -389,14 +385,14 @@ function showCancelConfirmation() {
             }
         }).then((result) => {
             if (result.isConfirmed) {
-                document.getElementById('cancelOrderForm').submit();
+                document.getElementById('cancelOrderForm'+no).submit();
             }
         });
     };
 
 
 
-    function showReturnConfirmation() {
+    function showReturnConfirmation(no) {
         Swal.fire({
             title: 'Return Order',
             html:
@@ -423,7 +419,7 @@ function showCancelConfirmation() {
             }
         }).then((result) => {
             if (result.isConfirmed) {
-                document.getElementById('returnOrderForm').submit();
+                document.getElementById('returnOrderForm'+no).submit();
             }
         });
     }

@@ -410,8 +410,7 @@
                                                 <th>date</th>
                                                 <th>order ID</th>
                                                 <th>email</th>
-                                                <th class="text-right">item</th>
-                                                <th class="text-right">quantity</th>
+                                                <th class="text-right">item&quantity</th>
                                                 <th class="text-right">total</th>
                                             </tr>
                                         </thead>
@@ -422,21 +421,18 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <%= new Date(sales[i].deliveredDate).toLocaleDateString() %>
+                                                            <%= sales[i].deliveredDate.toLocaleDateString() %>
                                                         </td>
                                                         <td>
-                                                            <%= sales[i].orderObjectId %>
+                                                            <%= sales[i].orderId %>
                                                         </td>
                                                         <td>
                                                             <%= sales[i].email %>
                                                         </td>
                                                         <td class="">
-                                                            <%= sales[i].purchaseDetails.productName %>
+                                                            <%= sales[i].item.productName %>-( <%= sales[i].item.quantity %>)
                                                         </td>
-                                                        <td class="">
-                                                            <%= sales[i].purchaseDetails.quantity %>
-                                                        </td>
-                                                        <td class="text-left">Rs<%= sales[i].purchaseDetails.payAmount
+                                                        <td class="text-left">Rs<%= sales[i].item.payAmount
                                                                 %>
                                                     </tr>
 
@@ -446,7 +442,7 @@
                                                     <%}else{%>
                                                         <tbody>
                                                             <tr>
-                                                                <td colspan="6">
+                                                                <td colspan="5">
                                                                     No Sales Yet..
                                                                 </td>
                                                             </tr>
@@ -556,8 +552,7 @@
                                         <th>Date</th>
                                         <th>Order ID</th>
                                         <th>Email</th>
-                                        <th class="text-right">Item</th>
-                                        <th class="text-right">Quantity</th>
+                                        <th class="text-right">Item&Quantity</th>
                                         <th class="text-right">Total</th>
                                     </tr>
                                 </thead>
@@ -567,12 +562,11 @@
                             res.sales.forEach(sale => {
                                 salesData += `
                                 <tr>
-                                    <td>${new Date(sale.deliveredDate).toLocaleDateString()}</td>
-                                    <td>${sale.orderObjectId}</td>
+                                    <td>${new Date(sale.deliveredDate).toLocaleDateString('en-GB')}</td>
+                                    <td>${sale.orderId}</td>
                                     <td>${sale.email}</td>
-                                    <td class="">${sale.purchaseDetails.productName}</td>
-                                    <td class="">${sale.purchaseDetails.quantity}</td>
-                                    <td class="text-left">Rs ${sale.purchaseDetails.payAmount}</td>
+                                    <td class="">${sale.item.productName}-(${sale.item.quantity})</td>
+                                    <td class="text-left">Rs ${sale.item.payAmount}</td>
                                 </tr>`;
                             });
 
