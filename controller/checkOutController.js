@@ -711,5 +711,4 @@ module.exports = {
     getStockFromPrductDetails,
     loadCheckOut,
     completePayment,
-
 }
