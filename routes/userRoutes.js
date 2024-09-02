@@ -134,6 +134,8 @@ userRoute.post ("/checkCoupon",isBlocked.isBlocked,auth.isLogin,couponController
 
 userRoute.post("/placeOrder",isBlocked.isBlocked,auth.isLogin,checkOutController.placeOrder);
 
+userRoute.post("/completePayment",isBlocked.isBlocked,auth.isLogin,checkOutController.completePayment);
+
 userRoute.get("/orderPlaced",isBlocked.isBlocked,auth.isLogin,checkOutController.loadOrderPlaced);
  
 
@@ -146,7 +148,9 @@ userRoute.get ("/orderManagement",isBlocked.isBlocked,auth.isLogin,ordersControl
 
 userRoute.post ("/cancelOrder",isBlocked.isBlocked,auth.isLogin,ordersController.cancelOrder);
 
-userRoute.post ("/returnOrder",isBlocked.isBlocked,auth.isLogin,ordersController.returnOrder)
+userRoute.post ("/returnOrder",isBlocked.isBlocked,auth.isLogin,ordersController.returnOrder);
+
+userRoute.get ("/downloadInvoice/:orderId",isBlocked.isBlocked,auth.isLogin,ordersController.getInvoice);
 
 //--------------------------------------
 

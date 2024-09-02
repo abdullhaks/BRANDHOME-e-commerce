@@ -196,8 +196,21 @@
                                                 <td><%= orders[i].orderId%></td>
                                                 <td><%= orders[i].grandTotal %></td>
                                                 <td><%= orders[i].paymentOption %></td>
-                                                <td></td>
-                                                <td></td>
+                                                
+                                                    <%if(orders[i].paymentOption=="online payment"&&orders[i].paymentStatus==0){ %>
+                                                    <td>   
+                                                        <a class="btn-sm btn-warning completePayment" href="" data-id="<%= orders[i]._id %>">complete payment</a>
+                                                    </td>
+                                                    <td></td>
+                                                    <%}else{%>
+                                                        <td></td>
+                                                        <td>
+                                                            <a href="/downloadInvoice/<%= orders[i]._id %>" class="text-success">get invoice</a>
+
+                                                        </td>
+                                                    <% } %>
+                                                
+                                               
                                             </tr>
                                             
                                             <% for (let j = 0; j < orders[i].items.length; j++) { %>
@@ -213,6 +226,10 @@
                                                     <td><%= orders[i].items[j].payAmount %></td>
                                                     <td><%= orders[i].items[j].status %></td>
                                                     <td>
+
+                                                        <%if(orders[i].paymentOption=="online payment"&&orders[i].paymentStatus==0){ %>
+
+                                                        <%}else {%>
                                                         <% if (orders[i].items[j].status !== 'delivered' && orders[i].items[j].status !== 'cancelled') { %>
                                                             <form id="cancelOrderForm<%= j %>" method="post" action="/cancelOrder?orderId=<%=orders[i]._id%>&itemNo=<%= j %>">
                                                                 <input type="hidden" id="cancelReason" name="cancelReason">
@@ -236,9 +253,9 @@
                                                                 <p class="text-primary">Returned</p>
                                                             <% } else if (orders[i].items[j].returnStatus == 3) { %>
                                                                 <p class="text-primary">Returned - Declined</p>
-                                                            <% } else if (currentTime >= new Date(orders[i].returnCanceledOn)) { %>
-                                                                <p class="text-success">Delivered</p>
                                                             <% } %>
+                                                        <% } %>
+
                                                         <% } %>
                                                     </td>
                                                 </tr>
@@ -342,6 +359,7 @@
 
 
     <!-- JavaScript Libraries -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="/lib/easing/easing.min.js"></script>
@@ -358,6 +376,21 @@
 </body>
 
 <script>
+
+
+function popup (popupMsg){
+
+        
+
+Swal.fire({
+               title: 'Message',
+               text: popupMsg,
+               //icon: 'success',
+               timer: 10000,
+               showConfirmButton: false,
+           })
+};
+
 
 function showCancelConfirmation(no) {
         Swal.fire({
@@ -422,7 +455,123 @@ function showCancelConfirmation(no) {
                 document.getElementById('returnOrderForm'+no).submit();
             }
         });
-    }
+    };
+
+
+
+
+function verifyPayment(order, payment) {
+        $.ajax({
+            url: "/verifyPayment",
+            type: "POST",
+            data:{order, payment},
+            success:  (res)=> {
+                if (res.status){
+
+                    popup("payment successfull");
+                    setTimeout(function () {
+                        window.location.href = "/orderPlaced";
+                    }, 1500);
+
+                   
+                   
+                }else if(res.outofStock){
+
+                    popup("item out of stock now. that's why your order automatically cancelled");
+                    setTimeout(function () {
+                        window.location.href = "/orderPlaced";
+                    }, 1500);
+
+
+                }else{
+                    
+
+                    window.location.href = "#";
+                    popup(res.errorMsg);
+                }
+            }
+        });
+    };
+
+document.addEventListener("DOMContentLoaded", function() {
+document.querySelectorAll(".completePayment").forEach(function(element) {
+element.addEventListener("click", function(e) {
+    e.preventDefault();
+    console.log("working....1")
+    var id = $(this).data('id');
+    
+    console.log("working....2")
+    $.ajax({
+        url: "/completePayment",
+        type: 'POST',
+        data: {id:id},
+        success: function (res) {
+            if (res.success) {
+
+console . log ("res is ",res);
+
+   var options = {
+       "key": "" + res.key_id + "", // Enter the Key ID generated from the Dashboard
+       "amount": "" + res.amount + "", 
+       "currency": "INR",
+       "name": "" + res.company_name + "",
+       "description": "" + res.description + "",
+       "image": "/images/BRAND HOME.jpg",
+       "order_id": ""+res.order_id+"", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+       "handler": function (response) {
+           // alert(response.razorpay_payment_id);
+           // alert(response.razorpay_order_id);
+           // alert(response.razorpay_signature);
+
+         
+
+           verifyPayment(res,response);
+       },
+       "prefill": {
+           "user": "" + res.user + "",
+           "email": "" + res.email + "",
+           "contact": "" + res.contact + "",
+       },
+       "notes": {
+           "description": "" + res.description + "",
+       },
+       "theme": {
+           "color": "#cf7e90"
+       }
+   };
+
+   var razorpayObject = new Razorpay(options);
+   razorpayObject.on('payment.failed', function (response) {
+       popup("Payment Failed");
+       // alert(response.error.code);
+       // alert(response.error.description);
+       // alert(response.error.source);
+       // alert(response.error.step);
+       // alert(response.error.reason);
+       // alert(response.error.metadata.order_id);
+       // alert(response.error.metadata.payment_id);
+       setTimeout(function(){
+           window.location.href = "/orders";
+       },1000);
+       
+   });
+
+   
+
+   razorpayObject.open();
+
+
+}
+        }
+    });
+
+    
+});
+});
+});
+
+
+
 </script>
 
 </html>

@@ -15,6 +15,9 @@ const validator = require("validator");
 const mail = require("../middleware/mail")
 const otpGenerator = require('otp-generator');
 const session = require("express-session");
+const easyinvoice = require('easyinvoice');
+const fs = require('fs');
+const path = require('path');
 
 
 const loadOrders = async (req,res)=>{ 
@@ -30,7 +33,7 @@ const loadOrders = async (req,res)=>{
         $or: [
           { paymentOption: "cash on delivery" },
           { paymentOption: "wallet payment" ,paymentStatus: 1 },
-          { paymentOption: "online payment", paymentStatus: 1 },
+          { paymentOption: "online payment" },
         ],
       }).sort({ orderDate: -1 });
 
@@ -271,6 +274,80 @@ const returnOrder = async (req,res)=>{
         console.log(error);
         return res.render("userSideErrors",{user,cartNo,wishListNo});
     }
+};
+
+
+const getInvoice = async(req,res)=>{
+    try{
+        const orderId = req.params.orderId;
+       
+        const order = await Orders.findById(orderId);
+
+        if (!order) {
+            return res.status(404).send('Order not found');
+        }
+
+        // Generate invoice data using easyinvoice
+        const invoiceData = {
+            "documentTitle": "INVOICE", // Defaults to INVOICE
+            "currency": "INR",
+            "taxNotation": "GST", // GST/VAT
+            "marginTop": 25,
+            "marginRight": 25,
+            "marginLeft": 25,
+            "marginBottom": 25,
+            "logo": "https://public.easyinvoice.cloud/img/logo_en_original.png",
+            "sender": {
+                "company": "BRANDHOME co",
+                "address": "near city centre malappuram",
+                "zip": "12345",
+                "city": "malappuram,kerala",
+                "country": "India",
+               
+            },
+            "client": {
+                "company": `${order.address.firstName} ${order.address.lastName}`,
+                "address": order.address.street,
+                "zip": order.address.postalCode,
+                "city": order.address.city,
+                "country": order.address.country
+            },
+            "invoiceNumber": order.orderId,
+            "invoiceDate": new Date(order.orderDate).toLocaleDateString(),
+            "products": order.items.map(item => ({
+                "quantity": item.quantity,
+                "description": `${item.productName}, ${item.size}, ${item.color}`,
+                "tax": 0, // Set tax if applicable
+                "price": item.payAmount
+            })),
+            "bottomNotice": "Thank you for your purchase!" // Customize the bottom notice
+        };
+
+     // Generate the PDF
+     const result = await easyinvoice.createInvoice(invoiceData);
+
+     // Define the directory and file path
+     const invoicesDir = path.join(__dirname, '..', 'invoices');
+     const filePath = path.join(invoicesDir, `invoice_${orderId}.pdf`);
+
+     // Check if the directory exists, if not, create it
+     if (!fs.existsSync(invoicesDir)) {
+         fs.mkdirSync(invoicesDir, { recursive: true });
+     }
+
+     // Save the PDF to the server
+     fs.writeFileSync(filePath, result.pdf, 'base64');
+
+     // Send the PDF to the user
+     res.download(filePath, `invoice_${orderId}.pdf`, () => {
+         // Optionally delete the file after sending it
+         fs.unlinkSync(filePath);
+     });
+    }catch(error){
+        console.log(error);
+        res.status(500).send('An error occurred while generating the invoice.');
+        
+    }
 }
 
 module.exports = {
@@ -278,5 +355,6 @@ module.exports = {
     cancelOrder,
     loadOrderManagement,
     returnOrder,
+    getInvoice,
 }
 

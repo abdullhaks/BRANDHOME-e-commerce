@@ -1096,7 +1096,7 @@ function checkCOD() {
                 }
             }
         });
-    }
+    };
 
 
     $(document).ready(function () {
@@ -1154,7 +1154,13 @@ function checkCOD() {
                             // alert(response.error.reason);
                             // alert(response.error.metadata.order_id);
                             // alert(response.error.metadata.payment_id);
+                            setTimeout(function(){
+                                window.location.href = "/orders";
+                            },1000);
+                            
                         });
+
+                        
 
                         razorpayObject.open();
 

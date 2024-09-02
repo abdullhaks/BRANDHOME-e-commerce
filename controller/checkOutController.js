@@ -155,11 +155,102 @@ const addToCheckOut = async(req,res)=>{
 
 
 
+const completePayment = async (req, res) => {
+    try {
+        var user = req.session.user;
+        var id = req.body.id;
+        console.log("id is........",id);
+
+        const result = await Orders.findById(id);
+console.log("rsult is ;....",result);
+        var stockCheck=true;
+
+
+      async  function getStock (size, color, productId){
+            const stock = await Stock.findOne({
+                productId,
+                productVariant: size,
+                productColor: color
+            });
+    
+            if (!stock||stock<1) {
+                stockCheck = false;
+            }
+        };
+
+        let productNames = [], productIds = [];
+
+        for(let item of result.items){
+            productNames.push(item.productName);
+            productIds.push(item.productId);
+
+            getStock(item.size,item.color,item.productId)
+        };
+
+        if(stockCheck){
+            const paymentOptions = {
+                amount: result.grandTotal * 100,
+                currency: 'INR',
+                receipt: result.orderId // Unique order ID
+            };
+    
+            await razorpay.orders.create(paymentOptions,
+                (err, order) => {
+                    if (!err) {
+                        res.status(200).send({
+                            success: true,
+                            productNames: productNames,
+                            productIds: productIds,
+                            order: result,
+                            msg: "Order Created",
+                            order_id: order.id,
+                            receipt: order.receipt,
+                            amount: order.amount,
+                            key_id: 'rzp_test_vDeFV4rhwkWFgQ',
+                            company_name: 'BRANDHOME',
+                            description: productNames.join(","),
+                            contact: result.address.mobile,
+                            user: order.email,
+                            email: result.address.shippingEmail
+                        });
+                    } else {
+                        res.status(400).send({ success: false, msg: "Something went wrong" });
+                        console.log(err);
+                    }
+                });
+
+        }else{
+
+
+            result.items.forEach(async function(item,index){
+                const updateResult = await Orders.updateOne(
+                    { _id: result._id },
+                    {
+                        $set: {
+                            [`items.${index}.status`]: 'cancelled',
+                            [`items.${index}.cancelDate`]: new Date()
+                        }
+                    }
+                );
+            });
+
+            res.json({outofStock:true})
+          
+        }
+
+    
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+
 const placeOrder = async(req,res)=>{
     try{
         var user = req.session.user;
 
-       console .log("user is ",user);
 
         const checkCart = await Cart.findOne({ email: user });
         console.log("check cart is ",checkCart.products.length);
@@ -173,8 +264,6 @@ const placeOrder = async(req,res)=>{
         console.log(req.body.paymentOption);
 
         const formData = req.body;
-
-        var id = Date.now();
 
         const totalOffer= parseInt(req.body.totalOffer);
         var grandTotal= parseInt(req.body.grandTotal);
@@ -384,9 +473,6 @@ const placeOrder = async(req,res)=>{
 
                     for (let i = 0; i < productCount; i++) {
 
-                        await Cart.updateOne({email:user},{$pull : {products:productIds[i]}});
-
-
                         await Product.updateOne({ _id: result.items[i].productId },
                             { $inc: { totalStock:-result.items[i].quantity } });
 
@@ -443,6 +529,7 @@ const placeOrder = async(req,res)=>{
         res.status(500).json({ success: false, msg: "Server error" });
     }
 };
+
 
 const getStock = async (req, res) => {
     try {
@@ -623,5 +710,6 @@ module.exports = {
     verifyPayment,
     getStockFromPrductDetails,
     loadCheckOut,
+    completePayment,
 
 }
