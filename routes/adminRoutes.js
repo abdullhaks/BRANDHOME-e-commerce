@@ -94,26 +94,65 @@ adminRoute.post("/listCategory/:categoryName",auth.isLogin,
 adminRoute.get("/allProducts",auth.isLogin,
   isAdmin.isAdmin, productController.loadAllProducts);
 
+
+  adminRoute.get ("/addProduct",productController.loadAddProduct)
+
+
+  const storage = multer.diskStorage({
+      destination: function (req, file, cb) {
+          cb(null, path.join(__dirname, '../public/productImages'));
+      },
+      filename: function (req, file, cb) {
+          cb(null, Date.now() + '_' + file.originalname);
+      }
+  });
+  
+  const upload = multer({
+      storage: storage,  
+      limits: { fileSize: 1000000 } // Limit file size if needed
+    }).fields([
+      { name: 'image1', maxCount: 1 },
+      { name: 'image2', maxCount: 1 },
+      { name: 'image3', maxCount: 1 }
+    ]); 
+  
+  
+  
+  // Assuming productController.addProduct is a function handling the logic of adding a product
+  adminRoute.post("/addProduct",upload, productController.addProduct);
+
+
+
+
+
+
+
+
+
+
+
+
+
 adminRoute.get("/ProductEdit",auth.isLogin,
   isAdmin.isAdmin, productController.loadProductEdit);
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, "../public/productImages"));
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + "_" + file.originalname);
-  },
-});
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, path.join(__dirname, "../public/productImages"));
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, Date.now() + "_" + file.originalname);
+//   },
+// });
 
-const upload = multer({
-  storage: storage,
-  limits: { fileSize: 1000000 }, // Limit file size if needed
-}).fields([
-  { name: "image1", maxCount: 1 },
-  { name: "image2", maxCount: 1 },
-  { name: "image3", maxCount: 1 },
-]);
+// const upload = multer({
+//   storage: storage,
+//   limits: { fileSize: 1000000 }, // Limit file size if needed
+// }).fields([
+//   { name: "image1", maxCount: 1 },
+//   { name: "image2", maxCount: 1 },
+//   { name: "image3", maxCount: 1 },
+// ]);
 
 adminRoute.post("/ProductEdit",auth.isLogin,
   isAdmin.isAdmin, upload, productController.editProduct);

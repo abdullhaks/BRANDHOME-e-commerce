@@ -69,8 +69,8 @@ app.use ("/admin",adminRoute)
 
 //-----------------------------------
 
-const productRoute = require("./routes/productRoutes");   
-app.use ("/product",productRoute)
+// const productRoute = require("./routes/productRoutes");   
+// app.use ("/product",productRoute);
 
 //-----------------------------------
 const portNo = process.env.PORT_NO;
