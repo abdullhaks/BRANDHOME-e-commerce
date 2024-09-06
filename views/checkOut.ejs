@@ -551,68 +551,68 @@
                     <div class="col-md-6 form-group">
                         <label>First Name</label>
                         <input class="form-control" type="text" placeholder="John" name="firstName"
-                            required minlength="3" maxlength="30">
+                            required minlength="3" maxlength="30"
+                            style="border: 1px solid rgb(196, 190, 190); border-radius: 5px;">
                     </div>
 
                     <div class="col-md-6 form-group">
                         <label>Last Name</label>
                         <input class="form-control" type="text" placeholder="Doe" name="lastName"
-                            required minlength="1" maxlength="20">
+                            required minlength="1" maxlength="20"
+                            style="border: 1px solid rgb(196, 190, 190); border-radius: 5px;">
                     </div>
 
                     <div class="col-md-6 form-group">
                         <label>E-mail</label>
                         <input class="form-control" type="email" placeholder="example@email.com"
-                            name="shippingEmail" required>
+                            name="shippingEmail" required
+                            style="border: 1px solid rgb(196, 190, 190); border-radius: 5px;">
                     </div>
 
                     <div class="col-md-6 form-group">
                         <label>Mobile No</label>
                         <input class="form-control" type="text" placeholder="6745 3456 564"
-                            name="mobile" required minlength="10" maxlength="10">
+                            name="mobile" required minlength="10" maxlength="10"
+                            style="border: 1px solid rgb(196, 190, 190); border-radius: 5px;">
                     </div>
 
                     <div class="col-md-6 form-group">
                         <label>Country</label>
                         <input class="form-control" type="text" placeholder="India" name="country"
-                            required>
-                                        <!-- <select class="custom-select" name="country">
-                            <option selected>United States</option>
-                            <option>Afghanistan</option>
-                            <option>Albania</option>
-                            <option>Algeria</option>
-                        </select> -->
+                            required
+                            style="border: 1px solid rgb(196, 190, 190); border-radius: 5px;">
+                                      
                     </div>
 
                     <div class="col-md-6 form-group">
                         <label>State</label>
                         <input class="form-control" type="text" placeholder="kerala" name="state"
-                            required>
+                            required
+                            style="border: 1px solid rgb(196, 190, 190); border-radius: 5px;">
                     </div>
 
                     <div class="col-md-6 form-group">
                         <label>City</label>
                         <input class="form-control" type="text" placeholder="kochi" name="city"
-                            required>
+                            required
+                            style="border: 1px solid rgb(196, 190, 190); border-radius: 5px;">
                     </div>
 
                     <div class="col-md-6 form-group">
                         <label>Street</label>
                         <input class="form-control" type="text" placeholder="123 Street"
-                            name="street" required>
+                            name="street" required
+                            style="border: 1px solid rgb(196, 190, 190); border-radius: 5px;">
                     </div>
 
                     <div class="col-md-6 form-group">
                         <label>Postal Code</label>
                         <input class="form-control" type="text" placeholder="345676"
-                            name="postalCode" required minlength="6" maxlength="6">
+                            name="postalCode" required minlength="6" maxlength="6"
+                            style="border: 1px solid rgb(196, 190, 190); border-radius: 5px;">
                     </div>
 
-                    <!-- <div
-                        class="col-md-12 form-group d-flex flex-column align-items-center justify-content-center">
-                        <button type="submit" class="btn btn-success ">Add Address</button>
-                    </div> -->
-
+                 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <input type="submit" value="Add Address" id="placeOrder"
@@ -950,17 +950,17 @@ async function cancelCoupon() {
     };
 
     function checkWallet (){
-        let userWallet = document.getElementById("userWallet").value;
-        let grandTotal = document.getElementById("grandTotal").value;
+
+        let userWallet = parseInt(document.getElementById("userWallet").value); 
+        let grandTotal = parseInt(document.getElementById("grandTotal").value);
 
         console.log("userWaller and grandTotal are ",userWallet,grandTotal);
 
-        if(userWallet<grandTotal){
-
+        if(userWallet>grandTotal){
+            document.getElementById("walletPayment").disabled=false;   
+        }else{ 
             document.getElementById("walletPayment").disabled=true;
-        }else{
-            document.getElementById("walletPayment").disabled=false;
-        }
+        };
 
     };
 

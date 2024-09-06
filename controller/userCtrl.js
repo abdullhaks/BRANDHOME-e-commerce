@@ -325,13 +325,15 @@ const loadHome = async (req,res)=>{
       };
 
       const wishList = await WishList.findOne({email:id});
-
-      
-    
         var wishListNo = 0;
         if(wishList){
         wishListNo = wishList.products.length;
-        }
+        };
+
+        const popularProduct = await Product.find({}).sort({ salesCount: -1 }).limit(8)
+        const popularCategory = await Category.find({}).sort({ salesCount: -1 }).limit(6)
+
+
       
       req.session.user_id = id
       req.session.user = id;
@@ -341,7 +343,7 @@ const loadHome = async (req,res)=>{
         res.set('Expires', '-1');
         res.set('Pragma', 'no-cache');
        
-      return  res.render("home",{user:id,cartNo,categories,wishListNo});
+      return  res.render("home",{user:id,cartNo,categories,wishListNo,popularProduct,popularCategory});
 
     }catch(error){
         console.log(error);

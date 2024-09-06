@@ -183,7 +183,7 @@ const addProductOffer = async(req,res)=>{
        
         console.log("Product offer added successfully.");
 
-        res.redirect("/admin/productOffersManagement")
+        res.redirect("/admin/offersManagement")
 
     }catch(error){
         console.log(error);
@@ -219,7 +219,7 @@ const addCategoryOffer = async (req, res) => {
        
         console.log("Category offer added successfully.");
 
-        res.redirect("/admin/categoryOffersManagement")
+        res.redirect("/admin/offersManagement")
 
     } catch (error) {
         console.log(error);

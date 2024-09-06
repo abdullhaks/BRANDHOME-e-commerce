@@ -38,9 +38,6 @@ input.form-control {
 
 <body>
 
-    
-
-    
     <!-- Topbar Start -->
     <div class="container-fluid">
         <div class="row bg-secondary py-2 px-xl-5">
@@ -292,7 +289,7 @@ input.form-control {
                                                         data-size="<%=variants[i].size%>"
                                                         data-index="<%= i %>"
                                                        >
-                                                        <i class="fas fa-trash text-primary mr-1"></i>Cancel
+                                                        <i class="fas fa-times text-primary mr-1"></i>
                                                     </a>
                                                 </td>
                                             </tr>
@@ -443,6 +440,7 @@ input.form-control {
     <!-- Contact Javascript File -->
     <script src="mail/jqBootstrapValidation.min.js"></script>
     <script src="mail/contact.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Template Javascript -->
     <script src="/js/main2.js"></script>
@@ -565,23 +563,37 @@ document.querySelectorAll('a[id^="decrease"]').forEach(button => {
 });
 
 async function removeProductFromCart(productId, color, size, index) {
-    try {
+        try {
 
-        const quantities = Array.from(document.querySelectorAll("input[id^='quantity']")).map(input => input.value);
+            const quantities = Array.from(document.querySelectorAll("input[id^='quantity']")).map(input => input.value);
 
-        quantities.splice(index, 1);
+            quantities.splice(index, 1);
 
-        if (confirm('Do you want to cancel this product from the cart?')) {
-        const response = await fetch(`/removeFromCart?productId=${productId}&color=${color}&size=${size}`, {
-            method: 'DELETE',
-        });
+            Swal.fire({
+                title: 'confirm user controll',
+                html: '<p>Are you sure...?</p>',
+                showCancelButton: true,
+                cancelButtonText: 'NO',
+                confirmButtonText: 'SURE',
+                customClass: {
+                    popup: 'no-border-radius',
+                    confirmButton: 'custom-confirm-btn',
+                    cancelButton: 'custom-cancel-btn'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
 
-        const data = await response.json();
-        if (data.success) {
-            document.getElementById(`cartTable`).innerHTML = ''; // Clear existing cart items
+                   (async function () {
+                        const response = await fetch(`/removeFromCart?productId=${productId}&color=${color}&size=${size}`, {
+                            method: 'DELETE',
+                        });
 
-            data.products.forEach((product, i) => {
-                document.getElementById('cartTable').innerHTML += `
+                        const data = await response.json();
+                        if (data.success) {
+                            document.getElementById(`cartTable`).innerHTML = ''; // Clear existing cart items
+
+                            data.products.forEach((product, i) => {
+                                document.getElementById('cartTable').innerHTML += `
                     <tr id="cartItem${i}">
                         <td class="align-middle">
                             <img src="/productImages/${product.image1}" alt="" style="width: 50px;">
@@ -603,30 +615,30 @@ async function removeProductFromCart(productId, color, size, index) {
                         </td>
                         <td class="align-middle">
                            <td class="align-middle">
-    <div class="d-flex align-items-center justify-content-center">
-        <!-- Decrease Button -->
-        <a class="btn btn-sm btn-dark" id="decrease${i}" style="min-width: 36px;">
-            <i class="fas fa-minus"></i>
-        </a>
+                        <div class="d-flex align-items-center justify-content-center">
+                                <!-- Decrease Button -->
+                                <a class="btn btn-sm btn-dark" id="decrease${i}" style="min-width: 36px;">
+                                    <i class="fas fa-minus"></i>
+                                </a>
 
-        <!-- Quantity Input -->
-        <input type="number" value="${quantities[i]}" name="quantity${i}" id="quantity${i}" 
-               class="form-control text-center mx-2" style="max-width: 60px;" readonly>
+                                <!-- Quantity Input -->
+                                <input type="number" value="${quantities[i]}" name="quantity${i}" id="quantity${i}" 
+                                    class="form-control text-center mx-2" style="max-width: 60px;" readonly>
 
-        <!-- Increase Button -->
-        <a class="btn btn-sm btn-dark" id="increase${i}" style="min-width: 36px;">
-            <i class="fas fa-plus"></i>
-        </a>
+                                <!-- Increase Button -->
+                                <a class="btn btn-sm btn-dark" id="increase${i}" style="min-width: 36px;">
+                                    <i class="fas fa-plus"></i>
+                                </a>
 
-        <!-- Limit Indicator (Hidden) -->
-        <input type="hidden" id="limit${i}">
-    </div>
+                                <!-- Limit Indicator (Hidden) -->
+                                <input type="hidden" id="limit${i}">
+                            </div>
 
-    <!-- Stock Alert (Hidden by Default) -->
-    <div class="text-center mt-2 d-none" id="stockAlert${i}">
-        <span class="text-danger">Out of stock</span>
-    </div>
-</td>
+                            <!-- Stock Alert (Hidden by Default) -->
+                            <div class="text-center mt-2 d-none" id="stockAlert${i}">
+                                <span class="text-danger">Out of stock</span>
+                            </div>
+                        </td>
 
                             <div class="input-group quantity mx-auto hide" id="stockAlert${i}" style="width: 100px;">
                                 <p class="text-danger">Out of stock</p>
@@ -640,48 +652,54 @@ async function removeProductFromCart(productId, color, size, index) {
                         </td>
                     </tr>
                 `;
+                            });
+
+                            await checkStockAndUpdateLimit();
+                            for (let i = 0; i < data.products.length; i++) {
+                                await updateTotalPriceAndGrandTotal(i);
+                            };
+
+                        }
+                    })();
+                };
+
             });
 
-            await checkStockAndUpdateLimit();
-                for (let i = 0; i < data.products.length; i++) {
-                await  updateTotalPriceAndGrandTotal(i);
-                };
-                
-        } };
+            document.querySelectorAll('a[id^="increase"]').forEach(button => {
+                button.addEventListener('click', function () {
+                    const index = this.id.replace('increase', '');
+                    const quantityInput = document.querySelector(`#quantity${index}`);
+                    quantityInput.value = parseInt(quantityInput.value) + 1;
+                    updateTotalPriceAndGrandTotal(index);
+                });
+            });
 
-        document.querySelectorAll('a[id^="increase"]').forEach(button => {
-    button.addEventListener('click', function() {
-        const index = this.id.replace('increase', '');
-        const quantityInput = document.querySelector(`#quantity${index}`);
-        quantityInput.value = parseInt(quantityInput.value) + 1;
-        updateTotalPriceAndGrandTotal(index);
-    });
-});
+            document.querySelectorAll('a[id^="decrease"]').forEach(button => {
+                button.addEventListener('click', function () {
+                    const index = this.id.replace('decrease', '');
+                    const quantityInput = document.querySelector(`#quantity${index}`);
+                    quantityInput.value = parseInt(quantityInput.value) - 1;
+                    updateTotalPriceAndGrandTotal(index);
+                });
 
-document.querySelectorAll('a[id^="decrease"]').forEach(button => {
-    button.addEventListener('click', function() {
-        const index = this.id.replace('decrease', '');
-        const quantityInput = document.querySelector(`#quantity${index}`);
-        quantityInput.value = parseInt(quantityInput.value) - 1;
-        updateTotalPriceAndGrandTotal(index);
-    });
+                document.querySelectorAll('.removeCartItems').forEach(button => {
+                    button.addEventListener('click', function () {
+                        const productId = this.dataset.productid;
+                        const color = this.dataset.color;
+                        const size = this.dataset.size;
+                        const index = this.dataset.index;
 
-    document.querySelectorAll('.removeCartItems').forEach(button => {
-    button.addEventListener('click', function() {
-        const productId = this.dataset.productid;
-        const color = this.dataset.color;
-        const size = this.dataset.size;
-        const index = this.dataset.index;
+                        removeProductFromCart(productId, color, size, index);
+                    });
+                });
 
-        removeProductFromCart(productId, color, size, index);
-    });
-});
+            });
+        } catch (error) {
+            console.error(`Error removing product from cart: ${error}`);
+        }
+};
 
-});
-    } catch (error) {
-        console.error(`Error removing product from cart: ${error}`);
-    }
-}
+
 
 document.querySelectorAll('.removeCartItems').forEach(button => {
     button.addEventListener('click', function() {

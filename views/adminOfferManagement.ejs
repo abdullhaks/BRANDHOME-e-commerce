@@ -379,40 +379,44 @@
                                     
                                     <div class="table-responsive">
                                         <table class="table table-top-campaign">
-
-                                            <% if (categoryOffers.length > 0) {
-                                                for (let i = 0; i < categoryOffers.length; i++) { %>
                                             <tbody>
-                                                <tr>
-                                                    <td>  <%=categoryOffers[i].categoryName %></td>
-                                                    <td> Offer <%=categoryOffers[i].offerPercentage %>%</td>
-                                                    
-
-                                                    <td>
-                                                       
-                                                            <form method="post" action="/admin/endCategoryOffer?id=<%= categoryOffers[i].categoryId %>">
-                                                                <button class=" text-danger" onclick=" return confirm('do you want to end this offer..?')">End</button>
-                                                            </form>
-                                                       
-                                                            
-                                                        
-                                                    </td
-                                                </tr>
+                                                <% if (categoryOffers.length> 0) {
                                                
+                                                    for (let i = 0; i < categoryOffers.length; i++) { %>
+                                        
+                                                        <tr>
+                                                            <td>
+                                                                <%=categoryOffers[i].categoryName %>
+                                                            </td>
+
+                                                            <td> Offer <%=categoryOffers[i].offerPercentage %>%</td>
+                                        
+                                        
+                                                            <td>
+                                        
+                                                                <form id="catEnd<%=i%>" method="post"
+                                                                    action="/admin/endCategoryOffer?id=<%= categoryOffers[i].categoryId %>">
+                                                                    <a class=" text-danger" onclick="showConfirm1('<%=i%>')" style="cursor: pointer;">End</a>
+                                                                </form>
+                                        
+                                        
+                                        
+                                                            </td >
+                                                        </tr>
+                                        
+                                        
+                                                    <% } %>
+                                                <% } else { %>
+                                        
+                                                
+                                                    <tr>
+                                                        <td colspan="1">
+                                                            Category Offers not found...
+                                                        </td>
+                                                    </tr>
+                                               
+                                                <% } %>
                                             </tbody>
-                                            <% }
-
-                                        } else { %>
-
-                                            <tbody>
-                                            <tr>
-                                                <td colspan="1">
-                                                    Category Offers not found...
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                        <% } %>
-
                                         </table>
                                     </div>
                                 </div>
@@ -445,13 +449,13 @@
 
                                                     <td>
   
-                                                            <form  action="/admin/endProductOffer?id=<%=productOffers[i].productId %>" method="post">
-                                                                <button class=" text-danger" onclick=" return confirm('do you want to end this offer..?')">End</button>
+                                                            <form id="prdcEnd<%=i%>" action="/admin/endProductOffer?id=<%=productOffers[i].productId %>" method="post">
+                                                                <a class=" text-danger" onclick="showConfirm2('<%=i%>')" style="cursor: pointer;" >End</a>
                                                             </form>
                                                             
                                                         
                                                         
-                                                    </td
+                                                    </td>
                                                 </tr>
                                                
                                             </tbody>
@@ -510,11 +514,59 @@
     <script src="/vendor/circle-progress/circle-progress.min.js"></script>
     <script src="/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="/vendor/chartjs/Chart.bundle.min.js"></script>
-    <script src="/vendor/select2/select2.min.js">
-    </script>
+    <script src="/vendor/select2/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Main JS-->
     <script src="/js/adminMain.js"></script>
+
+    <script>
+
+       function showConfirm1 (i){
+        Swal.fire({
+        title: 'confirm user controll',
+        html: '<p>Are you sure...?</p>',
+        showCancelButton: true,
+        cancelButtonText: 'NO',
+        confirmButtonText: 'SURE',
+        customClass: {
+            popup: 'no-border-radius',
+            confirmButton: 'custom-confirm-btn',
+            cancelButton: 'custom-cancel-btn'
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {     
+
+            document.getElementById("catEnd"+i).submit();
+       }
+    });
+};
+
+
+function showConfirm2 (i){
+        Swal.fire({
+        title: 'confirm user controll',
+        html: '<p>Are you sure...?</p>',
+        showCancelButton: true,
+        cancelButtonText: 'NO',
+        confirmButtonText: 'SURE',
+        customClass: {
+            popup: 'no-border-radius',
+            confirmButton: 'custom-confirm-btn',
+            cancelButton: 'custom-cancel-btn'
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {     
+
+            document.getElementById("prdcEnd"+i).submit();
+       }
+    });
+}
+
+
+
+
+    </script>
 
 </body>
 

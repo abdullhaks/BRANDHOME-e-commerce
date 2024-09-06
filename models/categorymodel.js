@@ -15,6 +15,10 @@ const categorySchema = new mongoose.Schema({
         type:Number,
         default:0,
     },
+    salesCount:{
+        type:Number,
+        default:0,
+    }
     
 });
 

@@ -158,7 +158,7 @@ a {
 }
 
 a:hover {
-  color: #ba6a62;
+  color: #c4c0c0;
   text-decoration: underline;
 }
 
@@ -9629,3 +9629,5 @@ a.text-dark:hover, a.text-dark:focus {
 .no-border-radius {
   border-radius: 0 !important;
 }
+
+

@@ -55,7 +55,10 @@ const updateOrderStatus = async (req, res) => {
 
         console.log("new status is " + newStatus);
 
-        const order = await Orders.findOne({ _id: orderId });
+        var order = await Orders.findOne({ _id: orderId });
+        console.log("order is ", order);
+        var product = await Product.findById(order.items[index].productId);
+        console.log("product is .....",product);
 
         if (!order) {
             console.log("Order not found");
@@ -126,9 +129,22 @@ const updateOrderStatus = async (req, res) => {
                     }
                 );
 
-                const order = await Orders.findOne({ _id: orderId });
-                console.log("order is ", order);
+                console.log("qualntity is.....",order.items[index].quantity )
+                const salesCountt = await Category.updateOne(
+                    { name: product.category },
+                    { $inc: { salesCount: order.items[index].quantity } }
+                );
 
+                console.log("sales count tt is ",salesCountt);
+               
+                 const salesCountPr = await Product.updateOne(
+                    { _id: product._id },
+                    { $inc: { salesCount: order.items[index].quantity } }
+                );
+
+                console.log("sales count pr is ",salesCountPr);
+             
+                var order = await Orders.findOne({ _id: orderId });
              
 
                 const sale = new Sales(
