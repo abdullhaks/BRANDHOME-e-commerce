@@ -330,7 +330,8 @@ const loadHome = async (req,res)=>{
         wishListNo = wishList.products.length;
         };
 
-        const popularProduct = await Product.find({}).sort({ salesCount: -1 }).limit(8)
+        const popularProduct = await Product.find({}).sort({ salesCount: -1 }).limit(8);
+        const justArrived = await Product.find({}).limit(8);
         const popularCategory = await Category.find({}).sort({ salesCount: -1 }).limit(6)
 
 
@@ -343,7 +344,7 @@ const loadHome = async (req,res)=>{
         res.set('Expires', '-1');
         res.set('Pragma', 'no-cache');
        
-      return  res.render("home",{user:id,cartNo,categories,wishListNo,popularProduct,popularCategory});
+      return  res.render("home",{user:id,cartNo,categories,wishListNo,popularProduct,popularCategory,justArrived});
 
     }catch(error){
         console.log(error);
