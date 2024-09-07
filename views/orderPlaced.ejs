@@ -85,33 +85,32 @@
 
 <body>
     <!-- Topbar Start -->
-      <!-- Topbar Start -->
-      <div class="container-fluid">
+    <div class="container-fluid">
         <div class="row bg-secondary py-2 px-xl-5">
             <div class="col-lg-6 d-none d-lg-block">
                 <div class="d-inline-flex align-items-center">
-                    <a class="text-dark" href="">FAQs</a>
+                    <a class="text-dark" href="https://wa.me/8594043859">FAQs</a>
                     <span class="text-muted px-2">|</span>
-                    <a class="text-dark" href="">Help</a>
+                    <a class="text-dark" href="https://wa.me/8594043859">Help</a>
                     <span class="text-muted px-2">|</span>
-                    <a class="text-dark" href="">Support</a>
+                    <a class="text-dark" href="https://wa.me/8593063568">Support</a>
                 </div>
             </div>
             <div class="col-lg-6 text-center text-lg-right">
                 <div class="d-inline-flex align-items-center">
                     <a class="text-dark px-2" href="">
-                        <i class="fab fa-facebook-f"></i>
+                        <i class="fab fa-whatsapp"></i>
                     </a>
-                    <a class="text-dark px-2" href="">
+                    <!-- <a class="text-dark px-2" href="">
                         <i class="fab fa-twitter"></i>
-                    </a>
-                    <a class="text-dark px-2" href="">
+                    </a> -->
+                    <a class="text-dark px-2" href="https://www.linkedin.com/in/abdullha-ks-234746295?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
-                    <a class="text-dark px-2" href="">
+                    <a class="text-dark px-2" href="https://www.instagram.com/abdullha_kalamban?igsh=MXJ3ODBxYnJncWFqcg%3D%3D&utm_source=qr">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a class="text-dark pl-2" href="">
+                    <a class="text-dark pl-2" href="https://youtube.com/@abdullhakalamban?feature=shared">
                         <i class="fab fa-youtube"></i>
                     </a>
                 </div>
@@ -120,18 +119,19 @@
         <div class="row align-items-center py-3 px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
                 <a href="" class="text-decoration-none">
-                    <h1 class="m-0 display-5 font-weight-semi-bold">BRAND HOME</h1>
+                    <h1 class="m-0 display-5 font-weight-semi-bold">BRANDHOME</h1>
                 </a>
-                
             </div>
             <div class="col-lg-6 col-6 text-left">
-                <form action="">
+                <form action="/products?email=<%= user %>" method="get">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for products">
+                        <input type="text" class="form-control" placeholder="Search by name" name="search">
                         <div class="input-group-append">
-                            <span class="input-group-text bg-transparent text-primary">
-                                <i class="fa fa-search"></i>
-                            </span>
+                            
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                   
                         </div>
                     </div>
                 </form>
@@ -145,37 +145,36 @@
 						
 					  <% } %>
                 </a>
-                <a href="" class="btn border active">
-                    <i class="fas fa-shopping-cart text-primary"></i> 
+                
+                <a href="/cart" class="btn border">
+                    <i class="fas fa-shopping-cart text-primary"></i>
 
                     <% if (cartNo) { %>
 						
                         <span class="badge"><%= cartNo %></span>
 						
-					<% } %>
-                  
+					  <% } %>
+                    
                 </a>
                 <% if (user) { %>
 
                     <a href="/logout">Log Out</a>
+
+                    <a href="/profile" class="btn border "     >
+                        <i class="fas fa-user  text-primary"></i>
+                    </a>
+                      
 
                 <% } else { %>
 
                     <a href="/login">Log In</a>
 
                 <% } %>
-                <a href="" class="btn border " data-toggle="dropdown">
-                    <i class="fas fa-user  text-primary"></i>
-                </a>
-                    <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                        <p  class="dropdown-item"><%= user %></p>
-                        <a href="/addresses" class="dropdown-item">Addresses</a>
-                        
-                    </div>
+
+                    
             </div>
-        </div> 
+        </div>
     </div>
-   
     <!-- Topbar End -->
 
     <!-- Navbar Start -->
