@@ -49,7 +49,7 @@ const loadWishList = async(req,res)=>{
            
         }
          console .log("products are "+products);
-        return  res.render("wishlist",{products,user:id,wishListNo,cartNo});
+        return  res.render("wishlistPage",{products,user:id,wishListNo,cartNo});
     }catch(error){
         console.log(error);
         return res.render("userSideErrors",{user:id,cartNo,wishListNo});
