@@ -31,34 +31,40 @@
 <body>
     <style>
          #main-image {
-        max-width: 500px;
+        max-width: 100%;
+        height: auto;
         margin-top: 20px;
-       
     }
+
+    #smimg {
+        max-width: 80px;
+        height: auto;
+    }
+
     .product-title {
         font-size: 2rem;
         font-weight: bold;
         margin-top: 20px;
     }
-    
+
     .product-description {
         font-size: 1.1rem;
         margin-top: 10px;
         color: #555;
     }
-    
+
     .product-price {
         font-size: 1.5rem;
         font-weight: bold;
         color: #d9534f;
         margin-top: 15px;
     }
-    
+
     .size,
     .color {
         margin-top: 15px;
     }
-    
+
     .form-select {
         width: 100%;
         max-width: 250px;
@@ -67,11 +73,11 @@
         border-radius: 5px;
         border: 1px solid #ddd;
     }
-    
+
     .stock-status {
         margin-top: 20px;
     }
-    
+
     .cart {
         background-color: #007bff;
         color: #fff;
@@ -80,7 +86,7 @@
         border-radius: 5px;
         cursor: pointer;
     }
-    
+
     .cart:hover {
         background-color: #0056b3;
     }
@@ -204,103 +210,74 @@
 
 
     <!-- Shop Start -->
-    <div class="main-content ">
+    <div class="main-content">
         <div class="section__content section__content--p30">
             <div class="container-fluid">
-                <div class="row  align-items-center justify-content-center">
-                    
-                    <div class="col-lg-12  ">
-                        
-                        <div class="container">
-    
-
-                            <div class="xzoom-container" id="image-container">
-                               
-                                <ul>
+                <div class="row align-items-start justify-content-center">
+                    <!-- Image Container -->
+                    <div class="col-12 col-lg-6 ">
+                        <div class="xzoom-container row" id="image-container">
+                            <div class="col-lg-2">
+                                <ul class="list-unstyled">
                                     <% if (product) { %>
-                                       
-                                            <li><img src="/productImages/<%= product.image1 %>" alt="" class="small-img"></li>
-                                      
-                                     
-                                            <li><img src="/productImages/<%= product.image2 %>" alt="" class="small-img"></li>
-                                      
-                                       
-                                            <li><img src="/productImages/<%= product.image3 %>" alt="" class="small-img"></li>
-                                        
+                                        <li><img src="/productImages/<%= product.image1 %>" alt="" class="small-img img-fluid" id="smimg"></li>
+                                        <li><img src="/productImages/<%= product.image2 %>" alt="" class="small-img img-fluid" id="smimg"></li>
+                                        <li><img src="/productImages/<%= product.image3 %>" alt="" class="small-img img-fluid" id="smimg"></li>
                                     <% } %>
                                 </ul>
-                        
-                                <img src="/productImages/<%= product.image1 %>" alt="" class="big-img" id="main-image">
                             </div>
-                        
-                          
-                        
-                        
-                        
-                            <div class="description" id="description">
-                                <h1 class="product-title"><%= product.productName %></h1>
-                                <input type="hidden" name="productId" id="productId" value="<%= product._id %>">
-                                <p class="product-description"><%= product.description %></p>
-                                <span class="product-price">Rs <%= product.price %></span>
-                                
-                                <!-- Variant Selection -->
-                                <div class="variant-selection">
-                                    <label for="variant-dropdown">Choose Variant:</label>
-                                    <select class="form-select" name="option" id="size" required onchange="checkQuantity()">
-                                        <% if (product && product.sizes.length > 0) {
-                                            for (let j = 0; j < product.sizes.length; j++) { %>
-                                                <option value="<%= product.sizes[j] %>">
-                                                    <%= product.sizes[j] %>
-                                                </option>
-                                        <% } } %>
-                                    </select>
-                                </div>
-                            
-                                <!-- Color Selection -->
-                                <div class="color-selection mt-2">
-                                    <label for="color-dropdown">Choose Color:</label>
-                                    <select id="color" class="form-select" name="color" required onchange="checkQuantity()">
-                                        <% if (product.colors && product.colors.length > 0) {
-                                            for (let j = 0; j < product.colors.length; j++) { %>
-                                                <option value="<%= product.colors[j] %>">
-                                                    <%= product.colors[j] %>
-                                                </option>
-                                        <% } } %>
-                                    </select>
-                                </div>
-                            
-                                <div id="stock-false" class="stock-false mt-3 hide">
-                                    <h2 class="text-danger">Out Of Stock</h2>
-                                    <p>Please check another variant...</p>
-                                </div>
-                            
-                                <div id="stock-true" class="stock-true mt-3 hide">
-                                    <button class="cart btn btn-primary mt-2" id="addToCart">Add to Cart</button>
-                                </div>
+                            <div class="col-lg-10">
+                                <img src="/productImages/<%= product.image1 %>" alt="" class="big-img img-fluid" id="main-image">
                             </div>
+                           
                             
-
-
-
                         </div>
-
-                            
-
-                            
-
-                            
-
-                  
-                        
-                        
                     </div>
-                    
-                    
+                    <!-- Description Container -->
+                    <div class="col-12 col-lg-6">
+                        <div class="description" id="description">
+                            <h1 class="product-title"><%= product.productName %></h1>
+                            <input type="hidden" name="productId" id="productId" value="<%= product._id %>">
+                            <p class="product-description"><%= product.description %></p>
+                            <span class="product-price">Rs <%= product.price %></span>
+    
+                            <!-- Variant Selection -->
+                            <div class="variant-selection">
+                                <label for="variant-dropdown">Choose Variant:</label>
+                                <select class="form-select" name="option" id="size" required onchange="checkQuantity()">
+                                    <% if (product && product.sizes.length > 0) {
+                                        for (let j = 0; j < product.sizes.length; j++) { %>
+                                            <option value="<%= product.sizes[j] %>">
+                                                <%= product.sizes[j] %>
+                                            </option>
+                                    <% } } %>
+                                </select>
+                            </div>
+    
+                            <!-- Color Selection -->
+                            <div class="color-selection mt-2">
+                                <label for="color-dropdown">Choose Color:</label>
+                                <select id="color" class="form-select" name="color" required onchange="checkQuantity()">
+                                    <% if (product.colors && product.colors.length > 0) {
+                                        for (let j = 0; j < product.colors.length; j++) { %>
+                                            <option value="<%= product.colors[j] %>">
+                                                <%= product.colors[j] %>
+                                            </option>
+                                    <% } } %>
+                                </select>
+                            </div>
+    
+                            <div id="stock-false" class="stock-false mt-3 hide">
+                                <h2 class="text-danger">Out Of Stock</h2>
+                                <p>Please check another variant...</p>
+                            </div>
+    
+                            <div id="stock-true" class="stock-true mt-3 hide">
+                                <button class="cart btn btn-primary mt-2" id="addToCart">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-               
-                
-                
-                
             </div>
         </div>
     </div>
