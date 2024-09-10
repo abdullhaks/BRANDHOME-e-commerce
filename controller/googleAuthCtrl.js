@@ -75,7 +75,7 @@ const googleAuth  = {
                 return next(err);
             }
             if (!user) {
-                return res.redirect("https://www.brandhome.shop/login");
+                return res.redirect("https://www.brandhome.shop");
             }
             req.logIn(user, (err) => {
                 if (err) {
