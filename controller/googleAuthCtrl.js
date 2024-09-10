@@ -91,7 +91,7 @@ const googleAuth  = {
                 res.set('Expires', '-1');
                 res.set('Pragma', 'no-cache');
                 
-                return res.redirect("http://localhost:7000/home");
+                return res.redirect("https://www.brandhome.shop/home");
             });
         })(req, res, next);
     }
