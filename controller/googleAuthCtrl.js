@@ -18,7 +18,7 @@ passport.use(
     new Oauth2Strategy({
         clientID : process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
-        callbackURL: "/auth/google/callback",
+        callbackURL: "https://www.brandhome.shop/auth/google/callback",
         scope: ["profile", "email"]
     },
     async (request, accessToken, refreshToken, profile, done) => {
