@@ -101,9 +101,6 @@
                     <a class="text-dark px-2" href="">
                         <i class="fab fa-whatsapp"></i>
                     </a>
-                    <!-- <a class="text-dark px-2" href="">
-                        <i class="fab fa-twitter"></i>
-                    </a> -->
                     <a class="text-dark px-2" href="https://www.linkedin.com/in/abdullha-ks-234746295?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
@@ -127,51 +124,40 @@
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search by name" name="search">
                         <div class="input-group-append">
-                            
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                   
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-search"></i>
+                            </button>
                         </div>
                     </div>
                 </form>
             </div>
-            <div class="col-lg-3 col-6 text-right">
-                <a href="/wishList" class="btn ">
-                    <i class="fas fa-heart text-primary"></i>
-                    <% if (wishListNo) { %>
-						
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-dark"><%= wishListNo %></span>
-						
-					  <% } %>
-                </a>
-                
-                <a href="/cart" class="btn ">
-                    <i class="fas fa-shopping-cart text-primary"></i>
-
-                    <% if (cartNo) { %>
-						
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-dark"><%= cartNo %></span>
-						
-					  <% } %>
-                    
-                </a>
-                <% if (user) { %>
-
-                
-
-                    <a href="/profile" class="btn  "     >
-                        <i class="fas fa-user  text-primary"></i>
+            <div class="col-lg-3 col-6 text-right ml-auto">
+                <div class="d-inline-flex align-items-center">
+    
+                    <a href="/wishList" class="btn position-relative">
+                        <i class="fas fa-heart text-primary">
+                        <% if (wishListNo) { %>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-dark"><%= wishListNo %></span>
+                        <% } %></i>
                     </a>
-                      
-
-                <% } else { %>
-
-                    <a href="/login">Log In</a>
-
-                <% } %>
-
-                    
+    
+                    <a href="/cart" class="btn">
+                        <i class="fas fa-shopping-cart text-primary"></i>
+                        <% if (cartNo) { %>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-dark"><%= cartNo %></span>
+                        <% } %>
+                    </a>
+    
+                    <% if (user) { %>
+                        <a href="/profile" class="btn">
+                            <i class="fas fa-user text-primary"></i>
+                        </a>
+                    <% } else { %>
+                        <a href="/login" class="btn btn-primary">
+                            Log In
+                        </a>
+                    <% } %>
+                </div>
             </div>
         </div>
     </div>
