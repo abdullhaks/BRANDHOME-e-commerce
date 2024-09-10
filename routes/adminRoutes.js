@@ -123,16 +123,6 @@ adminRoute.get("/allProducts",auth.isLogin,
 
 
 
-
-
-
-
-
-
-
-
-
-
 adminRoute.get("/ProductEdit",auth.isLogin,
   isAdmin.isAdmin, productController.loadProductEdit);
 

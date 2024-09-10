@@ -651,236 +651,246 @@
 
     <script>
 
-    let result1 = document.querySelector(".result1"),
-            img_result1 = document.querySelector(".img-result1"),
-            save1 = document.querySelector(".save1"),
-            cropped1 = document.querySelector(".cropped1"),
-            dwn1 = document.querySelector(".download"),
-            upload1 = document.querySelector("#file-input1"),
-            cropper1 = "";
+let result1 = document.querySelector(".result1"),
+    img_result1 = document.querySelector(".img-result1"),
+    save1 = document.querySelector(".save1"),
+    cropped1 = document.querySelector(".cropped1"),
+    dwn1 = document.querySelector(".download"),
+    upload1 = document.querySelector("#file-input1"),
+    cropper1 = "";
 
-            let image1 = document.getElementById("image1")
+// When a file is uploaded
+upload1.addEventListener('change', (e) => {
+    // Check if files were uploaded
+    if (e.target.files.length) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            if (e.target.result) {
+                let img = document.createElement("img");
+                img.id = "image1";
+                img.src = e.target.result;
 
-        upload1.addEventListener('change', (e) => {
-                console.log(e);
-                // on change show image with crop options
-                if (e.target.files.length) {
+                result1.innerHTML = ""; // Clear previous image
+                result1.appendChild(img); // Append new image
+                save1.classList.remove("hide"); // Show save button
 
-                    // start file reader
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        if (e.target.result) {
+                // Initialize the cropper
+                cropper1 = new Cropper(img, {
+                    aspectRatio: 1 / 1,
+                    viewMode: 3
+                });
+            }
+        };
+        reader.readAsDataURL(e.target.files[0]);
+    }
+});
 
-                            // create new image
-                            //let img = document.createElement("img");
-                           // img.id = "image1";
-                            image1.src = e.target.result;
+// When the save button is clicked
+save1.addEventListener("click", (e) => {
+    e.preventDefault();
 
-                            // clean result before
-                            //result1.innerHTML = "";
+    // Get cropped image data
+    let imgSrc = cropper1.getCroppedCanvas({
+        width: 350 // Set the width of the cropped image
+    });
 
-                            // append new image
-                            //result1.appendChild(img);
+    // Check if imgSrc is valid
+    if (imgSrc) {
+        imgSrc.toBlob(function (blob) {
+            if (blob) {
+                console.log("Blob created successfully:", blob);
+                let imageUrl = URL.createObjectURL(blob); // Create image URL from blob
+                console.log("Image URL:", imageUrl);
 
-                            // show save btn and options
-                            save1.classList.remove("hide");
+                // Display the cropped image in the preview
+                cropped1.classList.remove("hide");
+                img_result1.classList.remove("hide");
+                cropped1.src = imageUrl;
 
-                            // init cropper
-                            cropper1 = new Cropper(image1, {
-                                aspectRatio: 1 / 1,
-                                crop: function (e) {
-                                    // get the cropped image data
-                                    const imageData = cropper1.getImageData();
-                                    // set the input value to the cropped image data
-                                    upload1.value = imageData;
-                                }
-                            });
-                        }
+                // Set download attributes
+                // dwn1.classList.remove("hide");
+                // dwn1.download = "imagename.png";
+                // dwn1.href = imageUrl;
 
-                    };
+                // Convert the blob into a file and simulate file input update
+                let file = new File([blob], "cropped_image1.png", { type: blob.type });
+                let dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
 
-                    reader.readAsDataURL(e.target.files[0]);
-                }
-            });
+                // Assign the cropped image file to the file input element
+                upload1.files = dataTransfer.files;
 
-            // save button crop the image
-            save1.addEventListener("click", (e) => {
-                e.preventDefault();
+                console.log("File input updated with cropped image");
+            } else {
+                console.error("Blob is null or invalid.");
+            }
+        });
+    }
 
-                // get result to data uri
-                let imgSrc = cropper1.getCroppedCanvas({
-                    width: 350 // input value 
-                }).toDataURL();
-
-                // Do something with imgSrc, for example, display or save the cropped image
-                console.log("image is" + imgSrc);
-
-                 // remove hide class of img
-                 cropped1.classList.remove("hide");
-                 img_result1.classList.remove("hide");
-
-                // show image cropped
-                cropped1.src = imgSrc;
-                dwn1.classList.remove("hide");
-                dwn1.download = "imagename.png";
-                dwn1.setAttribute("href", imgSrc);
-
-
-
-            });
-
-
-            let result2 = document.querySelector(".result2"),
-            img_result2 = document.querySelector(".img-result2"),
-            save2 = document.querySelector(".save2"),
-            cropped2 = document.querySelector(".cropped2"),
-            dwn2 = document.querySelector(".download"),
-            upload2 = document.querySelector("#file-input2"),
-            cropper2 = "";
-
-            let image2= document.getElementById("image2");
-            
-
-        upload2.addEventListener('change', (e) => {
-                console.log(e);
-                // on change show image with crop options
-                if (e.target.files.length) {
-
-                    // start file reader
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        if (e.target.result) {
-
-                            // create new image
-                            //let img = document.createElement("img");
-                            //img.id = "image2";
-                            //img.src = e.target.result;
-
-                            // clean result before
-                            //result2.innerHTML = "";
-
-                            image2.src = e.target.result;
-
-                            // append new image
-                            //result2.appendChild(img);
-
-                            // show save btn and options
-                            save2.classList.remove("hide");
-
-                            // init cropper
-                            cropper2 = new Cropper(image2, {
-                                aspectRatio: 1 / 1
-                            });
-                        }
-
-                    };
-
-                    reader.readAsDataURL(e.target.files[0]);
-                }
-            });
-
-            // save button crop the image
-            save2.addEventListener("click", (e) => {
-                e.preventDefault();
-
-                // get result to data uri
-                let imgSrc = cropper2.getCroppedCanvas({
-                    width: 350 // input value 
-                }).toDataURL();
-
-                // Do something with imgSrc, for example, display or save the cropped image
-                console.log("image is" + imgSrc);
-
-                 // remove hide class of img
-                 cropped2.classList.remove("hide");
-                 img_result2.classList.remove("hide");
-
-                // show image cropped
-                cropped2.src = imgSrc;
-                dwn2.classList.remove("hide");
-                dwn2.download = "imagename.png";
-                dwn2.setAttribute("href", imgSrc);
+    // Log cropped image
+    console.log("Image is: ", imgSrc);
+});
 
 
 
-            });
+let result2 = document.querySelector(".result2"),
+    img_result2 = document.querySelector(".img-result2"),
+    save2 = document.querySelector(".save2"),
+    cropped2 = document.querySelector(".cropped2"),
+    dwn2 = document.querySelector(".download"),
+    upload2 = document.querySelector("#file-input2"),
+    cropper2 = "";
 
-           
+// When a file is uploaded
+upload2.addEventListener('change', (e) => {
+    // Check if files were uploaded
+    if (e.target.files.length) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            if (e.target.result) {
+                let img = document.createElement("img");
+                img.id = "image2";
+                img.src = e.target.result;
 
-            let result3 = document.querySelector(".result3"),
-            img_result3 = document.querySelector(".img-result3"),
-            save3 = document.querySelector(".save3"),
-            cropped3 = document.querySelector(".cropped3"),
-            dwn3 = document.querySelector(".download"),
-            upload3 = document.querySelector("#file-input3"),
-            cropper3 = "";
+                result2.innerHTML = ""; // Clear previous image
+                result2.appendChild(img); // Append new image
+                save2.classList.remove("hide"); // Show save button
 
-            let image3 = document.getElementById("image3");
-           
+                // Initialize the cropper
+                cropper2 = new Cropper(img, {
+                    aspectRatio: 1 / 1
+                });
+            }
+        };
+        reader.readAsDataURL(e.target.files[0]);
+    }
+});
 
-        upload3.addEventListener('change', (e) => {
-                console.log(e);
-                // on change show image with crop options
-                if (e.target.files.length) {
+// When the save button is clicked
+save2.addEventListener("click", (e) => {
+    e.preventDefault();
 
-                    // start file reader
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        if (e.target.result) {
+    // Get cropped image data
+    let imgSrc = cropper2.getCroppedCanvas({
+        width: 350 // Set the width of the cropped image
+    });
 
-                            // create new image
-                            //let img = document.createElement("img");
-                            //img.id = "image3";
-                            //img.src = e.target.result;
+    // Check if imgSrc is valid
+    if (imgSrc) {
+        imgSrc.toBlob(function (blob) {
+            if (blob) {
+                console.log("Blob created successfully:", blob);
+                let imageUrl = URL.createObjectURL(blob); // Create image URL from blob
+                console.log("Image URL:", imageUrl);
 
-                            // clean result before
-                            //result3.innerHTML = "";
+                // Display the cropped image in the preview
+                cropped2.classList.remove("hide");
+                img_result2.classList.remove("hide");
+                cropped2.src = imageUrl;
 
-                            image3.src = e.target.result;
+                // Set download attributes
+                // dwn2.classList.remove("hide");
+                // dwn2.download = "imagename.png";
+                // dwn2.href = imageUrl;
 
-                            // append new image
-                            //result3.appendChild(img);
+                // Convert the blob into a file and simulate file input update
+                let file = new File([blob], "cropped_image2.png", { type: blob.type });
+                let dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
 
-                            // show save btn and options
-                            save3.classList.remove("hide");
+                // Assign the cropped image file to the file input element
+                upload2.files = dataTransfer.files;
 
-                            // init cropper
-                            cropper3 = new Cropper(image3, {
-                                aspectRatio: 1 / 1
-                            });
-                        }
+                console.log("File input updated with cropped image for file-input2");
+            } else {
+                console.error("Blob is null or invalid.");
+            }
+        });
+    }
 
-                    };
+    // Log cropped image
+    console.log("Image is: ", imgSrc);
+});
+ 
 
-                    reader.readAsDataURL(e.target.files[0]);
-                }
-            });
+let result3 = document.querySelector(".result3"),
+    img_result3 = document.querySelector(".img-result3"),
+    save3 = document.querySelector(".save3"),
+    cropped3 = document.querySelector(".cropped3"),
+    dwn3 = document.querySelector(".download"),
+    upload3 = document.querySelector("#file-input3"),
+    cropper3 = "";
 
-            // save button crop the image
-            save3.addEventListener("click", (e) => {
-                e.preventDefault();
+// When a file is uploaded
+upload3.addEventListener('change', (e) => {
+    // Check if files were uploaded
+    if (e.target.files.length) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            if (e.target.result) {
+                let img = document.createElement("img");
+                img.id = "image3";
+                img.src = e.target.result;
 
-                // get result to data uri
-                let imgSrc = cropper3.getCroppedCanvas({
-                    width: 350 // input value 
-                }).toDataURL();
+                result3.innerHTML = ""; // Clear previous image
+                result3.appendChild(img); // Append new image
+                save3.classList.remove("hide"); // Show save button
 
-                // Do something with imgSrc, for example, display or save the cropped image
-                console.log("image is" + imgSrc);
+                // Initialize the cropper
+                cropper3 = new Cropper(img, {
+                    aspectRatio: 1 / 1
+                });
+            }
+        };
+        reader.readAsDataURL(e.target.files[0]);
+    }
+});
 
-                 // remove hide class of img
-                 cropped3.classList.remove("hide");
-                 img_result3.classList.remove("hide");
+// When the save button is clicked
+save3.addEventListener("click", (e) => {
+    e.preventDefault();
 
-                // show image cropped
-                cropped3.src = imgSrc;
-                dwn3.classList.remove("hide");
-                dwn3.download = "imagename.png";
-                dwn3.setAttribute("href", imgSrc);
+    // Get cropped image data
+    let imgSrc = cropper3.getCroppedCanvas({
+        width: 350 // Set the width of the cropped image
+    });
 
+    // Check if imgSrc is valid
+    if (imgSrc) {
+        imgSrc.toBlob(function (blob) {
+            if (blob) {
+                console.log("Blob created successfully:", blob);
+                let imageUrl = URL.createObjectURL(blob); // Create image URL from blob
+                console.log("Image URL:", imageUrl);
 
+                // Display the cropped image in the preview
+                cropped3.classList.remove("hide");
+                img_result3.classList.remove("hide");
+                cropped3.src = imageUrl;
 
-            });
+                // Set download attributes
+                // dwn3.classList.remove("hide");
+                // dwn3.download = "imagename.png";
+                // dwn3.href = imageUrl;
+
+                // Convert the blob into a file and simulate file input update
+                let file = new File([blob], "cropped_image3.png", { type: blob.type });
+                let dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+
+                // Assign the cropped image file to the file input element
+                upload3.files = dataTransfer.files;
+
+                console.log("File input updated with cropped image for file-input3");
+            } else {
+                console.error("Blob is null or invalid.");
+            }
+        });
+    }
+
+    // Log cropped image
+    console.log("Image is: ", imgSrc);
+});
 
               
 
