@@ -75,7 +75,7 @@ const googleAuth  = {
                 return next(err);
             }
             if (!user) {
-                return res.redirect("http://localhost:7000/login");
+                return res.redirect("https://www.brandhome.shop/login");
             }
             req.logIn(user, (err) => {
                 if (err) {
