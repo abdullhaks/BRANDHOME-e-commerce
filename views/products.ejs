@@ -64,7 +64,7 @@
         <div class="col-lg-6 col-6 text-left">
             <form action="/products?email=<%= user %>" method="get">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search by name" name="search">
+                    <input type="text" class="form-control" placeholder="Search anything you want" name="search">
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-primary">
                             <i class="fa fa-search"></i>
@@ -150,28 +150,34 @@
             <!-- Shop Sidebar Start -->
             <div class="col-lg-3 col-md-12">
 
-                <div class="col-lg-12 d-none d-lg-block">
-                    <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
-                        <h6 class="m-0">Categories</h6>
-                        <i class="fa fa-angle-down text-dark"></i>
+                <div class="col-lg-12">
+                    <!-- Button that toggles the dropdown -->
+                    <a class="btn shadow-none d-flex align-items-center justify-content-between bg-none text-white w-100" 
+                       data-toggle="collapse" href="#navbar-vertical" 
+                       style="height: 65px; margin-top: -1px; padding: 0 30px;">
+                        <!-- Text 'Categories' visible only on larger screens -->
+                        <h6 class="m-0 d-none d-lg-block">Categories</h6>
+                        <!-- Icon is visible on all screens -->
+                        <i class="fa fa-bars text-dark"></i>
                     </a>
+                    
+                    <!-- Navbar vertical collapsible menu -->
                     <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
                         <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
-                           
+                            <!-- All Products link -->
                             <a href="/products?email=<%= user %>" class="nav-item nav-link">ALL PRODUCTS</a>
-                            <% if (categories.length > 0) {
+                            
+                            <!-- Loop through categories if available -->
+                            <% if (categories.length > 0) { 
                                 for (let i = 0; i < categories.length; i++) { %>
-    
-    
-                            <a href="/products?email=<%= user %>&category=<%=categories[i].name %>" class="nav-item nav-link"><%=categories[i].name %></a>
-                            <% }
-    
-                             } else { %>
-    
-                            <% } %>
+                                    <a href="/products?email=<%= user %>&category=<%= categories[i].name %>" class="nav-item nav-link">
+                                        <%= categories[i].name %>
+                                    </a>
+                            <% } } %>
                         </div>
                     </nav>
                 </div>
+                
             </div>
             <!-- Shop Sidebar End -->
 
@@ -181,14 +187,11 @@
                 <div class="row pb-3">
                     <div class="col-12 pb-1">
                         <div class="d-flex align-items-center justify-content-between mb-4">
-                            <form action="/products?email=<%= user %>" method="get">
+                            <form action="" method="">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search by name" name="search">
+                                    
                                     <div class="input-group-append">
                                        
-                                            <button type="submit" class="btn btn-primary">
-                                                <i class="fa fa-search"></i>
-                                            </button>
                                       
                                     </div>
                                 </div>

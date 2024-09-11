@@ -334,6 +334,21 @@ const loadHome = async (req,res)=>{
         const justArrived = await Product.find({}).limit(8);
         const popularCategory = await Category.find({}).sort({ salesCount: -1 }).limit(6)
 
+        const categoryImages = [];
+
+for (const category of popularCategory) {
+
+  const product = await Product.findOne({ category: category.name }).select('image1');
+
+  if (product) {
+    categoryImages.push({
+      image: product.image1
+    });
+  }
+};
+
+console.log("pdsueimages...",categoryImages)
+
 
       
       req.session.user_id = id
@@ -344,7 +359,7 @@ const loadHome = async (req,res)=>{
         res.set('Expires', '-1');
         res.set('Pragma', 'no-cache');
        
-      return  res.render("home",{user:id,cartNo,categories,wishListNo,popularProduct,popularCategory,justArrived});
+      return  res.render("home",{user:id,cartNo,categories,wishListNo,popularProduct,popularCategory,justArrived,categoryImages});
 
     }catch(error){
         console.log(error);

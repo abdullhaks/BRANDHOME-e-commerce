@@ -64,7 +64,7 @@
         <div class="col-lg-6 col-6 text-left">
             <form action="/products?email=<%= user %>" method="get">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search by name" name="search">
+                    <input type="text" class="form-control" placeholder="Search anything you want" name="search">
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-primary">
                             <i class="fa fa-search"></i>
@@ -111,7 +111,7 @@
     <div class="container-fluid mb-5">
         <div class="row border-top px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
-                <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
+                <a class="btn shadow-none d-flex align-items-center justify-content-between bg-none text-white w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
                     <h6 class="m-0">Categories</h6>
                     <i class="fa fa-angle-down text-dark"></i>
                 </a>
@@ -230,21 +230,30 @@
         <div class="row px-xl-5 pb-3">
             <%if(popularCategory.length>0){ %>
 
-                <%for(let category of popularCategory){ %>
+                <% popularCategory.forEach((category, index) => { %>
 
-            <div class="col-lg-4 col-md-6 pb-1">
-                <a href="/products?email=<%= user %>&category=<%=category.name %>">
-                <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
-                    <p class="text-right text-warning">#trending</p>
-                    <a href="/products?email=<%= user %>&category=<%=category.name %>" class="cat-img position-relative overflow-hidden mb-3">
-                        <img class="img-fluid" src="/images/light.jpeg" alt=""  style="height: 20px; height: 150px;">
-                    </a>
-                    <h5 class="font-weight-semi-bold m-0"><%= category.name%></h5>
-                </div>
-               </a>
-            </div>
-
-            <% } %>
+                    <div class="col-lg-4 col-md-6 pb-1">
+                        <a href="/products?email=<%= user %>&category=<%=category.name %>">
+                            <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
+                                <p class="text-right text-warning">#trending</p>
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <% if(categoryImages.length > index && categoryImages[index].image) { %>
+                                        <a href="/products?email=<%= user %>&category=<%= category.name %>" class="cat-img position-relative overflow-hidden mb-3">
+                                            <img class="img-fluid" src="/productImages/<%= categoryImages[index].image %>" alt="" style="height: 150px;">
+                                        </a>
+                                    <% } else { %>
+                                        <a href="/products?email=<%= user %>&category=<%= category.name %>" class="cat-img position-relative overflow-hidden mb-3">
+                                            <img class="img-fluid" src="/productImages/categoryImages[index].image" alt="" style="height: 150px;">
+                                        </a>
+                                    <% } %>
+                                </div>
+                                <h5 class="font-weight-semi-bold m-0"><%= category.name %></h5>
+                            </div>
+                        </a>
+                    </div>
+                
+                <% }); %>
+                
             <% } %>
  
            
@@ -295,9 +304,11 @@
 
                     <a href="/productsDetails?productId=<%= product._id %>">
 
-                        <div class="card product-item border-0 mb-4">
-                            <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0" style="height: 250px; width: 200px;">
-                                <img class="img-fluid w-100" src="/productImages/<%= product.image1 %>" alt="" style="max-height: 100%; max-width: 100%;">
+                        <div class="card product-item border-0 mb-4" >
+                            <div class="d-flex justify-content-center align-items-center">
+                                <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0" style="height: 250px; width: 200px;">
+                                    <img class="img-fluid w-100" src="/productImages/<%= product.image1 %>" alt="" style="max-height: 100%; max-width: 100%;">
+                                </div>
                             </div>
                             <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                                 <h6 class="text-truncate mb-3"><%= product.productName %></h6>
@@ -375,8 +386,10 @@
                     <a href="/productsDetails?productId=<%= jProduct._id %>">
 
                         <div class="card product-item border-0 mb-4">
-                            <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0" style="height: 250px; width: 200px;">
-                                <img class="img-fluid w-100" src="/productImages/<%= jProduct.image1 %>" alt="" style="max-height: 100%; max-width: 100%;">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0" style="height: 250px; width: 200px;">
+                                    <img class="img-fluid w-100" src="/productImages/<%= jProduct.image1 %>" alt="" style="max-height: 100%; max-width: 100%;">
+                                </div>
                             </div>
                             <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                                 <h6 class="text-truncate mb-3"><%= jProduct.productName %></h6>
