@@ -120,7 +120,7 @@ userRoute.get ("/checkOut",isBlocked.isBlocked,auth.isLogin,checkOutController.l
 
 
 userRoute.get ("/getStock",isBlocked.isBlocked,auth.isLogin,checkOutController.getStock);
-userRoute.get ("/getStockFromPrductDetails",isBlocked.isBlocked,auth.isLogin,checkOutController.getStockFromPrductDetails);
+userRoute.get ("/getStockFromPrductDetails",checkOutController.getStockFromPrductDetails);
 
 
 

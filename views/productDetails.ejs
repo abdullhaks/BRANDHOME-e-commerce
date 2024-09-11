@@ -422,7 +422,7 @@ function checkQuantity() {
     var stockTrue = document.getElementById("stock-true");
     var stockFalse = document.getElementById("stock-false");
 
-    console.log("Checking quantity for size:", size, "and color:", color);
+    console.log("Checking quantity for size:", size, "and color:", color,"proid is :",productId);
 
     $.ajax({
         url: "/getStockFromPrductDetails",
