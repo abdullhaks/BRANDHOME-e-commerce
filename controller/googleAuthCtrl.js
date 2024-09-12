@@ -19,7 +19,7 @@ passport.use(
         clientID : process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
         callbackURL: "https://www.brandhome.shop/auth/google/callback",
-        scope: ["profile", "email"]
+        scope: ["profile", "email"] 
     },
     async (request, accessToken, refreshToken, profile, done) => {
         try {
