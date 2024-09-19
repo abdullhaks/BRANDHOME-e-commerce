@@ -480,7 +480,7 @@ function updateTotalPriceAndGrandTotal(i) {
 
     const price = parseFloat(document.querySelector(`input[name="productPrice${i}"]`).value);
     const quantity = document.getElementById(`quantity${i}`).value;
-    const limit = document.getElementById(`limit${i}`).value;
+    const limit = parseInt( document.getElementById(`limit${i}`).value);
 
     console.log("item price and quantity and limit is",price,quantity,limit);
     
