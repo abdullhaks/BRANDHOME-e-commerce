@@ -350,8 +350,6 @@ for (const category of popularCategory) {
   }
 };
 
-console.log("pdsueimages...",categoryImages)
-
 
       
       req.session.user_id = id

@@ -85,6 +85,9 @@ const googleAuth  = {
                     return next(err);
                 }
                 // Store user email in session
+
+                console.log('user from google Oauth',user);
+                
                 req.session.user = user.email;
                 req.session.user_id = user.email;
                 req.session.isUser = true;
@@ -93,7 +96,8 @@ const googleAuth  = {
                 res.set('Cache-Control', 'private, no-cache, no-store, must-revalidate');
                 res.set('Expires', '-1');
                 res.set('Pragma', 'no-cache');
-                
+
+
                 return res.redirect(`${SERVER_URL}/home`);
             });
         })(req, res, next);
