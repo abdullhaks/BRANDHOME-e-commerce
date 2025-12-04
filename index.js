@@ -67,7 +67,7 @@ const adminRoute = require("./routes/adminRoutes");
 app.use ("/admin",adminRoute)
 
 
-app.use('/checking', (req, res) => {
+app.get('/checking', (req, res) => {
     res.send("Server is working fine");
 });
 
