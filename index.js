@@ -68,11 +68,7 @@ app.use ("/admin",adminRoute)
 
 
 app.use('/checking', (req, res) => {
-
-    setTimeout(() => {
-        res.send("Server is working fine after delay");
-    }, 20000); 
-
+    res.send("Server is working fine");
 });
 
 //-----------------------------------
