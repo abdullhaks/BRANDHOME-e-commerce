@@ -1,6 +1,7 @@
 
 const dotenv = require("dotenv");
 dotenv.config();
+const { MongoStore } = require('connect-mongo');
 
 
 //---------------------------------
@@ -13,6 +14,7 @@ mongoose.connect(mongoURI);
 
 const express = require("express");   
 const app = express(); 
+app.set("trust proxy", 1);
 
 const config = require("./config/config");  
 
@@ -21,8 +23,21 @@ const config = require("./config/config");
 //---------------------------------
 
 const session = require("express-session");
-app.use (session({secret:config.sessionSecret,cookie: { maxAge: 2592000 },resave: false,//one month
-    saveUninitialized: false,}));
+app.use(session({
+  secret: config.sessionSecret,
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: mongoURI,
+    ttl: 14 * 24 * 60 * 60, // optional: 14 days
+  }),
+  cookie: {
+    maxAge: 2592000,
+    secure: false,          // important for Render HTTP
+    httpOnly: true,
+    sameSite: "lax"
+  }
+}));
 
 
 const nocache = require('nocache');
