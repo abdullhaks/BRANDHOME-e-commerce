@@ -63,9 +63,13 @@ app.use ("/",userRoute);
 
 //----------------------------------
 
-const adminRoute = require("./routes/adminRoutes");    ""
+const adminRoute = require("./routes/adminRoutes"); 
 app.use ("/admin",adminRoute)
 
+
+app.use('/checking', (req, res) => {
+    res.send("Server is working fine");
+});
 
 //-----------------------------------
 
