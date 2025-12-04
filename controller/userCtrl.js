@@ -202,7 +202,7 @@ const loadLogin = async (req,res)=>{
 
 const verifyLogin = async (req,res)=>{
     try{
-
+        let SERVER_URL = process.env.SERVER_URL || 'http://localhost:7000';
         const email = req.body.email;
         const password = req.body.password;
 
@@ -227,21 +227,22 @@ const verifyLogin = async (req,res)=>{
 
           if (emailErrors.length > 0||passwordErrors.length > 0) {
             // If yes, render the signup form again with the errors and the user input
-            res.render("login",{emailErrors,passwordErrors,  email:email, password:password});
+            
+            res.render("login",{emailErrors,passwordErrors,  email:email, password:password,SERVER_URL});
           } else {
             // If no, check if the email already exists in the database
             const user = await User.findOne({ email: email })
               if (!user) {
                 // If the email already exists, render the signup form again with an error message
                 emailErrors.push({ msg: "no account with this email " });
-                res.render("login",{emailErrors,passwordErrors,  email:email, password:password});
+                res.render("login",{emailErrors,passwordErrors,  email:email, password:password,SERVER_URL});
               } else {
                 // If the email does not exist, create a new user and save it to the database
             
                     if(user.is_admin===1){
 
                         emailErrors.push({ msg: "no account with this email  " });
-                        res.render("login",{emailErrors,passwordErrors,  email:email, password:password});
+                        res.render("login",{emailErrors,passwordErrors,  email:email, password:password,SERVER_URL});
                     }else{
 
                         const passwordMatch = await bcrypt.compare(password,user.password);
@@ -250,7 +251,7 @@ const verifyLogin = async (req,res)=>{
 
                             if(user.is_blocked===1){
                                 emailErrors.push({ msg: "this account is blocked  " });
-                                res.render("login",{emailErrors,passwordErrors,  email:email, password:password});
+                                res.render("login",{emailErrors,passwordErrors,  email:email, password:password,SERVER_URL});
                             }else{
                               if(user.is_verified===1){
                                 req.session.user_id = user._id
@@ -296,7 +297,7 @@ const verifyLogin = async (req,res)=>{
                         
                          }else{
                           passwordErrors.push({ msg: "incorrect password " });
-                          res.render("login",{emailErrors,passwordErrors,  email:email, password:password});
+                          res.render("login",{emailErrors,passwordErrors,  email:email, password:password,SERVER_URL});
                          }
                     }
                 
@@ -305,6 +306,7 @@ const verifyLogin = async (req,res)=>{
             }
 
     }catch(error){
+        let SERVER_URL = process.env.SERVER_URL || 'http://localhost:7000';
         console.log(error);
         res.status(500).json({ error: "Internal Server Error" });
     }
