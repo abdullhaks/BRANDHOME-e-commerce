@@ -11,14 +11,17 @@ const mail = require("../middleware/mail")
 const otpGenerator = require('otp-generator');
 const passport = require("passport");
 const Oauth2Strategy = require("passport-google-oauth2").Strategy;
+let dotenv = require('dotenv');
+dotenv.config();
 
+let SERVER_URL = process.env.SERVER_URL || 'http://localhost:7000';
 
 // Initialize passport strategy
 passport.use(
     new Oauth2Strategy({
         clientID : process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
-        callbackURL: "https://www.brandhome.shop/auth/google/callback",
+        callbackURL: `${SERVER_URL}/auth/google/callback`,
         scope: ["profile", "email"] 
     },
     async (request, accessToken, refreshToken, profile, done) => {
@@ -75,7 +78,7 @@ const googleAuth  = {
                 return next(err);
             }
             if (!user) {
-                return res.redirect("https://www.brandhome.shop");
+                return res.redirect(SERVER_URL);
             }
             req.logIn(user, (err) => {
                 if (err) {
@@ -91,7 +94,7 @@ const googleAuth  = {
                 res.set('Expires', '-1');
                 res.set('Pragma', 'no-cache');
                 
-                return res.redirect("https://www.brandhome.shop/home");
+                return res.redirect(`${SERVER_URL}/home`);
             });
         })(req, res, next);
     }

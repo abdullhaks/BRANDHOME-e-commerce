@@ -191,7 +191,8 @@ const loadLogin = async (req,res)=>{
       var passwordErrors = [];
       var email; var password;
 
-       return res.render("login",{emailErrors,passwordErrors,email,password});
+      let SERVER_URL = process.env.SERVER_URL || 'http://localhost:7000';
+       return res.render("login",{emailErrors,passwordErrors,email,password,SERVER_URL});
 
     }catch(error){
         console.log(error);

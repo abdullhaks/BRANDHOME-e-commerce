@@ -75,7 +75,7 @@ app.use ("/admin",adminRoute)
 //-----------------------------------
 const portNo = process.env.PORT_NO;
 app.listen(portNo,function(){
-    console.log("server is running on port number 7000");
+    console.log("server is running on port number 7000 http://localhost:7000");
 });
 
 //----------------------------------

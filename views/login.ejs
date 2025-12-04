@@ -61,7 +61,7 @@
 						<i class="zmdi zmdi-arrow-right"></i>
 					</button>
 					<div class="container">
-						<a href="https://www.brandhome.shop/auth/google/callback" id="google" >signin with google </a>
+						<a href= "<%= SERVER_URL %>/auth/google/callback" id="google" >signin with google </a>
 					</div>
 				</form>
 
@@ -78,7 +78,7 @@
 	<script>
 
 		const signinWithGoogle = ()=>{
-			window.open("http://localhost:7000/auth/google/callback","_self")
+			window.open("<%= SERVER_URL %>/auth/google/callback","_self")
 		}
 	</script>
 </html>
