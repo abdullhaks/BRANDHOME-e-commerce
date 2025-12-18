@@ -1,368 +1,490 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>BRAND HOME -product details</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="Free HTML Templates" name="keywords" />
+    <meta content="Free HTML Templates" name="description" />
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link href="img/favicon.ico" rel="icon" />
 
     <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+      rel="stylesheet"
+    />
 
     <!-- Libraries Stylesheet -->
-    <link href="/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link
+      href="/lib/owlcarousel/assets/owl.carousel.min.css"
+      rel="stylesheet"
+    />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="/css/style.css" rel="stylesheet">
-    
-    <link rel="stylesheet" href="/css/productDetails.css">
+    <link href="/css/style.css" rel="stylesheet" />
 
-</head>
+    <link rel="stylesheet" href="/css/productDetails.css" />
+  </head>
 
-<body>
+  <body>
     <style>
-         #main-image {
+      #main-image {
         max-width: 100%;
         height: auto;
         margin-top: 20px;
-    }
+      }
 
-    #smimg {
+      #smimg {
         max-width: 80px;
         height: auto;
-    }
+      }
 
-    .product-title {
+      .product-title {
         font-size: 2rem;
         font-weight: bold;
         margin-top: 20px;
-    }
+      }
 
-    .product-description {
+      .product-description {
         font-size: 1.1rem;
         margin-top: 10px;
         color: #555;
-    }
+      }
 
-    .product-price {
+      .product-price {
         font-size: 1.5rem;
         font-weight: bold;
         color: #d9534f;
         margin-top: 15px;
-    }
+      }
 
-    .size,
-    .color {
+      .size,
+      .color {
         margin-top: 15px;
-    }
+      }
 
-    .form-select {
+      .form-select {
         width: 100%;
         max-width: 250px;
         padding: 5px;
         margin-top: 5px;
         border-radius: 5px;
         border: 1px solid #ddd;
-    }
+      }
 
-    .stock-status {
+      .stock-status {
         margin-top: 20px;
-    }
+      }
 
-    .cart {
+      .cart {
         background-color: #007bff;
         color: #fff;
         border: none;
         padding: 10px 20px;
         border-radius: 5px;
         cursor: pointer;
-    }
+      }
 
-    .cart:hover {
+      .cart:hover {
         background-color: #0056b3;
-    }
-   
+      }
     </style>
 
-
-
-     <!-- Topbar Start -->
-     <div class="container-fluid">
-        <div class="row bg-secondary py-2 px-xl-5">
-            <div class="col-lg-6 d-none d-lg-block">
-                <div class="d-inline-flex align-items-center">
-                    <a class="text-dark" href="https://wa.me/8594043859">FAQs</a>
-                    <span class="text-muted px-2">|</span>
-                    <a class="text-dark" href="https://wa.me/8594043859">Help</a>
-                    <span class="text-muted px-2">|</span>
-                    <a class="text-dark" href="https://wa.me/8593063568">Support</a>
-                </div>
-            </div>
-            <div class="col-lg-6 text-center text-lg-right">
-                <div class="d-inline-flex align-items-center">
-                    <a class="text-dark px-2" href="">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
-                    <a class="text-dark px-2" href="https://www.linkedin.com/in/abdullha-ks-234746295?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a class="text-dark px-2" href="https://www.instagram.com/abdullha_kalamban?igsh=MXJ3ODBxYnJncWFqcg%3D%3D&utm_source=qr">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a class="text-dark pl-2" href="https://youtube.com/@abdullhakalamban?feature=shared">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                </div>
-            </div>
+    <!-- Topbar Start -->
+    <div class="container-fluid">
+      <div class="row bg-secondary py-2 px-xl-5">
+        <div class="col-lg-6 d-none d-lg-block">
+          <div class="d-inline-flex align-items-center">
+            <a class="text-dark" href="https://wa.me/8594043859">FAQs</a>
+            <span class="text-muted px-2">|</span>
+            <a class="text-dark" href="https://wa.me/8594043859">Help</a>
+            <span class="text-muted px-2">|</span>
+            <a class="text-dark" href="https://wa.me/8593063568">Support</a>
+          </div>
         </div>
-        <div class="row align-items-center py-3 px-xl-5">
-            <div class="col-lg-3 d-none d-lg-block">
-                <a href="/home" class="text-decoration-none">
-                    <h1 class="m-0 display-5 font-weight-semi-bold">BRANDHOME</h1>
-                </a>
-            </div>
-            <div class="col-lg-6 col-6 text-left">
-                <form action="/products?email=<%= user %>" method="get">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search anything you want" name="search">
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="col-lg-3 col-6 text-right ml-auto">
-                <div class="d-inline-flex align-items-center">
-    
-                    <a href="/wishList" class="btn position-relative">
-                        <i class="fas fa-heart text-primary">
-                        <% if (wishListNo) { %>
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-dark"><%= wishListNo %></span>
-                        <% } %></i>
-                    </a>
-    
-                    <a href="/cart" class="btn">
-                        <i class="fas fa-shopping-cart text-primary"></i>
-                        <% if (cartNo) { %>
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-dark"><%= cartNo %></span>
-                        <% } %>
-                    </a>
-    
-                    <% if (user) { %>
-                        <a href="/profile" class="btn">
-                            <i class="fas fa-user text-primary"></i>
-                        </a>
-                    <% } else { %>
-                        <a href="/login" class="btn btn-primary">
-                            Log In
-                        </a>
-                    <% } %>
-                </div>
-            </div>
+        <div class="col-lg-6 text-center text-lg-right">
+          <div class="d-inline-flex align-items-center">
+            <a class="text-dark px-2" href="">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+            <a
+              class="text-dark px-2"
+              href="https://www.linkedin.com/in/abdullha-ks-234746295?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+            >
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a
+              class="text-dark px-2"
+              href="https://www.instagram.com/abdullha_kalamban?igsh=MXJ3ODBxYnJncWFqcg%3D%3D&utm_source=qr"
+            >
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a
+              class="text-dark pl-2"
+              href="https://youtube.com/@abdullhakalamban?feature=shared"
+            >
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
         </div>
+      </div>
+      <div class="row align-items-center py-3 px-xl-5">
+        <div class="col-lg-3 d-none d-lg-block">
+          <a href="/home" class="text-decoration-none">
+            <h1 class="m-0 display-5 font-weight-semi-bold">BRANDHOME</h1>
+          </a>
+        </div>
+        <div class="col-lg-6 col-6 text-left">
+          <form action="/products?email=<%= user %>" method="get">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search anything you want"
+                name="search"
+              />
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-lg-3 col-6 text-right ml-auto">
+          <div class="d-inline-flex align-items-center">
+            <a href="/wishList" class="btn position-relative">
+              <i class="fas fa-heart text-primary">
+                <% if (wishListNo) { %>
+                <span
+                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-dark"
+                  ><%= wishListNo %></span
+                >
+                <% } %></i
+              >
+            </a>
+
+            <a href="/cart" class="btn">
+              <i class="fas fa-shopping-cart text-primary"></i>
+              <% if (cartNo) { %>
+              <span
+                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-dark"
+                ><%= cartNo %></span
+              >
+              <% } %>
+            </a>
+
+            <% if (user) { %>
+            <a href="/profile" class="btn">
+              <i class="fas fa-user text-primary"></i>
+            </a>
+            <% } else { %>
+            <a href="/login" class="btn btn-primary"> Log In </a>
+            <% } %>
+          </div>
+        </div>
+      </div>
     </div>
     <!-- Topbar End -->
-   
 
-   <!-- Navbar Start -->
-   <div class="container-fluid">
-    <div class="row border-top px-xl-5">
-        <div class="col-lg-3 d-none d-lg-block">
-            
-        </div>
+    <!-- Navbar Start -->
+    <div class="container-fluid">
+      <div class="row border-top px-xl-5">
+        <div class="col-lg-3 d-none d-lg-block"></div>
         <div class="col-lg-9">
-            <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
-                <a href="/home" class="text-decoration-none">
-                    <h1 class="m-0 display-5 font-weight-semi-bold">BRANDHOME</h1>
-                </a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                    <div class="navbar-nav mr-auto py-0">
-                        <a href="/home?email=<%= user %>" class="nav-item nav-link ">Home</a>
-                        <a href="/products?email=<%= user %>" class="nav-item nav-link">Shop</a>
-                        <a href="/cart" class="nav-item nav-link ">Cart</a>
-                        <a href="/checkOut" class="nav-item nav-link ">Checkout</a>
-                        <a href="/orders" class="nav-item nav-link">Orders</a>
-                        <a href="https://wa.me/8593063568" class="nav-item nav-link">Contact</a>
-                    </div>
-                </div>
-            </nav>
+          <nav
+            class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0"
+          >
+            <a href="/home" class="text-decoration-none">
+              <h1 class="m-0 display-5 font-weight-semi-bold">BRANDHOME</h1>
+            </a>
+            <button
+              type="button"
+              class="navbar-toggler"
+              data-toggle="collapse"
+              data-target="#navbarCollapse"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div
+              class="collapse navbar-collapse justify-content-between"
+              id="navbarCollapse"
+            >
+              <div class="navbar-nav mr-auto py-0">
+                <a href="/home?email=<%= user %>" class="nav-item nav-link"
+                  >Home</a
+                >
+                <a href="/products?email=<%= user %>" class="nav-item nav-link"
+                  >Shop</a
+                >
+                <a href="/cart" class="nav-item nav-link">Cart</a>
+                <a href="/checkOut" class="nav-item nav-link">Checkout</a>
+                <a href="/orders" class="nav-item nav-link">Orders</a>
+                <a href="https://wa.me/8593063568" class="nav-item nav-link"
+                  >Contact</a
+                >
+              </div>
+            </div>
+          </nav>
         </div>
+      </div>
     </div>
-</div>
-<!-- Navbar End -->
-
-
-   
-
+    <!-- Navbar End -->
 
     <!-- Shop Start -->
     <div class="main-content">
-        <div class="section__content section__content--p30">
-            <div class="container-fluid">
-                <div class="row align-items-start justify-content-center">
-                    <!-- Image Container -->
-                    <div class="col-12 col-lg-6 ">
-                        <div class="xzoom-container row" id="image-container">
-                            <div class="col-lg-2">
-                                <ul class="list-unstyled">
-                                    <% if (product) { %>
-                                        <li><img src="/productImages/<%= product.image1 %>" alt="" class="small-img img-fluid" id="smimg"></li>
-                                        <li><img src="/productImages/<%= product.image2 %>" alt="" class="small-img img-fluid" id="smimg"></li>
-                                        <li><img src="/productImages/<%= product.image3 %>" alt="" class="small-img img-fluid" id="smimg"></li>
-                                    <% } %>
-                                </ul>
-                            </div>
-                            <div class="col-lg-10">
-                                <img src="/productImages/<%= product.image1 %>" alt="" class="big-img img-fluid" id="main-image">
-                            </div>
-                           
-                            
-                        </div>
-                    </div>
-                    <!-- Description Container -->
-                    <div class="col-12 col-lg-6">
-                        <div class="description" id="description">
-                            <h1 class="product-title"><%= product.productName %></h1>
-                            <input type="hidden" name="productId" id="productId" value="<%= product._id %>">
-                            <p class="product-description"><%= product.description %></p>
-                            <span class="product-price">Rs <%= product.price %></span>
-    
-                            <!-- Variant Selection -->
-                            <div class="variant-selection">
-                                <label for="variant-dropdown">Choose Variant:</label>
-                                <select class="form-select" name="option" id="size" required onchange="checkQuantity()">
-                                    <% if (product && product.sizes.length > 0) {
-                                        for (let j = 0; j < product.sizes.length; j++) { %>
-                                            <option value="<%= product.sizes[j] %>">
-                                                <%= product.sizes[j] %>
-                                            </option>
-                                    <% } } %>
-                                </select>
-                            </div>
-    
-                            <!-- Color Selection -->
-                            <div class="color-selection mt-2">
-                                <label for="color-dropdown">Choose Color:</label>
-                                <select id="color" class="form-select" name="color" required onchange="checkQuantity()">
-                                    <% if (product.colors && product.colors.length > 0) {
-                                        for (let j = 0; j < product.colors.length; j++) { %>
-                                            <option value="<%= product.colors[j] %>">
-                                                <%= product.colors[j] %>
-                                            </option>
-                                    <% } } %>
-                                </select>
-                            </div>
-    
-                            <div id="stock-false" class="stock-false mt-3 hide">
-                                <h2 class="text-danger">Out Of Stock</h2>
-                                <p>Please check another variant...</p>
-                            </div>
-    
-                            <div id="stock-true" class="stock-true mt-3 hide">
-                                <button class="cart btn btn-primary mt-2" id="addToCart">Add to Cart</button>
-                            </div>
-                        </div>
-                    </div>
+      <div class="section__content section__content--p30">
+        <div class="container-fluid">
+          <div class="row align-items-start justify-content-center">
+            <!-- Image Container -->
+            <div class="col-12 col-lg-6">
+              <div class="xzoom-container row" id="image-container">
+                <div class="col-lg-2">
+                  <ul class="list-unstyled">
+                    <% if (product) { %>
+                    <li>
+                      <img
+                        src="/productImages/<%= product.image1 %>"
+                        alt=""
+                        class="small-img img-fluid"
+                        id="smimg"
+                      />
+                    </li>
+                    <li>
+                      <img
+                        src="/productImages/<%= product.image2 %>"
+                        alt=""
+                        class="small-img img-fluid"
+                        id="smimg"
+                      />
+                    </li>
+                    <li>
+                      <img
+                        src="/productImages/<%= product.image3 %>"
+                        alt=""
+                        class="small-img img-fluid"
+                        id="smimg"
+                      />
+                    </li>
+                    <% } %>
+                  </ul>
                 </div>
+                <div class="col-lg-10">
+                  <img
+                    src="/productImages/<%= product.image1 %>"
+                    alt=""
+                    class="big-img img-fluid"
+                    id="main-image"
+                  />
+                </div>
+              </div>
             </div>
+            <!-- Description Container -->
+            <div class="col-12 col-lg-6">
+              <div class="description" id="description">
+                <h1 class="product-title"><%= product.productName %></h1>
+                <input
+                  type="hidden"
+                  name="productId"
+                  id="productId"
+                  value="<%= product._id %>"
+                />
+                <p class="product-description"><%= product.description %></p>
+                <span class="product-price">Rs <%= product.price %></span>
+
+                <!-- Variant Selection -->
+                <div class="variant-selection">
+                  <label for="variant-dropdown">Choose Variant:</label>
+                  <select
+                    class="form-select"
+                    name="option"
+                    id="size"
+                    required
+                    onchange="checkQuantity()"
+                  >
+                    <% if (product && product.sizes.length > 0) { for (let j =
+                    0; j < product.sizes.length; j++) { %>
+                    <option value="<%= product.sizes[j] %>">
+                      <%= product.sizes[j] %>
+                    </option>
+                    <% } } %>
+                  </select>
+                </div>
+
+                <!-- Color Selection -->
+                <div class="color-selection mt-2">
+                  <label for="color-dropdown">Choose Color:</label>
+                  <select
+                    id="color"
+                    class="form-select"
+                    name="color"
+                    required
+                    onchange="checkQuantity()"
+                  >
+                    <% if (product.colors && product.colors.length > 0) { for
+                    (let j = 0; j < product.colors.length; j++) { %>
+                    <option value="<%= product.colors[j] %>">
+                      <%= product.colors[j] %>
+                    </option>
+                    <% } } %>
+                  </select>
+                </div>
+
+                <div id="stock-false" class="stock-false mt-3 hide">
+                  <h2 class="text-danger">Out Of Stock</h2>
+                  <p>Please check another variant...</p>
+                </div>
+
+                <div id="stock-true" class="stock-true mt-3 hide">
+                  <button class="cart btn btn-primary mt-2" id="addToCart">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
     <!-- Shop End -->
 
-
-   <!-- Footer Start -->
-   <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
-    <div class="row px-xl-5 pt-5">
+    <!-- Footer Start -->
+    <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
+      <div class="row px-xl-5 pt-5">
         <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
-            <a href="" class="text-decoration-none">
-                <h1 class="mb-4 display-5 font-weight-semi-bold">BRANDHOME</h1>
-            </a>
-            <p>Where Quality Meets Convenience – Your One-Stop Shop for Everything!</p>
-            <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, Kerala, India</p>
-            <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>brandhome@gmail.com</p>
-            <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
+          <a href="" class="text-decoration-none">
+            <h1 class="mb-4 display-5 font-weight-semi-bold">BRANDHOME</h1>
+          </a>
+          <p>
+            Where Quality Meets Convenience – Your One-Stop Shop for Everything!
+          </p>
+          <p class="mb-2">
+            <i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street,
+            Kerala, India
+          </p>
+          <p class="mb-2">
+            <i class="fa fa-envelope text-primary mr-3"></i>brandhome@gmail.com
+          </p>
+          <p class="mb-0">
+            <i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890
+          </p>
         </div>
         <div class="col-lg-8 col-md-12">
-            <div class="row">
-                <div class="col-md-4 mb-5">
-                    <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
-                    <div class="d-flex flex-column justify-content-start">
-                        <a class="text-dark mb-2" href="/home"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                        <a class="text-dark mb-2" href="/products"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-                        <a class="text-dark mb-2" href="/cart"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-                        <a class="text-dark mb-2" href="/checkOut"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
-                        <a class="text-dark" href="https://wa.me/8594043859"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-5">
-                    <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
-                    <div class="d-flex flex-column justify-content-start">
-                        <a class="text-dark mb-2" href="/orders"><i class="fa fa-angle-right mr-2"></i>My Orders</a>
-                        <a class="text-dark mb-2" href="/profile"><i class="fa fa-angle-right mr-2"></i>Profile</a>
-                        <a class="text-dark mb-2" href="/addresses"><i class="fa fa-angle-right mr-2"></i>Addresses</a>
-                        <a class="text-dark mb-2" href="/wishList"><i class="fa fa-angle-right mr-2"></i>WishList</a>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-5">
-                    <h5 class="font-weight-bold text-dark mb-4">Newsletter</h5>
-                    <form action="">
-                        <div class="form-group">
-                            <input type="text" class="form-control border-0 py-4" placeholder="Your Name" required="required" />
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control border-0 py-4" placeholder="Your Email"
-                                required="required" />
-                        </div>
-                        <div>
-                            <button class="btn btn-primary btn-block border-0 py-3" type="submit">Subscribe Now</button>
-                        </div>
-                    </form>
-                </div>
+          <div class="row">
+            <div class="col-md-4 mb-5">
+              <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
+              <div class="d-flex flex-column justify-content-start">
+                <a class="text-dark mb-2" href="/home"
+                  ><i class="fa fa-angle-right mr-2"></i>Home</a
+                >
+                <a class="text-dark mb-2" href="/products"
+                  ><i class="fa fa-angle-right mr-2"></i>Our Shop</a
+                >
+                <a class="text-dark mb-2" href="/cart"
+                  ><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a
+                >
+                <a class="text-dark mb-2" href="/checkOut"
+                  ><i class="fa fa-angle-right mr-2"></i>Checkout</a
+                >
+                <a class="text-dark" href="https://wa.me/8594043859"
+                  ><i class="fa fa-angle-right mr-2"></i>Contact Us</a
+                >
+              </div>
             </div>
+            <div class="col-md-4 mb-5">
+              <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
+              <div class="d-flex flex-column justify-content-start">
+                <a class="text-dark mb-2" href="/orders"
+                  ><i class="fa fa-angle-right mr-2"></i>My Orders</a
+                >
+                <a class="text-dark mb-2" href="/profile"
+                  ><i class="fa fa-angle-right mr-2"></i>Profile</a
+                >
+                <a class="text-dark mb-2" href="/addresses"
+                  ><i class="fa fa-angle-right mr-2"></i>Addresses</a
+                >
+                <a class="text-dark mb-2" href="/wishList"
+                  ><i class="fa fa-angle-right mr-2"></i>WishList</a
+                >
+              </div>
+            </div>
+            <div class="col-md-4 mb-5">
+              <h5 class="font-weight-bold text-dark mb-4">Newsletter</h5>
+              <form action="">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control border-0 py-4"
+                    placeholder="Your Name"
+                    required="required"
+                  />
+                </div>
+                <div class="form-group">
+                  <input
+                    type="email"
+                    class="form-control border-0 py-4"
+                    placeholder="Your Email"
+                    required="required"
+                  />
+                </div>
+                <div>
+                  <button
+                    class="btn btn-primary btn-block border-0 py-3"
+                    type="submit"
+                  >
+                    Subscribe Now
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
-    </div>
-    <div class="row border-top border-light mx-xl-5 py-4">
+      </div>
+      <div class="row border-top border-light mx-xl-5 py-4">
         <div class="col-md-6 px-xl-0">
-            <p class="mb-md-0 text-center text-md-left text-dark">
-                &copy; <a class="text-dark font-weight-semi-bold" href="#">BRANDHOME</a>. All Rights Reserved. Designed
-                by
-                <a class="text-dark font-weight-semi-bold" href="https://www.instagram.com/abdullha_kalamban?igsh=MXJ3ODBxYnJncWFqcg%3D%3D&utm_source=qr">aks_designs</a><br>
-                Distributed By <a href="https://www.instagram.com/abdullha_kalamban?igsh=MXJ3ODBxYnJncWFqcg%3D%3D&utm_source=qr" target="_blank">AKS4U WEB-SOLUTIONS</a>
-            </p>
+          <p class="mb-md-0 text-center text-md-left text-dark">
+            &copy;
+            <a class="text-dark font-weight-semi-bold" href="#">BRANDHOME</a>.
+            All Rights Reserved. Designed by
+            <a
+              class="text-dark font-weight-semi-bold"
+              href="https://www.instagram.com/abdullha_kalamban?igsh=MXJ3ODBxYnJncWFqcg%3D%3D&utm_source=qr"
+              >aks_designs</a
+            ><br />
+            Distributed By
+            <a
+              href="https://www.instagram.com/abdullha_kalamban?igsh=MXJ3ODBxYnJncWFqcg%3D%3D&utm_source=qr"
+              target="_blank"
+              >AKS4U WEB-SOLUTIONS</a
+            >
+          </p>
         </div>
         <div class="col-md-6 px-xl-0 text-center text-md-right">
-            <img class="img-fluid" src="/images/payments.png" alt="">
+          <img class="img-fluid" src="/images/payments.png" alt="" />
         </div>
+      </div>
     </div>
-</div>
-<!-- Footer End -->
-
+    <!-- Footer End -->
 
     <!-- Back to Top -->
-    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
-
+    <a href="#" class="btn btn-primary back-to-top"
+      ><i class="fa fa-angle-double-up"></i
+    ></a>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="/lib/easing/easing.min.js"></script>
     <script src="/lib/owlcarousel/owl.carousel.min.js"></script>
-
-  
 
     <!-- Contact Javascript File -->
     <script src="mail/jqBootstrapValidation.min.js"></script>
@@ -375,116 +497,95 @@
     <script src="/js/zoomsl.js" type="text/javascript"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</body>
-
-
-
+  </body>
 </html>
 
 <script>
-
-    function popup (popupMsg){
-
-            
-
+  function popup(popupMsg) {
     Swal.fire({
-                title: '',
-                text: popupMsg,
-                //icon: 'success',
-                timer: 8000,
-                showConfirmButton: false,
-            })
-    };
+      title: "",
+      text: popupMsg,
+      //icon: 'success',
+      timer: 8000,
+      showConfirmButton: false,
+    });
+  }
 
-   $(document).ready(function(){
-    $(".small-img").hover(function(){
-        $(".big-img").attr('src', $(this).attr('src'));
+  $(document).ready(function () {
+    $(".small-img").hover(function () {
+      $(".big-img").attr("src", $(this).attr("src"));
     });
 
     $(".big-img").imagezoomsl({
-        zoomrange: [3, 3]
+      zoomrange: [3, 3],
     });
 
     // Invoke checkQuantity function when the page loads
     checkQuantity();
 
-    $("#addToCart").click(function(){ 
-        
-        addToCart()
-    
+    $("#addToCart").click(function () {
+      addToCart();
     });
-});
+  });
 
-function checkQuantity() {
+  function checkQuantity() {
     var productId = document.getElementById("productId").value;
     var size = document.getElementById("size").value;
     var color = document.getElementById("color").value;
     var stockTrue = document.getElementById("stock-true");
     var stockFalse = document.getElementById("stock-false");
 
-    console.log("Checking quantity for size:", size, "and color:", color,"proid is :",productId);
+    console.log(
+      "Checking quantity for size:",
+      size,
+      "and color:",
+      color,
+      "proid is :",
+      productId
+    );
 
     $.ajax({
-        url: "/getStockFromPrductDetails",
-        type: "GET",
-        data: { size, color, productId },
+      url: "/getStockFromPrductDetails",
+      type: "GET",
+      data: { size, color, productId },
 
-        success: function(res) {
-            if (res.success) {
-                stockTrue.classList.remove("hide");
-                stockFalse.classList.add("hide");
-            } else {
-                stockTrue.classList.add("hide");
-                stockFalse.classList.remove("hide");
-            }
-        },
-        error: function(err) {
-            console.error("Error fetching stock:", err);
+      success: function (res) {
+        if (res.success) {
+          stockTrue.classList.remove("hide");
+          stockFalse.classList.add("hide");
+        } else {
+          stockTrue.classList.add("hide");
+          stockFalse.classList.remove("hide");
         }
+      },
+      error: function (err) {
+        console.error("Error fetching stock:", err);
+      },
     });
+  }
 
-};
-
-
-    function addToCart() {
-
-
-
-        console.log("add to cart is working........")
+  function addToCart() {
+    console.log("add to cart is working........");
     // Get the selected size and color values
-    var size = document.getElementById('size').value;
-    var color = document.getElementById('color').value;
-    var productId = document.getElementById('productId').value;
-
+    var size = document.getElementById("size").value;
+    var color = document.getElementById("color").value;
+    var productId = document.getElementById("productId").value;
 
     $.ajax({
-        url: "/addtoCart",
-        type: "POST",
-        data: { productId ,color:color,size:size},
+      url: "/addtoCart",
+      type: "POST",
+      data: { productId, color: color, size: size },
 
-        success: function(res) {
-            if(res.success){
-                window.location.href="/products";
-            }else{
-                popup(res.msg||"please login");
-            }
-        },
-        error: function(err) {
-            console.log("Error adding to cart:", err);
+      success: function (res) {
+        if (res.success) {
+          window.location.href = "/products";
+        } else {
+          popup(res.msg || "please login");
         }
-    
-    })
-
-    }
-
-
-   
-
-
-
-
+      },
+      error: function (err) {
+        console.log("Error adding to cart:", err);
+      },
+    });
+  }
 </script>
-
-
-
-

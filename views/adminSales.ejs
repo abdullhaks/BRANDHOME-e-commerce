@@ -1,471 +1,545 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <!-- Required meta tags-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="au theme template">
-    <meta name="author" content="Hau Nguyen">
-    <meta name="keywords" content="au theme template">
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="au theme template" />
+    <meta name="author" content="Hau Nguyen" />
+    <meta name="keywords" content="au theme template" />
 
     <!-- Title Page-->
     <title>Dashboard</title>
 
     <!-- Fontfaces CSS-->
-    <link href="/css/font-face.css" rel="stylesheet" media="all">
-    <link href="/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-    <link href="/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
-    <link href="/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="/css/font-face.css" rel="stylesheet" media="all" />
+    <link
+      href="/vendor/font-awesome-4.7/css/font-awesome.min.css"
+      rel="stylesheet"
+      media="all"
+    />
+    <link
+      href="/vendor/font-awesome-5/css/fontawesome-all.min.css"
+      rel="stylesheet"
+      media="all"
+    />
+    <link
+      href="/vendor/mdi-font/css/material-design-iconic-font.min.css"
+      rel="stylesheet"
+      media="all"
+    />
 
     <!-- Bootstrap CSS-->
-    <link href="/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+    <link
+      href="/vendor/bootstrap-4.1/bootstrap.min.css"
+      rel="stylesheet"
+      media="all"
+    />
 
     <!-- Vendor CSS-->
-    <link href="/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
-    <link href="/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
-    <link href="/vendor/wow/animate.css" rel="stylesheet" media="all">
-    <link href="/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
-    <link href="/vendor/slick/slick.css" rel="stylesheet" media="all">
-    <link href="/vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+    <link
+      href="/vendor/animsition/animsition.min.css"
+      rel="stylesheet"
+      media="all"
+    />
+    <link
+      href="/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css"
+      rel="stylesheet"
+      media="all"
+    />
+    <link href="/vendor/wow/animate.css" rel="stylesheet" media="all" />
+    <link
+      href="/vendor/css-hamburgers/hamburgers.min.css"
+      rel="stylesheet"
+      media="all"
+    />
+    <link href="/vendor/slick/slick.css" rel="stylesheet" media="all" />
+    <link href="/vendor/select2/select2.min.css" rel="stylesheet" media="all" />
+    <link
+      href="/vendor/perfect-scrollbar/perfect-scrollbar.css"
+      rel="stylesheet"
+      media="all"
+    />
 
     <!-- Main CSS-->
-    <link href="/css/theme.css" rel="stylesheet" media="all">
+    <link href="/css/theme.css" rel="stylesheet" media="all" />
+  </head>
 
-</head>
-
-<body class="animsition">
+  <body class="animsition">
     <div class="page-wrapper">
-        <!-- HEADER MOBILE-->
-        <header class="header-mobile d-block d-lg-none">
-            <div class="header-mobile__bar">
-                <div class="container-fluid">
-                    <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
-                            <h2>BRANDHOME</h2>
-                            <h6>Admin</h6>
-                        </a>
-                        <button class="hamburger hamburger--slider" type="button">
-                            <span class="hamburger-box">
-                                <span class="hamburger-inner"></span>
-                            </span>
-                        </button>
-                    </div>
-                </div>
+      <!-- HEADER MOBILE-->
+      <header class="header-mobile d-block d-lg-none">
+        <div class="header-mobile__bar">
+          <div class="container-fluid">
+            <div class="header-mobile-inner">
+              <a class="logo" href="index.html">
+                <h2>BRANDHOME</h2>
+                <h6>Admin</h6>
+              </a>
+              <button class="hamburger hamburger--slider" type="button">
+                <span class="hamburger-box">
+                  <span class="hamburger-inner"></span>
+                </span>
+              </button>
             </div>
-            <nav class="navbar-mobile">
-                <div class="container-fluid">
-                    <ul class="navbar-mobile__list list-unstyled">
-
-                        <li>
-                            <a class="js-arrow " href="/admin/home">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                           
-                        </li>
-
-                        <li>
-                            <a href="/admin/userManagement">
-                                <i class="fas fa-users"></i>Users</a>
-                        </li>
-
-                        <li>
-                            <a href="/admin/categoryManagement">
-                                <i class="fas fa-th"></i>Categories</a>
-                        </li>
-
-                        <li>
-                            <a href="/admin/addProduct">
-                                <i class="fas fa-shopping-basket"></i>Products</a>
-                        </li>
-
-                        <li>
-                            <a href="/admin/stockManagement">
-                                <i class="fas fa-truck "></i>Stocks</a>
-                        </li>
-
-                        <li>
-                            <a href="/admin/orderManagement">
-                                <i class="fas fa-shopping-bag "></i>Orders</a>
-                        </li>
-
-                        <li>
-                            <a href="/admin/returnManagement">
-                                <i class="fas fa fa-reply "></i>Returns</a>
-                        </li>
-
-                        <li>
-                            <a href="/admin/offersManagement">
-                                <i class="fas fa fa-gift "></i>Offers</a>
-                        </li>
-
-                        <li>
-                            <a href="/admin/couponManagement">
-                                <i class="fas fa fa-tags "></i>Coupons</a>
-                        </li>
-
-                        <li class="active">
-                            <a href="/admin/salesManagement">
-                                <i class="fas fa-bar-chart "></i>Sales</a>
-                        </li>
-                    
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        <!-- END HEADER MOBILE-->
-
-        <!-- MENU SIDEBAR-->
-        <aside class="menu-sidebar d-none d-lg-block">
-            <div class="logo">
-                <a href="#">
-                    <h2>BRANDHOME</h2>
-                    <h6>Admin</h6>
-                </a>
-            </div>
-            <div class="menu-sidebar__content js-scrollbar1">
-                <nav class="navbar-sidebar">
-                    <ul class="list-unstyled navbar__list">
-
-                        <li>
-                            <a class="js-arrow " href="/admin/home">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                           
-                        </li>
-
-                        <li>
-                            <a href="/admin/userManagement">
-                                <i class="fas fa-users"></i>Users</a>
-                        </li>
-
-                        <li>
-                            <a href="/admin/categoryManagement">
-                                <i class="fas fa-th"></i>Categories</a>
-                        </li>
-
-                        <li>
-                            <a href="/admin/addProduct">
-                                <i class="fas fa-shopping-basket"></i>Products</a>
-                        </li>
-
-                        <li>
-                            <a href="/admin/stockManagement">
-                                <i class="fas fa-truck "></i>Stocks</a>
-                        </li>
-
-                        <li>
-                            <a href="/admin/orderManagement">
-                                <i class="fas fa-shopping-bag "></i>Orders</a>
-                        </li>
-
-                        <li>
-                            <a href="/admin/returnManagement">
-                                <i class="fas fa fa-reply "></i>Returns</a>
-                        </li>
-
-                        <li>
-                            <a href="/admin/offersManagement">
-                                <i class="fas fa fa-gift "></i>Offers</a>
-                        </li>
-
-                        <li>
-                            <a href="/admin/couponManagement">
-                                <i class="fas fa fa-tags "></i>Coupons</a>
-                        </li>
-
-                        <li class="active">
-                            <a href="/admin/salesManagement">
-                                <i class="fas fa-bar-chart "></i>Sales</a>
-                        </li>
-                    
-                    </ul>
-                </nav>
-            </div>
-        </aside>
-        <!-- END MENU SIDEBAR-->
-
-        <!-- PAGE CONTAINER-->
-        <div class="page-container">
-            <!-- HEADER DESKTOP-->
-            <header class="header-desktop">
-                <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                        <div class="header-wrap">
-                            <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search"
-                                    placeholder="Search for datas &amp; reports..." />
-                                <button class="au-btn--submit" type="submit">
-                                    <i class="zmdi zmdi-search"></i>
-                                </button>
-                            </form>
-                            <div class="header-button">
-                                <div class="noti-wrap">
-                                    <div class="noti__item js-item-menu">
-                                        <i class="zmdi zmdi-comment-more"></i>
-                                        <span class="quantity">1</span>
-                                        <div class="mess-dropdown js-dropdown">
-                                            <div class="mess__title">
-                                                <p>You have 2 news message</p>
-                                            </div>
-                                            <div class="mess__item">
-                                                <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-06.jpg" alt="Michelle Moreno" />
-                                                </div>
-                                                <div class="content">
-                                                    <h6>Michelle Moreno</h6>
-                                                    <p>Have sent a photo</p>
-                                                    <span class="time">3 min ago</span>
-                                                </div>
-                                            </div>
-                                            <div class="mess__item">
-                                                <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-04.jpg" alt="Diane Myers" />
-                                                </div>
-                                                <div class="content">
-                                                    <h6>Diane Myers</h6>
-                                                    <p>You are now connected on message</p>
-                                                    <span class="time">Yesterday</span>
-                                                </div>
-                                            </div>
-                                            <div class="mess__footer">
-                                                <a href="#">View all messages</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="noti__item js-item-menu">
-                                        <i class="zmdi zmdi-email"></i>
-                                        <span class="quantity">1</span>
-                                        <div class="email-dropdown js-dropdown">
-                                            <div class="email__title">
-                                                <p>You have 3 New Emails</p>
-                                            </div>
-                                            <div class="email__item">
-                                                <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-06.jpg" alt="Cynthia Harvey" />
-                                                </div>
-                                                <div class="content">
-                                                    <p>Meeting about new dashboard...</p>
-                                                    <span>Cynthia Harvey, 3 min ago</span>
-                                                </div>
-                                            </div>
-                                            <div class="email__item">
-                                                <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-05.jpg" alt="Cynthia Harvey" />
-                                                </div>
-                                                <div class="content">
-                                                    <p>Meeting about new dashboard...</p>
-                                                    <span>Cynthia Harvey, Yesterday</span>
-                                                </div>
-                                            </div>
-                                            <div class="email__item">
-                                                <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-04.jpg" alt="Cynthia Harvey" />
-                                                </div>
-                                                <div class="content">
-                                                    <p>Meeting about new dashboard...</p>
-                                                    <span>Cynthia Harvey, April 12,,2018</span>
-                                                </div>
-                                            </div>
-                                            <div class="email__footer">
-                                                <a href="#">See all emails</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="noti__item js-item-menu">
-                                        <i class="zmdi zmdi-notifications"></i>
-                                        <span class="quantity">3</span>
-                                        <div class="notifi-dropdown js-dropdown">
-                                            <div class="notifi__title">
-                                                <p>You have 3 Notifications</p>
-                                            </div>
-                                            <div class="notifi__item">
-                                                <div class="bg-c1 img-cir img-40">
-                                                    <i class="zmdi zmdi-email-open"></i>
-                                                </div>
-                                                <div class="content">
-                                                    <p>You got a email notification</p>
-                                                    <span class="date">April 12, 2018 06:50</span>
-                                                </div>
-                                            </div>
-                                            <div class="notifi__item">
-                                                <div class="bg-c2 img-cir img-40">
-                                                    <i class="zmdi zmdi-account-box"></i>
-                                                </div>
-                                                <div class="content">
-                                                    <p>Your account has been blocked</p>
-                                                    <span class="date">April 12, 2018 06:50</span>
-                                                </div>
-                                            </div>
-                                            <div class="notifi__item">
-                                                <div class="bg-c3 img-cir img-40">
-                                                    <i class="zmdi zmdi-file-text"></i>
-                                                </div>
-                                                <div class="content">
-                                                    <p>You got a new file</p>
-                                                    <span class="date">April 12, 2018 06:50</span>
-                                                </div>
-                                            </div>
-                                            <div class="notifi__footer">
-                                                <a href="#">All notifications</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="account-wrap">
-                                    <div class="account-item clearfix js-item-menu">
-                                        <div class="image">
-                                            <img src="/images/aks dp.png" alt="John Doe" />
-                                        </div>
-                                        <div class="content">
-                                            <a class="js-acc-btn" href="#">abdullha kalamban</a>
-                                        </div>
-                                        <div class="account-dropdown js-dropdown">
-                                            <div class="info clearfix">
-                                                <div class="image">
-                                                    <a href="#">
-                                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />
-                                                    </a>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="name">
-                                                        <a href="#">abdullha kalamban</a>
-                                                    </h5>
-                                                    <span class="email">aks4u786@gmail.com</span>
-                                                </div>
-                                            </div>
-                                            <div class="account-dropdown__body">
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-account"></i>Account</a>
-                                                </div>
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-settings"></i>Setting</a>
-                                                </div>
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-money-box"></i>Billing</a>
-                                                </div>
-                                            </div>
-                                            <div class="account-dropdown__footer">
-                                                <a href="/admin/logout">
-                                                    <i class="zmdi zmdi-power"></i>Logout</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
-            <!-- HEADER DESKTOP-->
-
-            <!-- MAIN CONTENT-->
-            <div class="main-content">
-                <div class="section__content section__content--p30 ">
-                    <div class="container-fluid">
-
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <h2 class="title-1 m-b-25">Sales Report</h2>
-                            </div>
-
-                            <div class="col-lg-4 row  salesPdfXl">
-
-                                <div class="col-6"> <a id="pdf" href="">Download PDF</a></div>
-                                <div class="col-6"> <a id="xl" href="">Download Excel</a></div>
-                                <input type="hidden" name="filter" id="filter" value="<%= filter %>">
-                                <input type="hidden" name="startDate">
-                                <input type="hidden" name="endDate">
-
-                            </div>
-
-                            <div class="col-lg-12">
-
-                                <form method="POST" action="" id="adminSales">
-                                    <label for="filter">Filter:</label>
-                                    <select name="filter" id="filter" onchange="toggleDateRange(this.value)">
-                                        <option value="all">All</option>
-                                        <option selected value="today">Today</option>
-                                        <option value="thisWeek">This Week</option>
-                                        <option value="thisMonth">This Month</option>
-                                        <option value="thisYear">This Year</option>
-                                        <option value="dateRange">Date Range</option>
-                                    </select>
-                                    <div class="pb-2" id="dateRange" style="display: none;">
-                                        <label for="startDate">Start Date:</label>
-                                        <input type="date" name="startDate" id="startDate">
-                                        <label for="endDate">End Date:</label>
-                                        <input type="date" name="endDate" id="endDate">
-                                    </div>
-                                    <button class="btn-outline-secondary" type="submit">Apply Filter</button>
-                                </form>
-                            </div>
-                            <div class="col-lg-12 pt-2">
-
-                                <div class="table-responsive table--no-card m-b-40">
-                                    <table id="salesData" class="table table-borderless table-striped table-earning">
-                                        <thead>
-                                            <tr>
-                                                <th>date</th>
-                                                <th>order ID</th>
-                                                <th class="text-right">item&quantity</th>
-                                                <th class="text-right">total</th>
-                                            </tr>
-                                        </thead>
-
-
-                                        <% if(sales.length>0){
-                                            for(let i = 0; i < sales.length; i++){ %>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <%= sales[i].deliveredDate.toLocaleDateString() %>
-                                                        </td>
-                                                        <td>
-                                                            <%= sales[i].orderId %>
-                                                        </td>
-                                                        <td class="">
-                                                            <%= sales[i].item.productName %>-( <%= sales[i].item.quantity %>)
-                                                        </td>
-                                                        <td class="text-left">Rs<%= sales[i].item.payAmount
-                                                                %>
-                                                    </tr>
-
-                                                </tbody>
-
-                                                <% } %>
-                                                    <%}else{%>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td colspan="5">
-                                                                    No Sales Yet..
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                        <%}%>
-
-                                    </table>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="copyright">
-                                    <p>Copyright © 2024 BRANDHOME. All rights reserved.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- END MAIN CONTENT-->
-            <!-- END PAGE CONTAINER-->
+          </div>
         </div>
+        <nav class="navbar-mobile">
+          <div class="container-fluid">
+            <ul class="navbar-mobile__list list-unstyled">
+              <li>
+                <a class="js-arrow" href="/admin/home">
+                  <i class="fas fa-tachometer-alt"></i>Dashboard</a
+                >
+              </li>
 
+              <li>
+                <a href="/admin/userManagement">
+                  <i class="fas fa-users"></i>Users</a
+                >
+              </li>
+
+              <li>
+                <a href="/admin/categoryManagement">
+                  <i class="fas fa-th"></i>Categories</a
+                >
+              </li>
+
+              <li>
+                <a href="/admin/addProduct">
+                  <i class="fas fa-shopping-basket"></i>Products</a
+                >
+              </li>
+
+              <li>
+                <a href="/admin/stockManagement">
+                  <i class="fas fa-truck"></i>Stocks</a
+                >
+              </li>
+
+              <li>
+                <a href="/admin/orderManagement">
+                  <i class="fas fa-shopping-bag"></i>Orders</a
+                >
+              </li>
+
+              <li>
+                <a href="/admin/returnManagement">
+                  <i class="fas fa fa-reply"></i>Returns</a
+                >
+              </li>
+
+              <li>
+                <a href="/admin/offersManagement">
+                  <i class="fas fa fa-gift"></i>Offers</a
+                >
+              </li>
+
+              <li>
+                <a href="/admin/couponManagement">
+                  <i class="fas fa fa-tags"></i>Coupons</a
+                >
+              </li>
+
+              <li class="active">
+                <a href="/admin/salesManagement">
+                  <i class="fas fa-bar-chart"></i>Sales</a
+                >
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <!-- END HEADER MOBILE-->
+
+      <!-- MENU SIDEBAR-->
+      <aside class="menu-sidebar d-none d-lg-block">
+        <div class="logo">
+          <a href="#">
+            <h2>BRANDHOME</h2>
+            <h6>Admin</h6>
+          </a>
+        </div>
+        <div class="menu-sidebar__content js-scrollbar1">
+          <nav class="navbar-sidebar">
+            <ul class="list-unstyled navbar__list">
+              <li>
+                <a class="js-arrow" href="/admin/home">
+                  <i class="fas fa-tachometer-alt"></i>Dashboard</a
+                >
+              </li>
+
+              <li>
+                <a href="/admin/userManagement">
+                  <i class="fas fa-users"></i>Users</a
+                >
+              </li>
+
+              <li>
+                <a href="/admin/categoryManagement">
+                  <i class="fas fa-th"></i>Categories</a
+                >
+              </li>
+
+              <li>
+                <a href="/admin/addProduct">
+                  <i class="fas fa-shopping-basket"></i>Products</a
+                >
+              </li>
+
+              <li>
+                <a href="/admin/stockManagement">
+                  <i class="fas fa-truck"></i>Stocks</a
+                >
+              </li>
+
+              <li>
+                <a href="/admin/orderManagement">
+                  <i class="fas fa-shopping-bag"></i>Orders</a
+                >
+              </li>
+
+              <li>
+                <a href="/admin/returnManagement">
+                  <i class="fas fa fa-reply"></i>Returns</a
+                >
+              </li>
+
+              <li>
+                <a href="/admin/offersManagement">
+                  <i class="fas fa fa-gift"></i>Offers</a
+                >
+              </li>
+
+              <li>
+                <a href="/admin/couponManagement">
+                  <i class="fas fa fa-tags"></i>Coupons</a
+                >
+              </li>
+
+              <li class="active">
+                <a href="/admin/salesManagement">
+                  <i class="fas fa-bar-chart"></i>Sales</a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+      <!-- END MENU SIDEBAR-->
+
+      <!-- PAGE CONTAINER-->
+      <div class="page-container">
+        <!-- HEADER DESKTOP-->
+        <header class="header-desktop">
+          <div class="section__content section__content--p30">
+            <div class="container-fluid">
+              <div class="header-wrap">
+                <form class="form-header" action="" method="POST">
+                  <input
+                    class="au-input au-input--xl"
+                    type="text"
+                    name="search"
+                    placeholder="Search for datas &amp; reports..."
+                  />
+                  <button class="au-btn--submit" type="submit">
+                    <i class="zmdi zmdi-search"></i>
+                  </button>
+                </form>
+                <div class="header-button">
+                  <div class="noti-wrap">
+                    <div class="noti__item js-item-menu">
+                      <i class="zmdi zmdi-comment-more"></i>
+                      <span class="quantity">1</span>
+                      <div class="mess-dropdown js-dropdown">
+                        <div class="mess__title">
+                          <p>You have 2 news message</p>
+                        </div>
+                        <div class="mess__item">
+                          <div class="image img-cir img-40">
+                            <img
+                              src="images/icon/avatar-06.jpg"
+                              alt="Michelle Moreno"
+                            />
+                          </div>
+                          <div class="content">
+                            <h6>Michelle Moreno</h6>
+                            <p>Have sent a photo</p>
+                            <span class="time">3 min ago</span>
+                          </div>
+                        </div>
+                        <div class="mess__item">
+                          <div class="image img-cir img-40">
+                            <img
+                              src="images/icon/avatar-04.jpg"
+                              alt="Diane Myers"
+                            />
+                          </div>
+                          <div class="content">
+                            <h6>Diane Myers</h6>
+                            <p>You are now connected on message</p>
+                            <span class="time">Yesterday</span>
+                          </div>
+                        </div>
+                        <div class="mess__footer">
+                          <a href="#">View all messages</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="noti__item js-item-menu">
+                      <i class="zmdi zmdi-email"></i>
+                      <span class="quantity">1</span>
+                      <div class="email-dropdown js-dropdown">
+                        <div class="email__title">
+                          <p>You have 3 New Emails</p>
+                        </div>
+                        <div class="email__item">
+                          <div class="image img-cir img-40">
+                            <img
+                              src="images/icon/avatar-06.jpg"
+                              alt="Cynthia Harvey"
+                            />
+                          </div>
+                          <div class="content">
+                            <p>Meeting about new dashboard...</p>
+                            <span>Cynthia Harvey, 3 min ago</span>
+                          </div>
+                        </div>
+                        <div class="email__item">
+                          <div class="image img-cir img-40">
+                            <img
+                              src="images/icon/avatar-05.jpg"
+                              alt="Cynthia Harvey"
+                            />
+                          </div>
+                          <div class="content">
+                            <p>Meeting about new dashboard...</p>
+                            <span>Cynthia Harvey, Yesterday</span>
+                          </div>
+                        </div>
+                        <div class="email__item">
+                          <div class="image img-cir img-40">
+                            <img
+                              src="images/icon/avatar-04.jpg"
+                              alt="Cynthia Harvey"
+                            />
+                          </div>
+                          <div class="content">
+                            <p>Meeting about new dashboard...</p>
+                            <span>Cynthia Harvey, April 12,,2018</span>
+                          </div>
+                        </div>
+                        <div class="email__footer">
+                          <a href="#">See all emails</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="noti__item js-item-menu">
+                      <i class="zmdi zmdi-notifications"></i>
+                      <span class="quantity">3</span>
+                      <div class="notifi-dropdown js-dropdown">
+                        <div class="notifi__title">
+                          <p>You have 3 Notifications</p>
+                        </div>
+                        <div class="notifi__item">
+                          <div class="bg-c1 img-cir img-40">
+                            <i class="zmdi zmdi-email-open"></i>
+                          </div>
+                          <div class="content">
+                            <p>You got a email notification</p>
+                            <span class="date">April 12, 2018 06:50</span>
+                          </div>
+                        </div>
+                        <div class="notifi__item">
+                          <div class="bg-c2 img-cir img-40">
+                            <i class="zmdi zmdi-account-box"></i>
+                          </div>
+                          <div class="content">
+                            <p>Your account has been blocked</p>
+                            <span class="date">April 12, 2018 06:50</span>
+                          </div>
+                        </div>
+                        <div class="notifi__item">
+                          <div class="bg-c3 img-cir img-40">
+                            <i class="zmdi zmdi-file-text"></i>
+                          </div>
+                          <div class="content">
+                            <p>You got a new file</p>
+                            <span class="date">April 12, 2018 06:50</span>
+                          </div>
+                        </div>
+                        <div class="notifi__footer">
+                          <a href="#">All notifications</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="account-wrap">
+                    <div class="account-item clearfix js-item-menu">
+                      <div class="image">
+                        <img src="/images/aks dp.png" alt="John Doe" />
+                      </div>
+                      <div class="content">
+                        <a class="js-acc-btn" href="#">abdullha kalamban</a>
+                      </div>
+                      <div class="account-dropdown js-dropdown">
+                        <div class="info clearfix">
+                          <div class="image">
+                            <a href="#">
+                              <img
+                                src="images/icon/avatar-01.jpg"
+                                alt="John Doe"
+                              />
+                            </a>
+                          </div>
+                          <div class="content">
+                            <h5 class="name">
+                              <a href="#">abdullha kalamban</a>
+                            </h5>
+                            <span class="email">aks4u786@gmail.com</span>
+                          </div>
+                        </div>
+                        <div class="account-dropdown__body">
+                          <div class="account-dropdown__item">
+                            <a href="#">
+                              <i class="zmdi zmdi-account"></i>Account</a
+                            >
+                          </div>
+                          <div class="account-dropdown__item">
+                            <a href="#">
+                              <i class="zmdi zmdi-settings"></i>Setting</a
+                            >
+                          </div>
+                          <div class="account-dropdown__item">
+                            <a href="#">
+                              <i class="zmdi zmdi-money-box"></i>Billing</a
+                            >
+                          </div>
+                        </div>
+                        <div class="account-dropdown__footer">
+                          <a href="/admin/logout">
+                            <i class="zmdi zmdi-power"></i>Logout</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+        <!-- HEADER DESKTOP-->
+
+        <!-- MAIN CONTENT-->
+        <div class="main-content">
+          <div class="section__content section__content--p30">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-lg-8">
+                  <h2 class="title-1 m-b-25">Sales Report</h2>
+                </div>
+
+                <div class="col-lg-4 row salesPdfXl">
+                  <div class="col-6"><a id="pdf" href="">Download PDF</a></div>
+                  <div class="col-6"><a id="xl" href="">Download Excel</a></div>
+                  <input
+                    type="hidden"
+                    name="filter"
+                    id="filter"
+                    value="<%= filter %>"
+                  />
+                  <input type="hidden" name="startDate" />
+                  <input type="hidden" name="endDate" />
+                </div>
+
+                <div class="col-lg-12">
+                  <form method="POST" action="" id="adminSales">
+                    <label for="filter">Filter:</label>
+                    <select
+                      name="filter"
+                      id="filter"
+                      onchange="toggleDateRange(this.value)"
+                    >
+                      <option value="all">All</option>
+                      <option selected value="today">Today</option>
+                      <option value="thisWeek">This Week</option>
+                      <option value="thisMonth">This Month</option>
+                      <option value="thisYear">This Year</option>
+                      <option value="dateRange">Date Range</option>
+                    </select>
+                    <div class="pb-2" id="dateRange" style="display: none">
+                      <label for="startDate">Start Date:</label>
+                      <input type="date" name="startDate" id="startDate" />
+                      <label for="endDate">End Date:</label>
+                      <input type="date" name="endDate" id="endDate" />
+                    </div>
+                    <button class="btn-outline-secondary" type="submit">
+                      Apply Filter
+                    </button>
+                  </form>
+                </div>
+                <div class="col-lg-12 pt-2">
+                  <div class="table-responsive table--no-card m-b-40">
+                    <table
+                      id="salesData"
+                      class="table table-borderless table-striped table-earning"
+                    >
+                      <thead>
+                        <tr>
+                          <th>date</th>
+                          <th>order ID</th>
+                          <th class="text-right">item&quantity</th>
+                          <th class="text-right">total</th>
+                        </tr>
+                      </thead>
+
+                      <% if(sales.length>0){ for(let i = 0; i < sales.length;
+                      i++){ %>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <%= sales[i].deliveredDate.toLocaleDateString() %>
+                          </td>
+                          <td><%= sales[i].orderId %></td>
+                          <td class="">
+                            <%= sales[i].item.productName %>-( <%=
+                            sales[i].item.quantity %>)
+                          </td>
+                          <td class="text-left">
+                            Rs<%= sales[i].item.payAmount %>
+                          </td>
+                        </tr>
+                      </tbody>
+
+                      <% } %> <%}else{%>
+                      <tbody>
+                        <tr>
+                          <td colspan="5">No Sales Yet..</td>
+                        </tr>
+                      </tbody>
+                      <%}%>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="copyright">
+                    <p>Copyright © 2024 BRANDHOME. All rights reserved.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- END MAIN CONTENT-->
+        <!-- END PAGE CONTAINER-->
+      </div>
     </div>
 
     <!-- Jquery JS-->
@@ -474,56 +548,50 @@
     <script src="/vendor/bootstrap-4.1/popper.min.js"></script>
     <script src="/vendor/bootstrap-4.1/bootstrap.min.js"></script>
     <!-- Vendor JS       -->
-    <script src="/vendor/slick/slick.min.js">
-    </script>
+    <script src="/vendor/slick/slick.min.js"></script>
     <script src="/vendor/wow/wow.min.js"></script>
     <script src="/vendor/animsition/animsition.min.js"></script>
-    <script src="/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-    </script>
+    <script src="/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
     <script src="/vendor/counter-up/jquery.waypoints.min.js"></script>
-    <script src="/vendor/counter-up/jquery.counterup.min.js">
-    </script>
+    <script src="/vendor/counter-up/jquery.counterup.min.js"></script>
     <script src="/vendor/circle-progress/circle-progress.min.js"></script>
     <script src="/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="/vendor/chartjs/Chart.bundle.min.js"></script>
-    <script src="/vendor/select2/select2.min.js">
-    </script>
+    <script src="/vendor/select2/select2.min.js"></script>
 
     <!-- Main JS-->
     <script src="/js/adminMain.js"></script>
+  </body>
 
-</body>
-
-<script>
-
+  <script>
     function toggleDateRange(value) {
-        const dateRange = document.getElementById('dateRange');
-        if (value === 'dateRange') {
-            dateRange.style.display = 'block';
-        } else {
-            dateRange.style.display = 'none';
-        }
-    };
+      const dateRange = document.getElementById("dateRange");
+      if (value === "dateRange") {
+        dateRange.style.display = "block";
+      } else {
+        dateRange.style.display = "none";
+      }
+    }
 
     $(document).ready(function () {
-        $('#adminSales').submit(function (e) {
-            e.preventDefault();
+      $("#adminSales").submit(function (e) {
+        e.preventDefault();
 
-            console.log("AJAX working...");
-            var formData = $(this).serialize();
-            console.log("Form data is ", formData);
+        console.log("AJAX working...");
+        var formData = $(this).serialize();
+        console.log("Form data is ", formData);
 
-            $.ajax({
-                url: "/admin/salesManagement",
-                type: "POST",
-                data: formData,
-                success: function (res) {
-                    if (res.success) {
-                        document.getElementById("filter").value = res.filter;
-                        let salesData;
+        $.ajax({
+          url: "/admin/salesManagement",
+          type: "POST",
+          data: formData,
+          success: function (res) {
+            if (res.success) {
+              document.getElementById("filter").value = res.filter;
+              let salesData;
 
-                        if (res.sales.length === 0) {
-                            salesData = `
+              if (res.sales.length === 0) {
+                salesData = `
                             <table id="salesData" class="table table-borderless table-striped table-earning">
                                 <thead>
                                     <tr>
@@ -540,8 +608,8 @@
                                     </tr>
                                 </tbody>
                             </table>`;
-                        } else {
-                            salesData = `
+              } else {
+                salesData = `
                             <table id="salesData" class="table table-borderless table-striped table-earning">
                                 <thead>
                                     <tr>
@@ -553,68 +621,66 @@
                                 </thead>
                                 <tbody>`;
 
-                            // Loop through the sales data and build rows
-                            res.sales.forEach(sale => {
-                                salesData += `
+                // Loop through the sales data and build rows
+                res.sales.forEach((sale) => {
+                  salesData += `
                                 <tr>
-                                    <td>${new Date(sale.deliveredDate).toLocaleDateString('en-GB')}</td>
+                                    <td>${new Date(
+                                      sale.deliveredDate
+                                    ).toLocaleDateString("en-GB")}</td>
                                     <td>${sale.orderId}</td>
-                                    <td class="">${sale.item.productName}-(${sale.item.quantity})</td>
-                                    <td class="text-left">Rs ${sale.item.payAmount}</td>
+                                    <td class="">${sale.item.productName}-(${
+                    sale.item.quantity
+                  })</td>
+                                    <td class="text-left">Rs ${
+                                      sale.item.payAmount
+                                    }</td>
                                 </tr>`;
-                            });
+                });
 
-                            salesData += `</tbody></table>`;
-                        }
+                salesData += `</tbody></table>`;
+              }
 
-                        document.getElementById("salesData").innerHTML = salesData;
-                    }
-                }
-            });
+              document.getElementById("salesData").innerHTML = salesData;
+            }
+          },
         });
-
-
+      });
     });
 
     $(document).ready(function () {
-        $("#pdf").click(function (e) {
-            e.preventDefault();
+      $("#pdf").click(function (e) {
+        e.preventDefault();
 
-           
+        const filter = $("#filter").val();
+        const startDate = $("#startDate").val();
+        const endDate = $("#endDate").val();
 
-
-            const filter = $("#filter").val();
-            const startDate = $("#startDate").val();
-            const endDate = $("#endDate").val();
-
-           
-
-            $.ajax({
-                url: "/admin/downloadPdf",
-                type: "POST",
-                data: { filter: filter,startDate:startDate,endDate:endDate },
-                xhrFields: {
-                    responseType: 'blob'
-                },
-                success: function (blob, status, xhr) {
-                    const link = document.createElement('a');
-                    const url = window.URL.createObjectURL(blob);
-                    link.href = url;
-                    link.download = "sales-report.pdf";
-                    document.body.appendChild(link);
-                    link.click();
-                    window.URL.revokeObjectURL(url);
-                },
-                error: function (xhr, status, error) {
-                    console.error("Error downloading PDF:", error);
-                }
-            });
+        $.ajax({
+          url: "/admin/downloadPdf",
+          type: "POST",
+          data: { filter: filter, startDate: startDate, endDate: endDate },
+          xhrFields: {
+            responseType: "blob",
+          },
+          success: function (blob, status, xhr) {
+            const link = document.createElement("a");
+            const url = window.URL.createObjectURL(blob);
+            link.href = url;
+            link.download = "sales-report.pdf";
+            document.body.appendChild(link);
+            link.click();
+            window.URL.revokeObjectURL(url);
+          },
+          error: function (xhr, status, error) {
+            console.error("Error downloading PDF:", error);
+          },
         });
+      });
     });
 
-
     $(document).ready(function () {
-    $("#xl").click(function (e) {
+      $("#xl").click(function (e) {
         e.preventDefault();
 
         const filter = $("#filter").val();
@@ -622,34 +688,33 @@
         console.log("Downloading Excel file... Filter is:", filter);
 
         $.ajax({
-            url: "/admin/downloadXl",
-            type: "POST",
-            data: { filter: filter }, // Send filter data as a POST request
-            xhrFields: {
-                responseType: 'blob' // Important for file download
-            },
-            success: function (data) {
-                // Create a link element, hide it, direct it towards the blob, and then click it
-                const url = window.URL.createObjectURL(new Blob([data]));
-                const a = document.createElement('a');
-                a.style.display = 'none';
-                a.href = url;
-                a.download = 'sales-report.xlsx';
-                document.body.appendChild(a);
-                a.click();
-                window.URL.revokeObjectURL(url);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.error("Failed to download Excel file", textStatus, errorThrown);
-            }
+          url: "/admin/downloadXl",
+          type: "POST",
+          data: { filter: filter }, // Send filter data as a POST request
+          xhrFields: {
+            responseType: "blob", // Important for file download
+          },
+          success: function (data) {
+            // Create a link element, hide it, direct it towards the blob, and then click it
+            const url = window.URL.createObjectURL(new Blob([data]));
+            const a = document.createElement("a");
+            a.style.display = "none";
+            a.href = url;
+            a.download = "sales-report.xlsx";
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            console.error(
+              "Failed to download Excel file",
+              textStatus,
+              errorThrown
+            );
+          },
         });
+      });
     });
-});
-
-
-
-
-</script>
-
+  </script>
 </html>
 <!-- end document-->

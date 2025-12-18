@@ -1,437 +1,651 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>brand home</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="Free HTML Templates" name="keywords" />
+    <meta content="Free HTML Templates" name="description" />
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link href="img/favicon.ico" rel="icon" />
 
     <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+      rel="stylesheet"
+    />
 
     <!-- Libraries Stylesheet -->
-    <link href="/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link
+      href="/lib/owlcarousel/assets/owl.carousel.min.css"
+      rel="stylesheet"
+    />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="/css/style.css" rel="stylesheet">
-</head>
+    <link href="/css/style.css" rel="stylesheet" />
+  </head>
 
-<body>
+  <body>
     <!-- Topbar Start -->
     <div class="container-fluid">
-        <div class="row bg-secondary py-2 px-xl-5">
-            <div class="col-lg-6 d-none d-lg-block">
-                <div class="d-inline-flex align-items-center">
-                    <a class="text-dark" href="https://wa.me/8594043859">FAQs</a>
-                    <span class="text-muted px-2">|</span>
-                    <a class="text-dark" href="https://wa.me/8594043859">Help</a>
-                    <span class="text-muted px-2">|</span>
-                    <a class="text-dark" href="https://wa.me/8593063568">Support</a>
-                </div>
-            </div>
-            <div class="col-lg-6 text-center text-lg-right">
-                <div class="d-inline-flex align-items-center">
-                    <a class="text-dark px-2" href="">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
-                    <a class="text-dark px-2" href="https://www.linkedin.com/in/abdullha-ks-234746295?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a class="text-dark px-2" href="https://www.instagram.com/abdullha_kalamban?igsh=MXJ3ODBxYnJncWFqcg%3D%3D&utm_source=qr">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a class="text-dark pl-2" href="https://youtube.com/@abdullhakalamban?feature=shared">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                </div>
-            </div>
+      <div class="row bg-secondary py-2 px-xl-5">
+        <div class="col-lg-6 d-none d-lg-block">
+          <div class="d-inline-flex align-items-center">
+            <a class="text-dark" href="https://wa.me/8594043859">FAQs</a>
+            <span class="text-muted px-2">|</span>
+            <a class="text-dark" href="https://wa.me/8594043859">Help</a>
+            <span class="text-muted px-2">|</span>
+            <a class="text-dark" href="https://wa.me/8593063568">Support</a>
+          </div>
         </div>
-        <div class="row align-items-center py-3 px-xl-5">
-            <div class="col-lg-3 d-none d-lg-block">
-                <a href="/home" class="text-decoration-none">
-                    <h1 class="m-0 display-5 font-weight-semi-bold">BRANDHOME</h1>
-                </a>
-            </div>
-            <div class="col-lg-6 col-6 text-left">
-                <form action="/products?email=<%= user %>" method="get">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search anything you want" name="search">
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="col-lg-3 col-6 text-right ml-auto">
-                <div class="d-inline-flex align-items-center">
-    
-                    <a href="/wishList" class="btn position-relative">
-                        <i class="fas fa-heart text-primary">
-                        <% if (wishListNo) { %>
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-dark"><%= wishListNo %></span>
-                        <% } %></i>
-                    </a>
-    
-                    <a href="/cart" class="btn">
-                        <i class="fas fa-shopping-cart text-primary"></i>
-                        <% if (cartNo) { %>
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-dark"><%= cartNo %></span>
-                        <% } %>
-                    </a>
-    
-                    <% if (user) { %>
-                        <a href="/profile" class="btn">
-                            <i class="fas fa-user text-primary"></i>
-                        </a>
-                    <% } else { %>
-                        <a href="/login" class="btn btn-primary">
-                            Log In
-                        </a>
-                    <% } %>
-                </div>
-            </div>
+        <div class="col-lg-6 text-center text-lg-right">
+          <div class="d-inline-flex align-items-center">
+            <a class="text-dark px-2" href="">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+            <a
+              class="text-dark px-2"
+              href="https://www.linkedin.com/in/abdullha-ks-234746295?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+            >
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a
+              class="text-dark px-2"
+              href="https://www.instagram.com/abdullha_kalamban?igsh=MXJ3ODBxYnJncWFqcg%3D%3D&utm_source=qr"
+            >
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a
+              class="text-dark pl-2"
+              href="https://youtube.com/@abdullhakalamban?feature=shared"
+            >
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
         </div>
+      </div>
+      <div class="row align-items-center py-3 px-xl-5">
+        <div class="col-lg-3 d-none d-lg-block">
+          <a href="/home" class="text-decoration-none">
+            <h1 class="m-0 display-5 font-weight-semi-bold">BRANDHOME</h1>
+          </a>
+        </div>
+        <div class="col-lg-6 col-6 text-left">
+          <form action="/products?email=<%= user %>" method="get">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search anything you want"
+                name="search"
+              />
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-lg-3 col-6 text-right ml-auto">
+          <div class="d-inline-flex align-items-center">
+            <a href="/wishList" class="btn position-relative">
+              <i class="fas fa-heart text-primary">
+                <% if (wishListNo) { %>
+                <span
+                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-dark"
+                  ><%= wishListNo %></span
+                >
+                <% } %></i
+              >
+            </a>
+
+            <a href="/cart" class="btn">
+              <i class="fas fa-shopping-cart text-primary"></i>
+              <% if (cartNo) { %>
+              <span
+                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-dark"
+                ><%= cartNo %></span
+              >
+              <% } %>
+            </a>
+
+            <% if (user) { %>
+            <a href="/profile" class="btn">
+              <i class="fas fa-user text-primary"></i>
+            </a>
+            <% } else { %>
+            <a href="/login" class="btn btn-primary"> Log In </a>
+            <% } %>
+          </div>
+        </div>
+      </div>
     </div>
     <!-- Topbar End -->
 
-
     <!-- Navbar Start -->
     <div class="container-fluid">
-        <div class="row border-top px-xl-5">
-            <div class="col-lg-3 d-none d-lg-block">
-                
+      <div class="row border-top px-xl-5">
+        <div class="col-lg-3 d-none d-lg-block"></div>
+        <div class="col-lg-9">
+          <nav
+            class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0"
+          >
+            <a href="/home" class="text-decoration-none">
+              <h1 class="m-0 display-5 font-weight-semi-bold">BRANDHOME</h1>
+            </a>
+            <button
+              type="button"
+              class="navbar-toggler"
+              data-toggle="collapse"
+              data-target="#navbarCollapse"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div
+              class="collapse navbar-collapse justify-content-between"
+              id="navbarCollapse"
+            >
+              <div class="navbar-nav mr-auto py-0">
+                <a href="/home?email=<%= user %>" class="nav-item nav-link"
+                  >Home</a
+                >
+                <a href="/products?email=<%= user %>" class="nav-item nav-link"
+                  >Shop</a
+                >
+                <a href="/cart" class="nav-item nav-link">Cart</a>
+                <a href="/checkOut" class="nav-item nav-link">Checkout</a>
+                <a href="/orders" class="nav-item nav-link">Orders</a>
+                <a href="https://wa.me/8593063568" class="nav-item nav-link"
+                  >Contact</a
+                >
+              </div>
             </div>
-            <div class="col-lg-9">
-                <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
-                    <a href="/home" class="text-decoration-none">
-                        <h1 class="m-0 display-5 font-weight-semi-bold">BRANDHOME</h1>
-                    </a>
-                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                        <div class="navbar-nav mr-auto py-0">
-                            <a href="/home?email=<%= user %>" class="nav-item nav-link ">Home</a>
-                            <a href="/products?email=<%= user %>" class="nav-item nav-link">Shop</a>
-                            <a href="/cart" class="nav-item nav-link">Cart</a>
-                            <a href="/checkOut" class="nav-item nav-link">Checkout</a>
-                            <a href="/orders" class="nav-item nav-link">Orders</a>
-                            <a href="https://wa.me/8593063568" class="nav-item nav-link">Contact</a>
-                        </div>
-                    </div>
-                </nav>
-            </div>
+          </nav>
         </div>
+      </div>
     </div>
     <!-- Navbar End -->
 
-
     <!-- Page Header Start -->
     <div class="container-fluid bg-secondary mb-5">
-        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 50px">
-            <h1 class="font-weight-semi-bold text-uppercase mb-3">addresses</h1>
-           <!-- <div class="d-inline-flex">
+      <div
+        class="d-flex flex-column align-items-center justify-content-center"
+        style="min-height: 50px"
+      >
+        <h1 class="font-weight-semi-bold text-uppercase mb-3">addresses</h1>
+        <!-- <div class="d-inline-flex">
                 <p class="m-0"><a href="">Home</a></p>
                 <p class="m-0 px-2">-</p>
                 <p class="m-0">Checkout</p>
             </div>-->
-        </div>
+      </div>
     </div>
     <!-- Page Header End -->
     <div class="container-fluid pt-5">
-        <div class="row px-xl-5">
-            <div class="col-lg-12">
-                <div class="mb-4">
-                    <div class="row " >
+      <div class="row px-xl-5">
+        <div class="col-lg-12">
+          <div class="mb-4">
+            <div class="row">
+              <% if (addresses) { for (let i = 0; i < addresses.length; i++) {
+              %>
 
-                        <% if (addresses) {
-                            for (let i = 0; i < addresses.length; i++) { %>
-                        
-                        
-                        
-                        <div class="col-md-4 row shadow p-3 mr-4 mb-3 bg-white rounded" style="max-width: 350px; ">
-                            <div class="col-md-8">
-                                <p><%= addresses[i].firstName %>  <%= addresses[i].lastName %></p>
-                                
-                            </div>
-                        
-                            <div class="col-md-4 row">
-                                <div class="col-md-6">
-                                    <a href="#" class="edit-address" data-toggle="modal" data-target="#editAddressModal" data-address="<%= JSON.stringify(addresses[i]) %>">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                </div>
-                                <div class="col-md-6">
-                                    <a href="/deleteAddress?id=<%= addresses[i]._id %>">
-                                        <i class="fas fa-trash "></i>
-                                    </a>
-                                </div>
-                               
-                            </div>
-                        
-                           <div class="col-md-12">
-                            <p><small><%= addresses[i].shippingEmail %> 
-                                <%= addresses[i].mobile %>
-                                <%= addresses[i].street %>,<%= addresses[i].city %>
-                                <%= addresses[i].state %>,<%= addresses[i].country %>
-                                <%= addresses[i].postalCode %></small>
-                            </p>
-                           </div>
-                           
-                        </div>
-                        
-                        <% }
-                        
-                        } else { %>
-                        
-                        <% } %>
-                        
-                        
-                        </div>
+              <div
+                class="col-md-4 row shadow p-3 mr-4 mb-3 bg-white rounded"
+                style="max-width: 350px"
+              >
+                <div class="col-md-8">
+                  <p>
+                    <%= addresses[i].firstName %> <%= addresses[i].lastName %>
+                  </p>
                 </div>
-            </div>
-        </div>
-    </div>
 
-
-    <div class="modal fade" id="editAddressModal" tabindex="-1" role="dialog" aria-labelledby="editAddressModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="editAddressModalLabel">Edit Address</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form action="/editAddress" method="post" id="editAddressForm">
-                <div class="row">
-                  <div class="col-md-6 form-group">
-                    <label>First Name</label>
-                    <input class="form-control" type="text" name="firstName" id="editFirstName" required minlength="3" maxlength="30">
+                <div class="col-md-4 row">
+                  <div class="col-md-6">
+                    <a
+                      href="#"
+                      class="edit-address"
+                      data-toggle="modal"
+                      data-target="#editAddressModal"
+                      data-address="<%= JSON.stringify(addresses[i]) %>"
+                    >
+                      <i class="fas fa-edit"></i>
+                    </a>
                   </div>
-                  <div class="col-md-6 form-group">
-                    <label>Last Name</label>
-                    <input class="form-control" type="text" name="lastName" id="editLastName" required minlength="1" maxlength="20">
-                  </div>
-                  <div class="col-md-6 form-group">
-                    <label>E-mail</label>
-                    <input class="form-control" type="email" name="shippingEmail" id="editEmail" required>
-                  </div>
-                  <div class="col-md-6 form-group">
-                    <label>Mobile No</label>
-                    <input class="form-control" type="text" name="mobile" id="editMobile" required minlength="10" maxlength="10">
-                  </div>
-                  <div class="col-md-6 form-group">
-                    <label>Country</label>
-                    <input class="form-control" type="text" name="country" id="editCountry" required>
-                  </div>
-                  <div class="col-md-6 form-group">
-                    <label>State</label>
-                    <input class="form-control" type="text" name="state" id="editState" required>
-                  </div>
-                  <div class="col-md-6 form-group">
-                    <label>City</label>
-                    <input class="form-control" type="text" name="city" id="editCity" required>
-                  </div>
-                  <div class="col-md-6 form-group">
-                    <label>Street</label>
-                    <input class="form-control" type="text" name="street" id="editStreet" required>
-                  </div>
-                  <div class="col-md-6 form-group">
-                    <label>Postal Code</label>
-                    <input class="form-control" type="text" name="postalCode" id="editPostalCode" required minlength="6" maxlength="6">
-                  </div>
-                  <input type="hidden" name="addressId" id="editAddressId">
-                  <div class="col-md-12 form-group d-flex flex-column align-items-center justify-content-center">
-                    <button type="submit" class="btn btn-success">Edit Address</button>
+                  <div class="col-md-6">
+                    <a href="/deleteAddress?id=<%= addresses[i]._id %>">
+                      <i class="fas fa-trash"></i>
+                    </a>
                   </div>
                 </div>
-              </form>
+
+                <div class="col-md-12">
+                  <p>
+                    <small
+                      ><%= addresses[i].shippingEmail %> <%= addresses[i].mobile
+                      %> <%= addresses[i].street %>,<%= addresses[i].city %> <%=
+                      addresses[i].state %>,<%= addresses[i].country %> <%=
+                      addresses[i].postalCode %></small
+                    >
+                  </p>
+                </div>
+              </div>
+
+              <% } } else { %> <% } %>
             </div>
           </div>
         </div>
+      </div>
     </div>
-      
+
+    <div
+      class="modal fade"
+      id="editAddressModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="editAddressModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editAddressModalLabel">Edit Address</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="/editAddress" method="post" id="editAddressForm">
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label>First Name</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="firstName"
+                    id="editFirstName"
+                    required
+                    minlength="3"
+                    maxlength="30"
+                  />
+                </div>
+                <div class="col-md-6 form-group">
+                  <label>Last Name</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="lastName"
+                    id="editLastName"
+                    required
+                    minlength="1"
+                    maxlength="20"
+                  />
+                </div>
+                <div class="col-md-6 form-group">
+                  <label>E-mail</label>
+                  <input
+                    class="form-control"
+                    type="email"
+                    name="shippingEmail"
+                    id="editEmail"
+                    required
+                  />
+                </div>
+                <div class="col-md-6 form-group">
+                  <label>Mobile No</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="mobile"
+                    id="editMobile"
+                    required
+                    minlength="10"
+                    maxlength="10"
+                  />
+                </div>
+                <div class="col-md-6 form-group">
+                  <label>Country</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="country"
+                    id="editCountry"
+                    required
+                  />
+                </div>
+                <div class="col-md-6 form-group">
+                  <label>State</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="state"
+                    id="editState"
+                    required
+                  />
+                </div>
+                <div class="col-md-6 form-group">
+                  <label>City</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="city"
+                    id="editCity"
+                    required
+                  />
+                </div>
+                <div class="col-md-6 form-group">
+                  <label>Street</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="street"
+                    id="editStreet"
+                    required
+                  />
+                </div>
+                <div class="col-md-6 form-group">
+                  <label>Postal Code</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="postalCode"
+                    id="editPostalCode"
+                    required
+                    minlength="6"
+                    maxlength="6"
+                  />
+                </div>
+                <input type="hidden" name="addressId" id="editAddressId" />
+                <div
+                  class="col-md-12 form-group d-flex flex-column align-items-center justify-content-center"
+                >
+                  <button type="submit" class="btn btn-success">
+                    Edit Address
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Checkout Start -->
     <div class="container-fluid pt-1">
-        <div class="row px-xl-5">
-            <div class="col-lg-8">
-                <div class="mb-4">
-                    <h4 class="font-weight-semi-bold mb-4">Add Address</h4>
-    
-                    <% if (errors) { %>
-                        <% errors.forEach(function(error) { %>
-                            <p style="color: red;">
-                                <%= error.msg %>
-                            </p>
-                            <% }) %>
-                                <% } %>
-    
-                                    <form action="/addAddress" method="post">
-                                        <div class="row">
-    
-    
-                                            <div class="col-md-6 form-group">
-                                                <label>First Name</label>
-                                                <input class="form-control" type="text" placeholder="John" name="firstName"
-                                                    required minlength="3" maxlength="30">
-                                            </div>
-    
-                                            <div class="col-md-6 form-group">
-                                                <label>Last Name</label>
-                                                <input class="form-control" type="text" placeholder="Doe" name="lastName"
-                                                    required minlength="1" maxlength="20">
-                                            </div>
-    
-                                            <div class="col-md-6 form-group">
-                                                <label>E-mail</label>
-                                                <input class="form-control" type="email" placeholder="example@email.com"
-                                                    name="shippingEmail" required>
-                                            </div>
-    
-                                            <div class="col-md-6 form-group">
-                                                <label>Mobile No</label>
-                                                <input class="form-control" type="text" placeholder="6745 3456 564"
-                                                    name="mobile" required minlength="10" maxlength="10">
-                                            </div>
-    
-                                            <div class="col-md-6 form-group">
-                                                <label>Country</label>
-                                                <input class="form-control" type="text" placeholder="India" name="country"
-                                                    required>
-                                                                <!-- <select class="custom-select" name="country">
+      <div class="row px-xl-5">
+        <div class="col-lg-8">
+          <div class="mb-4">
+            <h4 class="font-weight-semi-bold mb-4">Add Address</h4>
+
+            <% if (errors) { %> <% errors.forEach(function(error) { %>
+            <p style="color: red"><%= error.msg %></p>
+            <% }) %> <% } %>
+
+            <form action="/addAddress" method="post">
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label>First Name</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="John"
+                    name="firstName"
+                    required
+                    minlength="3"
+                    maxlength="30"
+                  />
+                </div>
+
+                <div class="col-md-6 form-group">
+                  <label>Last Name</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Doe"
+                    name="lastName"
+                    required
+                    minlength="1"
+                    maxlength="20"
+                  />
+                </div>
+
+                <div class="col-md-6 form-group">
+                  <label>E-mail</label>
+                  <input
+                    class="form-control"
+                    type="email"
+                    placeholder="example@email.com"
+                    name="shippingEmail"
+                    required
+                  />
+                </div>
+
+                <div class="col-md-6 form-group">
+                  <label>Mobile No</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="6745 3456 564"
+                    name="mobile"
+                    required
+                    minlength="10"
+                    maxlength="10"
+                  />
+                </div>
+
+                <div class="col-md-6 form-group">
+                  <label>Country</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="India"
+                    name="country"
+                    required
+                  />
+                  <!-- <select class="custom-select" name="country">
                                                     <option selected>United States</option>
                                                     <option>Afghanistan</option>
                                                     <option>Albania</option>
                                                     <option>Algeria</option>
                                                 </select> -->
-                                            </div>
-    
-                                            <div class="col-md-6 form-group">
-                                                <label>State</label>
-                                                <input class="form-control" type="text" placeholder="kerala" name="state"
-                                                    required>
-                                            </div>
-    
-                                            <div class="col-md-6 form-group">
-                                                <label>City</label>
-                                                <input class="form-control" type="text" placeholder="kochi" name="city"
-                                                    required>
-                                            </div>
-    
-                                            <div class="col-md-6 form-group">
-                                                <label>Street</label>
-                                                <input class="form-control" type="text" placeholder="123 Street"
-                                                    name="street" required>
-                                            </div>
-    
-                                            <div class="col-md-6 form-group">
-                                                <label>Postal Code</label>
-                                                <input class="form-control" type="text" placeholder="345676"
-                                                    name="postalCode" required minlength="6" maxlength="6">
-                                            </div>
-    
-                                            <div
-                                                class="col-md-12 form-group d-flex flex-column align-items-center justify-content-center">
-                                                <button type="submit" class="btn btn-success ">Add Address</button>
-                                            </div>
-
-                                        </div>
-    
-                                    </form>
-                
                 </div>
-    
-            </div>
+
+                <div class="col-md-6 form-group">
+                  <label>State</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="kerala"
+                    name="state"
+                    required
+                  />
+                </div>
+
+                <div class="col-md-6 form-group">
+                  <label>City</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="kochi"
+                    name="city"
+                    required
+                  />
+                </div>
+
+                <div class="col-md-6 form-group">
+                  <label>Street</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="123 Street"
+                    name="street"
+                    required
+                  />
+                </div>
+
+                <div class="col-md-6 form-group">
+                  <label>Postal Code</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="345676"
+                    name="postalCode"
+                    required
+                    minlength="6"
+                    maxlength="6"
+                  />
+                </div>
+
+                <div
+                  class="col-md-12 form-group d-flex flex-column align-items-center justify-content-center"
+                >
+                  <button type="submit" class="btn btn-success">
+                    Add Address
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
     <!-- Checkout End -->
 
-
-      <!-- Footer Start -->
-      <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
-        <div class="row px-xl-5 pt-5">
-            <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
-                <a href="" class="text-decoration-none">
-                    <h1 class="mb-4 display-5 font-weight-semi-bold">BRANDHOME</h1>
-                </a>
-                <p>Where Quality Meets Convenience – Your One-Stop Shop for Everything!</p>
-                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, Kerala, India</p>
-                <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>brandhome@gmail.com</p>
-                <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
+    <!-- Footer Start -->
+    <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
+      <div class="row px-xl-5 pt-5">
+        <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
+          <a href="" class="text-decoration-none">
+            <h1 class="mb-4 display-5 font-weight-semi-bold">BRANDHOME</h1>
+          </a>
+          <p>
+            Where Quality Meets Convenience – Your One-Stop Shop for Everything!
+          </p>
+          <p class="mb-2">
+            <i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street,
+            Kerala, India
+          </p>
+          <p class="mb-2">
+            <i class="fa fa-envelope text-primary mr-3"></i>brandhome@gmail.com
+          </p>
+          <p class="mb-0">
+            <i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890
+          </p>
+        </div>
+        <div class="col-lg-8 col-md-12">
+          <div class="row">
+            <div class="col-md-4 mb-5">
+              <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
+              <div class="d-flex flex-column justify-content-start">
+                <a class="text-dark mb-2" href="/home"
+                  ><i class="fa fa-angle-right mr-2"></i>Home</a
+                >
+                <a class="text-dark mb-2" href="/products"
+                  ><i class="fa fa-angle-right mr-2"></i>Our Shop</a
+                >
+                <a class="text-dark mb-2" href="/cart"
+                  ><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a
+                >
+                <a class="text-dark mb-2" href="/checkOut"
+                  ><i class="fa fa-angle-right mr-2"></i>Checkout</a
+                >
+                <a class="text-dark" href="https://wa.me/8594043859"
+                  ><i class="fa fa-angle-right mr-2"></i>Contact Us</a
+                >
+              </div>
             </div>
-            <div class="col-lg-8 col-md-12">
-                <div class="row">
-                    <div class="col-md-4 mb-5">
-                        <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
-                        <div class="d-flex flex-column justify-content-start">
-                            <a class="text-dark mb-2" href="/home"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                            <a class="text-dark mb-2" href="/products"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-                            <a class="text-dark mb-2" href="/cart"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-                            <a class="text-dark mb-2" href="/checkOut"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
-                            <a class="text-dark" href="https://wa.me/8594043859"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-5">
-                        <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
-                        <div class="d-flex flex-column justify-content-start">
-                            <a class="text-dark mb-2" href="/orders"><i class="fa fa-angle-right mr-2"></i>My Orders</a>
-                            <a class="text-dark mb-2" href="/profile"><i class="fa fa-angle-right mr-2"></i>Profile</a>
-                            <a class="text-dark mb-2" href="/addresses"><i class="fa fa-angle-right mr-2"></i>Addresses</a>
-                            <a class="text-dark mb-2" href="/wishList"><i class="fa fa-angle-right mr-2"></i>WishList</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-5">
-                        <h5 class="font-weight-bold text-dark mb-4">Newsletter</h5>
-                        <form action="">
-                            <div class="form-group">
-                                <input type="text" class="form-control border-0 py-4" placeholder="Your Name" required="required" />
-                            </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control border-0 py-4" placeholder="Your Email"
-                                    required="required" />
-                            </div>
-                            <div>
-                                <button class="btn btn-primary btn-block border-0 py-3" type="submit">Subscribe Now</button>
-                            </div>
-                        </form>
-                    </div>
+            <div class="col-md-4 mb-5">
+              <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
+              <div class="d-flex flex-column justify-content-start">
+                <a class="text-dark mb-2" href="/orders"
+                  ><i class="fa fa-angle-right mr-2"></i>My Orders</a
+                >
+                <a class="text-dark mb-2" href="/profile"
+                  ><i class="fa fa-angle-right mr-2"></i>Profile</a
+                >
+                <a class="text-dark mb-2" href="/addresses"
+                  ><i class="fa fa-angle-right mr-2"></i>Addresses</a
+                >
+                <a class="text-dark mb-2" href="/wishList"
+                  ><i class="fa fa-angle-right mr-2"></i>WishList</a
+                >
+              </div>
+            </div>
+            <div class="col-md-4 mb-5">
+              <h5 class="font-weight-bold text-dark mb-4">Newsletter</h5>
+              <form action="">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control border-0 py-4"
+                    placeholder="Your Name"
+                    required="required"
+                  />
                 </div>
+                <div class="form-group">
+                  <input
+                    type="email"
+                    class="form-control border-0 py-4"
+                    placeholder="Your Email"
+                    required="required"
+                  />
+                </div>
+                <div>
+                  <button
+                    class="btn btn-primary btn-block border-0 py-3"
+                    type="submit"
+                  >
+                    Subscribe Now
+                  </button>
+                </div>
+              </form>
             </div>
+          </div>
         </div>
-        <div class="row border-top border-light mx-xl-5 py-4">
-            <div class="col-md-6 px-xl-0">
-                <p class="mb-md-0 text-center text-md-left text-dark">
-                    &copy; <a class="text-dark font-weight-semi-bold" href="#">BRANDHOME</a>. All Rights Reserved. Designed
-                    by
-                    <a class="text-dark font-weight-semi-bold" href="https://www.instagram.com/abdullha_kalamban?igsh=MXJ3ODBxYnJncWFqcg%3D%3D&utm_source=qr">aks_designs</a><br>
-                    Distributed By <a href="https://www.instagram.com/abdullha_kalamban?igsh=MXJ3ODBxYnJncWFqcg%3D%3D&utm_source=qr" target="_blank">AKS4U WEB-SOLUTIONS</a>
-                </p>
-            </div>
-            <div class="col-md-6 px-xl-0 text-center text-md-right">
-                <img class="img-fluid" src="/images/payments.png" alt="">
-            </div>
+      </div>
+      <div class="row border-top border-light mx-xl-5 py-4">
+        <div class="col-md-6 px-xl-0">
+          <p class="mb-md-0 text-center text-md-left text-dark">
+            &copy;
+            <a class="text-dark font-weight-semi-bold" href="#">BRANDHOME</a>.
+            All Rights Reserved. Designed by
+            <a
+              class="text-dark font-weight-semi-bold"
+              href="https://www.instagram.com/abdullha_kalamban?igsh=MXJ3ODBxYnJncWFqcg%3D%3D&utm_source=qr"
+              >aks_designs</a
+            ><br />
+            Distributed By
+            <a
+              href="https://www.instagram.com/abdullha_kalamban?igsh=MXJ3ODBxYnJncWFqcg%3D%3D&utm_source=qr"
+              target="_blank"
+              >AKS4U WEB-SOLUTIONS</a
+            >
+          </p>
         </div>
+        <div class="col-md-6 px-xl-0 text-center text-md-right">
+          <img class="img-fluid" src="/images/payments.png" alt="" />
+        </div>
+      </div>
     </div>
     <!-- Footer End -->
 
-
     <!-- Back to Top -->
-    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
-
+    <a href="#" class="btn btn-primary back-to-top"
+      ><i class="fa fa-angle-double-up"></i
+    ></a>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -442,34 +656,36 @@
     <!-- Contact Javascript File -->
     <script src="/mail/jqBootstrapValidation.min.js"></script>
     <script src="/mail/contact.js"></script>
-    
+
     <!-- Template Javascript -->
     <script src="/js/main.js"></script>
-</body>
+  </body>
 
-<script>
+  <script>
+    $(document).on("click", ".edit-address", function (e) {
+      e.preventDefault();
 
-$(document).on('click', '.edit-address', function (e) {
-    e.preventDefault();
+      // Get the address data from the button's data-address attribute
+      const address = $(this).data("address");
 
-    // Get the address data from the button's data-address attribute
-    const address = $(this).data('address');
+      // Populate the modal form fields with the address data
+      $('#editAddressModal input[name="firstName"]').val(address.firstName);
+      $('#editAddressModal input[name="lastName"]').val(address.lastName);
+      $('#editAddressModal input[name="shippingEmail"]').val(
+        address.shippingEmail
+      );
+      $('#editAddressModal input[name="mobile"]').val(address.mobile);
+      $('#editAddressModal input[name="country"]').val(address.country);
+      $('#editAddressModal input[name="state"]').val(address.state);
+      $('#editAddressModal input[name="city"]').val(address.city);
+      $('#editAddressModal input[name="street"]').val(address.street);
+      $('#editAddressModal input[name="postalCode"]').val(address.postalCode);
 
-    // Populate the modal form fields with the address data
-    $('#editAddressModal input[name="firstName"]').val(address.firstName);
-    $('#editAddressModal input[name="lastName"]').val(address.lastName);
-    $('#editAddressModal input[name="shippingEmail"]').val(address.shippingEmail);
-    $('#editAddressModal input[name="mobile"]').val(address.mobile);
-    $('#editAddressModal input[name="country"]').val(address.country);
-    $('#editAddressModal input[name="state"]').val(address.state);
-    $('#editAddressModal input[name="city"]').val(address.city);
-    $('#editAddressModal input[name="street"]').val(address.street);
-    $('#editAddressModal input[name="postalCode"]').val(address.postalCode);
-
-    // Set the form action URL to include the address ID
-    $('#editAddressModal form').attr('action', `/editAddress?id=${address._id}`);
-});
-
-</script>
-
+      // Set the form action URL to include the address ID
+      $("#editAddressModal form").attr(
+        "action",
+        `/editAddress?id=${address._id}`
+      );
+    });
+  </script>
 </html>

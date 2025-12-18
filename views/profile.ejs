@@ -1,397 +1,633 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>brand home</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="Free HTML Templates" name="keywords" />
+    <meta content="Free HTML Templates" name="description" />
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link href="img/favicon.ico" rel="icon" />
 
     <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+      rel="stylesheet"
+    />
 
     <!-- Libraries Stylesheet -->
-    <link href="/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link
+      href="/lib/owlcarousel/assets/owl.carousel.min.css"
+      rel="stylesheet"
+    />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="/css/style.css" rel="stylesheet">
-</head>
+    <link href="/css/style.css" rel="stylesheet" />
+  </head>
 
-<body>
-  <!-- Topbar Start -->
-  <div class="container-fluid">
-    <div class="row bg-secondary py-2 px-xl-5">
+  <body>
+    <!-- Topbar Start -->
+    <div class="container-fluid">
+      <div class="row bg-secondary py-2 px-xl-5">
         <div class="col-lg-6 d-none d-lg-block">
-            <div class="d-inline-flex align-items-center">
-                <a class="text-dark" href="https://wa.me/8594043859">FAQs</a>
-                <span class="text-muted px-2">|</span>
-                <a class="text-dark" href="https://wa.me/8594043859">Help</a>
-                <span class="text-muted px-2">|</span>
-                <a class="text-dark" href="https://wa.me/8593063568">Support</a>
-            </div>
+          <div class="d-inline-flex align-items-center">
+            <a class="text-dark" href="https://wa.me/8594043859">FAQs</a>
+            <span class="text-muted px-2">|</span>
+            <a class="text-dark" href="https://wa.me/8594043859">Help</a>
+            <span class="text-muted px-2">|</span>
+            <a class="text-dark" href="https://wa.me/8593063568">Support</a>
+          </div>
         </div>
         <div class="col-lg-6 text-center text-lg-right">
-            <div class="d-inline-flex align-items-center">
-                <a class="text-dark px-2" href="">
-                    <i class="fab fa-whatsapp"></i>
-                </a>
-                <a class="text-dark px-2" href="https://www.linkedin.com/in/abdullha-ks-234746295?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
-                <a class="text-dark px-2" href="https://www.instagram.com/abdullha_kalamban?igsh=MXJ3ODBxYnJncWFqcg%3D%3D&utm_source=qr">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a class="text-dark pl-2" href="https://youtube.com/@abdullhakalamban?feature=shared">
-                    <i class="fab fa-youtube"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="row align-items-center py-3 px-xl-5">
-        <div class="col-lg-3 d-none d-lg-block">
-            <a href="/home" class="text-decoration-none">
-                <h1 class="m-0 display-5 font-weight-semi-bold">BRANDHOME</h1>
+          <div class="d-inline-flex align-items-center">
+            <a class="text-dark px-2" href="">
+              <i class="fab fa-whatsapp"></i>
             </a>
+            <a
+              class="text-dark px-2"
+              href="https://www.linkedin.com/in/abdullha-ks-234746295?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+            >
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a
+              class="text-dark px-2"
+              href="https://www.instagram.com/abdullha_kalamban?igsh=MXJ3ODBxYnJncWFqcg%3D%3D&utm_source=qr"
+            >
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a
+              class="text-dark pl-2"
+              href="https://youtube.com/@abdullhakalamban?feature=shared"
+            >
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="row align-items-center py-3 px-xl-5">
+        <div class="col-lg-3 d-none d-lg-block">
+          <a href="/home" class="text-decoration-none">
+            <h1 class="m-0 display-5 font-weight-semi-bold">BRANDHOME</h1>
+          </a>
         </div>
         <div class="col-lg-6 col-6 text-left">
-            <form action="/products?email=<%= user %>" method="get">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search anything you want" name="search">
-                    <div class="input-group-append">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
+          <form action="/products?email=<%= user %>" method="get">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search anything you want"
+                name="search"
+              />
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
         <div class="col-lg-3 col-6 text-right ml-auto">
-            <div class="d-inline-flex align-items-center">
+          <div class="d-inline-flex align-items-center">
+            <a href="/wishList" class="btn position-relative">
+              <i class="fas fa-heart text-primary">
+                <% if (wishListNo) { %>
+                <span
+                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-dark"
+                  ><%= wishListNo %></span
+                >
+                <% } %></i
+              >
+            </a>
 
-                <a href="/wishList" class="btn position-relative">
-                    <i class="fas fa-heart text-primary">
-                    <% if (wishListNo) { %>
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-dark"><%= wishListNo %></span>
-                    <% } %></i>
-                </a>
+            <a href="/cart" class="btn">
+              <i class="fas fa-shopping-cart text-primary"></i>
+              <% if (cartNo) { %>
+              <span
+                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-dark"
+                ><%= cartNo %></span
+              >
+              <% } %>
+            </a>
 
-                <a href="/cart" class="btn">
-                    <i class="fas fa-shopping-cart text-primary"></i>
-                    <% if (cartNo) { %>
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-dark"><%= cartNo %></span>
-                    <% } %>
-                </a>
-
-                <% if (user) { %>
-                    <a href="/profile" class="btn">
-                        <i class="fas fa-user text-primary"></i>
-                    </a>
-                <% } else { %>
-                    <a href="/login" class="btn btn-primary">
-                        Log In
-                    </a>
-                <% } %>
-            </div>
+            <% if (user) { %>
+            <a href="/profile" class="btn">
+              <i class="fas fa-user text-primary"></i>
+            </a>
+            <% } else { %>
+            <a href="/login" class="btn btn-primary"> Log In </a>
+            <% } %>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-<!-- Topbar End -->
+    <!-- Topbar End -->
 
-
- <!-- Navbar Start -->
- <div class="container-fluid">
-    <div class="row border-top px-xl-5">
-        <div class="col-lg-3 d-none d-lg-block">
-            
-        </div>
+    <!-- Navbar Start -->
+    <div class="container-fluid">
+      <div class="row border-top px-xl-5">
+        <div class="col-lg-3 d-none d-lg-block"></div>
         <div class="col-lg-9">
-            <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
-                <a href="/home" class="text-decoration-none">
-                    <h1 class="m-0 display-5 font-weight-semi-bold">BRANDHOME</h1>
-                </a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                    <div class="navbar-nav mr-auto py-0">
-                        <a href="/home?email=<%= user %>" class="nav-item nav-link ">Home</a>
-                        <a href="/products?email=<%= user %>" class="nav-item nav-link ">Shop</a>
-                        <a href="/cart" class="nav-item nav-link ">Cart</a>
-                        <a href="/checkOut" class="nav-item nav-link ">Checkout</a>
-                        <a href="/orders" class="nav-item nav-link ">Orders</a>
-                        <a href="https://wa.me/8593063568" class="nav-item nav-link">Contact</a>
-                    </div>
-                </div>
-            </nav>
+          <nav
+            class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0"
+          >
+            <a href="/home" class="text-decoration-none">
+              <h1 class="m-0 display-5 font-weight-semi-bold">BRANDHOME</h1>
+            </a>
+            <button
+              type="button"
+              class="navbar-toggler"
+              data-toggle="collapse"
+              data-target="#navbarCollapse"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div
+              class="collapse navbar-collapse justify-content-between"
+              id="navbarCollapse"
+            >
+              <div class="navbar-nav mr-auto py-0">
+                <a href="/home?email=<%= user %>" class="nav-item nav-link"
+                  >Home</a
+                >
+                <a href="/products?email=<%= user %>" class="nav-item nav-link"
+                  >Shop</a
+                >
+                <a href="/cart" class="nav-item nav-link">Cart</a>
+                <a href="/checkOut" class="nav-item nav-link">Checkout</a>
+                <a href="/orders" class="nav-item nav-link">Orders</a>
+                <a href="https://wa.me/8593063568" class="nav-item nav-link"
+                  >Contact</a
+                >
+              </div>
+            </div>
+          </nav>
         </div>
+      </div>
     </div>
-</div>
-<!-- Navbar End -->
-
+    <!-- Navbar End -->
 
     <!-- Page Header Start -->
     <div class="container-fluid bg-secondary mb-1">
-        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 50px">
-           <h5><%= profile.name %> 
-            <span id="edit-Profile" data-user="<%= JSON.stringify(profile) %>" data-toggle="modal" data-target="#editProfile">
-                <i class="fas fa-edit  text-muted"></i></span></h5> 
-                <p><small>Mob <%=profile.mobile %></small></p>
-                <p class="font-weight-semi-bold mb-3"><%= profile.email %>  
-                <a style="cursor: pointer;"><small class="text-danger" id="" data-toggle="modal" data-target="#changePassword">change password</small></a></p>
-           <!-- <div class="d-inline-flex">
+      <div
+        class="d-flex flex-column align-items-center justify-content-center"
+        style="min-height: 50px"
+      >
+        <h5>
+          <%= profile.name %>
+          <span
+            id="edit-Profile"
+            data-user="<%= JSON.stringify(profile) %>"
+            data-toggle="modal"
+            data-target="#editProfile"
+          >
+            <i class="fas fa-edit text-muted"></i
+          ></span>
+        </h5>
+        <p><small>Mob <%=profile.mobile %></small></p>
+        <p class="font-weight-semi-bold mb-3">
+          <%= profile.email %>
+          <a style="cursor: pointer"
+            ><small
+              class="text-danger"
+              id=""
+              data-toggle="modal"
+              data-target="#changePassword"
+              >change password</small
+            ></a
+          >
+        </p>
+        <!-- <div class="d-inline-flex">
                 <p class="m-0"><a href="">Home</a></p>
                 <p class="m-0 px-2">-</p>
                 <p class="m-0">Checkout</p>
             </div>-->
-        </div>
+      </div>
     </div>
 
-    <div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="editAddressModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="editAddressModalLabel">Edit Profile</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form action="/editProfile" method="post" id="editProfileForm">
-                <div class="row">
-                  <div class="col-md-12 form-group">
-                    <label>Name</label>
-                    <input class="form-control" type="text" value="<%=profile.name %>" name="name" id="editName" required minlength="3" maxlength="30"
-                    style="border: 1px solid rgb(196, 190, 190); border-radius: 5px;">
-                  </div>
-                  <div class="col-md-12 form-group">
-                    <label>Mobile</label>
-                    <input class="form-control" type="tel" pattern="[0-9]{10}" value="<%=profile.mobile %>" name="mobile" id="editMobile" required minlength="10" maxlength="10"
-                    style="border: 1px solid rgb(196, 190, 190); border-radius: 5px;">
-                  </div>
-                  
-                  <input type="hidden" name="userId" id="userId" value="<%=profile._id %>">
-                  <div class="col-md-12 form-group d-flex flex-column align-items-center justify-content-center">
-                    <button type="submit" class="btn btn-success">Edit Profile</button>
-                  </div>
+    <div
+      class="modal fade"
+      id="editProfile"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="editAddressModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editAddressModalLabel">Edit Profile</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="/editProfile" method="post" id="editProfileForm">
+              <div class="row">
+                <div class="col-md-12 form-group">
+                  <label>Name</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    value="<%=profile.name %>"
+                    name="name"
+                    id="editName"
+                    required
+                    minlength="3"
+                    maxlength="30"
+                    style="
+                      border: 1px solid rgb(196, 190, 190);
+                      border-radius: 5px;
+                    "
+                  />
                 </div>
-              </form>
-            </div>
+                <div class="col-md-12 form-group">
+                  <label>Mobile</label>
+                  <input
+                    class="form-control"
+                    type="tel"
+                    pattern="[0-9]{10}"
+                    value="<%=profile.mobile %>"
+                    name="mobile"
+                    id="editMobile"
+                    required
+                    minlength="10"
+                    maxlength="10"
+                    style="
+                      border: 1px solid rgb(196, 190, 190);
+                      border-radius: 5px;
+                    "
+                  />
+                </div>
+
+                <input
+                  type="hidden"
+                  name="userId"
+                  id="userId"
+                  value="<%=profile._id %>"
+                />
+                <div
+                  class="col-md-12 form-group d-flex flex-column align-items-center justify-content-center"
+                >
+                  <button type="submit" class="btn btn-success">
+                    Edit Profile
+                  </button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
+      </div>
     </div>
 
-
-    <div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="editAddressModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="editAddressModalLabel">Change Password</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form action="" method="post" id="changePasswordForm">
-                <div class="row">
-                  <div class="col-md-12 form-group">
-                    <label>Current Password</label>
-                    <input class="form-control" type="text" name="currentPassword" id="currentPassword" required minlength="6" maxlength="30"
-                    style="border: 1px solid rgb(196, 190, 190); border-radius: 5px;">
-                  </div>
-                  <div class="col-md-12 form-group">
-                    <label>New Password</label>
-                    <input class="form-control" type="text" name="newPassword" id="newPassword" required minlength="6" maxlength="30"
-                    style="border: 1px solid rgb(196, 190, 190); border-radius: 5px;">
-                    <small class="text-danger hide" id="newPasswordError">it's not strong password..!</small>
-                  </div>
-                  <div class="col-md-12 form-group">
-                    <label>Repeat Password</label>
-                    <input class="form-control" type="text" name="repeatPassword" id="repeatPassword" required minlength="6" maxlength="30"
-                    style="border: 1px solid rgb(196, 190, 190); border-radius: 5px;">
-                    <small class="text-danger hide" id="passwordError">not same!</small>
-                  </div>
-                  
-                  <input type="hidden" name="userId" id="userId" value="<%=profile._id %>">
-                  <div class="col-md-12 form-group d-flex flex-column align-items-center justify-content-center">
-                    <button type="submit" class="btn btn-success" id="changePasswordBtn" disabled >Change Password</button>
-                  </div>
+    <div
+      class="modal fade"
+      id="changePassword"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="editAddressModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editAddressModalLabel">
+              Change Password
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="" method="post" id="changePasswordForm">
+              <div class="row">
+                <div class="col-md-12 form-group">
+                  <label>Current Password</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="currentPassword"
+                    id="currentPassword"
+                    required
+                    minlength="6"
+                    maxlength="30"
+                    style="
+                      border: 1px solid rgb(196, 190, 190);
+                      border-radius: 5px;
+                    "
+                  />
                 </div>
-              </form>
-            </div>
+                <div class="col-md-12 form-group">
+                  <label>New Password</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="newPassword"
+                    id="newPassword"
+                    required
+                    minlength="6"
+                    maxlength="30"
+                    style="
+                      border: 1px solid rgb(196, 190, 190);
+                      border-radius: 5px;
+                    "
+                  />
+                  <small class="text-danger hide" id="newPasswordError"
+                    >it's not strong password..!</small
+                  >
+                </div>
+                <div class="col-md-12 form-group">
+                  <label>Repeat Password</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="repeatPassword"
+                    id="repeatPassword"
+                    required
+                    minlength="6"
+                    maxlength="30"
+                    style="
+                      border: 1px solid rgb(196, 190, 190);
+                      border-radius: 5px;
+                    "
+                  />
+                  <small class="text-danger hide" id="passwordError"
+                    >not same!</small
+                  >
+                </div>
+
+                <input
+                  type="hidden"
+                  name="userId"
+                  id="userId"
+                  value="<%=profile._id %>"
+                />
+                <div
+                  class="col-md-12 form-group d-flex flex-column align-items-center justify-content-center"
+                >
+                  <button
+                    type="submit"
+                    class="btn btn-success"
+                    id="changePasswordBtn"
+                    disabled
+                  >
+                    Change Password
+                  </button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
+      </div>
     </div>
-
-
 
     <!-- Page Header End -->
     <div class="container-fluid pt-5">
-        <div class="row px-xl-5">
-            <div class="col-lg-12">
-                <div class="mb-4">
-                    <div class="row d-flex justify-content-between">
-
-                        <div class="col-md-4 shadow p-3 mb-5 rounded d-flex justify-content-center" style="background-color: rgb(211, 245, 198); max-width: 400px;">
-                           <a href="/addresses"><h4>Addresses</h4></a>
-                        </div>
-
-                        <div class="col-md-4 shadow p-3 mb-5 rounded d-flex justify-content-center" style="background-color: rgb(194, 204, 247); max-width: 400px;">
-                            <a href="/orders"><h4>Orders</h4></a>
-                         </div>
-
-                         <div class="col-md-4 shadow p-3 mb-5  rounded d-flex  justify-content-center" id="wallet" style="background-color: rgb(194, 189, 189); max-width: 400px;">
-                            <h4>Wallet-Rs:<%= profile.wallet %></h4>
-                          </div>
-
-                          <div class="col-md-4 shadow p-3 mb-5 rounded d-flex justify-content-center" style="background-color: rgb(230, 172, 172); max-width: 400px;">
-                            <a href="/logout"><h4>Logout</h4></a>
-                          </div>
-                            
-
-
-
-                    </div>
-
-                    
-
-                </div>
-            </div>
-
-                
-        </div>
-    </div>
-
-   
-
-    <% if (wallet&&wallet.transactions.length> 0) { %>
-        <div class="modal fade" id="walletModal" tabindex="-1" role="dialog" aria-labelledby="walletModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="walletModalLabel">Wallet Transactions</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
+      <div class="row px-xl-5">
+        <div class="col-lg-12">
+          <div class="mb-4">
+            <div class="row d-flex justify-content-between">
+              <div
+                class="col-md-4 shadow p-3 mb-5 rounded d-flex justify-content-center"
+                style="background-color: rgb(211, 245, 198); max-width: 400px"
+              >
+                <a href="/addresses"><h4>Addresses</h4></a>
               </div>
-              <div class="modal-body">
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>Date</th>
-                      <th>Amount</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% wallet.transactions.slice().reverse().forEach(function(item) { %>
-                        <tr>
-                          <td><%= new Date(item.date).toLocaleDateString() %></td>
-                          <% if (item.status == "debit") { %>
-                            <td class="text-danger"><%= item.amount %></td>
-                          <% } else { %>
-                            <td class="text-success"><%= item.amount %></td>
-                          <% } %>
-                          <td><%= item.status %></td>
-                        </tr>
-                      <% }); %>
-                  </tbody>
-                </table>
+
+              <div
+                class="col-md-4 shadow p-3 mb-5 rounded d-flex justify-content-center"
+                style="background-color: rgb(194, 204, 247); max-width: 400px"
+              >
+                <a href="/orders"><h4>Orders</h4></a>
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+              <div
+                class="col-md-4 shadow p-3 mb-5 rounded d-flex justify-content-center"
+                id="wallet"
+                style="background-color: rgb(194, 189, 189); max-width: 400px"
+              >
+                <h4>Wallet-Rs:<%= profile.wallet %></h4>
+              </div>
+
+              <div
+                class="col-md-4 shadow p-3 mb-5 rounded d-flex justify-content-center"
+                style="background-color: rgb(230, 172, 172); max-width: 400px"
+              >
+                <a href="/logout"><h4>Logout</h4></a>
               </div>
             </div>
           </div>
         </div>
-      <% } %>
-      
+      </div>
+    </div>
 
-    
+    <% if (wallet&&wallet.transactions.length> 0) { %>
+    <div
+      class="modal fade"
+      id="walletModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="walletModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="walletModalLabel">
+              Wallet Transactions
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Amount</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% wallet.transactions.slice().reverse().forEach(function(item)
+                { %>
+                <tr>
+                  <td><%= new Date(item.date).toLocaleDateString() %></td>
+                  <% if (item.status == "debit") { %>
+                  <td class="text-danger"><%= item.amount %></td>
+                  <% } else { %>
+                  <td class="text-success"><%= item.amount %></td>
+                  <% } %>
+                  <td><%= item.status %></td>
+                </tr>
+                <% }); %>
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% } %>
 
     <!-- Checkout Start -->
-   
-    <!-- Checkout End -->
 
+    <!-- Checkout End -->
 
     <!-- Footer Start -->
     <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
-        <div class="row px-xl-5 pt-5">
-            <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
-                <a href="" class="text-decoration-none">
-                    <h1 class="mb-4 display-5 font-weight-semi-bold">BRANDHOME</h1>
-                </a>
-                <p>Where Quality Meets Convenience – Your One-Stop Shop for Everything!</p>
-                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, Kerala, India</p>
-                <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>brandhome@gmail.com</p>
-                <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
+      <div class="row px-xl-5 pt-5">
+        <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
+          <a href="" class="text-decoration-none">
+            <h1 class="mb-4 display-5 font-weight-semi-bold">BRANDHOME</h1>
+          </a>
+          <p>
+            Where Quality Meets Convenience – Your One-Stop Shop for Everything!
+          </p>
+          <p class="mb-2">
+            <i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street,
+            Kerala, India
+          </p>
+          <p class="mb-2">
+            <i class="fa fa-envelope text-primary mr-3"></i>brandhome@gmail.com
+          </p>
+          <p class="mb-0">
+            <i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890
+          </p>
+        </div>
+        <div class="col-lg-8 col-md-12">
+          <div class="row">
+            <div class="col-md-4 mb-5">
+              <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
+              <div class="d-flex flex-column justify-content-start">
+                <a class="text-dark mb-2" href="/home"
+                  ><i class="fa fa-angle-right mr-2"></i>Home</a
+                >
+                <a class="text-dark mb-2" href="/products"
+                  ><i class="fa fa-angle-right mr-2"></i>Our Shop</a
+                >
+                <a class="text-dark mb-2" href="/cart"
+                  ><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a
+                >
+                <a class="text-dark mb-2" href="/checkOut"
+                  ><i class="fa fa-angle-right mr-2"></i>Checkout</a
+                >
+                <a class="text-dark" href="https://wa.me/8594043859"
+                  ><i class="fa fa-angle-right mr-2"></i>Contact Us</a
+                >
+              </div>
             </div>
-            <div class="col-lg-8 col-md-12">
-                <div class="row">
-                    <div class="col-md-4 mb-5">
-                        <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
-                        <div class="d-flex flex-column justify-content-start">
-                            <a class="text-dark mb-2" href="/home"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                            <a class="text-dark mb-2" href="/products"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-                            <a class="text-dark mb-2" href="/cart"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-                            <a class="text-dark mb-2" href="/checkOut"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
-                            <a class="text-dark" href="https://wa.me/8594043859"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-5">
-                        <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
-                        <div class="d-flex flex-column justify-content-start">
-                            <a class="text-dark mb-2" href="/orders"><i class="fa fa-angle-right mr-2"></i>My Orders</a>
-                            <a class="text-dark mb-2" href="/profile"><i class="fa fa-angle-right mr-2"></i>Profile</a>
-                            <a class="text-dark mb-2" href="/addresses"><i class="fa fa-angle-right mr-2"></i>Addresses</a>
-                            <a class="text-dark mb-2" href="/wishList"><i class="fa fa-angle-right mr-2"></i>WishList</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-5">
-                        <h5 class="font-weight-bold text-dark mb-4">Newsletter</h5>
-                        <form action="">
-                            <div class="form-group">
-                                <input type="text" class="form-control border-0 py-4" placeholder="Your Name" required="required" />
-                            </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control border-0 py-4" placeholder="Your Email"
-                                    required="required" />
-                            </div>
-                            <div>
-                                <button class="btn btn-primary btn-block border-0 py-3" type="submit">Subscribe Now</button>
-                            </div>
-                        </form>
-                    </div>
+            <div class="col-md-4 mb-5">
+              <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
+              <div class="d-flex flex-column justify-content-start">
+                <a class="text-dark mb-2" href="/orders"
+                  ><i class="fa fa-angle-right mr-2"></i>My Orders</a
+                >
+                <a class="text-dark mb-2" href="/profile"
+                  ><i class="fa fa-angle-right mr-2"></i>Profile</a
+                >
+                <a class="text-dark mb-2" href="/addresses"
+                  ><i class="fa fa-angle-right mr-2"></i>Addresses</a
+                >
+                <a class="text-dark mb-2" href="/wishList"
+                  ><i class="fa fa-angle-right mr-2"></i>WishList</a
+                >
+              </div>
+            </div>
+            <div class="col-md-4 mb-5">
+              <h5 class="font-weight-bold text-dark mb-4">Newsletter</h5>
+              <form action="">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control border-0 py-4"
+                    placeholder="Your Name"
+                    required="required"
+                  />
                 </div>
+                <div class="form-group">
+                  <input
+                    type="email"
+                    class="form-control border-0 py-4"
+                    placeholder="Your Email"
+                    required="required"
+                  />
+                </div>
+                <div>
+                  <button
+                    class="btn btn-primary btn-block border-0 py-3"
+                    type="submit"
+                  >
+                    Subscribe Now
+                  </button>
+                </div>
+              </form>
             </div>
+          </div>
         </div>
-        <div class="row border-top border-light mx-xl-5 py-4">
-            <div class="col-md-6 px-xl-0">
-                <p class="mb-md-0 text-center text-md-left text-dark">
-                    &copy; <a class="text-dark font-weight-semi-bold" href="#">BRANDHOME</a>. All Rights Reserved. Designed
-                    by
-                    <a class="text-dark font-weight-semi-bold" href="https://www.instagram.com/abdullha_kalamban?igsh=MXJ3ODBxYnJncWFqcg%3D%3D&utm_source=qr">aks_designs</a><br>
-                    Distributed By <a href="https://www.instagram.com/abdullha_kalamban?igsh=MXJ3ODBxYnJncWFqcg%3D%3D&utm_source=qr" target="_blank">AKS4U WEB-SOLUTIONS</a>
-                </p>
-            </div>
-            <div class="col-md-6 px-xl-0 text-center text-md-right">
-                <img class="img-fluid" src="/images/payments.png" alt="">
-            </div>
+      </div>
+      <div class="row border-top border-light mx-xl-5 py-4">
+        <div class="col-md-6 px-xl-0">
+          <p class="mb-md-0 text-center text-md-left text-dark">
+            &copy;
+            <a class="text-dark font-weight-semi-bold" href="#">BRANDHOME</a>.
+            All Rights Reserved. Designed by
+            <a
+              class="text-dark font-weight-semi-bold"
+              href="https://www.instagram.com/abdullha_kalamban?igsh=MXJ3ODBxYnJncWFqcg%3D%3D&utm_source=qr"
+              >aks_designs</a
+            ><br />
+            Distributed By
+            <a
+              href="https://www.instagram.com/abdullha_kalamban?igsh=MXJ3ODBxYnJncWFqcg%3D%3D&utm_source=qr"
+              target="_blank"
+              >AKS4U WEB-SOLUTIONS</a
+            >
+          </p>
         </div>
+        <div class="col-md-6 px-xl-0 text-center text-md-right">
+          <img class="img-fluid" src="/images/payments.png" alt="" />
+        </div>
+      </div>
     </div>
     <!-- Footer End -->
 
-
     <!-- Back to Top -->
-    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
-
+    <a href="#" class="btn btn-primary back-to-top"
+      ><i class="fa fa-angle-double-up"></i
+    ></a>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -407,104 +643,101 @@
     <script src="/js/main.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </body>
 
-</body>
+  <script>
+    function popup(popupMsg) {
+      Swal.fire({
+        title: "",
+        text: popupMsg,
+        timer: 1000,
+        showConfirmButton: false,
+        customClass: {
+          popup: "no-border-radius",
+          confirmButton: "custom-confirm-btn",
+          cancelButton: "custom-cancel-btn",
+        },
+      });
+    }
 
-<script>
+    document.getElementById("wallet").addEventListener("click", function () {
+      $("#walletModal").modal("show");
+    });
 
-        function popup(popupMsg) {
-            Swal.fire({
-                title: '',
-                text: popupMsg,
-                timer: 1000,
-                showConfirmButton: false,
-                customClass: {
-            popup: 'no-border-radius',
-            confirmButton: 'custom-confirm-btn',
-            cancelButton: 'custom-cancel-btn'
-        }
-            });
-        }
-
-
-document.getElementById('wallet').addEventListener('click', function () {
-    $('#walletModal').modal('show');
-});
-
-
-$(document).ready(function(){
-    function validatePasswords() {
+    $(document).ready(function () {
+      function validatePasswords() {
         let newPassword = document.getElementById("newPassword").value;
         let repeatPassword = document.getElementById("repeatPassword").value;
 
         if (newPassword === repeatPassword) {
-            document.getElementById("passwordError").classList.add("hide");
-            document.getElementById("changePasswordBtn").disabled = false;
+          document.getElementById("passwordError").classList.add("hide");
+          document.getElementById("changePasswordBtn").disabled = false;
         } else {
-            document.getElementById("passwordError").classList.remove("hide");
-            document.getElementById("changePasswordBtn").disabled = true;
+          document.getElementById("passwordError").classList.remove("hide");
+          document.getElementById("changePasswordBtn").disabled = true;
         }
-    };
+      }
 
-    // document.getElementById("newPassword").addEventListener("input", validatePasswords);
-    document.getElementById("repeatPassword").addEventListener("input", validatePasswords);
-});
+      // document.getElementById("newPassword").addEventListener("input", validatePasswords);
+      document
+        .getElementById("repeatPassword")
+        .addEventListener("input", validatePasswords);
+    });
 
-document.getElementById("newPassword").addEventListener("input", function() {
-    const passwordInput = this.value.trim();
-    let repeatPassword = document.getElementById("repeatPassword").value;
-    const errorElement = document.getElementById("newPasswordError");
-    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    document
+      .getElementById("newPassword")
+      .addEventListener("input", function () {
+        const passwordInput = this.value.trim();
+        let repeatPassword = document.getElementById("repeatPassword").value;
+        const errorElement = document.getElementById("newPasswordError");
+        const passwordPattern =
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
-    if (passwordPattern.test(passwordInput)) {
-        errorElement.classList.add("hide");
-        if(passwordInput==repeatPassword){
-            document.getElementById("changePasswordBtn").disabled = false; 
+        if (passwordPattern.test(passwordInput)) {
+          errorElement.classList.add("hide");
+          if (passwordInput == repeatPassword) {
+            document.getElementById("changePasswordBtn").disabled = false;
+          }
+        } else {
+          errorElement.classList.remove("hide");
+          document.getElementById("changePasswordBtn").disabled = true;
         }
-        
-    } else {
-        errorElement.classList.remove("hide");
-        document.getElementById("changePasswordBtn").disabled = true;
-    }
-});
+      });
 
-$(document).ready(function(){
-    document.getElementById("changePasswordForm").addEventListener("submit", function(e) {
-        e.preventDefault();
+    $(document).ready(function () {
+      document
+        .getElementById("changePasswordForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
 
-        const formData = $(this).serialize();
+          const formData = $(this).serialize();
 
-        console.log("formdata is ",formData);
+          console.log("formdata is ", formData);
 
-        $.ajax({
-            url: '/changePassword',
+          $.ajax({
+            url: "/changePassword",
             type: "POST",
             data: formData,
             dataType: "json",
 
-            success: function(res) {
-                if (res.success) {
-                    popup(res.msg);  // Popup message
+            success: function (res) {
+              if (res.success) {
+                popup(res.msg); // Popup message
 
-                    setTimeout(function () {
-                        window.location.href = "/profile";
-                    }, 2000);
-                        // Redirect if necessary
-                    
-                } else {
-                    popup(res.msg);  // Display error message
-                }
+                setTimeout(function () {
+                  window.location.href = "/profile";
+                }, 2000);
+                // Redirect if necessary
+              } else {
+                popup(res.msg); // Display error message
+              }
             },
-            error: function(err) {
-                console.error('Error:', err);
-                popup('An error occurred. Please try again.');
-            }
+            error: function (err) {
+              console.error("Error:", err);
+              popup("An error occurred. Please try again.");
+            },
+          });
         });
     });
-});
-
-
-
-</script>
-
+  </script>
 </html>

@@ -458,7 +458,9 @@ async function checkStockAndUpdateLimit() {
                 document.querySelector('#checkoutButton').disabled = true;
                 document.getElementById(`quantity${i}`).value = 0;
             } else {
-                document.getElementById(`limit${i}`).value = data.quantity;
+                // document.getElementById(`limit${i}`).value = data.quantity;
+
+                document.getElementById(`limit${i}`).value = data.quantity<5?data.quantity:5
 
                 document.getElementById(`stockAlert${i}`).classList.add('hide');
                 document.getElementById(`stockAlert`).classList.add('hide');
@@ -638,6 +640,11 @@ async function removeProductFromCart(productId, color, size, index) {
                 button.addEventListener('click', function () {
                     const index = this.id.replace('increase', '');
                     const quantityInput = document.querySelector(`#quantity${index}`);
+
+                    if(quantityInput.value === 5 ){
+                        alert("reach max limit");
+                        return
+                    }
                     quantityInput.value = parseInt(quantityInput.value) + 1;
                     updateTotalPriceAndGrandTotal(index);
                 });

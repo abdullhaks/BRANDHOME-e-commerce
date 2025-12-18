@@ -1,558 +1,745 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <!-- Required meta tags-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="au theme template">
-    <meta name="author" content="Hau Nguyen">
-    <meta name="keywords" content="au theme template">
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="au theme template" />
+    <meta name="author" content="Hau Nguyen" />
+    <meta name="keywords" content="au theme template" />
 
     <!-- Title Page-->
     <title>Dashboard</title>
 
     <!-- Fontfaces CSS-->
-    <link href="/css/font-face.css" rel="stylesheet" media="all">
-    <link href="/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-    <link href="/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
-    <link href="/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="/css/font-face.css" rel="stylesheet" media="all" />
+    <link
+      href="/vendor/font-awesome-4.7/css/font-awesome.min.css"
+      rel="stylesheet"
+      media="all"
+    />
+    <link
+      href="/vendor/font-awesome-5/css/fontawesome-all.min.css"
+      rel="stylesheet"
+      media="all"
+    />
+    <link
+      href="/vendor/mdi-font/css/material-design-iconic-font.min.css"
+      rel="stylesheet"
+      media="all"
+    />
 
     <!-- Bootstrap CSS-->
-    <link href="/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
-    
+    <link
+      href="/vendor/bootstrap-4.1/bootstrap.min.css"
+      rel="stylesheet"
+      media="all"
+    />
 
     <!-- Vendor CSS-->
-    <link href="/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
-    <link href="/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
-    <link href="/vendor/wow/animate.css" rel="stylesheet" media="all">
-    <link href="/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
-    <link href="/vendor/slick/slick.css" rel="stylesheet" media="all">
-    <link href="/vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+    <link
+      href="/vendor/animsition/animsition.min.css"
+      rel="stylesheet"
+      media="all"
+    />
+    <link
+      href="/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css"
+      rel="stylesheet"
+      media="all"
+    />
+    <link href="/vendor/wow/animate.css" rel="stylesheet" media="all" />
+    <link
+      href="/vendor/css-hamburgers/hamburgers.min.css"
+      rel="stylesheet"
+      media="all"
+    />
+    <link href="/vendor/slick/slick.css" rel="stylesheet" media="all" />
+    <link href="/vendor/select2/select2.min.css" rel="stylesheet" media="all" />
+    <link
+      href="/vendor/perfect-scrollbar/perfect-scrollbar.css"
+      rel="stylesheet"
+      media="all"
+    />
 
     <!-- Main CSS-->
-    <link href="/css/theme.css" rel="stylesheet" media="all">
+    <link href="/css/theme.css" rel="stylesheet" media="all" />
+  </head>
 
-</head>
-
-<body class="animsition">
+  <body class="animsition">
     <div class="page-wrapper">
-        <!-- HEADER MOBILE-->
-        <header class="header-mobile d-block d-lg-none">
-            <div class="header-mobile__bar">
-                <div class="container-fluid">
-                    <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
-                    <h2>BRANDHOME</h2><h6>Admin</h6>
-                        </a>
-                        <button class="hamburger hamburger--slider" type="button">
-                            <span class="hamburger-box">
-                                <span class="hamburger-inner"></span>
-                            </span>
-                        </button>
-                    </div>
-                </div>
+      <!-- HEADER MOBILE-->
+      <header class="header-mobile d-block d-lg-none">
+        <div class="header-mobile__bar">
+          <div class="container-fluid">
+            <div class="header-mobile-inner">
+              <a class="logo" href="index.html">
+                <h2>BRANDHOME</h2>
+                <h6>Admin</h6>
+              </a>
+              <button class="hamburger hamburger--slider" type="button">
+                <span class="hamburger-box">
+                  <span class="hamburger-inner"></span>
+                </span>
+              </button>
             </div>
-            <nav class="navbar-mobile">
-                <div class="container-fluid">
-                    <ul class="navbar-mobile__list list-unstyled">
+          </div>
+        </div>
+        <nav class="navbar-mobile">
+          <div class="container-fluid">
+            <ul class="navbar-mobile__list list-unstyled">
+              <li>
+                <a class="js-arrow" href="/admin/home">
+                  <i class="fas fa-tachometer-alt"></i>Dashboard</a
+                >
+              </li>
 
-                        <li>
-                            <a class="js-arrow " href="/admin/home">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                           
-                        </li>
+              <li>
+                <a href="/admin/userManagement">
+                  <i class="fas fa-users"></i>Users</a
+                >
+              </li>
 
-                        <li>
-                            <a href="/admin/userManagement">
-                                <i class="fas fa-users"></i>Users</a>
-                        </li>
+              <li>
+                <a href="/admin/categoryManagement">
+                  <i class="fas fa-th"></i>Categories</a
+                >
+              </li>
 
-                        <li>
-                            <a href="/admin/categoryManagement">
-                                <i class="fas fa-th"></i>Categories</a>
-                        </li>
+              <li>
+                <a href="/admin/addProduct">
+                  <i class="fas fa-shopping-basket"></i>Products</a
+                >
+              </li>
 
-                        <li>
-                            <a href="/admin/addProduct">
-                                <i class="fas fa-shopping-basket"></i>Products</a>
-                        </li>
+              <li>
+                <a href="/admin/stockManagement">
+                  <i class="fas fa-truck"></i>Stocks</a
+                >
+              </li>
 
-                        <li>
-                            <a href="/admin/stockManagement">
-                                <i class="fas fa-truck "></i>Stocks</a>
-                        </li>
+              <li>
+                <a href="/admin/orderManagement">
+                  <i class="fas fa-shopping-bag"></i>Orders</a
+                >
+              </li>
 
-                        <li>
-                            <a href="/admin/orderManagement">
-                                <i class="fas fa-shopping-bag "></i>Orders</a>
-                        </li>
+              <li>
+                <a href="/admin/returnManagement">
+                  <i class="fas fa fa-reply"></i>Returns</a
+                >
+              </li>
 
-                        <li>
-                            <a href="/admin/returnManagement">
-                                <i class="fas fa fa-reply "></i>Returns</a>
-                        </li>
+              <li>
+                <a href="/admin/offersManagement">
+                  <i class="fas fa fa-gift"></i>Offers</a
+                >
+              </li>
 
-                        <li>
-                            <a href="/admin/offersManagement">
-                                <i class="fas fa fa-gift "></i>Offers</a>
-                        </li>
+              <li class="active">
+                <a href="/admin/couponManagement">
+                  <i class="fas fa fa-tags"></i>Coupons</a
+                >
+              </li>
 
-                        <li class="active">
-                            <a href="/admin/couponManagement">
-                                <i class="fas fa fa-tags "></i>Coupons</a>
-                        </li>
+              <li>
+                <a href="/admin/salesManagement">
+                  <i class="fas fa-bar-chart"></i>Sales</a
+                >
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <!-- END HEADER MOBILE-->
 
-                        <li>
-                            <a href="/admin/salesManagement">
-                                <i class="fas fa-bar-chart "></i>Sales</a>
-                        </li>
-                    
-                    </ul>
+      <!-- MENU SIDEBAR-->
+      <aside class="menu-sidebar d-none d-lg-block">
+        <div class="logo">
+          <a href="#">
+            <h2>BRANDHOME</h2>
+            <h6>Admin</h6>
+          </a>
+        </div>
+        <div class="menu-sidebar__content js-scrollbar1">
+          <nav class="navbar-sidebar">
+            <ul class="list-unstyled navbar__list">
+              <li>
+                <a class="js-arrow" href="/admin/home">
+                  <i class="fas fa-tachometer-alt"></i>Dashboard</a
+                >
+              </li>
+
+              <li>
+                <a href="/admin/userManagement">
+                  <i class="fas fa-users"></i>Users</a
+                >
+              </li>
+
+              <li>
+                <a href="/admin/categoryManagement">
+                  <i class="fas fa-th"></i>Categories</a
+                >
+              </li>
+
+              <li>
+                <a href="/admin/addProduct">
+                  <i class="fas fa-shopping-basket"></i>Products</a
+                >
+              </li>
+
+              <li>
+                <a href="/admin/stockManagement">
+                  <i class="fas fa-truck"></i>Stocks</a
+                >
+              </li>
+
+              <li>
+                <a href="/admin/orderManagement">
+                  <i class="fas fa-shopping-bag"></i>Orders</a
+                >
+              </li>
+
+              <li>
+                <a href="/admin/returnManagement">
+                  <i class="fas fa fa-reply"></i>Returns</a
+                >
+              </li>
+
+              <li>
+                <a href="/admin/offersManagement">
+                  <i class="fas fa fa-gift"></i>Offers</a
+                >
+              </li>
+
+              <li class="active">
+                <a href="/admin/couponManagement">
+                  <i class="fas fa fa-tags"></i>Coupons</a
+                >
+              </li>
+
+              <li>
+                <a href="/admin/salesManagement">
+                  <i class="fas fa-bar-chart"></i>Sales</a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+      <!-- END MENU SIDEBAR-->
+
+      <!-- PAGE CONTAINER-->
+      <div class="page-container">
+        <!-- HEADER DESKTOP-->
+        <header class="header-desktop">
+          <div class="section__content section__content--p30">
+            <div class="container-fluid">
+              <div class="header-wrap">
+                <form class="form-header" action="" method="POST">
+                  <input
+                    class="au-input au-input--xl"
+                    type="text"
+                    name="search"
+                    placeholder="Search for datas &amp; reports..."
+                  />
+                  <button class="au-btn--submit" type="submit">
+                    <i class="zmdi zmdi-search"></i>
+                  </button>
+                </form>
+                <div class="header-button">
+                  <div class="noti-wrap">
+                    <div class="noti__item js-item-menu">
+                      <i class="zmdi zmdi-comment-more"></i>
+                      <span class="quantity">1</span>
+                      <div class="mess-dropdown js-dropdown">
+                        <div class="mess__title">
+                          <p>You have 2 news message</p>
+                        </div>
+                        <div class="mess__item">
+                          <div class="image img-cir img-40">
+                            <img
+                              src="images/icon/avatar-06.jpg"
+                              alt="Michelle Moreno"
+                            />
+                          </div>
+                          <div class="content">
+                            <h6>Michelle Moreno</h6>
+                            <p>Have sent a photo</p>
+                            <span class="time">3 min ago</span>
+                          </div>
+                        </div>
+                        <div class="mess__item">
+                          <div class="image img-cir img-40">
+                            <img
+                              src="images/icon/avatar-04.jpg"
+                              alt="Diane Myers"
+                            />
+                          </div>
+                          <div class="content">
+                            <h6>Diane Myers</h6>
+                            <p>You are now connected on message</p>
+                            <span class="time">Yesterday</span>
+                          </div>
+                        </div>
+                        <div class="mess__footer">
+                          <a href="#">View all messages</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="noti__item js-item-menu">
+                      <i class="zmdi zmdi-email"></i>
+                      <span class="quantity">1</span>
+                      <div class="email-dropdown js-dropdown">
+                        <div class="email__title">
+                          <p>You have 3 New Emails</p>
+                        </div>
+                        <div class="email__item">
+                          <div class="image img-cir img-40">
+                            <img
+                              src="images/icon/avatar-06.jpg"
+                              alt="Cynthia Harvey"
+                            />
+                          </div>
+                          <div class="content">
+                            <p>Meeting about new dashboard...</p>
+                            <span>Cynthia Harvey, 3 min ago</span>
+                          </div>
+                        </div>
+                        <div class="email__item">
+                          <div class="image img-cir img-40">
+                            <img
+                              src="images/icon/avatar-05.jpg"
+                              alt="Cynthia Harvey"
+                            />
+                          </div>
+                          <div class="content">
+                            <p>Meeting about new dashboard...</p>
+                            <span>Cynthia Harvey, Yesterday</span>
+                          </div>
+                        </div>
+                        <div class="email__item">
+                          <div class="image img-cir img-40">
+                            <img
+                              src="images/icon/avatar-04.jpg"
+                              alt="Cynthia Harvey"
+                            />
+                          </div>
+                          <div class="content">
+                            <p>Meeting about new dashboard...</p>
+                            <span>Cynthia Harvey, April 12,,2018</span>
+                          </div>
+                        </div>
+                        <div class="email__footer">
+                          <a href="#">See all emails</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="noti__item js-item-menu">
+                      <i class="zmdi zmdi-notifications"></i>
+                      <span class="quantity">3</span>
+                      <div class="notifi-dropdown js-dropdown">
+                        <div class="notifi__title">
+                          <p>You have 3 Notifications</p>
+                        </div>
+                        <div class="notifi__item">
+                          <div class="bg-c1 img-cir img-40">
+                            <i class="zmdi zmdi-email-open"></i>
+                          </div>
+                          <div class="content">
+                            <p>You got a email notification</p>
+                            <span class="date">April 12, 2018 06:50</span>
+                          </div>
+                        </div>
+                        <div class="notifi__item">
+                          <div class="bg-c2 img-cir img-40">
+                            <i class="zmdi zmdi-account-box"></i>
+                          </div>
+                          <div class="content">
+                            <p>Your account has been blocked</p>
+                            <span class="date">April 12, 2018 06:50</span>
+                          </div>
+                        </div>
+                        <div class="notifi__item">
+                          <div class="bg-c3 img-cir img-40">
+                            <i class="zmdi zmdi-file-text"></i>
+                          </div>
+                          <div class="content">
+                            <p>You got a new file</p>
+                            <span class="date">April 12, 2018 06:50</span>
+                          </div>
+                        </div>
+                        <div class="notifi__footer">
+                          <a href="#">All notifications</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="account-wrap">
+                    <div class="account-item clearfix js-item-menu">
+                      <div class="image">
+                        <img src="/images/aks dp.png" alt="John Doe" />
+                      </div>
+                      <div class="content">
+                        <a class="js-acc-btn" href="#">abdullha kalamban</a>
+                      </div>
+                      <div class="account-dropdown js-dropdown">
+                        <div class="info clearfix">
+                          <div class="image">
+                            <a href="#">
+                              <img
+                                src="images/icon/avatar-01.jpg"
+                                alt="John Doe"
+                              />
+                            </a>
+                          </div>
+                          <div class="content">
+                            <h5 class="name">
+                              <a href="#">abdullha kalamban</a>
+                            </h5>
+                            <span class="email">aks4u786@gmail.com</span>
+                          </div>
+                        </div>
+                        <div class="account-dropdown__body">
+                          <div class="account-dropdown__item">
+                            <a href="#">
+                              <i class="zmdi zmdi-account"></i>Account</a
+                            >
+                          </div>
+                          <div class="account-dropdown__item">
+                            <a href="#">
+                              <i class="zmdi zmdi-settings"></i>Setting</a
+                            >
+                          </div>
+                          <div class="account-dropdown__item">
+                            <a href="#">
+                              <i class="zmdi zmdi-money-box"></i>Billing</a
+                            >
+                          </div>
+                        </div>
+                        <div class="account-dropdown__footer">
+                          <a href="/admin/logout">
+                            <i class="zmdi zmdi-power"></i>Logout</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-            </nav>
+              </div>
+            </div>
+          </div>
         </header>
-        <!-- END HEADER MOBILE-->
 
-        <!-- MENU SIDEBAR-->
-        <aside class="menu-sidebar d-none d-lg-block">
-            <div class="logo">
-                <a href="#">
-                    <h2>BRANDHOME</h2><h6>Admin</h6>
-                </a>
-            </div>
-            <div class="menu-sidebar__content js-scrollbar1">
-                <nav class="navbar-sidebar">
-                    <ul class="list-unstyled navbar__list">
-
-                        <li>
-                            <a class="js-arrow " href="/admin/home">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                           
-                        </li>
-
-                        <li>
-                            <a href="/admin/userManagement">
-                                <i class="fas fa-users"></i>Users</a>
-                        </li>
-
-                        <li>
-                            <a href="/admin/categoryManagement">
-                                <i class="fas fa-th"></i>Categories</a>
-                        </li>
-
-                        <li>
-                            <a href="/admin/addProduct">
-                                <i class="fas fa-shopping-basket"></i>Products</a>
-                        </li>
-
-                        <li>
-                            <a href="/admin/stockManagement">
-                                <i class="fas fa-truck "></i>Stocks</a>
-                        </li>
-
-                        <li>
-                            <a href="/admin/orderManagement">
-                                <i class="fas fa-shopping-bag "></i>Orders</a>
-                        </li>
-
-                        <li>
-                            <a href="/admin/returnManagement">
-                                <i class="fas fa fa-reply "></i>Returns</a>
-                        </li>
-
-                        <li>
-                            <a href="/admin/offersManagement">
-                                <i class="fas fa fa-gift "></i>Offers</a>
-                        </li>
-
-                        <li class="active">
-                            <a href="/admin/couponManagement">
-                                <i class="fas fa fa-tags "></i>Coupons</a>
-                        </li>
-
-                        <li>
-                            <a href="/admin/salesManagement">
-                                <i class="fas fa-bar-chart "></i>Sales</a>
-                        </li>
-                    
-                    </ul>
-                </nav>
-            </div>
-        </aside>
-        <!-- END MENU SIDEBAR-->
-
-        <!-- PAGE CONTAINER-->
-        <div class="page-container">
-            <!-- HEADER DESKTOP-->
-            <header class="header-desktop">
-                <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                        <div class="header-wrap">
-                            <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
-                                <button class="au-btn--submit" type="submit">
-                                    <i class="zmdi zmdi-search"></i>
+        <div class="main-content">
+          <div class="section__content section__content--p30">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-lg-6">
+                  <!-- TOP CAMPAIGN-->
+                  <div class="top-campaign">
+                    <h3 class="title-3 m-b-30">Coupons</h3>
+                    <div class="table-responsive">
+                      <table class="table table-top-campaign">
+                        <tbody id="couponRow">
+                          <% if (coupons.length > 0) { %> <% for (let i = 0; i <
+                          coupons.length; i++) { %>
+                          <tr>
+                            <td><%= i + 1 %> <%= coupons[i].couponName %></td>
+                            <td><%= coupons[i].off %>% Off</td>
+                            <td>
+                              <div class="table-data-feature">
+                                <button
+                                  class="item"
+                                  data-placement="top"
+                                  title="delete"
+                                >
+                                  <a
+                                    class="coupon_del"
+                                    data-couponId="<%= coupons[i]._id %>"
+                                    href="#"
+                                  >
+                                    <i class="zmdi zmdi-delete"></i>
+                                  </a>
                                 </button>
-                            </form>
-                            <div class="header-button">
-                                <div class="noti-wrap">
-                                    <div class="noti__item js-item-menu">
-                                        <i class="zmdi zmdi-comment-more"></i>
-                                        <span class="quantity">1</span>
-                                        <div class="mess-dropdown js-dropdown">
-                                            <div class="mess__title">
-                                                <p>You have 2 news message</p>
-                                            </div>
-                                            <div class="mess__item">
-                                                <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-06.jpg" alt="Michelle Moreno" />
-                                                </div>
-                                                <div class="content">
-                                                    <h6>Michelle Moreno</h6>
-                                                    <p>Have sent a photo</p>
-                                                    <span class="time">3 min ago</span>
-                                                </div>
-                                            </div>
-                                            <div class="mess__item">
-                                                <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-04.jpg" alt="Diane Myers" />
-                                                </div>
-                                                <div class="content">
-                                                    <h6>Diane Myers</h6>
-                                                    <p>You are now connected on message</p>
-                                                    <span class="time">Yesterday</span>
-                                                </div>
-                                            </div>
-                                            <div class="mess__footer">
-                                                <a href="#">View all messages</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="noti__item js-item-menu">
-                                        <i class="zmdi zmdi-email"></i>
-                                        <span class="quantity">1</span>
-                                        <div class="email-dropdown js-dropdown">
-                                            <div class="email__title">
-                                                <p>You have 3 New Emails</p>
-                                            </div>
-                                            <div class="email__item">
-                                                <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-06.jpg" alt="Cynthia Harvey" />
-                                                </div>
-                                                <div class="content">
-                                                    <p>Meeting about new dashboard...</p>
-                                                    <span>Cynthia Harvey, 3 min ago</span>
-                                                </div>
-                                            </div>
-                                            <div class="email__item">
-                                                <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-05.jpg" alt="Cynthia Harvey" />
-                                                </div>
-                                                <div class="content">
-                                                    <p>Meeting about new dashboard...</p>
-                                                    <span>Cynthia Harvey, Yesterday</span>
-                                                </div>
-                                            </div>
-                                            <div class="email__item">
-                                                <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-04.jpg" alt="Cynthia Harvey" />
-                                                </div>
-                                                <div class="content">
-                                                    <p>Meeting about new dashboard...</p>
-                                                    <span>Cynthia Harvey, April 12,,2018</span>
-                                                </div>
-                                            </div>
-                                            <div class="email__footer">
-                                                <a href="#">See all emails</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="noti__item js-item-menu">
-                                        <i class="zmdi zmdi-notifications"></i>
-                                        <span class="quantity">3</span>
-                                        <div class="notifi-dropdown js-dropdown">
-                                            <div class="notifi__title">
-                                                <p>You have 3 Notifications</p>
-                                            </div>
-                                            <div class="notifi__item">
-                                                <div class="bg-c1 img-cir img-40">
-                                                    <i class="zmdi zmdi-email-open"></i>
-                                                </div>
-                                                <div class="content">
-                                                    <p>You got a email notification</p>
-                                                    <span class="date">April 12, 2018 06:50</span>
-                                                </div>
-                                            </div>
-                                            <div class="notifi__item">
-                                                <div class="bg-c2 img-cir img-40">
-                                                    <i class="zmdi zmdi-account-box"></i>
-                                                </div>
-                                                <div class="content">
-                                                    <p>Your account has been blocked</p>
-                                                    <span class="date">April 12, 2018 06:50</span>
-                                                </div>
-                                            </div>
-                                            <div class="notifi__item">
-                                                <div class="bg-c3 img-cir img-40">
-                                                    <i class="zmdi zmdi-file-text"></i>
-                                                </div>
-                                                <div class="content">
-                                                    <p>You got a new file</p>
-                                                    <span class="date">April 12, 2018 06:50</span>
-                                                </div>
-                                            </div>
-                                            <div class="notifi__footer">
-                                                <a href="#">All notifications</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="account-wrap">
-                                    <div class="account-item clearfix js-item-menu">
-                                        <div class="image">
-                                            <img src="/images/aks dp.png" alt="John Doe" />
-                                        </div>
-                                        <div class="content">
-                                            <a class="js-acc-btn" href="#">abdullha kalamban</a>
-                                        </div>
-                                        <div class="account-dropdown js-dropdown">
-                                            <div class="info clearfix">
-                                                <div class="image">
-                                                    <a href="#">
-                                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />
-                                                    </a>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="name">
-                                                        <a href="#">abdullha kalamban</a>
-                                                    </h5>
-                                                    <span class="email">aks4u786@gmail.com</span>
-                                                </div>
-                                            </div>
-                                            <div class="account-dropdown__body">
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-account"></i>Account</a>
-                                                </div>
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-settings"></i>Setting</a>
-                                                </div>
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-money-box"></i>Billing</a>
-                                                </div>
-                                            </div>
-                                            <div class="account-dropdown__footer">
-                                                <a href="/admin/logout">
-                                                    <i class="zmdi zmdi-power"></i>Logout</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                              </div>
+                            </td>
+
+                            <td>
+                              <div class="table-data-feature">
+                                <button class="item">
+                                  <a
+                                    class="coupon-edit"
+                                    href=""
+                                    data-placement="top"
+                                    title="Edit"
+                                    data-toggle="modal"
+                                    data-target="#editCouponModal"
+                                    data-coupon="<%= JSON.stringify(coupons[i]) %>"
+                                  >
+                                    <i class="zmdi zmdi-edit"></i>
+                                  </a>
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                          <% } %> <% } else { %>
+                          <tr>
+                            <td colspan="3">Coupons not found...</td>
+                          </tr>
+                          <% } %>
+                        </tbody>
+                      </table>
                     </div>
+                  </div>
+                  <!--  END TOP CAMPAIGN-->
                 </div>
-            </header>
-            
 
-            <div class="main-content">
-                <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                        <div class="row">
+                <div class="col-lg-6">
+                  <div class="card">
+                    <div class="card-header">add coupons</div>
+                    <div class="card-body card-block">
+                      <form
+                        action="/admin/couponManagement"
+                        method="post"
+                        class=""
+                      >
+                        <% if (errors) { %> <% errors.forEach(function(error) {
+                        %>
+                        <small style="color: red"><%= error.msg %></small>
+                        <% }) %> <% } %>
 
-                            <div class="col-lg-6">
-                                <!-- TOP CAMPAIGN-->
-                                <div class="top-campaign">
-                                    <h3 class="title-3 m-b-30">Coupons</h3>
-                                    <div class="table-responsive">
-                                        <table class="table table-top-campaign">
-                                            <tbody id="couponRow">
-                                                <% if (coupons.length > 0) { %>
-                                                    <% for (let i = 0; i < coupons.length; i++) { %>
-                                                        <tr>
-                                                            <td><%= i + 1 %> <%= coupons[i].couponName %></td>
-                                                            <td><%= coupons[i].off %>% Off</td>
-                                                            <td>
-                                                                <div class="table-data-feature">
-                                                                    <button class="item" data-placement="top" title="delete">
-                                                                        <a class="coupon_del" data-couponId="<%= coupons[i]._id %>" href="#">
-                                                                            <i class="zmdi zmdi-delete"></i>
-                                                                        </a>
-                                                                    </button>
-                                                                </div>
-                                                            </td>
-
-                                                            <td>
-                                                                <div class="table-data-feature">
-                                                                    <button class="item">
-                                                                        <a class="coupon-edit" href="" data-placement="top" title="Edit" data-toggle="modal" data-target="#editCouponModal" data-coupon='<%= JSON.stringify(coupons[i]) %>'>
-                                                                            <i class="zmdi zmdi-edit"></i>
-                                                                        </a>
-                                                                    </button>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    <% } %>
-                                                <% } else { %>
-                                                    <tr>
-                                                        <td colspan="3">Coupons not found...</td>
-                                                    </tr>
-                                                <% } %>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <!--  END TOP CAMPAIGN-->
-                                  
+                        <div class="form-group">
+                          <div class="input-group">
+                            <input
+                              type="text"
+                              name="coupon"
+                              value="<%= coupon.couponName %>"
+                              placeholder="coupon name"
+                              class="form-control"
+                              required
+                              minlength="3"
+                              maxlength="25"
+                            />
+                            <div class="input-group-addon">
+                              <i class="fa fa-gift"></i>
                             </div>
-
-
-                         
-
-                          
-
-
-                            <div class="col-lg-6">
-                                <div class="card">
-                                    <div class="card-header">add coupons</div>
-                                    <div class="card-body card-block">
-                                        <form action="/admin/couponManagement" method="post" class="">
-
-                                            <% if (errors) { %>
-                                                <% errors.forEach(function(error) { %>
-                                                  <small style="color: red;"><%= error.msg %></small>
-                                                <% }) %>
-                                              <% } %>
-
-
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <input type="text"  name="coupon" value="<%= coupon.couponName %>" placeholder="coupon name" class="form-control" required minlength="3" maxlength="25" >
-                                                    <div class="input-group-addon">
-                                                        <i class="fa fa-gift"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <textarea class="form-control"  name="description"  id="description" rows="1" placeholder="add description..." minlength="5" maxlength="100" required><%=coupon.description%></textarea>
-                                                    
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <input type="number"  name="off" value="<%= coupon.off %>" placeholder="off percentage" class="form-control" required  min="1" max="50">
-                                                    
-                                                </div>
-                                            </div>
-                                           
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <input type="number"  name="maxOff" value="<%= coupon.maxOff %>" placeholder="enter maximum off amount" class="form-control" required  min="1">
-                                                    
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <input type="number"  name="startsAt" value="<%= coupon.startsAt %>" placeholder="off starts from" class="form-control" required  min="1" >
-                                                    
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <small>coupon ends on..</small>
-                                                <div class="input-group">
-                                                    <input type="date"  name="endsOn" value="<%= coupon.endsOn %>"  class="form-control" required  >
-                                                    
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="form-actions form-group row justify-content-center align-items-center">
-                                                <button type="submit" class="btn btn-success btn-sm">Add Coupon</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-
-                           
-                        </div>
-                       
-                        
-                        
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="copyright">
-                                    <p>Copyright © 2024 BRANDHOME. All rights reserved.</p>
-                                </div>
-                            </div>
+                          </div>
                         </div>
 
+                        <div class="form-group">
+                          <div class="input-group">
+                            <textarea
+                              class="form-control"
+                              name="description"
+                              id="description"
+                              rows="1"
+                              placeholder="add description..."
+                              minlength="5"
+                              maxlength="100"
+                              required
+                            >
+<%=coupon.description%></textarea
+                            >
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <div class="input-group">
+                            <input
+                              type="number"
+                              name="off"
+                              value="<%= coupon.off %>"
+                              placeholder="off percentage"
+                              class="form-control"
+                              required
+                              min="1"
+                              max="50"
+                            />
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <div class="input-group">
+                            <input
+                              type="number"
+                              name="maxOff"
+                              value="<%= coupon.maxOff %>"
+                              placeholder="enter maximum off amount"
+                              class="form-control"
+                              required
+                              min="1"
+                            />
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <div class="input-group">
+                            <input
+                              type="number"
+                              name="startsAt"
+                              value="<%= coupon.startsAt %>"
+                              placeholder="off starts from"
+                              class="form-control"
+                              required
+                              min="1"
+                            />
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <small>coupon ends on..</small>
+                          <div class="input-group">
+                            <input
+                              type="date"
+                              name="endsOn"
+                              value="<%= coupon.endsOn %>"
+                              class="form-control"
+                              required
+                            />
+                          </div>
+                        </div>
+
+                        <div
+                          class="form-actions form-group row justify-content-center align-items-center"
+                        >
+                          <button type="submit" class="btn btn-success btn-sm">
+                            Add Coupon
+                          </button>
+                        </div>
+                      </form>
                     </div>
+                  </div>
                 </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="copyright">
+                    <p>Copyright © 2024 BRANDHOME. All rights reserved.</p>
+                  </div>
+                </div>
+              </div>
             </div>
-
-           
-            <div class="modal fade" id="editCouponModal" tabindex="-1" role="dialog" aria-labelledby="editCouponModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editCouponModalLabel">Edit Coupon</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="" method="post" id="editCouponForm">
-                                <div class="row">
-                                    <div class="col-md-12 form-group">
-                                        <div class="input-group">
-                                            <input type="text" name="couponName" placeholder="Coupon Name" class="form-control" required minlength="3" maxlength="25">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-gift"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 form-group">
-                                        <textarea class="form-control" name="description" id="description" rows="1" placeholder="Add description..." minlength="5" maxlength="100" required></textarea>
-                                    </div>
-                                    <div class="col-md-12 form-group">
-                                        <input type="number" name="off" placeholder="Off Percentage" class="form-control" required min="1" max="50">
-                                    </div>
-                                    <div class="col-md-12 form-group">
-                                        <input type="number" name="maxOff" placeholder="Enter Maximum Off Amount" class="form-control" required min="1">
-                                    </div>
-                                    <div class="col-md-12 form-group">
-                                        <input type="number" name="startsAt" placeholder="Off Starts From" class="form-control" required min="1">
-                                    </div>
-                                    <div class="col-md-12 form-group">
-                                        <small>Coupon ends on..</small>
-                                        <div class="input-group">
-                                            <input type="date" name="endsOn" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <input type="hidden" name="couponId" id="couponId">
-                                    <div class="col-md-12 form-group d-flex flex-column align-items-center justify-content-center">
-                                        <button type="submit" class="btn btn-success btn-sm">Update Coupon</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>    
-                
-            <!-- END MAIN CONTENT-->
-            <!-- END PAGE CONTAINER-->
+          </div>
         </div>
 
+        <div
+          class="modal fade"
+          id="editCouponModal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="editCouponModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="editCouponModalLabel">
+                  Edit Coupon
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form action="" method="post" id="editCouponForm">
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <div class="input-group">
+                        <input
+                          type="text"
+                          name="couponName"
+                          placeholder="Coupon Name"
+                          class="form-control"
+                          required
+                          minlength="3"
+                          maxlength="25"
+                        />
+                        <div class="input-group-addon">
+                          <i class="fa fa-gift"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12 form-group">
+                      <textarea
+                        class="form-control"
+                        name="description"
+                        id="description"
+                        rows="1"
+                        placeholder="Add description..."
+                        minlength="5"
+                        maxlength="100"
+                        required
+                      ></textarea>
+                    </div>
+                    <div class="col-md-12 form-group">
+                      <input
+                        type="number"
+                        name="off"
+                        placeholder="Off Percentage"
+                        class="form-control"
+                        required
+                        min="1"
+                        max="50"
+                      />
+                    </div>
+                    <div class="col-md-12 form-group">
+                      <input
+                        type="number"
+                        name="maxOff"
+                        placeholder="Enter Maximum Off Amount"
+                        class="form-control"
+                        required
+                        min="1"
+                      />
+                    </div>
+                    <div class="col-md-12 form-group">
+                      <input
+                        type="number"
+                        name="startsAt"
+                        placeholder="Off Starts From"
+                        class="form-control"
+                        required
+                        min="1"
+                      />
+                    </div>
+                    <div class="col-md-12 form-group">
+                      <small>Coupon ends on..</small>
+                      <div class="input-group">
+                        <input
+                          type="date"
+                          name="endsOn"
+                          class="form-control"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <input type="hidden" name="couponId" id="couponId" />
+                    <div
+                      class="col-md-12 form-group d-flex flex-column align-items-center justify-content-center"
+                    >
+                      <button type="submit" class="btn btn-success btn-sm">
+                        Update Coupon
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- END MAIN CONTENT-->
+        <!-- END PAGE CONTAINER-->
+      </div>
     </div>
 
     <!-- Jquery JS-->
@@ -561,61 +748,54 @@
     <script src="/vendor/bootstrap-4.1/popper.min.js"></script>
     <script src="/vendor/bootstrap-4.1/bootstrap.min.js"></script>
     <!-- Vendor JS       -->
-    <script src="/vendor/slick/slick.min.js">
-    </script>
+    <script src="/vendor/slick/slick.min.js"></script>
     <script src="/vendor/wow/wow.min.js"></script>
     <script src="/vendor/animsition/animsition.min.js"></script>
-    <script src="/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-    </script>
+    <script src="/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
     <script src="/vendor/counter-up/jquery.waypoints.min.js"></script>
-    <script src="/vendor/counter-up/jquery.counterup.min.js">
-    </script>
+    <script src="/vendor/counter-up/jquery.counterup.min.js"></script>
     <script src="/vendor/circle-progress/circle-progress.min.js"></script>
     <script src="/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="/vendor/chartjs/Chart.bundle.min.js"></script>
-    <script src="/vendor/select2/select2.min.js">
-    </script>
+    <script src="/vendor/select2/select2.min.js"></script>
 
     <!-- Main JS-->
     <script src="/js/adminMain.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
     <script>
+      function popup(popupMsg) {
+        Swal.fire({
+          title: "",
+          text: popupMsg,
+          timer: 1000,
+          showConfirmButton: false,
+        });
+      }
 
-function popup(popupMsg) {
-            Swal.fire({
-                title: '',
-                text: popupMsg,
-                timer: 1000,
-                showConfirmButton: false,
-            });
-        };
+      document.addEventListener("DOMContentLoaded", function () {
+        function attachEventListeners() {
+          document.querySelectorAll(".coupon_del").forEach(function (del) {
+            del.addEventListener("click", function (event) {
+              event.preventDefault();
 
+              const couponId = this.getAttribute("data-couponId");
+              console.log("coupon id is", couponId);
 
-document.addEventListener('DOMContentLoaded', function() {
-    function attachEventListeners() {
-        document.querySelectorAll('.coupon_del').forEach(function(del) {
-            del.addEventListener('click', function(event) {
-                event.preventDefault();
+              $.ajax({
+                url: "/admin/couponDelete",
+                type: "DELETE",
+                data: { couponId: couponId },
+                success: function (res) {
+                  alert("it is working");
 
-                const couponId = this.getAttribute("data-couponId");
-                console.log("coupon id is", couponId);
+                  console.log("coupons is", res.coupons);
 
-                $.ajax({
-                    url: "/admin/couponDelete",
-                    type: "DELETE",
-                    data: { couponId: couponId },
-                    success: function(res) {
-                        alert("it is working");
-
-                        console.log("coupons is", res.coupons);
-
-                        if (res.coupons.length > 0) {
-                            let coupons = ""; // Initialize an empty string
-                            let no = 1;
-                            for (let coupon of res.coupons) {
-                                coupons += `
+                  if (res.coupons.length > 0) {
+                    let coupons = ""; // Initialize an empty string
+                    let no = 1;
+                    for (let coupon of res.coupons) {
+                      coupons += `
                                     <tr>
                                         <td>${no} ${coupon.couponName}</td>
                                         <td>${coupon.off}% Off</td>
@@ -630,88 +810,88 @@ document.addEventListener('DOMContentLoaded', function() {
                                         </td>
                                     </tr>
                                 `;
-                                no++;
-                            }
+                      no++;
+                    }
 
-                            console.log("now data is", coupons);
+                    console.log("now data is", coupons);
 
-                            document.getElementById("couponRow").innerHTML = coupons; // Update the tbody content
-                            attachEventListeners(); // Re-attach event listeners to the updated DOM elements
-                        } else {
-                            document.getElementById("couponRow").innerHTML = `
+                    document.getElementById("couponRow").innerHTML = coupons; // Update the tbody content
+                    attachEventListeners(); // Re-attach event listeners to the updated DOM elements
+                  } else {
+                    document.getElementById("couponRow").innerHTML = `
                                 <tr>
                                     <td colspan="3">Coupons not found...</td>
                                 </tr>
                             `;
-                        }
-                    }
-                });
+                  }
+                },
+              });
             });
-        });
-    }
+          });
+        }
 
-    attachEventListeners();
-});
+        attachEventListeners();
+      });
 
-$(document).on('click', '.coupon-edit', function (e) {
-    e.preventDefault();
-
-    const coupon = $(this).data('coupon');
-
-    console.log("coupon is ",coupon);
-
-    $('#editCouponModal input[name="couponName"]').val(coupon.couponName);
-    $('#editCouponModal textarea[name="description"]').val(coupon.description);
-    $('#editCouponModal input[name="off"]').val(coupon.off);
-    $('#editCouponModal input[name="maxOff"]').val(coupon.maxOff);
-    $('#editCouponModal input[name="startsAt"]').val(coupon.startsAt);
-    $('#editCouponModal input[name="endsOn"]').val(new Date(coupon.endsOn).toISOString().split('T')[0]);  // Setting date properly
-    $('#editCouponModal input[name="couponId"]').val(coupon._id);
-
-    // Update form action dynamically
-    // $('#editCouponForm').attr('action', `/admin/editCoupon?id=${coupon._id}`);
-});
-
-$(document).ready(function(){
-    document.getElementById("editCouponForm").addEventListener("submit", function(e) {
+      $(document).on("click", ".coupon-edit", function (e) {
         e.preventDefault();
 
-        const formData = $(this).serialize();
+        const coupon = $(this).data("coupon");
 
-        console.log("formdata is ",formData);
+        console.log("coupon is ", coupon);
 
-        $.ajax({
-            url: '/admin/editCoupon',
-            type: "POST",
-            data: formData,
-            dataType: "json",
+        $('#editCouponModal input[name="couponName"]').val(coupon.couponName);
+        $('#editCouponModal textarea[name="description"]').val(
+          coupon.description
+        );
+        $('#editCouponModal input[name="off"]').val(coupon.off);
+        $('#editCouponModal input[name="maxOff"]').val(coupon.maxOff);
+        $('#editCouponModal input[name="startsAt"]').val(coupon.startsAt);
+        $('#editCouponModal input[name="endsOn"]').val(
+          new Date(coupon.endsOn).toISOString().split("T")[0]
+        ); // Setting date properly
+        $('#editCouponModal input[name="couponId"]').val(coupon._id);
 
-            success: function(res) {
+        // Update form action dynamically
+        // $('#editCouponForm').attr('action', `/admin/editCoupon?id=${coupon._id}`);
+      });
+
+      $(document).ready(function () {
+        document
+          .getElementById("editCouponForm")
+          .addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const formData = $(this).serialize();
+
+            console.log("formdata is ", formData);
+
+            $.ajax({
+              url: "/admin/editCoupon",
+              type: "POST",
+              data: formData,
+              dataType: "json",
+
+              success: function (res) {
                 if (res.success) {
-                    popup(res.msg);  // Popup message
+                  popup(res.msg); // Popup message
 
-                    setTimeout(function () {
-                        window.location.href = "/admin/couponManagement";
-                    }, 1500);
-                        // Redirect if necessary
-                    
+                  setTimeout(function () {
+                    window.location.href = "/admin/couponManagement";
+                  }, 1500);
+                  // Redirect if necessary
                 } else {
-                    popup(res.msg);  // Display error message
+                  popup(res.msg); // Display error message
                 }
-            },
-            error: function(err) {
-                console.error('Error:', err);
-                popup('An error occurred. Please try again.');
-            }
-        });
-    });
-});
-
-
-
+              },
+              error: function (err) {
+                console.error("Error:", err);
+                popup("An error occurred. Please try again.");
+              },
+            });
+          });
+      });
     </script>
-
-</body>
-
+  </body>
 </html>
 <!-- end document-->

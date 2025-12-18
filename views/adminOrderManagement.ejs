@@ -1,609 +1,673 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <!-- Required meta tags-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="au theme template">
-    <meta name="author" content="Hau Nguyen">
-    <meta name="keywords" content="au theme template">
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="au theme template" />
+    <meta name="author" content="Hau Nguyen" />
+    <meta name="keywords" content="au theme template" />
 
     <!-- Title Page-->
     <title>Dashboard</title>
 
     <!-- Fontfaces CSS-->
-    <link href="/css/font-face.css" rel="stylesheet" media="all">
-    <link href="/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-    <link href="/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
-    <link href="/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="/css/font-face.css" rel="stylesheet" media="all" />
+    <link
+      href="/vendor/font-awesome-4.7/css/font-awesome.min.css"
+      rel="stylesheet"
+      media="all"
+    />
+    <link
+      href="/vendor/font-awesome-5/css/fontawesome-all.min.css"
+      rel="stylesheet"
+      media="all"
+    />
+    <link
+      href="/vendor/mdi-font/css/material-design-iconic-font.min.css"
+      rel="stylesheet"
+      media="all"
+    />
 
     <!-- Bootstrap CSS-->
-    <link href="/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+    <link
+      href="/vendor/bootstrap-4.1/bootstrap.min.css"
+      rel="stylesheet"
+      media="all"
+    />
 
     <!-- Vendor CSS-->
-    <link href="/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
-    <link href="/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
-    <link href="/vendor/wow/animate.css" rel="stylesheet" media="all">
-    <link href="/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
-    <link href="/vendor/slick/slick.css" rel="stylesheet" media="all">
-    <link href="/vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+    <link
+      href="/vendor/animsition/animsition.min.css"
+      rel="stylesheet"
+      media="all"
+    />
+    <link
+      href="/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css"
+      rel="stylesheet"
+      media="all"
+    />
+    <link href="/vendor/wow/animate.css" rel="stylesheet" media="all" />
+    <link
+      href="/vendor/css-hamburgers/hamburgers.min.css"
+      rel="stylesheet"
+      media="all"
+    />
+    <link href="/vendor/slick/slick.css" rel="stylesheet" media="all" />
+    <link href="/vendor/select2/select2.min.css" rel="stylesheet" media="all" />
+    <link
+      href="/vendor/perfect-scrollbar/perfect-scrollbar.css"
+      rel="stylesheet"
+      media="all"
+    />
 
     <!-- Main CSS-->
-    <link href="/css/theme.css" rel="stylesheet" media="all">
+    <link href="/css/theme.css" rel="stylesheet" media="all" />
+  </head>
 
-</head>
-
-<body class="animsition">
+  <body class="animsition">
     <div class="page-wrapper">
-        <!-- HEADER MOBILE-->
-        <header class="header-mobile d-block d-lg-none">
-            <div class="header-mobile__bar">
-                <div class="container-fluid">
-                    <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
-                    <h2>BRANDHOME</h2><h6>Admin</h6>
-                        </a>
-                        <button class="hamburger hamburger--slider" type="button">
-                            <span class="hamburger-box">
-                                <span class="hamburger-inner"></span>
-                            </span>
-                        </button>
-                    </div>
-                </div>
+      <!-- HEADER MOBILE-->
+      <header class="header-mobile d-block d-lg-none">
+        <div class="header-mobile__bar">
+          <div class="container-fluid">
+            <div class="header-mobile-inner">
+              <a class="logo" href="index.html">
+                <h2>BRANDHOME</h2>
+                <h6>Admin</h6>
+              </a>
+              <button class="hamburger hamburger--slider" type="button">
+                <span class="hamburger-box">
+                  <span class="hamburger-inner"></span>
+                </span>
+              </button>
             </div>
-            <nav class="navbar-mobile">
-                <div class="container-fluid">
-                    <ul class="navbar-mobile__list list-unstyled">
+          </div>
+        </div>
+        <nav class="navbar-mobile">
+          <div class="container-fluid">
+            <ul class="navbar-mobile__list list-unstyled">
+              <li>
+                <a class="js-arrow" href="/admin/home">
+                  <i class="fas fa-tachometer-alt"></i>Dashboard</a
+                >
+              </li>
 
-                        <li>
-                            <a class="js-arrow " href="/admin/home">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                           
-                        </li>
+              <li>
+                <a href="/admin/userManagement">
+                  <i class="fas fa-users"></i>Users</a
+                >
+              </li>
 
-                        <li>
-                            <a href="/admin/userManagement">
-                                <i class="fas fa-users"></i>Users</a>
-                        </li>
+              <li>
+                <a href="/admin/categoryManagement">
+                  <i class="fas fa-th"></i>Categories</a
+                >
+              </li>
 
-                        <li>
-                            <a href="/admin/categoryManagement">
-                                <i class="fas fa-th"></i>Categories</a>
-                        </li>
+              <li>
+                <a href="/admin/addProduct">
+                  <i class="fas fa-shopping-basket"></i>Products</a
+                >
+              </li>
 
-                        <li>
-                            <a href="/admin/addProduct">
-                                <i class="fas fa-shopping-basket"></i>Products</a>
-                        </li>
+              <li>
+                <a href="/admin/stockManagement">
+                  <i class="fas fa-truck"></i>Stocks</a
+                >
+              </li>
 
-                        <li>
-                            <a href="/admin/stockManagement">
-                                <i class="fas fa-truck "></i>Stocks</a>
-                        </li>
+              <li class="active">
+                <a href="/admin/orderManagement">
+                  <i class="fas fa-shopping-bag"></i>Orders</a
+                >
+              </li>
 
-                        <li class="active">
-                            <a href="/admin/orderManagement">
-                                <i class="fas fa-shopping-bag "></i>Orders</a>
-                        </li>
+              <li>
+                <a href="/admin/returnManagement">
+                  <i class="fas fa fa-reply"></i>Returns</a
+                >
+              </li>
 
-                        <li>
-                            <a href="/admin/returnManagement">
-                                <i class="fas fa fa-reply "></i>Returns</a>
-                        </li>
+              <li>
+                <a href="/admin/offersManagement">
+                  <i class="fas fa fa-gift"></i>Offers</a
+                >
+              </li>
 
-                        <li>
-                            <a href="/admin/offersManagement">
-                                <i class="fas fa fa-gift "></i>Offers</a>
-                        </li>
+              <li>
+                <a href="/admin/couponManagement">
+                  <i class="fas fa fa-tags"></i>Coupons</a
+                >
+              </li>
 
-                        <li>
-                            <a href="/admin/couponManagement">
-                                <i class="fas fa fa-tags "></i>Coupons</a>
-                        </li>
+              <li>
+                <a href="/admin/salesManagement">
+                  <i class="fas fa-bar-chart"></i>Sales</a
+                >
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <!-- END HEADER MOBILE-->
 
-                        <li>
-                            <a href="/admin/salesManagement">
-                                <i class="fas fa-bar-chart "></i>Sales</a>
-                        </li>
-                    
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        <!-- END HEADER MOBILE-->
+      <!-- MENU SIDEBAR-->
+      <aside class="menu-sidebar d-none d-lg-block">
+        <div class="logo">
+          <a href="#">
+            <h2>BRANDHOME</h2>
+            <h6>Admin</h6>
+          </a>
+        </div>
+        <div class="menu-sidebar__content js-scrollbar1">
+          <nav class="navbar-sidebar">
+            <ul class="list-unstyled navbar__list">
+              <li>
+                <a class="js-arrow" href="/admin/home">
+                  <i class="fas fa-tachometer-alt"></i>Dashboard</a
+                >
+              </li>
 
-        <!-- MENU SIDEBAR-->
-        <aside class="menu-sidebar d-none d-lg-block">
-            <div class="logo">
-                <a href="#">
-                    <h2>BRANDHOME</h2><h6>Admin</h6>
-                </a>
-            </div>
-            <div class="menu-sidebar__content js-scrollbar1">
-                <nav class="navbar-sidebar">
-                    <ul class="list-unstyled navbar__list">
+              <li>
+                <a href="/admin/userManagement">
+                  <i class="fas fa-users"></i>Users</a
+                >
+              </li>
 
-                        <li>
-                            <a class="js-arrow " href="/admin/home">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                           
-                        </li>
+              <li>
+                <a href="/admin/categoryManagement">
+                  <i class="fas fa-th"></i>Categories</a
+                >
+              </li>
 
-                        <li>
-                            <a href="/admin/userManagement">
-                                <i class="fas fa-users"></i>Users</a>
-                        </li>
+              <li>
+                <a href="/admin/addProduct">
+                  <i class="fas fa-shopping-basket"></i>Products</a
+                >
+              </li>
 
-                        <li>
-                            <a href="/admin/categoryManagement">
-                                <i class="fas fa-th"></i>Categories</a>
-                        </li>
+              <li>
+                <a href="/admin/stockManagement">
+                  <i class="fas fa-truck"></i>Stocks</a
+                >
+              </li>
 
-                        <li>
-                            <a href="/admin/addProduct">
-                                <i class="fas fa-shopping-basket"></i>Products</a>
-                        </li>
+              <li class="active">
+                <a href="/admin/orderManagement">
+                  <i class="fas fa-shopping-bag"></i>Orders</a
+                >
+              </li>
 
-                        <li>
-                            <a href="/admin/stockManagement">
-                                <i class="fas fa-truck "></i>Stocks</a>
-                        </li>
+              <li>
+                <a href="/admin/returnManagement">
+                  <i class="fas fa fa-reply"></i>Returns</a
+                >
+              </li>
 
-                        <li class="active">
-                            <a href="/admin/orderManagement">
-                                <i class="fas fa-shopping-bag "></i>Orders</a>
-                        </li>
+              <li>
+                <a href="/admin/offersManagement">
+                  <i class="fas fa fa-gift"></i>Offers</a
+                >
+              </li>
 
-                        <li>
-                            <a href="/admin/returnManagement">
-                                <i class="fas fa fa-reply "></i>Returns</a>
-                        </li>
+              <li>
+                <a href="/admin/couponManagement">
+                  <i class="fas fa fa-tags"></i>Coupons</a
+                >
+              </li>
 
-                        <li>
-                            <a href="/admin/offersManagement">
-                                <i class="fas fa fa-gift "></i>Offers</a>
-                        </li>
+              <li>
+                <a href="/admin/salesManagement">
+                  <i class="fas fa-bar-chart"></i>Sales</a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+      <!-- END MENU SIDEBAR-->
 
-                        <li>
-                            <a href="/admin/couponManagement">
-                                <i class="fas fa fa-tags "></i>Coupons</a>
-                        </li>
-
-                        <li>
-                            <a href="/admin/salesManagement">
-                                <i class="fas fa-bar-chart "></i>Sales</a>
-                        </li>
-                    
-                    </ul>
-                </nav>
-            </div>
-        </aside>
-        <!-- END MENU SIDEBAR-->
-
-        <!-- PAGE CONTAINER-->
-        <div class="page-container">
-            <!-- HEADER DESKTOP-->
-            <header class="header-desktop">
-                <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                        <div class="header-wrap">
-                            <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
-                                <button class="au-btn--submit" type="submit">
-                                    <i class="zmdi zmdi-search"></i>
-                                </button>
-                            </form>
-                            <div class="header-button">
-                                <div class="noti-wrap">
-                                    <div class="noti__item js-item-menu">
-                                        <i class="zmdi zmdi-comment-more"></i>
-                                        <span class="quantity">1</span>
-                                        <div class="mess-dropdown js-dropdown">
-                                            <div class="mess__title">
-                                                <p>You have 2 news message</p>
-                                            </div>
-                                            <div class="mess__item">
-                                                <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-06.jpg" alt="Michelle Moreno" />
-                                                </div>
-                                                <div class="content">
-                                                    <h6>Michelle Moreno</h6>
-                                                    <p>Have sent a photo</p>
-                                                    <span class="time">3 min ago</span>
-                                                </div>
-                                            </div>
-                                            <div class="mess__item">
-                                                <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-04.jpg" alt="Diane Myers" />
-                                                </div>
-                                                <div class="content">
-                                                    <h6>Diane Myers</h6>
-                                                    <p>You are now connected on message</p>
-                                                    <span class="time">Yesterday</span>
-                                                </div>
-                                            </div>
-                                            <div class="mess__footer">
-                                                <a href="#">View all messages</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="noti__item js-item-menu">
-                                        <i class="zmdi zmdi-email"></i>
-                                        <span class="quantity">1</span>
-                                        <div class="email-dropdown js-dropdown">
-                                            <div class="email__title">
-                                                <p>You have 3 New Emails</p>
-                                            </div>
-                                            <div class="email__item">
-                                                <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-06.jpg" alt="Cynthia Harvey" />
-                                                </div>
-                                                <div class="content">
-                                                    <p>Meeting about new dashboard...</p>
-                                                    <span>Cynthia Harvey, 3 min ago</span>
-                                                </div>
-                                            </div>
-                                            <div class="email__item">
-                                                <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-05.jpg" alt="Cynthia Harvey" />
-                                                </div>
-                                                <div class="content">
-                                                    <p>Meeting about new dashboard...</p>
-                                                    <span>Cynthia Harvey, Yesterday</span>
-                                                </div>
-                                            </div>
-                                            <div class="email__item">
-                                                <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-04.jpg" alt="Cynthia Harvey" />
-                                                </div>
-                                                <div class="content">
-                                                    <p>Meeting about new dashboard...</p>
-                                                    <span>Cynthia Harvey, April 12,,2018</span>
-                                                </div>
-                                            </div>
-                                            <div class="email__footer">
-                                                <a href="#">See all emails</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="noti__item js-item-menu">
-                                        <i class="zmdi zmdi-notifications"></i>
-                                        <span class="quantity">3</span>
-                                        <div class="notifi-dropdown js-dropdown">
-                                            <div class="notifi__title">
-                                                <p>You have 3 Notifications</p>
-                                            </div>
-                                            <div class="notifi__item">
-                                                <div class="bg-c1 img-cir img-40">
-                                                    <i class="zmdi zmdi-email-open"></i>
-                                                </div>
-                                                <div class="content">
-                                                    <p>You got a email notification</p>
-                                                    <span class="date">April 12, 2018 06:50</span>
-                                                </div>
-                                            </div>
-                                            <div class="notifi__item">
-                                                <div class="bg-c2 img-cir img-40">
-                                                    <i class="zmdi zmdi-account-box"></i>
-                                                </div>
-                                                <div class="content">
-                                                    <p>Your account has been blocked</p>
-                                                    <span class="date">April 12, 2018 06:50</span>
-                                                </div>
-                                            </div>
-                                            <div class="notifi__item">
-                                                <div class="bg-c3 img-cir img-40">
-                                                    <i class="zmdi zmdi-file-text"></i>
-                                                </div>
-                                                <div class="content">
-                                                    <p>You got a new file</p>
-                                                    <span class="date">April 12, 2018 06:50</span>
-                                                </div>
-                                            </div>
-                                            <div class="notifi__footer">
-                                                <a href="#">All notifications</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="account-wrap">
-                                    <div class="account-item clearfix js-item-menu">
-                                        <div class="image">
-                                            <img src="/images/aks dp.png" alt="John Doe" />
-                                        </div>
-                                        <div class="content">
-                                            <a class="js-acc-btn" href="#">abdullha kalamban</a>
-                                        </div>
-                                        <div class="account-dropdown js-dropdown">
-                                            <div class="info clearfix">
-                                                <div class="image">
-                                                    <a href="#">
-                                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />
-                                                    </a>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="name">
-                                                        <a href="#">abdullha kalamban</a>
-                                                    </h5>
-                                                    <span class="email">aks4u786@gmail.com</span>
-                                                </div>
-                                            </div>
-                                            <div class="account-dropdown__body">
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-account"></i>Account</a>
-                                                </div>
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-settings"></i>Setting</a>
-                                                </div>
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-money-box"></i>Billing</a>
-                                                </div>
-                                            </div>
-                                            <div class="account-dropdown__footer">
-                                                <a href="/admin/logout">
-                                                    <i class="zmdi zmdi-power"></i>Logout</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+      <!-- PAGE CONTAINER-->
+      <div class="page-container">
+        <!-- HEADER DESKTOP-->
+        <header class="header-desktop">
+          <div class="section__content section__content--p30">
+            <div class="container-fluid">
+              <div class="header-wrap">
+                <form class="form-header" action="" method="POST">
+                  <input
+                    class="au-input au-input--xl"
+                    type="text"
+                    name="search"
+                    placeholder="Search for datas &amp; reports..."
+                  />
+                  <button class="au-btn--submit" type="submit">
+                    <i class="zmdi zmdi-search"></i>
+                  </button>
+                </form>
+                <div class="header-button">
+                  <div class="noti-wrap">
+                    <div class="noti__item js-item-menu">
+                      <i class="zmdi zmdi-comment-more"></i>
+                      <span class="quantity">1</span>
+                      <div class="mess-dropdown js-dropdown">
+                        <div class="mess__title">
+                          <p>You have 2 news message</p>
                         </div>
-                    </div>
-                </div>
-            </header>
-            <!-- HEADER DESKTOP-->
-
-            <!-- MAIN CONTENT-->
-            <div class="main-content">
-                <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="table-responsive table--no-card m-b-30">
-                                    <table class="table table-borderless table-striped table-earning">
-                                        <thead>
-                                            <tr>
-                                                <th>DATE</th>
-                                                <th>ORDER-ID</th>
-                                                <th>ITEM</th>
-                                                <th>TOTAL</th>
-                                                <th>STATUS</th>
-                                                
-                                            </tr>
-                                        </thead>
-
-                                        
-                                    <tbody  id="tableItems">
-
-                    <% if (orders.length> 0) {
-                        for (let i = 0; i < orders.length; i++) { %>
-
-                            <% for (let j=0; j < orders[i].items.length; j++) { %>
-                                <tr>
-                                    <td>
-                                        <%= orders[i].orderDate.toLocaleDateString() %>
-                                    </td>
-                                    <td class="text-danger font-weight-bold" id="order-details" data-toggle="modal"
-                                        data-target="#orderDetails" data-order="<%= JSON.stringify(orders[i]) %>" data-index="<%= j %>">
-                                        <%= orders[i].orderId%>
-                                    </td>
-
-                                
-                                    <td>
-                                        <%= orders[i].items[j].productBrand %>
-                                            <%= orders[i].items[j].productName %>,<br>
-                                                <%= orders[i].items[j].size %>, <%= orders[i].color %>
-                                                        (<%= orders[i].items[j].quantity %>)
-                                    </td>
-
-                                    <td>Rs <%= orders[i].items[j].payAmount %>
-                                    </td>
-                                    <td>
-                                        <select name="orderStatus" id="orderStatus-<%= j %>"
-                                            data-order-id="<%= orders[i]._id %>" data-index="<%= j %>">
-                                            <option value="" disabled selected>
-                                                <%= orders[i].items[j].status %>
-                                            </option>
-                                            <option value="pending">pending</option>
-                                            <option value="dispatched">dispatched</option>
-                                            <option value="delivered">delivered</option>
-                                            <option value="cancelled">cancelled</option>
-                                        </select>
-                                    </td>
-
-
-                                </tr>
-
-
-                                <% } %>
-                                    <% } %>
-
-
-                                </tbody>
-                                       
-                                           
-                                        
-                                    <% } else { %>
-
-                                        <tbody>
-                                        <tr>
-                                            <td colspan="5">
-                                                Orders not found...
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                    <% } %>
-                                    </table>
-                                    
-
-                                    
-                                </div>
-
-                                <input type="hidden" name="currentPage" id="currentPage" value="<%= currentPage %>">
-
-                                <% if (totalPages > 1) { %>
-                                   
-                                    <div class="col-12 pb-1">
-                                        <nav aria-label="Page navigation">
-                                            <ul class="pagination justify-content-center mb-3">
-                                                <li class="page-item <%= currentPage === 1 ? 'disabled' : '' %>">
-                                                    <a class="page-link" href="/admin/orderManagement?page=<%= currentPage - 1 %>" aria-label="Previous">
-                                                        <span aria-hidden="true">&laquo;</span>
-                                                        <span class="sr-only">Previous</span>
-                                                    </a>
-                                                </li>
-                                                <% for (let page = 1; page <= totalPages; page++) { %>
-                                                    <li class="page-item <%= currentPage === page ? 'active' : '' %>">
-                                                        <a class="page-link" href="/admin/orderManagement?page=<%= page %>"><%= page %></a>
-                                                    </li>
-                                                <% } %>
-                                                <li class="page-item <%= currentPage === totalPages ? 'disabled' : '' %>">
-                                                    <a class="page-link" href="/admin/orderManagement?page=<%= currentPage + 1 %>" aria-label="Next">
-                                                        <span aria-hidden="true">&raquo;</span>
-                                                        <span class="sr-only">Next</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                <% } %>
-                            </div>
-                            
+                        <div class="mess__item">
+                          <div class="image img-cir img-40">
+                            <img
+                              src="images/icon/avatar-06.jpg"
+                              alt="Michelle Moreno"
+                            />
+                          </div>
+                          <div class="content">
+                            <h6>Michelle Moreno</h6>
+                            <p>Have sent a photo</p>
+                            <span class="time">3 min ago</span>
+                          </div>
                         </div>
-                       
-                        
-                        
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="copyright">
-                                    <p>Copyright © 2024 BRANDHOME. All rights reserved.</p>
-                                </div>
-                            </div>
+                        <div class="mess__item">
+                          <div class="image img-cir img-40">
+                            <img
+                              src="images/icon/avatar-04.jpg"
+                              alt="Diane Myers"
+                            />
+                          </div>
+                          <div class="content">
+                            <h6>Diane Myers</h6>
+                            <p>You are now connected on message</p>
+                            <span class="time">Yesterday</span>
+                          </div>
                         </div>
-
+                        <div class="mess__footer">
+                          <a href="#">View all messages</a>
+                        </div>
+                      </div>
                     </div>
-                </div>
-            </div>
-            <!-- END MAIN CONTENT-->
-
-
-            <div class="modal fade" id="orderDetails" tabindex="-1" role="dialog" aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="editAddressModalLabel">Order Details</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
+                    <div class="noti__item js-item-menu">
+                      <i class="zmdi zmdi-email"></i>
+                      <span class="quantity">1</span>
+                      <div class="email-dropdown js-dropdown">
+                        <div class="email__title">
+                          <p>You have 3 New Emails</p>
+                        </div>
+                        <div class="email__item">
+                          <div class="image img-cir img-40">
+                            <img
+                              src="images/icon/avatar-06.jpg"
+                              alt="Cynthia Harvey"
+                            />
+                          </div>
+                          <div class="content">
+                            <p>Meeting about new dashboard...</p>
+                            <span>Cynthia Harvey, 3 min ago</span>
+                          </div>
+                        </div>
+                        <div class="email__item">
+                          <div class="image img-cir img-40">
+                            <img
+                              src="images/icon/avatar-05.jpg"
+                              alt="Cynthia Harvey"
+                            />
+                          </div>
+                          <div class="content">
+                            <p>Meeting about new dashboard...</p>
+                            <span>Cynthia Harvey, Yesterday</span>
+                          </div>
+                        </div>
+                        <div class="email__item">
+                          <div class="image img-cir img-40">
+                            <img
+                              src="images/icon/avatar-04.jpg"
+                              alt="Cynthia Harvey"
+                            />
+                          </div>
+                          <div class="content">
+                            <p>Meeting about new dashboard...</p>
+                            <span>Cynthia Harvey, April 12,,2018</span>
+                          </div>
+                        </div>
+                        <div class="email__footer">
+                          <a href="#">See all emails</a>
+                        </div>
+                      </div>
                     </div>
-                    <div class="modal-body">
-
-                        <div class="col-lg-12 row ">
-                        
-                            <div class="col-lg-4">
-                                
-                            </div>
-                            <div class="col-lg-8 " id="productImage">
-                               
-                            </div>
-
-                            <div class="col-lg-4">
-                                <p>Product Name </p>
-                            </div>
-                            <div class="col-lg-8 " id="productName">
-                                
-                            </div>
-
-                            <div class="col-lg-4">
-                                <p>Quantity</p>
-                            </div>
-                            <div class="col-lg-8 " id="quantity">
-                              
-                            </div>
-
-                            <div class="col-lg-4">
-                                <p>Price</p>
-                            </div>
-                            <div class="col-lg-8 " id="price">
-                            
-                            </div>
-
-                            <div class="col-lg-4">
-                                <p>Order Date </p>
-                            </div>
-                            <div class="col-lg-8 " id="orderDate">
-                            
-                            </div>
-
-
-
-                            <div class="col-lg-4">
-                                <p>Order Id </p>
-                            </div>
-                            <div class="col-lg-8 " id="id">
-                            
-                            </div>
-
-                            <div class="col-lg-4">
-                                <p>Shipping Charge</p>
-                            </div>
-                            <div class="col-lg-8 " id="shippingCharge">
-                            
-                            </div>
-
-                            <div class="col-lg-4">
-                                <p>Discount</p>
-                            </div>
-                            <div class="col-lg-8 " id="youSave">
-                    
-                            </div>
-
-                            <div class="col-lg-4">
-                                <p>Total Amount </p>
-                            </div>
-                            <div class="col-lg-8 " id="payAmount">
-                          
-                            </div>
-
-                            <div class="col-lg-4">
-                                <p>Shipping Address </p>
-                            </div>
-                            <div class="col-lg-8 " id="Address">
-                               
-                            </div>
-
-                            <div class="col-lg-4">
-                                <p>Payment Option </p>
-                            </div>
-                            <div class="col-lg-8 " id="paymentOption">
-                            
-                            </div>
-
-                            <div class="col-lg-4">
-                                <p>Order Status  </p>
-                            </div>
-                            <div class="col-lg-8 " id="Status">
-
-                              
-                            
-                                
-                            </div>
-                            
-                         
+                    <div class="noti__item js-item-menu">
+                      <i class="zmdi zmdi-notifications"></i>
+                      <span class="quantity">3</span>
+                      <div class="notifi-dropdown js-dropdown">
+                        <div class="notifi__title">
+                          <p>You have 3 Notifications</p>
+                        </div>
+                        <div class="notifi__item">
+                          <div class="bg-c1 img-cir img-40">
+                            <i class="zmdi zmdi-email-open"></i>
+                          </div>
+                          <div class="content">
+                            <p>You got a email notification</p>
+                            <span class="date">April 12, 2018 06:50</span>
+                          </div>
+                        </div>
+                        <div class="notifi__item">
+                          <div class="bg-c2 img-cir img-40">
+                            <i class="zmdi zmdi-account-box"></i>
+                          </div>
+                          <div class="content">
+                            <p>Your account has been blocked</p>
+                            <span class="date">April 12, 2018 06:50</span>
+                          </div>
+                        </div>
+                        <div class="notifi__item">
+                          <div class="bg-c3 img-cir img-40">
+                            <i class="zmdi zmdi-file-text"></i>
+                          </div>
+                          <div class="content">
+                            <p>You got a new file</p>
+                            <span class="date">April 12, 2018 06:50</span>
+                          </div>
+                        </div>
+                        <div class="notifi__footer">
+                          <a href="#">All notifications</a>
+                        </div>
+                      </div>
                     </div>
-                      
+                  </div>
+                  <div class="account-wrap">
+                    <div class="account-item clearfix js-item-menu">
+                      <div class="image">
+                        <img src="/images/aks dp.png" alt="John Doe" />
+                      </div>
+                      <div class="content">
+                        <a class="js-acc-btn" href="#">abdullha kalamban</a>
+                      </div>
+                      <div class="account-dropdown js-dropdown">
+                        <div class="info clearfix">
+                          <div class="image">
+                            <a href="#">
+                              <img
+                                src="images/icon/avatar-01.jpg"
+                                alt="John Doe"
+                              />
+                            </a>
+                          </div>
+                          <div class="content">
+                            <h5 class="name">
+                              <a href="#">abdullha kalamban</a>
+                            </h5>
+                            <span class="email">aks4u786@gmail.com</span>
+                          </div>
+                        </div>
+                        <div class="account-dropdown__body">
+                          <div class="account-dropdown__item">
+                            <a href="#">
+                              <i class="zmdi zmdi-account"></i>Account</a
+                            >
+                          </div>
+                          <div class="account-dropdown__item">
+                            <a href="#">
+                              <i class="zmdi zmdi-settings"></i>Setting</a
+                            >
+                          </div>
+                          <div class="account-dropdown__item">
+                            <a href="#">
+                              <i class="zmdi zmdi-money-box"></i>Billing</a
+                            >
+                          </div>
+                        </div>
+                        <div class="account-dropdown__footer">
+                          <a href="/admin/logout">
+                            <i class="zmdi zmdi-power"></i>Logout</a
+                          >
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
+              </div>
             </div>
-            <!-- END PAGE CONTAINER-->
-        </div>
+          </div>
+        </header>
+        <!-- HEADER DESKTOP-->
 
+        <!-- MAIN CONTENT-->
+        <div class="main-content">
+          <div class="section__content section__content--p30">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="table-responsive table--no-card m-b-30">
+                    <table
+                      class="table table-borderless table-striped table-earning"
+                    >
+                      <thead>
+                        <tr>
+                          <th>DATE</th>
+                          <th>ORDER-ID</th>
+                          <th>ITEM</th>
+                          <th>TOTAL</th>
+                          <th>STATUS</th>
+                        </tr>
+                      </thead>
+
+                      <tbody id="tableItems">
+                        <% if (orders.length> 0) { for (let i = 0; i <
+                        orders.length; i++) { %> <% for (let j=0; j <
+                        orders[i].items.length; j++) { %>
+                        <tr>
+                          <td>
+                            <%= orders[i].orderDate.toLocaleDateString() %>
+                          </td>
+                          <td
+                            class="text-danger font-weight-bold"
+                            id="order-details"
+                            data-toggle="modal"
+                            data-target="#orderDetails"
+                            data-order="<%= JSON.stringify(orders[i]) %>"
+                            data-index="<%= j %>"
+                          >
+                            <%= orders[i].orderId%>
+                          </td>
+
+                          <td>
+                            <%= orders[i].items[j].productBrand %> <%=
+                            orders[i].items[j].productName %>,<br />
+                            <%= orders[i].items[j].size %>, <%= orders[i].color
+                            %> (<%= orders[i].items[j].quantity %>)
+                          </td>
+
+                          <td>Rs <%= orders[i].items[j].payAmount %></td>
+                          <td>
+                            <select
+                              name="orderStatus"
+                              id="orderStatus-<%= j %>"
+                              data-order-id="<%= orders[i]._id %>"
+                              data-index="<%= j %>"
+                            >
+                              <option value="" disabled selected>
+                                <%= orders[i].items[j].status %>
+                              </option>
+                              <option value="pending">pending</option>
+                              <option value="dispatched">dispatched</option>
+                              <option value="delivered">delivered</option>
+                              <option value="cancelled">cancelled</option>
+                            </select>
+                          </td>
+                        </tr>
+
+                        <% } %> <% } %>
+                      </tbody>
+
+                      <% } else { %>
+
+                      <tbody>
+                        <tr>
+                          <td colspan="5">Orders not found...</td>
+                        </tr>
+                      </tbody>
+                      <% } %>
+                    </table>
+                  </div>
+
+                  <input
+                    type="hidden"
+                    name="currentPage"
+                    id="currentPage"
+                    value="<%= currentPage %>"
+                  />
+
+                  <% if (totalPages > 1) { %>
+
+                  <div class="col-12 pb-1">
+                    <nav aria-label="Page navigation">
+                      <ul class="pagination justify-content-center mb-3">
+                        <li
+                          class="page-item <%= currentPage === 1 ? 'disabled' : '' %>"
+                        >
+                          <a
+                            class="page-link"
+                            href="/admin/orderManagement?page=<%= currentPage - 1 %>"
+                            aria-label="Previous"
+                          >
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                          </a>
+                        </li>
+                        <% for (let page = 1; page <= totalPages; page++) { %>
+                        <li
+                          class="page-item <%= currentPage === page ? 'active' : '' %>"
+                        >
+                          <a
+                            class="page-link"
+                            href="/admin/orderManagement?page=<%= page %>"
+                            ><%= page %></a
+                          >
+                        </li>
+                        <% } %>
+                        <li
+                          class="page-item <%= currentPage === totalPages ? 'disabled' : '' %>"
+                        >
+                          <a
+                            class="page-link"
+                            href="/admin/orderManagement?page=<%= currentPage + 1 %>"
+                            aria-label="Next"
+                          >
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+                  <% } %>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="copyright">
+                    <p>Copyright © 2024 BRANDHOME. All rights reserved.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- END MAIN CONTENT-->
+
+        <div
+          class="modal fade"
+          id="orderDetails"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="orderDetailsModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="editAddressModalLabel">
+                  Order Details
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="col-lg-12 row">
+                  <div class="col-lg-4"></div>
+                  <div class="col-lg-8" id="productImage"></div>
+
+                  <div class="col-lg-4">
+                    <p>Product Name</p>
+                  </div>
+                  <div class="col-lg-8" id="productName"></div>
+
+                  <div class="col-lg-4">
+                    <p>Quantity</p>
+                  </div>
+                  <div class="col-lg-8" id="quantity"></div>
+
+                  <div class="col-lg-4">
+                    <p>Price</p>
+                  </div>
+                  <div class="col-lg-8" id="price"></div>
+
+                  <div class="col-lg-4">
+                    <p>Order Date</p>
+                  </div>
+                  <div class="col-lg-8" id="orderDate"></div>
+
+                  <div class="col-lg-4">
+                    <p>Order Id</p>
+                  </div>
+                  <div class="col-lg-8" id="id"></div>
+
+                  <div class="col-lg-4">
+                    <p>Shipping Charge</p>
+                  </div>
+                  <div class="col-lg-8" id="shippingCharge"></div>
+
+                  <div class="col-lg-4">
+                    <p>Discount</p>
+                  </div>
+                  <div class="col-lg-8" id="youSave"></div>
+
+                  <div class="col-lg-4">
+                    <p>Total Amount</p>
+                  </div>
+                  <div class="col-lg-8" id="payAmount"></div>
+
+                  <div class="col-lg-4">
+                    <p>Shipping Address</p>
+                  </div>
+                  <div class="col-lg-8" id="Address"></div>
+
+                  <div class="col-lg-4">
+                    <p>Payment Option</p>
+                  </div>
+                  <div class="col-lg-8" id="paymentOption"></div>
+
+                  <div class="col-lg-4">
+                    <p>Order Status</p>
+                  </div>
+                  <div class="col-lg-8" id="Status"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- END PAGE CONTAINER-->
+      </div>
     </div>
 
     <!-- Jquery JS-->
@@ -612,80 +676,90 @@
     <script src="/vendor/bootstrap-4.1/popper.min.js"></script>
     <script src="/vendor/bootstrap-4.1/bootstrap.min.js"></script>
     <!-- Vendor JS       -->
-    <script src="/vendor/slick/slick.min.js">
-    </script>
+    <script src="/vendor/slick/slick.min.js"></script>
     <script src="/vendor/wow/wow.min.js"></script>
     <script src="/vendor/animsition/animsition.min.js"></script>
-    <script src="/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-    </script>
+    <script src="/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
     <script src="/vendor/counter-up/jquery.waypoints.min.js"></script>
-    <script src="/vendor/counter-up/jquery.counterup.min.js">
-    </script>
+    <script src="/vendor/counter-up/jquery.counterup.min.js"></script>
     <script src="/vendor/circle-progress/circle-progress.min.js"></script>
     <script src="/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="/vendor/chartjs/Chart.bundle.min.js"></script>
-    <script src="/vendor/select2/select2.min.js"> </script>
-
+    <script src="/vendor/select2/select2.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Main JS-->
     <script src="/js/adminMain.js"></script>
+  </body>
 
-</body>
-
-
-<script>
-
-function popup(popupMsg) {
-    Swal.fire({
-        title: 'Message',
+  <script>
+    function popup(popupMsg) {
+      Swal.fire({
+        title: "Message",
         text: popupMsg,
         //icon: 'success',
         timer: 10000,
         showConfirmButton: false,
-    });
-};
+      });
+    }
 
-function showConfirmation(orderId,index, newStatus, currentPage) {
-    Swal.fire({
-        title: 'Confirm Order Status',
-        html: '<p>Are you sure you want to update the order status?</p>',
+    function showConfirmation(orderId, index, newStatus, currentPage) {
+      Swal.fire({
+        title: "Confirm Order Status",
+        html: "<p>Are you sure you want to update the order status?</p>",
         showCancelButton: true,
-        cancelButtonText: 'NO',
-        confirmButtonText: 'SURE',
-    }).then((result) => {
+        cancelButtonText: "NO",
+        confirmButtonText: "SURE",
+      }).then((result) => {
         if (result.isConfirmed) {
-            $.ajax({
-                type: 'POST',
-                url: '/admin/updateOrderStatus',
-                data: { orderId: orderId,index:index, newStatus: newStatus, currentPage: currentPage },
-                success: function(response) {
-                    if (response.success) {
-                        const ordersTableBody = document.getElementById("tableItems");
-                        ordersTableBody.innerHTML = ''; // Clear existing rows
-                        console.log("response data is ", response.orders);
+          $.ajax({
+            type: "POST",
+            url: "/admin/updateOrderStatus",
+            data: {
+              orderId: orderId,
+              index: index,
+              newStatus: newStatus,
+              currentPage: currentPage,
+            },
+            success: function (response) {
+              if (response.success) {
+                const ordersTableBody = document.getElementById("tableItems");
+                ordersTableBody.innerHTML = ""; // Clear existing rows
+                console.log("response data is ", response.orders);
 
-                       
+                response.orders.forEach((order) => {
+                  // Loop through each item in the order
+                  order.items.forEach((item, index) => {
+                    const row = document.createElement("tr"); // Create a new row element
 
-                        response.orders.forEach((order) => {
-                            // Loop through each item in the order
-                            order.items.forEach((item, index) => {
-                                const row = document.createElement('tr'); // Create a new row element
-
-                                row.innerHTML = `
-                                    <td>${new Date(order.orderDate).toLocaleDateString()}</td>
-                                    <td class="text-danger font-weight-bold" id="order-details" data-toggle="modal" data-target="#orderDetails" data-order='${JSON.stringify(order)}' data-index='${index}'>
+                    row.innerHTML = `
+                                    <td>${new Date(
+                                      order.orderDate
+                                    ).toLocaleDateString()}</td>
+                                    <td class="text-danger font-weight-bold" id="order-details" data-toggle="modal" data-target="#orderDetails" data-order='${JSON.stringify(
+                                      order
+                                    )}' data-index='${index}'>
                                         ${order.orderId}
                                     </td>
                                     <td>
-                                        ${item.productBrand} ${item.productName},<br>
-                                        ${item.size}, ${item.color} (${item.quantity})
+                                        ${item.productBrand} ${
+                      item.productName
+                    },<br>
+                                        ${item.size}, ${item.color} (${
+                      item.quantity
+                    })
                                     </td>
                                     <td>Rs ${item.payAmount}</td>
                                     <td>
-                                        <select name="orderStatus" id="orderStatus-${order._id}-${index}" data-order-id="${order._id}" data-index="${index}">
-                                            <option value="" disabled selected>${item.status}</option>
+                                        <select name="orderStatus" id="orderStatus-${
+                                          order._id
+                                        }-${index}" data-order-id="${
+                      order._id
+                    }" data-index="${index}">
+                                            <option value="" disabled selected>${
+                                              item.status
+                                            }</option>
                                             <option value="pending">pending</option>
                                             <option value="dispatched">dispatched</option>
                                             <option value="delivered">delivered</option>
@@ -693,93 +767,93 @@ function showConfirmation(orderId,index, newStatus, currentPage) {
                                         </select>
                                     </td>
                                 `;
-                                ordersTableBody.appendChild(row); // Append the newly created row to the table body
-                            });
-                         });
+                    ordersTableBody.appendChild(row); // Append the newly created row to the table body
+                  });
+                });
 
-                        // Re-attach the event listener for the newly added select elements
-                        $('select[name="orderStatus"]').change(function() {
-                            var orderId = $(this).data('order-id');
-                            var index = $(this).data('index');
-                            var newStatus = $(this).val();
-                            const currentPage = document.getElementById("currentPage").value;
-                            showConfirmation(orderId,index, newStatus, currentPage);
-                        });
-                    } else {
-                        popup("Status changing failed!");
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
-            });
+                // Re-attach the event listener for the newly added select elements
+                $('select[name="orderStatus"]').change(function () {
+                  var orderId = $(this).data("order-id");
+                  var index = $(this).data("index");
+                  var newStatus = $(this).val();
+                  const currentPage =
+                    document.getElementById("currentPage").value;
+                  showConfirmation(orderId, index, newStatus, currentPage);
+                });
+              } else {
+                popup("Status changing failed!");
+              }
+            },
+            error: function (xhr, status, error) {
+              console.error(xhr.responseText);
+            },
+          });
         } else {
-            window.location.reload();
+          window.location.reload();
         }
-    });
-}
+      });
+    }
 
-// update order status
-$(document).ready(function() {
-    $('select[name="orderStatus"]').change(function() {
-        var orderId = $(this).data('order-id');
-        var index = $(this).data('index');
-        console.log('Order ID is', orderId);
+    // update order status
+    $(document).ready(function () {
+      $('select[name="orderStatus"]').change(function () {
+        var orderId = $(this).data("order-id");
+        var index = $(this).data("index");
+        console.log("Order ID is", orderId);
         var newStatus = $(this).val();
         const currentPage = document.getElementById("currentPage").value;
         console.log("current page is", currentPage);
 
-        showConfirmation(orderId,index,newStatus,currentPage);
+        showConfirmation(orderId, index, newStatus, currentPage);
+      });
     });
-});
 
+    $(document).on("click", "#order-details", function (e) {
+      e.preventDefault();
 
-$(document).on('click', '#order-details', function(e) {
-    e.preventDefault();
+      // Get the order data from the button's data-order attribute
+      const order = $(this).data("order");
+      const index = $(this).data("index");
 
-    // Get the order data from the button's data-order attribute
-    const order = $(this).data('order');
-    const index = $(this).data('index');
-
-    // Populate the modal form fields with the order data
-    document.getElementById("productImage").innerHTML = `
+      // Populate the modal form fields with the order data
+      document.getElementById("productImage").innerHTML = `
         <img src="/productImages/${order.items[index].productImage}" alt="" style="width: 150px;">
     `;
 
-    document.getElementById("productName").innerHTML = `
+      document.getElementById("productName").innerHTML = `
         <p class="text-dark">${order.items[index].productBrand} ${order.items[index].productName}, 
         ${order.items[index].size}, ${order.items[index].color}</p>
     `;
 
-    document.getElementById("quantity").innerHTML = `
+      document.getElementById("quantity").innerHTML = `
         <p class="text-dark">${order.items[index].quantity}</p>
     `;
 
-    document.getElementById("price").innerHTML = `
+      document.getElementById("price").innerHTML = `
         <p class="text-dark">Rs ${order.items[index].price}</p>
     `;
 
-    document.getElementById("orderDate").innerHTML = `
+      document.getElementById("orderDate").innerHTML = `
     <p>${new Date(order.orderDate).toLocaleDateString()}</p>
     `;
 
-    document.getElementById("id").innerHTML = `
+      document.getElementById("id").innerHTML = `
         <p>${order.orderId}</p>
     `;
 
-    document.getElementById("shippingCharge").innerHTML = `
+      document.getElementById("shippingCharge").innerHTML = `
         <p>Rs ${order.items[index].shippingCharge}</p>
     `;
 
-    document.getElementById("youSave").innerHTML = `
+      document.getElementById("youSave").innerHTML = `
         <p>Rs ${order.items[index].youSave}</p>
     `;
 
-    document.getElementById("payAmount").innerHTML = `
+      document.getElementById("payAmount").innerHTML = `
         <p>Rs ${order.items[index].payAmount}</p>
     `;
 
-    document.getElementById("Address").innerHTML = `
+      document.getElementById("Address").innerHTML = `
         <p>${order.address.firstName} ${order.address.lastName}<br>
         ${order.address.shippingEmail}<br>
         ${order.address.mobile}<br>
@@ -788,26 +862,36 @@ $(document).on('click', '#order-details', function(e) {
         pin: ${order.address.postalCode}</p>
     `;
 
-    document.getElementById("paymentOption").innerHTML = `
+      document.getElementById("paymentOption").innerHTML = `
         <p>${order.paymentOption}</p>
     `;
 
-    // Status and Dates
-    let statusContent = '';
-    if (order.items[index].status === "dispatched") {
-        statusContent = `<p class="text-primary">${order.items[index].status} - ${new Date(order.items[index].dispatchedDate).toLocaleDateString()}</p>`;
-    } else if (order.items[index].status === "delivered") {
-        statusContent = `<p class="text-success">${order.items[index].status} - ${new Date(order.items[index].deliveredDate).toLocaleDateString()}</p>`;
-    } else if (order.items[index].status === "cancelled") {
-        statusContent = `<p class="text-danger">${order.items[index].status} - ${new Date(order.items[index].cancelDate).toLocaleDateString()}</p>`;
-    } else if (order.items[index].status === "pending") {
+      // Status and Dates
+      let statusContent = "";
+      if (order.items[index].status === "dispatched") {
+        statusContent = `<p class="text-primary">${
+          order.items[index].status
+        } - ${new Date(
+          order.items[index].dispatchedDate
+        ).toLocaleDateString()}</p>`;
+      } else if (order.items[index].status === "delivered") {
+        statusContent = `<p class="text-success">${
+          order.items[index].status
+        } - ${new Date(
+          order.items[index].deliveredDate
+        ).toLocaleDateString()}</p>`;
+      } else if (order.items[index].status === "cancelled") {
+        statusContent = `<p class="text-danger">${
+          order.items[index].status
+        } - ${new Date(
+          order.items[index].cancelDate
+        ).toLocaleDateString()}</p>`;
+      } else if (order.items[index].status === "pending") {
         statusContent = `<p>pending</p>`;
-    }
+      }
 
-    document.getElementById("Status").innerHTML = statusContent;
-});
-
-</script>
-
+      document.getElementById("Status").innerHTML = statusContent;
+    });
+  </script>
 </html>
 <!-- end document-->
