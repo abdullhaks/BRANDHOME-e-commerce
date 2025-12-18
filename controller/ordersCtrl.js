@@ -23,11 +23,6 @@ const path = require('path');
 const loadOrders = async (req,res)=>{ 
     try{
         var user = await req.session.user ;
-
-     
-
-      
-
       const orders = await Orders.find({
         email: user,
         $or: [
