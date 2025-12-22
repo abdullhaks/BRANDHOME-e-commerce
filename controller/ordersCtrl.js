@@ -103,6 +103,7 @@ const cancelOrder = async (req,res)=>{
             const transactions = {
                 date: new Date(),
                 amount: order.items[index].payAmount,
+                type:"order cancelled",
                 status: "credit"
             };
             await Wallet.updateOne({ user: email }, { $push: { transactions: transactions } }, { upsert: true });

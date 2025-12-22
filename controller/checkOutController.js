@@ -502,6 +502,7 @@ const placeOrder = async(req,res)=>{
                       const transactions={
                         date:new Date(),
                         amount:parseInt(gndtotl),
+                        type:'purchase with wallet',
                         status:"debit"
                       }
                       const trans = await Wallet.updateOne({user:user},{$push:{transactions:transactions}} ,{upsert:true});

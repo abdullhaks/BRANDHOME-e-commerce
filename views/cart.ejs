@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>BRAND HOME -your cart</title>
+    <title>BRANDHOME-cart</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -41,16 +41,8 @@ input.form-control {
    <!-- Topbar Start -->
    <div class="container-fluid">
     <div class="row bg-secondary py-2 px-xl-5">
-        <div class="col-lg-6 d-none d-lg-block">
-            <div class="d-inline-flex align-items-center">
-                <a class="text-dark" href="https://wa.me/8594043859">FAQs</a>
-                <span class="text-muted px-2">|</span>
-                <a class="text-dark" href="https://wa.me/8594043859">Help</a>
-                <span class="text-muted px-2">|</span>
-                <a class="text-dark" href="https://wa.me/8593063568">Support</a>
-            </div>
-        </div>
-        <div class="col-lg-6 text-center text-lg-right">
+      
+        <div class="col-lg-12 text-center text-lg-right">
             <div class="d-inline-flex align-items-center">
                 <a class="text-dark px-2" href="">
                     <i class="fab fa-whatsapp"></i>
@@ -121,19 +113,17 @@ input.form-control {
     <!-- Navbar Start -->
     <div class="container-fluid">
         <div class="row border-top px-xl-5">
-            <div class="col-lg-3 d-none d-lg-block">
+         
                 
             </div>
-            <div class="col-lg-9">
+            <div class="col-lg-12">
                 <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
-                    <a href="/home" class="text-decoration-none">
-                        <h1 class="m-0 display-5 font-weight-semi-bold">BRANDHOME</h1>
-                    </a>
+                 
                     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                        <div class="navbar-nav mr-auto py-0">
+                        <div class="navbar-nav mx-auto py-0">
                             <a href="/home?email=<%= user %>" class="nav-item nav-link ">Home</a>
                             <a href="/products?email=<%= user %>" class="nav-item nav-link">Shop</a>
                             <a href="/cart" class="nav-item nav-link active">Cart</a>
@@ -155,177 +145,118 @@ input.form-control {
     
 
     <!-- Shop Start -->
-        <form action="/cart" method="post">
-            <div class="container-fluid pt-5">
-                <div class="row px-xl-5">
-                    <!-- Shop Sidebar Start -->
-                
-                                <div class="col-lg-12 table-responsive mb-5">
-                                    <table class="table table-bordered text-center mb-0">
-                                        <thead class="bg-secondary text-dark">
-                                            <tr>
-                                                <th>Products</th>
-                                                <th>Price</th>
-                                                <th>Size</th>
-                                                <th>Color</th>
-                                                <th>Quantity</th>
-                                                <th>Total</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class=" align-middle " id="cartTable">
-                                            <% if (products.length > 0) {
-                                                for (let i = 0; i < products.length; i++) { %>
-                                            <tr id="cartItem<%= i %>">
-                                                <td class="align-middle">
-                                                    <img src="/productImages/<%= products[i].image1 %>" alt="" style="width: 50px;">
-                                                    <%= products[i].productName %>
-                                                    <input type="hidden" value="<%= products[i]._id %>" name="productId<%= i %>">
-                                                    <input type="hidden" value="<%= products[i].productName%>" name="productName<%= i %>">
-                                                    <input type="hidden" value="<%= products[i].brand %>" name="productBrand<%= i %>">
-                                                    <input type="hidden" value="<%= products[i].price %>" name="productPrice<%= i %>">
-                                                    <input type="hidden" value="<%= products[i].categoryOfferPercentage + products[i]. productOfferPercentage  %> " name="totalOffer<%= i %>">
-                                                    <input type="hidden" value="<%= products[i].image1 %>" name="productImage<%= i %>">
-                                                    <input type="hidden" value="<%= (products[i].categoryOfferPercentage + products[i]. productOfferPercentage )*products[i].price/100 %>" name="save<%= i %>">
-                                                </td>
-
-
-                                                <td class="align-middle" id="pricePerUnit<%= i %>">Rs <%= products[i].price %></td>
-                                                <td class="align-middle"><%= variants[i].size %>
-                                                    <input type="hidden"  name="option<%= i %>" id="size<%= i %>" value="<%= variants[i].size %>">
-
-
-                                                    <!-- <div class="input-group quantity mx-auto" style="width: 100px;">
-                                                        <select name="option<%= i %>" id="size<%= i %>" required onchange="updateQuantity('<%= products[i]._id %>', `<%= i %>`)">
-                                                            <% if (products[i].sizes && products[i].sizes.length > 0) {
-                                                                for (let j = 0; j < products[i].sizes.length; j++) { %>
-                                                                    <option value="<%= products[i].sizes[j] %>">
-                                                                        <%= products[i].sizes[j] %>
-                                                                    </option>
-                                                            <% } } %>
-                                                        </select>
-                                                    </div> -->
-                                                </td>
-                                                <td class="align-middle"><%= variants[i].color%>
-                                                    <input type="hidden" name="color<%= i %>" id="color<%= i %>" value="<%= variants[i].color%>">
-
-
-
-                                                    <!-- <div class="input-group quantity mx-auto" style="width: 100px;">
-                                                        <select name="color<%= i %>" id="color<%= i %>" required onchange="updateQuantity('<%= products[i]._id %>', `<%= i %>`)">
-                                                            <% if (products[i].colors && products[i].colors.length > 0) {
-                                                                for (let j = 0; j < products[i].colors.length; j++) { %>
-                                                                    <option value="<%= products[i].colors[j] %>">
-                                                                        <%= products[i].colors[j] %>
-                                                                    </option>
-                                                            <% } } %>
-                                                        </select>
-                                                    </div> -->
-                                                </td>
-
-                                                <td class="align-middle">
-                                                    <div class="d-flex align-items-center justify-content-center">
-                                                        <!-- Decrease Button -->
-                                                        <a class="btn btn-sm btn-dark" id="decrease<%= i %>" style="min-width: 36px;">
-                                                            <i class="fas fa-minus"></i>
-                                                        </a>
-                                                
-                                                        <!-- Quantity Input -->
-                                                        <input type="number" value="1" name="quantity<%= i %>" id="quantity<%= i %>" 
-                                                               class="form-control text-center mx-2" style="max-width: 60px;" readonly>
-                                                
-                                                        <!-- Increase Button -->
-                                                        <a class="btn btn-sm btn-dark" id="increase<%= i %>" style="min-width: 36px;">
-                                                            <i class="fas fa-plus"></i>
-                                                        </a>
-                                                
-                                                        <!-- Limit Indicator (Hidden) -->
-                                                        <input type="hidden" id="limit<%= i %>">
-                                                    </div>
-                                                
-                                                    <!-- Stock Alert (Hidden by Default) -->
-                                                    <div class="text-center mt-2 d-none" id="stockAlert<%= i %>">
-                                                        <span class="text-danger">Out of stock</span>
-                                                    </div>
-                                                </td>
-                                                
-
-                                                <td class="align-middle" id="totalPrice<%= i %>" >
-                                                    Rs <%= products[i].price %>
-                                                    
-                                                </td>
-                                                <!-- onclick="removeCartItem('<%= products[i]._id %>', '<%=variants[i].color%>', '<%=variants[i].size%>', '<%= i %>')" -->
-                                                <td class="align-middle">
-                                                    <a class="btn btn-sm text-dark p-0 removeCartItems" data-productId="<%= products[i]._id %>"
-                                                        data-color="<%=variants[i].color%>"
-                                                        data-size="<%=variants[i].size%>"
-                                                        data-index="<%= i %>"
-                                                       >
-                                                        <i class="fas fa-times text-primary mr-1"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <% } } else { %>
-                                                <tr>
-                                                    <td colspan="7">No products in the cart.</td>
-                                                </tr>
-                                            <% } %>
-
-
-                                    
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                        
+       <form action="/cart" method="post">
+        <div class="container-fluid pt-5">
+            <div class="row px-xl-5">
+                <div class="col-lg-12 table-responsive mb-5">
+                    <table class="table table-bordered text-center mb-0">
+                        <thead class="bg-secondary text-dark">
+                            <tr>
+                                <th>Products</th>
+                                <th>Price</th>
+                                <th>Size</th>
+                                <th>Color</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody class="align-middle" id="cartTable">
+                            <% if (products.length > 0) {
+                                for (let i = 0; i < products.length; i++) { %>
+                            <tr id="cartItem<%= i %>">
+                                <td class="align-middle">
+                                    <img src="/productImages/<%= products[i].image1 %>" alt="" style="width: 50px;">
+                                    <%= products[i].productName %>
+                                    <input type="hidden" value="<%= products[i]._id %>" name="productId<%= i %>">
+                                    <input type="hidden" value="<%= products[i].productName %>" name="productName<%= i %>">
+                                    <input type="hidden" value="<%= products[i].brand %>" name="productBrand<%= i %>">
+                                    <input type="hidden" value="<%= products[i].price %>" name="productPrice<%= i %>">
+                                    <input type="hidden" value="<%= products[i].categoryOfferPercentage + products[i].productOfferPercentage %>" name="totalOffer<%= i %>">
+                                    <input type="hidden" value="<%= products[i].image1 %>" name="productImage<%= i %>">
+                                    <input type="hidden" value="<%= (products[i].categoryOfferPercentage + products[i].productOfferPercentage) * products[i].price / 100 %>" name="save<%= i %>">
+                                </td>
+                                <td class="align-middle" id="pricePerUnit<%= i %>">Rs <%= products[i].price %></td>
+                                <td class="align-middle">
+                                    <%= variants[i].size %>
+                                    <input type="hidden" name="option<%= i %>" id="size<%= i %>" value="<%= variants[i].size %>">
+                                </td>
+                                <td class="align-middle">
+                                    <%= variants[i].color %>
+                                    <input type="hidden" name="color<%= i %>" id="color<%= i %>" value="<%= variants[i].color %>">
+                                </td>
+                                <td class="align-middle">
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <a class="btn btn-sm btn-dark decrease-btn" data-index="<%= i %>" style="min-width: 36px;">
+                                            <i class="fas fa-minus"></i>
+                                        </a>
+                                        <input type="number" value="1" name="quantity<%= i %>" id="quantity<%= i %>"
+                                               class="form-control text-center mx-2" style="max-width: 60px;" readonly>
+                                        <a class="btn btn-sm btn-dark increase-btn" data-index="<%= i %>" style="min-width: 36px;">
+                                            <i class="fas fa-plus"></i>
+                                        </a>
+                                        <input type="hidden" id="limit<%= i %>" value="5">
+                                    </div>
+                                    <div class="text-center mt-2 d-none" id="stockAlert<%= i %>">
+                                        <span class="text-danger">Out of stock</span>
+                                    </div>
+                                </td>
+                                <td class="align-middle" id="totalPrice<%= i %>">Rs <%= products[i].price %></td>
+                                <td class="align-middle">
+                                    <a class="btn btn-sm text-dark p-0 removeCartItems"
+                                       data-productid="<%= products[i]._id %>"
+                                       data-color="<%= variants[i].color %>"
+                                       data-size="<%= variants[i].size %>"
+                                       data-index="<%= i %>">
+                                        <i class="fas fa-times text-primary mr-1"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <% } } else { %>
+                            <tr>
+                                <td colspan="7">No products in the cart.</td>
+                            </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <!-- Shop End -->
+        </div>
 
-            <div class="container-fluid pt-0">
-                <div class="row px-xl-5">
-                    <div class="col-lg-8 row justify-content-center">
-                        <div class="col-lg-6">
-                            <h5 class="text-dark bg-warning">offers will add from next page..</h5>
-                        </div>
-                       
+        <div class="container-fluid pt-0">
+            <div class="row px-xl-5">
+                <div class="col-lg-8 row justify-content-center">
+                    <div class="col-lg-6">
+                        <h5 class="text-dark bg-warning">Offers will be applied on the next page..</h5>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="card border-secondary mb-2">
-
-                            <div class="card-header bg-secondary border-0">
-                                <h4 class="font-weight-semi-bold m-0">Order Total</h4>
-                            </div>
-
-                            <div class="card-body">
-                                <hr class="mt-0">
-                            </div>
-
-                            <div class="card-footer border-secondary bg-transparent">
-                                <div class="d-flex justify-content-between mt-2">
-                                    <h5 class="font-weight-bold">Total</h5>
-                                    <h5 class="font-weight-bold" id="grandTotal">Rs 
-                                    </h5>
-                                    <input type="hidden" name="totalAmount" id="totalAmount">
-                                </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card border-secondary mb-2">
+                        <div class="card-header bg-secondary border-0">
+                            <h4 class="font-weight-semi-bold m-0">Order Total</h4>
+                        </div>
+                        <div class="card-body"><hr class="mt-0"></div>
+                        <div class="card-footer border-secondary bg-transparent">
+                            <div class="d-flex justify-content-between mt-2">
+                                <h5 class="font-weight-bold">Total</h5>
+                                <h5 class="font-weight-bold" id="grandTotal">Rs 0</h5>
+                                <input type="hidden" name="totalAmount" id="totalAmount">
                             </div>
                         </div>
-                        <div class="card border-secondary mb-5">
-                            <% if(products.length > 0){ %>
-                                <div class="card-footer border-secondary bg-transparent">
-                                    <p class="text-danger hide " id="stockAlert" >remove out of stock item</p>
-                                    <input type="submit" value="Check Out" id="checkoutButton"
-                                        class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">
-                                    </input>
-                                </div>
-                           <% } %>
-                           
+                    </div>
+                    <div class="card border-secondary mb-5">
+                        <% if(products.length > 0) { %>
+                        <div class="card-footer border-secondary bg-transparent">
+                            <p class="text-danger d-none" id="stockAlert">Remove out of stock items</p>
+                            <input type="submit" value="Check Out" id="checkoutButton"
+                                   class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">
                         </div>
+                        <% } %>
                     </div>
                 </div>
             </div>
-        
-        </form>
+        </div>
+    </form>
 
 
     <!-- Footer Start -->
@@ -441,277 +372,223 @@ input.form-control {
 
 
 <script>
-
 document.addEventListener('DOMContentLoaded', async function () {
-    const cartItems = await document.querySelectorAll('tr[id^="cartItem"]');
-    console.log("cart items",cartItems);
+            await checkStockAndUpdateLimit();
+            updateAllTotals();
+            bindQuantityButtons();
+            bindRemoveButtons();
+        });
 
-    await checkStockAndUpdateLimit();
-    for (let i = 0; i < cartItems.length; i++) {
-      await  updateTotalPriceAndGrandTotal(i);
-    };
-    
-});
+        // Check stock and set limits
+        async function checkStockAndUpdateLimit() {
+            const cartItems = document.querySelectorAll('tr[id^="cartItem"]');
+            let hasOutOfStock = false;
 
-async function checkStockAndUpdateLimit() {
+            for (let i = 0; i < cartItems.length; i++) {
+                const productId = document.querySelector(`input[name="productId${i}"]`).value;
+                const size = document.querySelector(`#size${i}`).value;
+                const color = document.querySelector(`#color${i}`).value;
 
-    console.log("checkStockAndUpdateLimit is working ....")
-    const cartItems = document.querySelectorAll('tr[id^="cartItem"]');
+                try {
+                    const response = await fetch(`/getStock?productId=${productId}&size=${size}&color=${color}`);
+                    const data = await response.json();
 
-    console.log("cart items",cartItems);
-    
-    
-    for (let i = 0; i < cartItems.length; i++) {
-        const productId = document.querySelector(`input[name="productId${i}"]`).value;
-        const size = document.querySelector(`input[name="option${i}"]`).value;
-        const color = document.querySelector(`input[name="color${i}"]`).value;
+                    const limit = data.quantity < 5 ? data.quantity : 5;
+                    document.getElementById(`limit${i}`).value = limit;
 
-        console.log("product id and sise and color are",productId,size,color);
-        
-        
-        try {
-            const response = await fetch(`/getStock?productId=${productId}&size=${size}&color=${color}`);
-            const data = await response.json();
-            
-            console.log("data is ",data);
-
-            if (data.quantity <= 0) {
-                document.getElementById(`stockAlert${i}`).classList.remove('hide');
-                document.getElementById(`stockAlert`).classList.remove('hide');
-                document.getElementById(`stock${i}`).classList.add('hide');
-                document.querySelector('#checkoutButton').disabled = true;
-                document.getElementById(`quantity${i}`).value = 0;
-            } else {
-                // document.getElementById(`limit${i}`).value = data.quantity;
-
-                document.getElementById(`limit${i}`).value = data.quantity<5?data.quantity:5
-
-                document.getElementById(`stockAlert${i}`).classList.add('hide');
-                document.getElementById(`stockAlert`).classList.add('hide');
-                document.getElementById(`stock${i}`).classList.remove('hide');
-                document.querySelector('#checkoutButton').disabled = false;
-
-                console.log("updated limit is ",document.getElementById(`limit${i}`).value )
-            }
-        } catch (error) {
-            console.error(`Error fetching stock for product ${productId}:`, error);
-        }
-    }
-};
-
-function updateTotalPriceAndGrandTotal(i) {
-
-    console.log("i is ",i);
-    console.log("updateTotalPriceAndGrandTotal is working ");
-
-    const price = parseFloat(document.querySelector(`input[name="productPrice${i}"]`).value);
-    const quantity = document.getElementById(`quantity${i}`).value;
-    const limit = parseInt( document.getElementById(`limit${i}`).value);
-
-    console.log("item price and quantity and limit is",price,quantity,limit);
-    
-    // Update total price for the product
-    const totalPrice = price * quantity;
-
-    console.log("total price is ",totalPrice)
-    document.getElementById(`totalPrice${i}`).innerText = `Rs ${totalPrice.toFixed(2)}`;
-    
-    // Update grand total
-    let grandTotal = 0;
-    const cartItems = document.querySelectorAll('tr[id^="cartItem"]');
-    cartItems.forEach((item, i) => {
-        const itemTotalPrice = parseFloat(document.getElementById(`totalPrice${i}`).innerText.replace('Rs ', ''));
-        grandTotal += itemTotalPrice;
-    });
-    document.getElementById('grandTotal').innerText = `Rs ${grandTotal.toFixed(2)}`;
-
-    // Handle the increase and decrease buttons
-    if (quantity <= 1) {
-        document.getElementById(`decrease${i}`).style.display = 'none';
-    } else {
-        document.getElementById(`decrease${i}`).style.display = 'inline';
-    }
-
-    if (quantity >= limit) {
-        document.getElementById(`increase${i}`).style.display = 'none';
-    } else {
-        document.getElementById(`increase${i}`).style.display = 'inline';
-    }
-}
-
-document.querySelectorAll('a[id^="increase"]').forEach(button => {
-    button.addEventListener('click', function() {
-        const index = this.id.replace('increase', '');
-        const quantityInput = document.querySelector(`#quantity${index}`);
-        quantityInput.value = parseInt(quantityInput.value) + 1;
-        updateTotalPriceAndGrandTotal(index);
-    });
-});
-
-document.querySelectorAll('a[id^="decrease"]').forEach(button => {
-    button.addEventListener('click', function() {
-        const index = this.id.replace('decrease', '');
-        const quantityInput = document.querySelector(`#quantity${index}`);
-        quantityInput.value = parseInt(quantityInput.value) - 1;
-        updateTotalPriceAndGrandTotal(index);
-    });
-});
-
-async function removeProductFromCart(productId, color, size, index) {
-        try {
-
-            const quantities = Array.from(document.querySelectorAll("input[id^='quantity']")).map(input => input.value);
-
-            quantities.splice(index, 1);
-
-            Swal.fire({
-                title: 'confirm user controll',
-                html: '<p>Are you sure...?</p>',
-                showCancelButton: true,
-                cancelButtonText: 'NO',
-                confirmButtonText: 'SURE',
-                customClass: {
-                    popup: 'no-border-radius',
-                    confirmButton: 'custom-confirm-btn',
-                    cancelButton: 'custom-cancel-btn'
+                    if (data.quantity <= 0) {
+                        document.getElementById(`stockAlert${i}`).classList.remove('d-none');
+                        hasOutOfStock = true;
+                        document.getElementById(`quantity${i}`).value = 0;
+                    } else {
+                        document.getElementById(`stockAlert${i}`).classList.add('d-none');
+                    }
+                } catch (error) {
+                    console.error("Stock check error:", error);
                 }
-            }).then((result) => {
+            }
+
+            if (hasOutOfStock) {
+                document.getElementById('stockAlert').classList.remove('d-none');
+                document.getElementById('checkoutButton').disabled = true;
+            } else {
+                document.getElementById('stockAlert').classList.add('d-none');
+                document.getElementById('checkoutButton').disabled = false;
+            }
+        }
+
+        // Update individual item total and grand total
+        function updateItemTotal(index) {
+            const price = parseFloat(document.querySelector(`input[name="productPrice${index}"]`).value);
+            const quantity = parseInt(document.getElementById(`quantity${index}`).value) || 0;
+            const total = price * quantity;
+            document.getElementById(`totalPrice${index}`).innerText = `Rs ${total.toFixed(2)}`;
+        }
+
+        function updateGrandTotal() {
+            let grandTotal = 0;
+            document.querySelectorAll('tr[id^="cartItem"]').forEach((row, i) => {
+                const totalText = document.getElementById(`totalPrice${i}`)?.innerText || "Rs 0";
+                grandTotal += parseFloat(totalText.replace('Rs ', '')) || 0;
+            });
+            document.getElementById('grandTotal').innerText = `Rs ${grandTotal.toFixed(2)}`;
+            document.getElementById('totalAmount').value = grandTotal.toFixed(2);
+        }
+
+        function updateAllTotals() {
+            document.querySelectorAll('tr[id^="cartItem"]').forEach((_, i) => updateItemTotal(i));
+            updateGrandTotal();
+        }
+
+        // Bind + / - buttons
+        function bindQuantityButtons() {
+            document.querySelectorAll('.increase-btn').forEach(btn => {
+                btn.onclick = function() {
+                    const index = this.dataset.index;
+                    const qtyInput = document.getElementById(`quantity${index}`);
+                    const limit = parseInt(document.getElementById(`limit${index}`).value);
+
+                    if (parseInt(qtyInput.value) < limit) {
+                        qtyInput.value = parseInt(qtyInput.value) + 1;
+                        updateItemTotal(index);
+                        updateGrandTotal();
+
+                        if (qtyInput.value > 1) {
+                            document.querySelector(`.decrease-btn[data-index="${index}"]`).style.display = 'inline';
+                        }
+                        if (qtyInput.value >= limit) {
+                            this.style.display = 'none';
+                        }
+                    }
+                };
+            });
+
+            document.querySelectorAll('.decrease-btn').forEach(btn => {
+                btn.onclick = function() {
+                    const index = this.dataset.index;
+                    const qtyInput = document.getElementById(`quantity${index}`);
+
+                    if (parseInt(qtyInput.value) > 1) {
+                        qtyInput.value = parseInt(qtyInput.value) - 1;
+                        updateItemTotal(index);
+                        updateGrandTotal();
+
+                        document.querySelector(`.increase-btn[data-index="${index}"]`).style.display = 'inline';
+                        if (qtyInput.value <= 1) {
+                            this.style.display = 'none';
+                        }
+                    }
+                };
+            });
+        }
+
+        // Use event delegation for remove buttons
+        function bindRemoveButtons() {
+            document.getElementById('cartTable').addEventListener('click', function(e) {
+                if (e.target.closest('.removeCartItems')) {
+                    const btn = e.target.closest('.removeCartItems');
+                    const productId = btn.dataset.productid;
+                    const color = btn.dataset.color;
+                    const size = btn.dataset.size;
+                    const index = btn.dataset.index;
+
+                    removeProductFromCart(productId, color, size, index);
+                }
+            });
+        }
+
+        // Remove item with confirmation
+        async function removeProductFromCart(productId, color, size, index) {
+            Swal.fire({
+                title: 'Remove Item?',
+                text: "This item will be removed from your cart.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, remove it',
+                cancelButtonText: 'Cancel'
+            }).then(async (result) => {
                 if (result.isConfirmed) {
-
-                   (async function () {
+                    try {
                         const response = await fetch(`/removeFromCart?productId=${productId}&color=${color}&size=${size}`, {
-                            method: 'DELETE',
+                            method: 'DELETE'
                         });
-
                         const data = await response.json();
+
                         if (data.success) {
-                            document.getElementById(`cartTable`).innerHTML = ''; // Clear existing cart items
+                            // Rebuild cart table
+                            const cartTable = document.getElementById('cartTable');
+                            cartTable.innerHTML = '';
 
-                            data.products.forEach((product, i) => {
-                                document.getElementById('cartTable').innerHTML += `
-                    <tr id="cartItem${i}">
-                        <td class="align-middle">
-                            <img src="/productImages/${product.image1}" alt="" style="width: 50px;">
-                            ${product.productName}
-                            <input type="hidden" value="${product._id}" name="productId${i}">
-                            <input type="hidden" value="${product.productName}" name="productName${i}">
-                            <input type="hidden" value="${product.brand}" name="productBrand${i}">
-                            <input type="hidden" value="${product.price}" name="productPrice${i}">
-                            <input type="hidden" value="${product.categoryOfferPercentage + product.productOfferPercentage}" name="totalOffer${i}">
-                            <input type="hidden" value="${product.image1}" name="productImage${i}">
-                            <input type="hidden" value="${(product.categoryOfferPercentage + product.productOfferPercentage) * product.price / 100}" name="save${i}">
-                        </td>
-                        <td class="align-middle" id="pricePerUnit${i}">Rs ${product.price}</td>
-                        <td class="align-middle">${data.variants[i].size}
-                            <input type="hidden" name="option${i}" id="size${i}" value="${data.variants[i].size}">
-                        </td>
-                        <td class="align-middle">${data.variants[i].color}
-                            <input type="hidden" name="color${i}" id="color${i}" value="${data.variants[i].color}">
-                        </td>
-                        <td class="align-middle">
-                           <td class="align-middle">
-                        <div class="d-flex align-items-center justify-content-center">
-                                <!-- Decrease Button -->
-                                <a class="btn btn-sm btn-dark" id="decrease${i}" style="min-width: 36px;">
-                                    <i class="fas fa-minus"></i>
-                                </a>
+                            if (data.products.length === 0) {
+                                cartTable.innerHTML = '<tr><td colspan="7">No products in the cart.</td></tr>';
+                                document.getElementById('grandTotal').innerText = 'Rs 0';
+                                document.querySelector('.card-footer .btn-primary').style.display = 'none';
+                            } else {
+                                data.products.forEach((product, i) => {
+                                    const variant = data.variants[i];
+                                    const qty = document.getElementById(`quantity${index}`)?.value || 1; // fallback
 
-                                <!-- Quantity Input -->
-                                <input type="number" value="${quantities[i]}" name="quantity${i}" id="quantity${i}" 
-                                    class="form-control text-center mx-2" style="max-width: 60px;" readonly>
-
-                                <!-- Increase Button -->
-                                <a class="btn btn-sm btn-dark" id="increase${i}" style="min-width: 36px;">
-                                    <i class="fas fa-plus"></i>
-                                </a>
-
-                                <!-- Limit Indicator (Hidden) -->
-                                <input type="hidden" id="limit${i}">
-                            </div>
-
-                            <!-- Stock Alert (Hidden by Default) -->
-                            <div class="text-center mt-2 d-none" id="stockAlert${i}">
-                                <span class="text-danger">Out of stock</span>
-                            </div>
-                        </td>
-
-                            <div class="input-group quantity mx-auto hide" id="stockAlert${i}" style="width: 100px;">
-                                <p class="text-danger">Out of stock</p>
-                            </div>
-                        </td>
-                        <td class="align-middle" id="totalPrice${i}">Rs ${product.price}</td>
-                        <td class="align-middle">
-                            <a class="btn btn-sm text-dark p-0 removeCartItems" data-productId="${product._id}" data-color="${data.variants[i].color}" data-size="${data.variants[i].size}" data-index="${i}">
-                                <i class="fas fa-trash text-primary mr-1"></i>Cancel
-                            </a>
-                        </td>
-                    </tr>
-                `;
-                            });
+                                    cartTable.innerHTML += `
+                                        <tr id="cartItem${i}">
+                                            <td class="align-middle">
+                                                <img src="/productImages/${product.image1}" alt="" style="width: 50px;">
+                                                ${product.productName}
+                                                <input type="hidden" value="${product._id}" name="productId${i}">
+                                                <input type="hidden" value="${product.productName}" name="productName${i}">
+                                                <input type="hidden" value="${product.brand}" name="productBrand${i}">
+                                                <input type="hidden" value="${product.price}" name="productPrice${i}">
+                                                <input type="hidden" value="${product.categoryOfferPercentage + product.productOfferPercentage}" name="totalOffer${i}">
+                                                <input type="hidden" value="${product.image1}" name="productImage${i}">
+                                                <input type="hidden" value="${(product.categoryOfferPercentage + product.productOfferPercentage) * product.price / 100}" name="save${i}">
+                                            </td>
+                                            <td class="align-middle" id="pricePerUnit${i}">Rs ${product.price}</td>
+                                            <td class="align-middle">${variant.size}
+                                                <input type="hidden" name="option${i}" id="size${i}" value="${variant.size}">
+                                            </td>
+                                            <td class="align-middle">${variant.color}
+                                                <input type="hidden" name="color${i}" id="color${i}" value="${variant.color}">
+                                            </td>
+                                            <td class="align-middle">
+                                                <div class="d-flex align-items-center justify-content-center">
+                                                    <a class="btn btn-sm btn-dark decrease-btn" data-index="${i}" style="min-width: 36px;">
+                                                        <i class="fas fa-minus"></i>
+                                                    </a>
+                                                    <input type="number" value="${qty}" name="quantity${i}" id="quantity${i}"
+                                                           class="form-control text-center mx-2" style="max-width: 60px;" readonly>
+                                                    <a class="btn btn-sm btn-dark increase-btn" data-index="${i}" style="min-width: 36px;">
+                                                        <i class="fas fa-plus"></i>
+                                                    </a>
+                                                    <input type="hidden" id="limit${i}" value="5">
+                                                </div>
+                                                <div class="text-center mt-2 d-none" id="stockAlert${i}">
+                                                    <span class="text-danger">Out of stock</span>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle" id="totalPrice${i}">Rs ${product.price * qty}</td>
+                                            <td class="align-middle">
+                                                <a class="btn btn-sm text-dark p-0 removeCartItems"
+                                                   data-productid="${product._id}"
+                                                   data-color="${variant.color}"
+                                                   data-size="${variant.size}"
+                                                   data-index="${i}">
+                                                    <i class="fas fa-times text-primary mr-1"></i>
+                                                </a>
+                                            </td>
+                                        </tr>`;
+                                });
+                            }
 
                             await checkStockAndUpdateLimit();
-                            for (let i = 0; i < data.products.length; i++) {
-                                await updateTotalPriceAndGrandTotal(i);
-                            };
-
+                            updateAllTotals();
+                            bindQuantityButtons(); // Re-bind after DOM update
                         }
-                    })();
-                };
-
-            });
-
-            document.querySelectorAll('a[id^="increase"]').forEach(button => {
-                button.addEventListener('click', function () {
-                    const index = this.id.replace('increase', '');
-                    const quantityInput = document.querySelector(`#quantity${index}`);
-
-                    if(quantityInput.value === 5 ){
-                        alert("reach max limit");
-                        return
+                    } catch (error) {
+                        console.error("Remove error:", error);
+                        Swal.fire('Error', 'Failed to remove item', 'error');
                     }
-                    quantityInput.value = parseInt(quantityInput.value) + 1;
-                    updateTotalPriceAndGrandTotal(index);
-                });
+                }
             });
-
-            document.querySelectorAll('a[id^="decrease"]').forEach(button => {
-                button.addEventListener('click', function () {
-                    const index = this.id.replace('decrease', '');
-                    const quantityInput = document.querySelector(`#quantity${index}`);
-                    quantityInput.value = parseInt(quantityInput.value) - 1;
-                    updateTotalPriceAndGrandTotal(index);
-                });
-
-                document.querySelectorAll('.removeCartItems').forEach(button => {
-                    button.addEventListener('click', function () {
-                        const productId = this.dataset.productid;
-                        const color = this.dataset.color;
-                        const size = this.dataset.size;
-                        const index = this.dataset.index;
-
-                        removeProductFromCart(productId, color, size, index);
-                    });
-                });
-
-            });
-        } catch (error) {
-            console.error(`Error removing product from cart: ${error}`);
         }
-};
-
-
-
-document.querySelectorAll('.removeCartItems').forEach(button => {
-    button.addEventListener('click', function() {
-        const productId = this.dataset.productid;
-        const color = this.dataset.color;
-        const size = this.dataset.size;
-        const index = this.dataset.index;
-
-        removeProductFromCart(productId, color, size, index);
-    });
-});
-
 
 </script>
 

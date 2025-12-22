@@ -216,6 +216,7 @@ const updateOrderStatus = async (req, res) => {
                     const transactions = {
                         date: new Date(),
                         amount: order.items[index].payAmount,
+                        type:"oreder returned",
                         status: "credit"
                     };
 
