@@ -54,9 +54,7 @@ const loadRegister = async(req,res)=>{
 const verifyRegister = async (req,res)=> {
 
     try{
-
-       
-        
+  
        const user = new User ({
             name:req.body.name,
             email:req.body.email,
